@@ -19,10 +19,15 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import java.awt.Toolkit;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.MatteBorder;
+import java.awt.Rectangle;
 
 public class ventanaLogin {
 
-	private JFrame frame;
+	private JFrame frmCampingMudez;
 	private JPanel pnlIdioma;
 	private JComboBox cbIdioma;
 	private JPanel pnlLogin;
@@ -35,6 +40,7 @@ public class ventanaLogin {
 	private JButton btnLogin;
 	private JLabel lblOlvido;
 
+	private Object[] items = {new ImageIcon("english.png"), new ImageIcon("spain.png")};
 	/**
 	 * Launch the application.
 	 */
@@ -43,7 +49,7 @@ public class ventanaLogin {
 			public void run() {
 				try {
 					ventanaLogin window = new ventanaLogin();
-					window.frame.setVisible(true);
+					window.frmCampingMudez.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,16 +68,23 @@ public class ventanaLogin {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frmCampingMudez = new JFrame();
+		frmCampingMudez.setBackground(Color.WHITE);
+		frmCampingMudez.setTitle("Camping Mudez");
+		frmCampingMudez.setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaLogin.class.getResource("/presentacion/campingMudez.png")));
 		
 		// Hacer que la frame ocupe toda la pantalla
 		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 				
-		frame.setBounds(150, 15, 950, 700);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCampingMudez.setBounds(150, 15, 950, 700);
+		frmCampingMudez.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		pnlIdioma = new JPanel();
-		frame.getContentPane().add(pnlIdioma, BorderLayout.NORTH);
+		
+		pnlIdioma.setBackground(new java.awt.Color(243, 243, 245));
+		
+		
+		frmCampingMudez.getContentPane().add(pnlIdioma, BorderLayout.NORTH);
 		GridBagLayout gbl_pnlIdioma = new GridBagLayout();
 		gbl_pnlIdioma.columnWidths = new int[]{769, 98, 0, 0};
 		gbl_pnlIdioma.rowHeights = new int[]{16, 0, 0};
@@ -80,6 +93,8 @@ public class ventanaLogin {
 		pnlIdioma.setLayout(gbl_pnlIdioma);
 		
 		cbIdioma = new JComboBox();
+		cbIdioma.setRenderer(new ModeloIdiomaCB());
+		
 		GridBagConstraints gbc_cbIdioma = new GridBagConstraints();
 		gbc_cbIdioma.insets = new Insets(0, 0, 0, 5);
 		gbc_cbIdioma.fill = GridBagConstraints.HORIZONTAL;
@@ -88,7 +103,10 @@ public class ventanaLogin {
 		pnlIdioma.add(cbIdioma, gbc_cbIdioma);
 		
 		pnlLogin = new JPanel();
-		frame.getContentPane().add(pnlLogin, BorderLayout.CENTER);
+		frmCampingMudez.getContentPane().add(pnlLogin, BorderLayout.CENTER);
+		
+		pnlLogin.setBackground(new java.awt.Color(243, 243, 245));
+		
 		pnlLogin.setLayout(new BorderLayout(0, 0));
 		
 		lblLogoCamping = new JLabel("");
@@ -98,10 +116,13 @@ public class ventanaLogin {
 		pnlLogin.add(lblLogoCamping, BorderLayout.NORTH);
 		
 		pnlTFLogin = new JPanel();
+		
+		pnlTFLogin.setBackground(new java.awt.Color(243, 243, 245));
+		
 		pnlLogin.add(pnlTFLogin, BorderLayout.CENTER);
 		GridBagLayout gbl_pnlTFLogin = new GridBagLayout();
 		gbl_pnlTFLogin.columnWidths = new int[]{254, 450, 230, 0};
-		gbl_pnlTFLogin.rowHeights = new int[]{0, 0, 0, 38, 0, 49, 0, 0};
+		gbl_pnlTFLogin.rowHeights = new int[]{0, 0, 0, 38, 31, 49, 0, 0};
 		gbl_pnlTFLogin.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_pnlTFLogin.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlTFLogin.setLayout(gbl_pnlTFLogin);
@@ -132,6 +153,12 @@ public class ventanaLogin {
 		pnlTFLogin.add(chckbxRecuerdame, gbc_chckbxRecuerdame);
 		
 		btnLogin = new JButton("Login");
+		btnLogin.setBounds(new Rectangle(0, 0, 100, 100));
+		btnLogin.setMinimumSize(new Dimension(80, 50));
+		btnLogin.setMaximumSize(new Dimension(70, 70));
+		
+		btnLogin.setBackground(new java.awt.Color(159, 177, 57));
+		
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
 		gbc_btnLogin.gridx = 1;
@@ -146,7 +173,7 @@ public class ventanaLogin {
 		pnlTFLogin.add(lblOlvido, gbc_lblOlvido);
 		
 		lblInfoLegal = new JLabel("");
-		frame.getContentPane().add(lblInfoLegal, BorderLayout.SOUTH);
+		frmCampingMudez.getContentPane().add(lblInfoLegal, BorderLayout.SOUTH);
 	}
 
 }
