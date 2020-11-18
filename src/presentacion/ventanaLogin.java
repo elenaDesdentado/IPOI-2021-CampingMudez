@@ -190,7 +190,7 @@ public class ventanaLogin {
 		gbc_lblOlvido.gridy = 6;
 		pnlTFLogin.add(lblOlvido, gbc_lblOlvido);
 
-		lblInfoLegal = new JLabel("");
+		lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
 		frmCampingMudez.getContentPane().add(lblInfoLegal, BorderLayout.SOUTH);
 		
 		// Text Prompt para indicar lo que hay que escribir en los text field
