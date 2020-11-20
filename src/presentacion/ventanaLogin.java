@@ -24,6 +24,8 @@ import javax.swing.JPasswordField;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ventanaLogin {
 
@@ -95,6 +97,7 @@ public class ventanaLogin {
 		pnlIdioma.setLayout(gbl_pnlIdioma);
 		
 		btnEspaniol = new JButton("");
+		btnEspaniol.setFocusable(false);
 		btnEspaniol.setIcon(new ImageIcon(ventanaLogin.class.getResource("/presentacion/espaniol.png")));
 		btnEspaniol.setBackground(new java.awt.Color(243, 243, 245));
 		GridBagConstraints gbc_btnEspaniol = new GridBagConstraints();
@@ -104,6 +107,7 @@ public class ventanaLogin {
 		pnlIdioma.add(btnEspaniol, gbc_btnEspaniol);
 		
 		btnIngles = new JButton("");
+		btnIngles.setFocusable(false);
 		btnIngles.setIcon(new ImageIcon(ventanaLogin.class.getResource("/presentacion/ingles.png")));
 		btnIngles.setBackground(colorFondo);
 		GridBagConstraints gbc_btnIngles = new GridBagConstraints();
@@ -173,6 +177,7 @@ public class ventanaLogin {
 		pnlTFLogin.add(chckbxRecuerdame, gbc_chckbxRecuerdame);
 
 		btnLogin = new JButton("Login");
+		btnLogin.addKeyListener(new BtnLoginKeyListener());
 		btnLogin.addActionListener(new BtnLoginActionListener());
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 
@@ -216,6 +221,18 @@ public class ventanaLogin {
 			inicio.setVisible(true);
 			// Hacer que la frame ocupe toda la pantalla
 			inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		}
+	}
+	private class BtnLoginKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if (e.getKeyCode()==KeyEvent.VK_ENTER){
+				VentanaInicio inicio = new VentanaInicio();
+				frmCampingMudez.dispose();
+				inicio.setVisible(true);
+				// Hacer que la frame ocupe toda la pantalla
+				inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		    }
 		}
 	}
 }
