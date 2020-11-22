@@ -41,7 +41,7 @@ public class ventanaLogin {
 	private JButton btnLogin;
 	private JLabel lblOlvido;
 	
-	private Color colorFondo = new Color(243, 243, 245);
+	private Color colorFondo = new Color(255, 255, 255);
 	private Color colorResaltado = new Color(226, 224, 64);
 	private Color colorBoton = new Color(159, 177, 57);
 	
@@ -99,7 +99,7 @@ public class ventanaLogin {
 		btnEspaniol = new JButton("");
 		btnEspaniol.setFocusable(false);
 		btnEspaniol.setIcon(new ImageIcon(ventanaLogin.class.getResource("/presentacion/espaniol.png")));
-		btnEspaniol.setBackground(new java.awt.Color(243, 243, 245));
+		btnEspaniol.setBackground(colorFondo);
 		GridBagConstraints gbc_btnEspaniol = new GridBagConstraints();
 		gbc_btnEspaniol.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEspaniol.gridx = 1;
@@ -175,6 +175,7 @@ public class ventanaLogin {
 		gbc_chckbxRecuerdame.gridx = 1;
 		gbc_chckbxRecuerdame.gridy = 2;
 		pnlTFLogin.add(chckbxRecuerdame, gbc_chckbxRecuerdame);
+		chckbxRecuerdame.setBackground(colorFondo);
 
 		btnLogin = new JButton("Login");
 		btnLogin.addKeyListener(new BtnLoginKeyListener());
@@ -196,6 +197,8 @@ public class ventanaLogin {
 		pnlTFLogin.add(lblOlvido, gbc_lblOlvido);
 
 		lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
+		lblInfoLegal.setForeground(Color.BLACK);
+		lblInfoLegal.setBackground(Color.WHITE);
 		frmCampingMudez.getContentPane().add(lblInfoLegal, BorderLayout.SOUTH);
 		
 		// Text Prompt para indicar lo que hay que escribir en los text field

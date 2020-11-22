@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JTextArea;
+import java.awt.Color;
 
 public class PanelFormularioActividades extends JPanel {
 	private JLabel lblAvatar;
@@ -36,11 +37,15 @@ public class PanelFormularioActividades extends JPanel {
 	private JTextArea textArea_1;
 	private JButton btnAplicarCambios;
 	private JButton btnCancelar;
+	
+	private Color colorFondo = new Color(255, 255, 255);
+	private Color colorBoton = new Color(159, 177, 57);
 
 	/**
 	 * Create the panel.
 	 */
 	public PanelFormularioActividades() {
+		setBackground(colorFondo);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -48,7 +53,7 @@ public class PanelFormularioActividades extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		lblAvatar = new JLabel("Avatar");
+		lblAvatar = new JLabel("");
 		GridBagConstraints gbc_lblAvatar = new GridBagConstraints();
 		gbc_lblAvatar.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAvatar.gridheight = 2;
@@ -220,6 +225,7 @@ public class PanelFormularioActividades extends JPanel {
 		add(textArea_1, gbc_textArea_1);
 		
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setForeground(Color.BLACK);
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancelar.gridx = 5;
@@ -227,6 +233,8 @@ public class PanelFormularioActividades extends JPanel {
 		add(btnCancelar, gbc_btnCancelar);
 		
 		btnAplicarCambios = new JButton("Aplicar cambios");
+		btnAplicarCambios.setForeground(Color.BLACK);
+		btnAplicarCambios.setBackground(colorBoton);
 		GridBagConstraints gbc_btnAplicarCambios = new GridBagConstraints();
 		gbc_btnAplicarCambios.gridx = 6;
 		gbc_btnAplicarCambios.gridy = 9;
