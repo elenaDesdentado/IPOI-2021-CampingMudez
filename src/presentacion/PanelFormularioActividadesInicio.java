@@ -9,6 +9,9 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.GridLayout;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class PanelFormularioActividadesInicio extends JPanel {
 	private JLabel lblEspacioVacio;
@@ -21,28 +24,17 @@ public class PanelFormularioActividadesInicio extends JPanel {
 	 */
 	public PanelFormularioActividadesInicio() {
 		setBackground(colorFondo);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{419, 0};
-		gridBagLayout.rowHeights = new int[]{57, 234, 166, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		setLayout(gridBagLayout);
+		setLayout(new GridLayout(3, 1, 0, 0));
 		
 		lblEspacioVacio = new JLabel("");
+		lblEspacioVacio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEspacioVacio.setIcon(new ImageIcon(PanelFormularioActividadesInicio.class.getResource("/presentacion/emptyState.png")));
-		GridBagConstraints gbc_lblEspacioVacio = new GridBagConstraints();
-		gbc_lblEspacioVacio.anchor = GridBagConstraints.NORTH;
-		gbc_lblEspacioVacio.insets = new Insets(0, 0, 5, 0);
-		gbc_lblEspacioVacio.gridx = 0;
-		gbc_lblEspacioVacio.gridy = 1;
-		add(lblEspacioVacio, gbc_lblEspacioVacio);
+		add(lblEspacioVacio);
 		
 		lblMensajeEspacioVacio = new JLabel("Oops, ¡no encontramos nada aquí! \nPor favor elige un elemento de la lista.");
+		lblMensajeEspacioVacio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensajeEspacioVacio.setForeground(Color.BLACK);
-		GridBagConstraints gbc_lblMensajeEspacioVacio = new GridBagConstraints();
-		gbc_lblMensajeEspacioVacio.gridx = 0;
-		gbc_lblMensajeEspacioVacio.gridy = 2;
-		add(lblMensajeEspacioVacio, gbc_lblMensajeEspacioVacio);
+		add(lblMensajeEspacioVacio);
 
 	}
 
