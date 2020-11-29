@@ -117,7 +117,7 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblCupo, gbc_lblCupo);
 		
 		spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(1, null, 15, 1));
+		spinner.setModel(new SpinnerNumberModel(1, 1, 15, 1));
 		GridBagConstraints gbc_spinner = new GridBagConstraints();
 		gbc_spinner.insets = new Insets(0, 0, 5, 5);
 		gbc_spinner.gridx = 5;

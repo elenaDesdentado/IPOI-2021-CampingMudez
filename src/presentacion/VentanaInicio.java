@@ -32,14 +32,26 @@ import java.awt.Dimension;
 import javax.swing.JSplitPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.SoftBevelBorder;
 
 public class VentanaInicio extends JFrame {
 
 	private JPanel contentPane;
-	private Container pnlListaFormulario;
+	private JPanel pnlActividades;
+	private JPanel pnlMonitores;
+	private JPanel pnlReservas;
+	private JPanel pnlRutas;
+	private JButton btnGestorReservas;
+	private JButton btnGestorActividades;
+	private JButton btnGestorMonitores;
+	private JButton btnRutasSenderistas;
+	private JPanel pnlListaFormulario;
 	
 	private Color colorFondo = new Color(255, 255, 255);
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
+	private Color colorTbGestion = new Color(51, 153, 51);
 	
 
 	/**
@@ -73,7 +85,7 @@ public class VentanaInicio extends JFrame {
 		setContentPane(contentPane);
 
 		JToolBar tbGestion = new JToolBar();
-		tbGestion.setBackground(colorFondo);
+		tbGestion.setBackground(new Color(51, 153, 51));
 		tbGestion.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Gesti\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -81,25 +93,28 @@ public class VentanaInicio extends JFrame {
 		tbGestion.setFloatable(false);
 		contentPane.add(tbGestion, BorderLayout.WEST);
 
-		final Component verticalGlue = Box.createVerticalGlue();
-		tbGestion.add(verticalGlue);
-
 		final Component verticalGlue_5 = Box.createVerticalGlue();
 		tbGestion.add(verticalGlue_5);
 
-		final JButton btnGestorReservas = new JButton("Reservas");
-		btnGestorReservas.setBackground(colorFondo);
+		btnGestorReservas = new JButton("Reservas");
+		btnGestorReservas.setToolTipText("Haz click para gestionar las reservas de los campings y bungalows ofertados por Campings Mudez");
+		btnGestorReservas.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoReservas.png")));
+		btnGestorReservas.setMargin(new Insets(10, 15, 10, 15));
+		btnGestorReservas.setBackground(colorTbGestion );
 		btnGestorReservas.setFocusable(false);
-		// btnGestorReservas.setPreferredSize (new Dimension(250, 75));
+		btnGestorReservas.addActionListener(new BtnSeleccionarGestorActionListener());
 		btnGestorReservas.setAlignmentX(Component.CENTER_ALIGNMENT);
 		tbGestion.add(btnGestorReservas);
 
 		final Component verticalGlue_2 = Box.createVerticalGlue();
 		tbGestion.add(verticalGlue_2);
 
-		final JButton btnGestorActividades = new JButton("Actividades");
-		btnGestorActividades.setBackground(colorFondo);
-		btnGestorActividades.addActionListener(new BtnGestorActividadesActionListener());
+		btnGestorActividades = new JButton("Actividades");
+		btnGestorActividades.setToolTipText("Haz click para gestionar las actividades ofertadas por Campings Mudez");
+		btnGestorActividades.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoActividades.png")));
+		btnGestorActividades.setMargin(new Insets(10, 10, 10, 10));
+		btnGestorActividades.setBackground(colorTbGestion );
+		btnGestorActividades.addActionListener(new BtnSeleccionarGestorActionListener());
 		btnGestorActividades.setFocusable(false);
 		btnGestorActividades.setAlignmentX(Component.CENTER_ALIGNMENT);
 		tbGestion.add(btnGestorActividades);
@@ -107,8 +122,12 @@ public class VentanaInicio extends JFrame {
 		final Component verticalGlue_3 = Box.createVerticalGlue();
 		tbGestion.add(verticalGlue_3);
 
-		final JButton btnGestorMonitores = new JButton("Monitores");
-		btnGestorMonitores.setBackground(colorFondo);
+		btnGestorMonitores = new JButton("Monitores");
+		btnGestorMonitores.setToolTipText("Haz click para gestionar los monitores que trabajan en Campings Mudez");
+		btnGestorMonitores.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoMonitores.png")));
+		btnGestorMonitores.setMargin(new Insets(10, 14, 10, 14));
+		btnGestorMonitores.setBackground(colorTbGestion);
+		btnGestorMonitores.addActionListener(new BtnSeleccionarGestorActionListener());
 		btnGestorMonitores.setFocusable(false);
 		btnGestorMonitores.setAlignmentX(0.5f);
 		tbGestion.add(btnGestorMonitores);
@@ -116,8 +135,12 @@ public class VentanaInicio extends JFrame {
 		final Component verticalGlue_4 = Box.createVerticalGlue();
 		tbGestion.add(verticalGlue_4);
 
-		final JButton btnRutasSenderistas = new JButton("Rutas senderistas");
-		btnRutasSenderistas.setBackground(colorFondo);
+		btnRutasSenderistas = new JButton("Rutas");
+		btnRutasSenderistas.setToolTipText("Haz click para gestionar las rutas ofertadas por Campings Mudez");
+		btnRutasSenderistas.setMargin(new Insets(10, 28, 10, 28));
+		btnRutasSenderistas.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoRutas.png")));
+		btnRutasSenderistas.setBackground(colorTbGestion);
+		btnRutasSenderistas.addActionListener(new BtnSeleccionarGestorActionListener());
 		btnRutasSenderistas.setFocusable(false);
 		btnRutasSenderistas.setAlignmentX(0.5f);
 		tbGestion.add(btnRutasSenderistas);
@@ -125,18 +148,23 @@ public class VentanaInicio extends JFrame {
 		final Component verticalGlue_1 = Box.createVerticalGlue();
 		tbGestion.add(verticalGlue_1);
 
-		final Component verticalGlue_6 = Box.createVerticalGlue();
-		tbGestion.add(verticalGlue_6);
-
-		JPanel pnlListaFormulario = new JPanel();
+		pnlListaFormulario = new JPanel();
 		pnlListaFormulario.setBackground(colorFondo);
 		pnlListaFormulario.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(pnlListaFormulario, BorderLayout.CENTER);
 		pnlListaFormulario.setLayout(new CardLayout(0, 0));
 
-		final JPanel pnlActividades = new PanelActividades();
+		// Añadiendo los paneles al panel con cardLayout
+		pnlActividades = new PanelActividades();
+		pnlMonitores = new PanelMonitores();
+		pnlReservas = new JPanel();
+		pnlRutas = new JPanel();
 		pnlActividades.setBackground(colorFondo);
+		pnlMonitores.setBackground(colorFondo);
 		pnlListaFormulario.add(pnlActividades, "Actividades");
+		pnlListaFormulario.add(pnlMonitores, "Monitores");
+		pnlListaFormulario.add(pnlReservas, "Reservas");
+		pnlListaFormulario.add(pnlRutas, "Rutas");
 		
 
 		JLabel lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
@@ -224,7 +252,7 @@ public class VentanaInicio extends JFrame {
 		mntmReadMe.setBackground(colorFondo);
 		mnAyuda.add(mntmReadMe);
 	}
-	private class BtnGestorActividadesActionListener implements ActionListener {
+	private class BtnSeleccionarGestorActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, arg0.getActionCommand());
 		}

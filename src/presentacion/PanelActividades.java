@@ -18,6 +18,7 @@ import java.awt.Insets;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 public class PanelActividades extends JPanel {
 	private JSplitPane splitPane;
@@ -49,9 +50,11 @@ public class PanelActividades extends JPanel {
 		pnlFormularioActs.setLayout(new CardLayout(0, 0));
 		
 		scrollPaneListaActs = new JScrollPane();
+		scrollPaneListaActs.setMinimumSize(new Dimension(200, 23));
 		splitPane.setLeftComponent(scrollPaneListaActs);
 		
 		lstActividades = new JList();
+		lstActividades.setMinimumSize(new Dimension(200, 23));
 		scrollPaneListaActs.setViewportView(lstActividades);
 		
 		pnlGestionBusqueda = new JPanel();
@@ -65,6 +68,7 @@ public class PanelActividades extends JPanel {
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
 		
 		btnCrearActividad = new JButton("Crear Actividad");
+		btnCrearActividad.addActionListener(new BtnCrearActividadActionListener());
 		btnCrearActividad.setForeground(Color.BLACK);
 		btnCrearActividad.setBackground(colorBoton);
 		btnCrearActividad.setFocusPainted(false);
@@ -110,5 +114,9 @@ public class PanelActividades extends JPanel {
 		
 		pnlFormularioActs.add(formularioVacio);
 
+	}
+	private class BtnCrearActividadActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+		}
 	}
 }
