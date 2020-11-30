@@ -133,6 +133,11 @@ public class PanelMonitores extends JPanel {
 
 	private class LstMonitoresListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
+			/*
+			 * Mejor usar el getIndex() con un ArrayList con la info de los paneles (es decir, objetos de tipo Monitor) y manejar el arrayList.
+			 * Es decir, si selecciono el primer monitor, su index sera el 0, accedo al objeto de tipo Monitor en el ArrayList de Monitores
+			 * y con eso creo el formulario. Lo mismo aplica a cabañas, campings, rutas y actividades.
+			 */
 			System.out.println("Ay que me has pinchaoooo "
 					+ ((PanelMonitorRenderer) lstMonitores.getSelectedValue()).getLblAvatar().getText());
 		}
