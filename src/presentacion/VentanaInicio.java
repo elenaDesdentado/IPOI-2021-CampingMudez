@@ -220,7 +220,8 @@ public class VentanaInicio extends JFrame {
 		final Component horizontalGlue = Box.createHorizontalGlue();
 		tbUsuario.add(horizontalGlue);
 
-		JButton btnConfiguracion = new JButton("CONFIG");
+		JButton btnConfiguracion = new JButton("");
+		btnConfiguracion.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoConfiguracion.png")));
 		btnConfiguracion.setBackground(colorFondo);
 		btnConfiguracion.setFocusPainted(false);
 		tbUsuario.add(btnConfiguracion);
@@ -231,7 +232,7 @@ public class VentanaInicio extends JFrame {
 		final JButton btnLogOut = new JButton("");
 		btnLogOut.setBackground(colorFondo);
 		btnLogOut.setFocusPainted(false);
-		btnLogOut.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/espaniol.png")));
+		btnLogOut.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoLogout.png")));
 		tbUsuario.add(btnLogOut);
 
 		JMenuBar mnbAyuda = new JMenuBar();

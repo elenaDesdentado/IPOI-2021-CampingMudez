@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -17,10 +18,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import dominio.Monitor;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
+import persistencia.Monitores;
 
 public class PanelMonitores extends JPanel {
 	private JSplitPane splitPane;
@@ -37,19 +39,38 @@ public class PanelMonitores extends JPanel {
 	private Color colorBoton = new Color(159, 177, 57);
 	private Color colorBotonCritico = new Color(190, 68, 36);
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
+	
+	private Monitores monitoresDb = new Monitores(new ArrayList<Monitor>());
 	/*
 	 * Monitores iniciales de ejemplo.
 	 */
-	private ArrayList<String> idiomas = new ArrayList<String>();
-	Monitor monitorEjemplo1 = new Monitor("Juan", "Marín Prieto", "05718928T", "654738273", null,
-			"juanmapriSi@gmail.com", "Grado universitario", "Disponible", "8:00-15:00", 1000.0, 24, idiomas);
-	private PanelMonitorRenderer panelEjemplo1 = new PanelMonitorRenderer("./avatarMonitorEjemplo1.png",
-			monitorEjemplo1);
+	private PanelMonitorRenderer panelEjemplo1;
+	private PanelMonitorRenderer panelEjemplo2;
+	private PanelMonitorRenderer panelEjemplo3;
 
 	/**
 	 * Create the panel.
 	 */
 	public PanelMonitores() {
+
+		/*
+		 * Añade los monitores de ejemplo a la "persistencia" 
+		 */
+		ArrayList<String> idiomas = new ArrayList<String>(); idiomas.add("Castellano"); idiomas.add("Inglés"); idiomas.add("Francés");
+		Monitor monitorEjemplo1 = new Monitor("Juan", "Marín Prieto", "05718928T", "654738273", null,
+				"juanmapriSi@gmail.com", "Estudios Universitarios", "Disponible", "8:00-15:00", 1000.0, 24, idiomas, "./avatarMonitorEjemplo1.png");
+		Monitor monitorEjemplo2 = new Monitor("Eva", "Grande Milagro", "05283928L", "654839283", "926 46 82 91",
+				"powerJapan90@yahoo.com", "Educación Secundaria Obligatoria", "Baja laboral", "17:30-22:30", 1235.5, 20,
+				idiomas, "./avatarMonitorEjemplo2.png");
+		Monitor monitorEjemplo3 = new Monitor("Martín", "García Ortega", "05673822Q", "625890973", null,
+				"destroyerManhattan@gmail.com", "Estudios post-universitarios", "Vacaciones", "15:00-23:00", 1540.0, 30,
+				idiomas, "./avatarMonitorEjemplo3.png");
+		monitoresDb.addMonitor(monitorEjemplo1); monitoresDb.addMonitor(monitorEjemplo2); monitoresDb.addMonitor(monitorEjemplo3); 
+
+		panelEjemplo1 = new PanelMonitorRenderer(monitorEjemplo1);
+		panelEjemplo2 = new PanelMonitorRenderer(monitorEjemplo2);
+		panelEjemplo3 = new PanelMonitorRenderer(monitorEjemplo3);
+		
 		setLayout(new BorderLayout(0, 0));
 
 		splitPane = new JSplitPane();
@@ -66,7 +87,10 @@ public class PanelMonitores extends JPanel {
 		lstMonitores = new JList();
 		lstMonitores.addListSelectionListener(new LstMonitoresListSelectionListener());
 		DefaultListModel lstModel = new DefaultListModel();
+		
 		lstModel.addElement(panelEjemplo1);
+		lstModel.addElement(panelEjemplo2);
+		lstModel.addElement(panelEjemplo3);
 		lstMonitores.setModel(lstModel);
 		lstMonitores.setFixedCellHeight(220);
 		lstMonitores.setCellRenderer(new MonitorRenderer());
@@ -129,17 +153,38 @@ public class PanelMonitores extends JPanel {
 		JPanel formularioVacio = new PanelFormularioActividadesInicio();
 
 		pnlFormularioMons.add(formularioVacio);
+		
 	}
 
 	private class LstMonitoresListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
 			/*
-			 * Mejor usar el getIndex() con un ArrayList con la info de los paneles (es decir, objetos de tipo Monitor) y manejar el arrayList.
-			 * Es decir, si selecciono el primer monitor, su index sera el 0, accedo al objeto de tipo Monitor en el ArrayList de Monitores
-			 * y con eso creo el formulario. Lo mismo aplica a cabañas, campings, rutas y actividades.
+			 * Mejor usar el getIndex() con un ArrayList con la info de los paneles (es
+			 * decir, objetos de tipo Monitor) y manejar el arrayList. Es decir, si
+			 * selecciono el primer monitor, su index sera el 0, accedo al objeto de tipo
+			 * Monitor en el ArrayList de Monitores y con eso creo el formulario. Lo mismo
+			 * aplica a cabañas, campings, rutas y actividades.
+			 * Maybe seria mejor crear el panel de monitor en un metodo a parte, que lo añada 
+			 * SI NO EXISTE en el pnlFormularioMons y que luego lo haga visible
 			 */
-			System.out.println("Ay que me has pinchaoooo "
-					+ ((PanelMonitorRenderer) lstMonitores.getSelectedValue()).getLblAvatar().getText());
+			Monitor monitorSeleccionado = monitoresDb.getMonitores().get(lstMonitores.getSelectedIndex());
+			PanelFormularioMonitores panelMonitorInfoCompleta = new PanelFormularioMonitores();
+			panelMonitorInfoCompleta.lblAvatar.setIcon(new ImageIcon(PanelMonitorRenderer.class.getResource(monitorSeleccionado.getAvatar())));
+			panelMonitorInfoCompleta.txtNombre.setText(monitorSeleccionado.getNombre());
+			panelMonitorInfoCompleta.txtApellidos.setText(monitorSeleccionado.getApellidos());
+			panelMonitorInfoCompleta.ftxtDNI.setText(monitorSeleccionado.getDni());
+			panelMonitorInfoCompleta.ftxtMovil.setText(monitorSeleccionado.getMovil());
+			panelMonitorInfoCompleta.ftxtFijo.setText(monitorSeleccionado.getFijo());
+			panelMonitorInfoCompleta.txtCorreo.setText(monitorSeleccionado.getCorreo());
+			panelMonitorInfoCompleta.cbEstudios.setSelectedItem(monitorSeleccionado.getEstudios());
+			panelMonitorInfoCompleta.txtSueldo.setText(monitorSeleccionado.getSueldo().toString());
+			panelMonitorInfoCompleta.cbHorario.setSelectedItem(monitorSeleccionado.getHorario());
+			DefaultListModel model = new DefaultListModel();
+			for(String idioma : monitorSeleccionado.getIdiomas())
+				model.addElement(idioma);
+			panelMonitorInfoCompleta.lstIdiomas.setModel(model);
+			pnlFormularioMons.add(panelMonitorInfoCompleta, monitorSeleccionado.getDni()); 
+			((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, monitorSeleccionado.getDni());
 		}
 	}
 }

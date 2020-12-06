@@ -24,14 +24,14 @@ public class PanelMonitorRenderer extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelMonitorRenderer(String avatar, Monitor monitor) {
+	public PanelMonitorRenderer(Monitor monitor) {
 		this.monitor = monitor;
 		setBorder(new TitledBorder(null, "Información del monitor", TitledBorder.LEADING, TitledBorder.TOP, null,
 				new Color(0, 0, 139)));
 		setLayout(null);
 
 		lblAvatar = new JLabel("");
-		lblAvatar.setIcon(new ImageIcon(PanelMonitorRenderer.class.getResource(avatar)));
+		lblAvatar.setIcon(new ImageIcon(PanelMonitorRenderer.class.getResource(monitor.getAvatar())));
 		lblAvatar.setBounds(10, 10, 131, 186);
 		add(lblAvatar);
 

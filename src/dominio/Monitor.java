@@ -15,9 +15,10 @@ public class Monitor {
 	private Double sueldo;
 	private int edad;
 	ArrayList<String> idiomas;
+	private String avatar;
 
 	public Monitor(String nombre, String apellidos, String dni, String movil, String fijo, String correo,
-			String estudios, String disponibilidad, String horario, Double sueldo, int edad, ArrayList<String> idiomas) {
+			String estudios, String disponibilidad, String horario, Double sueldo, int edad, ArrayList<String> idiomas, String avatar) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -31,6 +32,16 @@ public class Monitor {
 		this.sueldo = sueldo;
 		this.edad = edad;
 		this.idiomas = idiomas;
+		this.avatar = avatar;
+	}
+	
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public int getEdad() {
