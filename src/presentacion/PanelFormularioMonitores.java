@@ -16,11 +16,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelFormularioMonitores extends JPanel {
 
 	public JLabel lblAvatar;
-	private JButton btnAniadirAvatar;
+	public JButton btnAniadirAvatar;
 	public JLabel lblSueldo;
 	public JTextField txtSueldo;
 	private JLabel lblHorario;
@@ -34,8 +36,8 @@ public class PanelFormularioMonitores extends JPanel {
 	private JLabel lblIdiomas;
 	public JTextField txtNombre;
 	public JTextField txtApellidos;
-	private JButton btnAplicarCambios;
-	private JButton btnCancelar;
+	public JButton btnAplicarCambios;
+	public JButton btnCancelar;
 	
 	private Color colorFondo = new Color(255, 255, 255);
 	private Color colorBoton = new Color(159, 177, 57);
@@ -46,9 +48,10 @@ public class PanelFormularioMonitores extends JPanel {
 	private JLabel lblEstudios;
 	public JComboBox cbEstudios;
 	private JScrollPane spIdiomas;
-	private JButton btnAniadirIdioma;
+	public JButton btnAniadirIdioma;
 	public JList lstIdiomas;
 	private JLabel lblSimboloEuros;
+	private JButton btnModificar;
 	
 	/**
 	 * Create the panel.
@@ -57,9 +60,9 @@ public class PanelFormularioMonitores extends JPanel {
 		setBackground(colorFondo);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{23, 86, 41, 61, 0, 44, 37, 0, 108, 44, 93, 0, 0};
-		gridBagLayout.rowHeights = new int[]{28, 0, 0, 0, 0, 0, 0, 0, 24, 40, 39, 34, 0};
+		gridBagLayout.rowHeights = new int[]{28, 0, 0, 0, 0, 0, 0, 0, 24, 40, 39, 34, 32, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblAvatar = new JLabel("");
@@ -70,6 +73,14 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblAvatar.gridx = 1;
 		gbc_lblAvatar.gridy = 1;
 		add(lblAvatar, gbc_lblAvatar);
+		
+		btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new BtnModificarActionListener());
+		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
+		gbc_btnModificar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnModificar.gridx = 10;
+		gbc_btnModificar.gridy = 1;
+		add(btnModificar, gbc_btnModificar);
 		
 		lblNombre = new JLabel("Nombre:");
 		lblNombre.setHorizontalAlignment(SwingConstants.LEFT);
@@ -277,7 +288,7 @@ public class PanelFormularioMonitores extends JPanel {
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.BLACK);
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCancelar.gridx = 8;
 		gbc_btnCancelar.gridy = 11;
 		add(btnCancelar, gbc_btnCancelar);
@@ -286,10 +297,28 @@ public class PanelFormularioMonitores extends JPanel {
 		btnAplicarCambios.setForeground(Color.BLACK);
 		btnAplicarCambios.setBackground(colorBoton);
 		GridBagConstraints gbc_btnAplicarCambios = new GridBagConstraints();
-		gbc_btnAplicarCambios.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAplicarCambios.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAplicarCambios.gridx = 10;
 		gbc_btnAplicarCambios.gridy = 11;
 		add(btnAplicarCambios, gbc_btnAplicarCambios);
 	}
 
+	private class BtnModificarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			btnAniadirAvatar.setEnabled(true);
+			btnAplicarCambios.setEnabled(true);
+			btnCancelar.setEnabled(true);
+			btnAniadirIdioma.setEnabled(true);
+			lstIdiomas.setEnabled(true);
+			txtNombre.setEnabled(true);
+			txtApellidos.setEnabled(true);
+			ftxtDNI.setEnabled(true);
+			ftxtMovil.setEnabled(true);
+			ftxtFijo.setEnabled(true);
+			txtCorreo.setEnabled(true);
+			cbEstudios.setEnabled(true);
+			txtSueldo.setEnabled(true);
+			cbHorario.setEnabled(true);
+		}
+	}
 }

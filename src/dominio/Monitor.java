@@ -19,7 +19,6 @@ public class Monitor {
 
 	public Monitor(String nombre, String apellidos, String dni, String movil, String fijo, String correo,
 			String estudios, String disponibilidad, String horario, Double sueldo, int edad, ArrayList<String> idiomas, String avatar) {
-		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.dni = dni;

@@ -12,6 +12,7 @@ import javax.swing.border.TitledBorder;
 
 import dominio.Monitor;
 import javax.swing.border.EtchedBorder;
+import java.awt.Dimension;
 
 public class PanelMonitorRenderer extends JPanel {
 	private JLabel lblAvatar;
@@ -26,6 +27,8 @@ public class PanelMonitorRenderer extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelMonitorRenderer(Monitor monitor) {
+		setMinimumSize(new Dimension(10, 2));
+		setMaximumSize(new Dimension(32767, 5));
 		this.monitor = monitor;
 		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informaci\u00F3n del monitor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY));
 		setLayout(null);
@@ -36,24 +39,24 @@ public class PanelMonitorRenderer extends JPanel {
 		add(lblAvatar);
 
 		lblNombre = new JLabel(monitor.getNombre() + ' ' + monitor.getApellidos());
-		lblNombre.setFont(new Font("Verdana", Font.PLAIN, 12));
+		lblNombre.setFont(new Font("Verdana", Font.BOLD, 13));
 		lblNombre.setToolTipText("Nombre del monitor");
-		lblNombre.setBounds(177, 29, 145, 29);
+		lblNombre.setBounds(177, 29, 275, 29);
 		add(lblNombre);
 
 		lblEdad = new JLabel("" + monitor.getEdad());
 		lblEdad.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblEdad.setBounds(177, 68, 49, 28);
+		lblEdad.setBounds(177, 55, 49, 28);
 		add(lblEdad);
 
 		lblCorreo = new JLabel(monitor.getCorreo());
 		lblCorreo.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblCorreo.setBounds(177, 106, 370, 28);
+		lblCorreo.setBounds(177, 82, 275, 28);
 		add(lblCorreo);
 
 		lblTelefono = new JLabel(monitor.getMovil());
 		lblTelefono.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblTelefono.setBounds(177, 144, 145, 28);
+		lblTelefono.setBounds(177, 114, 145, 28);
 		add(lblTelefono);
 
 		lblDisponibilidad = new JLabel(monitor.getDisponibilidad());
@@ -69,7 +72,7 @@ public class PanelMonitorRenderer extends JPanel {
 			break;
 		}
 		lblDisponibilidad.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblDisponibilidad.setBounds(177, 182, 145, 21);
+		lblDisponibilidad.setBounds(177, 153, 145, 21);
 		add(lblDisponibilidad);
 
 	}

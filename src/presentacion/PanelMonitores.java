@@ -82,7 +82,7 @@ public class PanelMonitores extends JPanel {
 		pnlFormularioMons.setLayout(new CardLayout(0, 0));
 
 		scrollPaneListaMons = new JScrollPane();
-		scrollPaneListaMons.setMinimumSize(new Dimension(440, 23));
+		scrollPaneListaMons.setMinimumSize(new Dimension(450, 15));
 		splitPane.setLeftComponent(scrollPaneListaMons);
 
 		lstMonitores = new JList();
@@ -186,6 +186,21 @@ public class PanelMonitores extends JPanel {
 			panelMonitorInfoCompleta.lstIdiomas.setModel(model);
 			pnlFormularioMons.add(panelMonitorInfoCompleta, monitorSeleccionado.getDni()); 
 			((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, monitorSeleccionado.getDni());
+			
+			panelMonitorInfoCompleta.btnAniadirAvatar.setEnabled(false);
+			panelMonitorInfoCompleta.btnAplicarCambios.setEnabled(false);
+			panelMonitorInfoCompleta.btnCancelar.setEnabled(false);
+			panelMonitorInfoCompleta.btnAniadirIdioma.setEnabled(false);
+			panelMonitorInfoCompleta.lstIdiomas.setEnabled(false);
+			panelMonitorInfoCompleta.txtNombre.setEnabled(false);
+			panelMonitorInfoCompleta.txtApellidos.setEnabled(false);
+			panelMonitorInfoCompleta.ftxtDNI.setEnabled(false);
+			panelMonitorInfoCompleta.ftxtMovil.setEnabled(false);
+			panelMonitorInfoCompleta.ftxtFijo.setEnabled(false);
+			panelMonitorInfoCompleta.txtCorreo.setEnabled(false);
+			panelMonitorInfoCompleta.cbEstudios.setEnabled(false);
+			panelMonitorInfoCompleta.txtSueldo.setEnabled(false);
+			panelMonitorInfoCompleta.cbHorario.setEnabled(false);
 		}
 	}
 }
