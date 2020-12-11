@@ -43,6 +43,7 @@ public class PanelActividades extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		splitPane = new JSplitPane();
+		splitPane.setMinimumSize(new Dimension(462, 25));
 		add(splitPane, BorderLayout.CENTER);
 		
 		pnlFormularioActs = new JPanel();

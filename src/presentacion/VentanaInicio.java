@@ -51,7 +51,8 @@ public class VentanaInicio extends JFrame {
 	
 	private Color colorFondo = new Color(255, 255, 255);
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
-	private Color colorTbGestion = new Color(51, 153, 51);
+	private Color colorTbGestion = new Color(74, 103, 49);
+	private Color colorBotonesGestion = new Color (243, 243, 245);
 	
 
 	/**
@@ -85,7 +86,7 @@ public class VentanaInicio extends JFrame {
 		setContentPane(contentPane);
 
 		JToolBar tbGestion = new JToolBar();
-		tbGestion.setBackground(new Color(51, 153, 51));
+		tbGestion.setBackground(colorTbGestion);
 		tbGestion.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Gesti\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -100,7 +101,7 @@ public class VentanaInicio extends JFrame {
 		btnGestorReservas.setToolTipText("Haz click para gestionar las reservas de los campings y bungalows ofertados por Campings Mudez");
 		btnGestorReservas.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoReservas.png")));
 		btnGestorReservas.setMargin(new Insets(10, 15, 10, 15));
-		btnGestorReservas.setBackground(colorTbGestion );
+		btnGestorReservas.setBackground(colorBotonesGestion);
 		btnGestorReservas.setFocusable(false);
 		btnGestorReservas.addActionListener(new BtnSeleccionarGestorActionListener());
 		btnGestorReservas.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -112,8 +113,8 @@ public class VentanaInicio extends JFrame {
 		btnGestorActividades = new JButton("Actividades");
 		btnGestorActividades.setToolTipText("Haz click para gestionar las actividades ofertadas por Campings Mudez");
 		btnGestorActividades.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoActividades.png")));
-		btnGestorActividades.setMargin(new Insets(10, 10, 10, 10));
-		btnGestorActividades.setBackground(colorTbGestion );
+		btnGestorActividades.setMargin(new Insets(10, 9, 10, 9));
+		btnGestorActividades.setBackground(colorBotonesGestion);
 		btnGestorActividades.addActionListener(new BtnSeleccionarGestorActionListener());
 		btnGestorActividades.setFocusable(false);
 		btnGestorActividades.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -126,7 +127,7 @@ public class VentanaInicio extends JFrame {
 		btnGestorMonitores.setToolTipText("Haz click para gestionar los monitores que trabajan en Campings Mudez");
 		btnGestorMonitores.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoMonitores.png")));
 		btnGestorMonitores.setMargin(new Insets(10, 14, 10, 14));
-		btnGestorMonitores.setBackground(colorTbGestion);
+		btnGestorMonitores.setBackground(colorBotonesGestion);
 		btnGestorMonitores.addActionListener(new BtnSeleccionarGestorActionListener());
 		btnGestorMonitores.setFocusable(false);
 		btnGestorMonitores.setAlignmentX(0.5f);
@@ -137,9 +138,9 @@ public class VentanaInicio extends JFrame {
 
 		btnRutasSenderistas = new JButton("Rutas");
 		btnRutasSenderistas.setToolTipText("Haz click para gestionar las rutas ofertadas por Campings Mudez");
-		btnRutasSenderistas.setMargin(new Insets(10, 28, 10, 28));
+		btnRutasSenderistas.setMargin(new Insets(14, 30, 10, 30));
 		btnRutasSenderistas.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoRutas.png")));
-		btnRutasSenderistas.setBackground(colorTbGestion);
+		btnRutasSenderistas.setBackground(colorBotonesGestion);
 		btnRutasSenderistas.addActionListener(new BtnSeleccionarGestorActionListener());
 		btnRutasSenderistas.setFocusable(false);
 		btnRutasSenderistas.setAlignmentX(0.5f);

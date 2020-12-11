@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import dominio.Monitor;
+import javax.swing.border.EtchedBorder;
 
 public class PanelMonitorRenderer extends JPanel {
 	private JLabel lblAvatar;
@@ -26,8 +27,7 @@ public class PanelMonitorRenderer extends JPanel {
 	 */
 	public PanelMonitorRenderer(Monitor monitor) {
 		this.monitor = monitor;
-		setBorder(new TitledBorder(null, "Información del monitor", TitledBorder.LEADING, TitledBorder.TOP, null,
-				new Color(0, 0, 139)));
+		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informaci\u00F3n del monitor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY));
 		setLayout(null);
 
 		lblAvatar = new JLabel("");
@@ -60,10 +60,13 @@ public class PanelMonitorRenderer extends JPanel {
 		switch (lblDisponibilidad.getText()) {
 		case "Disponible":
 			lblDisponibilidad.setForeground(Color.green);
+			break;
 		case "Baja laboral":
 			lblDisponibilidad.setForeground(Color.red);
+			break;
 		case "Vacaciones":
 			lblDisponibilidad.setForeground(Color.orange);
+			break;
 		}
 		lblDisponibilidad.setFont(new Font("Verdana", Font.PLAIN, 12));
 		lblDisponibilidad.setBounds(177, 182, 145, 21);

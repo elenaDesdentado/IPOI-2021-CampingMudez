@@ -74,6 +74,7 @@ public class PanelMonitores extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 
 		splitPane = new JSplitPane();
+		splitPane.setMinimumSize(new Dimension(462, 25));
 		add(splitPane, BorderLayout.CENTER);
 
 		pnlFormularioMons = new JPanel();
@@ -81,7 +82,7 @@ public class PanelMonitores extends JPanel {
 		pnlFormularioMons.setLayout(new CardLayout(0, 0));
 
 		scrollPaneListaMons = new JScrollPane();
-		scrollPaneListaMons.setMinimumSize(new Dimension(200, 23));
+		scrollPaneListaMons.setMinimumSize(new Dimension(440, 23));
 		splitPane.setLeftComponent(scrollPaneListaMons);
 
 		lstMonitores = new JList();

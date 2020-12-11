@@ -18,6 +18,7 @@ public class PanelFormularioActividadesInicio extends JPanel {
 	private JLabel lblMensajeEspacioVacio;
 	
 	private Color colorFondo = new Color(255, 255, 255);
+	private Component verticalStrut;
 
 	/**
 	 * Create the panel.
@@ -25,6 +26,9 @@ public class PanelFormularioActividadesInicio extends JPanel {
 	public PanelFormularioActividadesInicio() {
 		setBackground(colorFondo);
 		setLayout(new GridLayout(3, 1, 0, 0));
+		
+		verticalStrut = Box.createVerticalStrut(20);
+		add(verticalStrut);
 		
 		lblEspacioVacio = new JLabel("");
 		lblEspacioVacio.setHorizontalAlignment(SwingConstants.CENTER);
