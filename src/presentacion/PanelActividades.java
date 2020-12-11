@@ -1,24 +1,31 @@
 package presentacion;
 
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.BorderLayout;
-import javax.swing.JScrollPane;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.Component;
-import javax.swing.Box;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Dimension;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import dominio.Actividad;
+import dominio.Monitor;
+import persistencia.Actividades;
 
 public class PanelActividades extends JPanel {
 	private JSplitPane splitPane;
@@ -30,46 +37,86 @@ public class PanelActividades extends JPanel {
 	private JLabel lblBarraBusqueda;
 	private JTextField txtBarraBusqueda;
 	private JList lstActividades;
-	
+
 	private Color colorFondo = new Color(255, 255, 255);
 	private Color colorBoton = new Color(159, 177, 57);
 	private Color colorBotonCritico = new Color(190, 68, 36);
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
 
+	private Actividades actividadesDb = new Actividades(new ArrayList<Actividad>());
+	/*
+	 * Actividades iniciales de ejemplo.
+	 */
+	private PanelActividadRenderer panelEjemplo1;
+	private PanelActividadRenderer panelEjemplo2;
+	private PanelActividadRenderer panelEjemplo3;
+
 	/**
 	 * Create the panel.
 	 */
 	public PanelActividades() {
-		setLayout(new BorderLayout(0, 0));
+		/*
+		 * Añade las actividades de ejemplo a la "persistencia"
+		 */
+		Actividad actividad1 = new Actividad("Paintball", "Juan Marín Prieto", 10, "Adultos", "Ciervo",
+				"El paintball es un juego de estrategia en el que compiten normalmente dos equipos. Cada jugador tiene algo "
+				+ "parecido a una pistola de bolas de pintura, y el objetivo puede variar según la modalidad del juego que es"
+				+ "cojas: atrapar la bandera, eliminar al equipo contrario, rescatar al presidente...",
+				"Incluye la equipación", "16:00-18:00", 20.5, "./fotoPaintball.jpg");
+		Actividad actividad2 = new Actividad("Espeleología subacuática", "Martín García Ortega", 5, "Adultos", "Salmón",
+				"Cuevas bajo el agua. Si descubrir los secretos de las cuevas y galerías nos abre un mundo, imagínate la "
+				+ "sensación cuando esto ocurre debajo del agua. ",
+				"Incluye la equipación", "11:00-12:00", 150.0, "./fotoEspeleologiaAcuatica.jpg");
 		
+		actividadesDb.addActividad(actividad1);
+		actividadesDb.addActividad(actividad2);
+		panelEjemplo1 = new PanelActividadRenderer(actividad1);
+		panelEjemplo2 = new PanelActividadRenderer(actividad2);
+		
+		setLayout(new BorderLayout(0, 0));
+
 		splitPane = new JSplitPane();
 		splitPane.setMinimumSize(new Dimension(462, 25));
 		add(splitPane, BorderLayout.CENTER);
-		
+
 		pnlFormularioActs = new JPanel();
 		splitPane.setRightComponent(pnlFormularioActs);
 		pnlFormularioActs.setLayout(new CardLayout(0, 0));
-		
+
 		scrollPaneListaActs = new JScrollPane();
-		scrollPaneListaActs.setMinimumSize(new Dimension(200, 23));
+		scrollPaneListaActs.setMinimumSize(new Dimension(420, 23));
 		splitPane.setLeftComponent(scrollPaneListaActs);
-		
+
 		lstActividades = new JList();
-		lstActividades.setMinimumSize(new Dimension(200, 23));
+		lstActividades.addListSelectionListener(new LstActividadesListSelectionListener());
+		lstActividades.setMinimumSize(new Dimension(440, 23));
 		scrollPaneListaActs.setViewportView(lstActividades);
 		
+		//lstActividades.addListSelectionListener(new LstActividadesListSelectionListener());
+		DefaultListModel lstModel = new DefaultListModel();
+		
+		lstModel.addElement(panelEjemplo1);
+		lstModel.addElement(panelEjemplo2);
+		//lstModel.addElement(panelEjemplo3);
+		lstActividades.setModel(lstModel);
+		lstActividades.setFixedCellHeight(220);
+		lstActividades.setCellRenderer(new ActividadRenderer());
+
+		lstActividades.setMinimumSize(new Dimension(200, 23));
+		scrollPaneListaActs.setViewportView(lstActividades);
+
 		pnlGestionBusqueda = new JPanel();
 		pnlGestionBusqueda.setBackground(colorBarraBusqueda);
 		add(pnlGestionBusqueda, BorderLayout.NORTH);
 		GridBagLayout gbl_pnlGestionBusqueda = new GridBagLayout();
-		gbl_pnlGestionBusqueda.columnWidths = new int[]{56, 83, 171, 0, 0, 0, 0, 0, 0};
-		gbl_pnlGestionBusqueda.rowHeights = new int[]{19, 33, 0, 0};
-		gbl_pnlGestionBusqueda.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_pnlGestionBusqueda.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlGestionBusqueda.columnWidths = new int[] { 56, 83, 171, 0, 0, 0, 0, 0, 0 };
+		gbl_pnlGestionBusqueda.rowHeights = new int[] { 19, 33, 0, 0 };
+		gbl_pnlGestionBusqueda.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
-		
+
 		btnCrearActividad = new JButton("Crear Actividad");
-		btnCrearActividad.addActionListener(new BtnCrearActividadActionListener());
 		btnCrearActividad.setForeground(Color.BLACK);
 		btnCrearActividad.setBackground(colorBoton);
 		btnCrearActividad.setFocusPainted(false);
@@ -78,7 +125,7 @@ public class PanelActividades extends JPanel {
 		gbc_btnCrearActividad.gridx = 1;
 		gbc_btnCrearActividad.gridy = 1;
 		pnlGestionBusqueda.add(btnCrearActividad, gbc_btnCrearActividad);
-		
+
 		btnEliminarActividad = new JButton("Eliminar Actividad");
 		btnEliminarActividad.setForeground(Color.BLACK);
 		btnEliminarActividad.setBackground(colorBotonCritico);
@@ -88,7 +135,7 @@ public class PanelActividades extends JPanel {
 		gbc_btnEliminarActividad.gridx = 2;
 		gbc_btnEliminarActividad.gridy = 1;
 		pnlGestionBusqueda.add(btnEliminarActividad, gbc_btnEliminarActividad);
-		
+
 		lblBarraBusqueda = new JLabel("Barra de búsqueda:");
 		lblBarraBusqueda.setBackground(colorFondo);
 		lblBarraBusqueda.setAlignmentX(1.0f);
@@ -98,7 +145,7 @@ public class PanelActividades extends JPanel {
 		gbc_lblBarraBusqueda.gridx = 4;
 		gbc_lblBarraBusqueda.gridy = 1;
 		pnlGestionBusqueda.add(lblBarraBusqueda, gbc_lblBarraBusqueda);
-		
+
 		txtBarraBusqueda = new JTextField();
 		GridBagConstraints gbc_txtBarraBusqueda = new GridBagConstraints();
 		gbc_txtBarraBusqueda.gridwidth = 2;
@@ -108,16 +155,44 @@ public class PanelActividades extends JPanel {
 		gbc_txtBarraBusqueda.gridy = 1;
 		pnlGestionBusqueda.add(txtBarraBusqueda, gbc_txtBarraBusqueda);
 		txtBarraBusqueda.setColumns(10);
-		
-		
-		//PANELES PARA EL CARD LAYOUT
+
+		// PANELES PARA EL CARD LAYOUT
 		JPanel formularioVacio = new PanelFormularioActividadesInicio();
-		
+
 		pnlFormularioActs.add(formularioVacio);
 
 	}
-	private class BtnCrearActividadActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
+
+	private class LstActividadesListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent e) {
+			Actividad actividadSeleccionada = actividadesDb.getActividades().get(lstActividades.getSelectedIndex());
+			PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades();
+			panelActividadInfoCompleta.lblFoto.setIcon(new ImageIcon(PanelMonitorRenderer.class.getResource(actividadSeleccionada.getFotoActividad())));
+			panelActividadInfoCompleta.txtNombre.setText(actividadSeleccionada.getNombre());
+			panelActividadInfoCompleta.txtMonitor.setText(actividadSeleccionada.getMonitor());
+			panelActividadInfoCompleta.spinCupo.setValue(actividadSeleccionada.getCupo());
+			panelActividadInfoCompleta.cbDestinatarios.setSelectedItem(actividadSeleccionada.getDestinatario());
+			panelActividadInfoCompleta.cbArea.setSelectedItem(actividadSeleccionada.getArea());
+			panelActividadInfoCompleta.tADescripcion.setText(actividadSeleccionada.getDescripcion());
+			panelActividadInfoCompleta.tAMateriales.setText(actividadSeleccionada.getMateriales());
+			panelActividadInfoCompleta.txtPrecio.setText(actividadSeleccionada.getPrecio().toString());
+			panelActividadInfoCompleta.cbHorario.setSelectedItem(actividadSeleccionada.getHorario());
+			
+			pnlFormularioActs.add(panelActividadInfoCompleta, actividadSeleccionada.getNombre());
+			((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, actividadSeleccionada.getNombre());
+			
+			panelActividadInfoCompleta.btnAniadirAvatar.setEnabled(false);
+			panelActividadInfoCompleta.btnAplicarCambios.setEnabled(false);
+			panelActividadInfoCompleta.btnCancelar.setEnabled(false);
+			panelActividadInfoCompleta.txtNombre.setEditable(false);
+			panelActividadInfoCompleta.txtMonitor.setEditable(false);
+			panelActividadInfoCompleta.txtPrecio.setEditable(false);
+			panelActividadInfoCompleta.spinCupo.setEnabled(false);
+			panelActividadInfoCompleta.tADescripcion.setEnabled(false);
+			panelActividadInfoCompleta.tAMateriales.setEnabled(false);
+			panelActividadInfoCompleta.cbDestinatarios.setEnabled(false);
+			panelActividadInfoCompleta.cbArea.setEnabled(false);
+			panelActividadInfoCompleta.cbHorario.setEnabled(false);
 		}
 	}
 }
