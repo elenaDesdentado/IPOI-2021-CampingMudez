@@ -82,6 +82,9 @@ public class ventanaLogin {
 
 		frmCampingMudez.setBounds(275, 20, 850, 600);
 		frmCampingMudez.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//Center of the screen
+		frmCampingMudez.setLocationRelativeTo(null);
 
 		pnlIdioma = new JPanel();
 
