@@ -50,6 +50,8 @@ public class PanelActividades extends JPanel {
 	private PanelActividadRenderer panelEjemplo1;
 	private PanelActividadRenderer panelEjemplo2;
 	private PanelActividadRenderer panelEjemplo3;
+	private PanelActividadRenderer panelEjemplo4;
+	private PanelActividadRenderer panelEjemplo5;
 
 	/**
 	 * Create the panel.
@@ -67,11 +69,32 @@ public class PanelActividades extends JPanel {
 				"Cuevas bajo el agua. Si descubrir los secretos de las cuevas y galerías nos abre un mundo, imagínate la "
 				+ "sensación cuando esto ocurre debajo del agua. ",
 				"Incluye la equipación", "11:00-12:00", 150.0, "./fotoEspeleologiaAcuatica.jpg");
+		Actividad actividad3 = new Actividad("Karts Infantil", "Martín García Ortega", 8, "Niños de 12 a 14 años", "Escorpión",
+				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
+				+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
+				+ "toda la adrenalina generada sin preocupaciones.",
+				"Incluye el kart y la equipación", "9:00-12:00", 14.5, "./fotoKartInf.jpg");
+		Actividad actividad4 = new Actividad("Karts Junior", "Juan Marín Prieto", 10, "Niños de 14 a 17 años", "Ciervo",
+				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
+				+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
+				+ "toda la adrenalina generada sin preocupaciones.",
+				"Incluye el kart y la equipación", "10:00-11:30", 18.5, "./fotoKartJunior.jpg");
+		Actividad actividad5 = new Actividad("Karts Adultos", "Juan Marín Prieto", 12, "Adultos", "Águila",
+				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
+				+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
+				+ "toda la adrenalina generada sin preocupaciones.",
+				"Incluye el kart y la equipación", "19:00-21:00", 22.5, "./fotoKartAdultos.jpg");
 		
 		actividadesDb.addActividad(actividad1);
 		actividadesDb.addActividad(actividad2);
+		actividadesDb.addActividad(actividad3);
+		actividadesDb.addActividad(actividad4);
+		actividadesDb.addActividad(actividad5);
 		panelEjemplo1 = new PanelActividadRenderer(actividad1);
 		panelEjemplo2 = new PanelActividadRenderer(actividad2);
+		panelEjemplo3 = new PanelActividadRenderer(actividad3);
+		panelEjemplo4 = new PanelActividadRenderer(actividad4);
+		panelEjemplo5 = new PanelActividadRenderer(actividad5);
 		
 		setLayout(new BorderLayout(0, 0));
 
@@ -97,7 +120,10 @@ public class PanelActividades extends JPanel {
 		
 		lstModel.addElement(panelEjemplo1);
 		lstModel.addElement(panelEjemplo2);
-		//lstModel.addElement(panelEjemplo3);
+		lstModel.addElement(panelEjemplo3);
+		lstModel.addElement(panelEjemplo4);
+		lstModel.addElement(panelEjemplo5);
+		
 		lstActividades.setModel(lstModel);
 		lstActividades.setFixedCellHeight(220);
 		lstActividades.setCellRenderer(new ActividadRenderer());

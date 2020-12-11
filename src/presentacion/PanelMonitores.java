@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -198,9 +199,12 @@ public class PanelMonitores extends JPanel {
 			panelMonitorInfoCompleta.ftxtMovil.setEnabled(false);
 			panelMonitorInfoCompleta.ftxtFijo.setEnabled(false);
 			panelMonitorInfoCompleta.txtCorreo.setEnabled(false);
-			panelMonitorInfoCompleta.cbEstudios.setEnabled(false);
 			panelMonitorInfoCompleta.txtSueldo.setEnabled(false);
 			panelMonitorInfoCompleta.cbHorario.setEnabled(false);
+			panelMonitorInfoCompleta.cbEstudios.setEnabled(false);
+			
+			UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
+			UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
 		}
 	}
 }
