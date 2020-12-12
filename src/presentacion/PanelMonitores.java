@@ -57,15 +57,17 @@ public class PanelMonitores extends JPanel {
 		/*
 		 * Añade los monitores de ejemplo a la "persistencia" 
 		 */
-		ArrayList<String> idiomas = new ArrayList<String>(); idiomas.add("Castellano"); idiomas.add("Inglés"); idiomas.add("Francés");
+		ArrayList<String> idiomas1 = new ArrayList<String>(); idiomas1.add("Castellano"); idiomas1.add("Inglés"); idiomas1.add("Francés");
+		ArrayList<String> idiomas2 = new ArrayList<String>(); idiomas2.add("Castellano"); idiomas2.add("Francés");
+		ArrayList<String> idiomas3 = new ArrayList<String>(); idiomas3.add("Castellano"); idiomas3.add("Noruego"); idiomas3.add("Alemán");
 		Monitor monitorEjemplo1 = new Monitor("Juan", "Marín Prieto", "05718928T", "654738273", null,
-				"juanmapriSi@gmail.com", "Estudios Universitarios", "Disponible", "8:00-15:00", 1000.0, 24, idiomas, "./avatarMonitorEjemplo1.png");
+				"juanmapriSi@gmail.com", "Estudios Universitarios", "Disponible", "8:00-15:00", 1000.0, 24, idiomas1, "./avatarMonitorEjemplo1.png");
 		Monitor monitorEjemplo2 = new Monitor("Eva", "Grande Milagro", "05283928L", "654839283", "926 46 82 91",
 				"powerJapan90@yahoo.com", "Educación Secundaria Obligatoria", "Baja laboral", "17:30-22:30", 1235.5, 20,
-				idiomas, "./avatarMonitorEjemplo2.png");
+				idiomas2, "./avatarMonitorEjemplo2.png");
 		Monitor monitorEjemplo3 = new Monitor("Martín", "García Ortega", "05673822Q", "625890973", null,
 				"destroyerManhattan@gmail.com", "Estudios post-universitarios", "Vacaciones", "15:00-23:00", 1540.0, 30,
-				idiomas, "./avatarMonitorEjemplo3.png");
+				idiomas3, "./avatarMonitorEjemplo3.png");
 		monitoresDb.addMonitor(monitorEjemplo1); monitoresDb.addMonitor(monitorEjemplo2); monitoresDb.addMonitor(monitorEjemplo3); 
 
 		panelEjemplo1 = new PanelMonitorRenderer(monitorEjemplo1);
@@ -170,7 +172,7 @@ public class PanelMonitores extends JPanel {
 			 * SI NO EXISTE en el pnlFormularioMons y que luego lo haga visible
 			 */
 			Monitor monitorSeleccionado = monitoresDb.getMonitores().get(lstMonitores.getSelectedIndex());
-			PanelFormularioMonitores panelMonitorInfoCompleta = new PanelFormularioMonitores();
+			PanelFormularioMonitores panelMonitorInfoCompleta = new PanelFormularioMonitores(monitoresDb, lstMonitores.getSelectedIndex());
 			panelMonitorInfoCompleta.lblAvatar.setIcon(new ImageIcon(PanelMonitorRenderer.class.getResource(monitorSeleccionado.getAvatar())));
 			panelMonitorInfoCompleta.txtNombre.setText(monitorSeleccionado.getNombre());
 			panelMonitorInfoCompleta.txtApellidos.setText(monitorSeleccionado.getApellidos());

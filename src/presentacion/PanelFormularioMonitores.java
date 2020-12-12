@@ -12,10 +12,15 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import dominio.Monitor;
+import persistencia.Monitores;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -53,10 +58,17 @@ public class PanelFormularioMonitores extends JPanel {
 	private JLabel lblSimboloEuros;
 	private JButton btnModificar;
 	
+	private int indice; //Indice del monitor en la lsita
+	private Monitores monitoresDb;
+	
 	/**
 	 * Create the panel.
 	 */
-	public PanelFormularioMonitores() {
+	public PanelFormularioMonitores(Monitores db, int indice) {
+		
+		this.monitoresDb = db;
+		this.indice = indice;
+		
 		setBackground(colorFondo);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{23, 86, 41, 61, 0, 44, 37, 0, 108, 44, 93, 0, 0};
@@ -279,6 +291,7 @@ public class PanelFormularioMonitores extends JPanel {
 		spIdiomas.setViewportView(lstIdiomas);
 		
 		btnAniadirIdioma = new JButton("Añadir...");
+		btnAniadirIdioma.addActionListener(new BtnAniadirIdiomaActionListener());
 		GridBagConstraints gbc_btnAniadirIdioma = new GridBagConstraints();
 		gbc_btnAniadirIdioma.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAniadirIdioma.gridx = 10;
@@ -294,6 +307,7 @@ public class PanelFormularioMonitores extends JPanel {
 		add(btnCancelar, gbc_btnCancelar);
 		
 		btnAplicarCambios = new JButton("Aplicar cambios");
+		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
 		btnAplicarCambios.setForeground(Color.BLACK);
 		btnAplicarCambios.setBackground(colorBoton);
 		GridBagConstraints gbc_btnAplicarCambios = new GridBagConstraints();
@@ -319,6 +333,33 @@ public class PanelFormularioMonitores extends JPanel {
 			cbEstudios.setEnabled(true);
 			txtSueldo.setEnabled(true);
 			cbHorario.setEnabled(true);
+		}
+	}
+	private class BtnAniadirIdiomaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String nuevoIdioma = JOptionPane.showInputDialog("Introduzca un nuevo idioma");
+			Monitor monitor = monitoresDb.getMonitores().get(indice);
+			monitor.getIdiomas().add(nuevoIdioma);
+			DefaultListModel modeloLista= (DefaultListModel) lstIdiomas.getModel();
+			modeloLista.addElement(nuevoIdioma);
+		}
+	}
+	private class BtnAplicarCambiosActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			Monitor monitor = monitoresDb.getMonitores().get(indice);
+			monitor.setNombre(txtNombre.getText());
+			monitor.setApellidos(txtApellidos.getText());
+			monitor.setDni(ftxtDNI.getText());
+			monitor.setMovil(ftxtMovil.getText());
+			monitor.setFijo(ftxtFijo.getText());
+			monitor.setCorreo(txtCorreo.getText());
+			monitor.setSueldo(Double.valueOf(txtSueldo.getText()));
+			monitor.setEstudios((String) cbEstudios.getSelectedItem());
+			monitor.setHorario((String) cbHorario.getSelectedItem());
+			//monitor.setAvatar(ruta); Como sacar la ruta del icono?
+			//DefaultListModel m = lstIdiomas.getModel();
+			// Coger todos los idiomas del modelo y crear una nueva lista para setearla.
+			//monitor.setIdiomas(lstIdiomas);
 		}
 	}
 }
