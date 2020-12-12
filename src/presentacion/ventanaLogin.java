@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -26,6 +27,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class ventanaLogin {
 
@@ -40,6 +47,8 @@ public class ventanaLogin {
 	private JCheckBox chckbxRecuerdame;
 	private JButton btnLogin;
 	private JLabel lblOlvido;
+	private TextPrompt nombreUsuario;
+	private TextPrompt contrasenia;
 	
 	private Color colorFondo = new Color(255, 255, 255);
 	private Color colorResaltado = new Color(226, 224, 64);
@@ -47,6 +56,14 @@ public class ventanaLogin {
 	
 	private JButton btnEspaniol;
 	private JButton btnIngles;
+	
+	File file = new File("./credenciales.txt");
+	public String USER = "IPOMudez";
+	public String PASSWORD = "mudez";
+	Icon wrong = new ImageIcon(ventanaLogin.class.getResource("/presentacion/iconoWrong.png"));
+	private JLabel lblWrong;
+	private JLabel lblWrongPassword;
+	private JLabel lblMensajeError;
 
 	/**
 	 * Launch the application.
@@ -75,6 +92,7 @@ public class ventanaLogin {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frmCampingMudez = new JFrame();
 		frmCampingMudez.setTitle("Camping Mudez");
 		frmCampingMudez.setIconImage(Toolkit.getDefaultToolkit().getImage(ventanaLogin.class.getResource("/presentacion/campingMudez.png")));
@@ -140,10 +158,10 @@ public class ventanaLogin {
 
 		pnlLogin.add(pnlTFLogin, BorderLayout.CENTER);
 		GridBagLayout gbl_pnlTFLogin = new GridBagLayout();
-		gbl_pnlTFLogin.columnWidths = new int[] { 254, 450, 230, 0 };
-		gbl_pnlTFLogin.rowHeights = new int[] { 0, 0, 0, 27, 0, 37, 0, 0 };
+		gbl_pnlTFLogin.columnWidths = new int[] { 254, 450, 182, 0 };
+		gbl_pnlTFLogin.rowHeights = new int[] { 0, 0, 0, 0, 27, 0, 37, 0, 0 };
 		gbl_pnlTFLogin.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_pnlTFLogin.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnlTFLogin.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlTFLogin.setLayout(gbl_pnlTFLogin);
 
 		txtNombreUsuario = new JTextField();
@@ -162,6 +180,14 @@ public class ventanaLogin {
 		
 		pwfContrasenia.addFocusListener(new MiFocusListener());
 		
+		lblWrong = new JLabel("");
+		GridBagConstraints gbc_lblWrong = new GridBagConstraints();
+		gbc_lblWrong.anchor = GridBagConstraints.WEST;
+		gbc_lblWrong.insets = new Insets(0, 0, 5, 0);
+		gbc_lblWrong.gridx = 2;
+		gbc_lblWrong.gridy = 0;
+		pnlTFLogin.add(lblWrong, gbc_lblWrong);
+		
 		GridBagConstraints gbc_pwfContrasenia = new GridBagConstraints();
 		gbc_pwfContrasenia.insets = new Insets(0, 0, 5, 5);
 		gbc_pwfContrasenia.fill = GridBagConstraints.HORIZONTAL;
@@ -171,12 +197,27 @@ public class ventanaLogin {
 		pwfContrasenia.setColumns(10);
 		
 		pwfContrasenia.setEchoChar('*');
+		
+		lblWrongPassword = new JLabel("");
+		GridBagConstraints gbc_lblWrongPassword = new GridBagConstraints();
+		gbc_lblWrongPassword.anchor = GridBagConstraints.WEST;
+		gbc_lblWrongPassword.insets = new Insets(0, 0, 5, 0);
+		gbc_lblWrongPassword.gridx = 2;
+		gbc_lblWrongPassword.gridy = 1;
+		pnlTFLogin.add(lblWrongPassword, gbc_lblWrongPassword);
+		
+		lblMensajeError = new JLabel("");
+		GridBagConstraints gbc_lblMensajeError = new GridBagConstraints();
+		gbc_lblMensajeError.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMensajeError.gridx = 1;
+		gbc_lblMensajeError.gridy = 2;
+		pnlTFLogin.add(lblMensajeError, gbc_lblMensajeError);
 
 		chckbxRecuerdame = new JCheckBox("Recuérdame");
 		GridBagConstraints gbc_chckbxRecuerdame = new GridBagConstraints();
 		gbc_chckbxRecuerdame.insets = new Insets(0, 0, 5, 5);
 		gbc_chckbxRecuerdame.gridx = 1;
-		gbc_chckbxRecuerdame.gridy = 2;
+		gbc_chckbxRecuerdame.gridy = 3;
 		pnlTFLogin.add(chckbxRecuerdame, gbc_chckbxRecuerdame);
 		chckbxRecuerdame.setBackground(colorFondo);
 
@@ -189,14 +230,14 @@ public class ventanaLogin {
 
 		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
 		gbc_btnLogin.gridx = 1;
-		gbc_btnLogin.gridy = 4;
+		gbc_btnLogin.gridy = 5;
 		pnlTFLogin.add(btnLogin, gbc_btnLogin);
 
 		lblOlvido = new JLabel("Olvidé mi contraseña o usuario");
 		GridBagConstraints gbc_lblOlvido = new GridBagConstraints();
 		gbc_lblOlvido.insets = new Insets(0, 0, 0, 5);
 		gbc_lblOlvido.gridx = 1;
-		gbc_lblOlvido.gridy = 6;
+		gbc_lblOlvido.gridy = 7;
 		pnlTFLogin.add(lblOlvido, gbc_lblOlvido);
 
 		lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
@@ -204,11 +245,44 @@ public class ventanaLogin {
 		lblInfoLegal.setBackground(Color.WHITE);
 		frmCampingMudez.getContentPane().add(lblInfoLegal, BorderLayout.SOUTH);
 		
+		update();
+		
 		// Text Prompt para indicar lo que hay que escribir en los text field
-		TextPrompt nombreUsuario = new TextPrompt("Nombre de usuario", txtNombreUsuario);
-		TextPrompt contrasenia = new TextPrompt("Contraseña", pwfContrasenia);
+		nombreUsuario = new TextPrompt("Nombre de usuario", txtNombreUsuario);
+		contrasenia = new TextPrompt("Contraseña", pwfContrasenia);
+		
+		
 	}
 	
+	public void update() {
+		try {
+	          if(file.exists()){
+
+	            Scanner scan = new Scanner(file);
+
+	            txtNombreUsuario.setText(scan.nextLine());  
+	            pwfContrasenia.setText(scan.nextLine());
+	            chckbxRecuerdame.setSelected(true);
+	            scan.close();
+	          }
+
+	        } catch (FileNotFoundException e) {         
+	            e.printStackTrace();
+	        } 
+	}
+
+	public void save() {
+		try {
+            if(!file.exists()) file.createNewFile();  //if the file !exist create a new one
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsolutePath()));
+            bw.write(txtNombreUsuario.getText()); //write the name
+            bw.newLine(); //leave a new Line
+            bw.write(pwfContrasenia.getPassword()); //write the password
+            bw.close(); //close the BufferdWriter
+
+        } catch (IOException e) { e.printStackTrace(); } 
+	}
 
 	private class MiFocusListener extends FocusAdapter {
 		@Override
@@ -219,25 +293,53 @@ public class ventanaLogin {
 			e.getComponent().setBackground(colorFondo);
 		}
 	}
+	
 	private class BtnLoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			// CHECKEO DE CREDENCIALES 
-			VentanaInicio inicio = new VentanaInicio();
-			frmCampingMudez.dispose();
-			inicio.setVisible(true);
-			// Hacer que la frame ocupe toda la pantalla
-			inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			// CHECKEO DE CREDENCIALES
+			if(txtNombreUsuario.getText().equals(USER) && String.valueOf(pwfContrasenia.getPassword()).equals(PASSWORD)) {
+				if(chckbxRecuerdame.isSelected()) save();
+				VentanaInicio inicio = new VentanaInicio();
+				frmCampingMudez.dispose();
+				inicio.setVisible(true);
+				// Hacer que la frame ocupe toda la pantalla
+				inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+			}
+			else {
+				lblWrong.setIcon(wrong);
+				lblWrongPassword.setIcon(wrong);
+				if (!txtNombreUsuario.getText().equals(USER)) {
+					lblMensajeError.setText("Nombre de usuario incorrecto. Intente de nuevo.");
+					lblMensajeError.setForeground(Color.RED);
+				}
+				else {
+					lblMensajeError.setText("Contraseña incorrecta. Intente de nuevo.");
+					lblMensajeError.setForeground(Color.RED);
+				}
+			}
 		}
 	}
 	private class BtnLoginKeyListener extends KeyAdapter {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			if (e.getKeyCode()==KeyEvent.VK_ENTER){
-				VentanaInicio inicio = new VentanaInicio();
-				frmCampingMudez.dispose();
-				inicio.setVisible(true);
-				// Hacer que la frame ocupe toda la pantalla
-				inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				// CHECKEO DE CREDENCIALES
+//				if(txtNombreUsuario.getText() == USER && String.valueOf(pwfContrasenia.getPassword()) == PASSWORD) {
+					if(chckbxRecuerdame.isSelected()) save();
+					VentanaInicio inicio = new VentanaInicio();
+					frmCampingMudez.dispose();
+					inicio.setVisible(true);
+					// Hacer que la frame ocupe toda la pantalla
+					inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//				}
+//				else {
+//					lblWrong.setIcon(wrong);
+//					lblWrongPassword.setIcon(wrong);
+//					TextPrompt nombreUsuarioWrong = new TextPrompt("Nombre de usuario incorrecto. Intente de nuevo.", txtNombreUsuario);
+//					TextPrompt contraseniaWrong = new TextPrompt("Contraseña incorrecta. Intente de nuevo.", pwfContrasenia);
+//					nombreUsuarioWrong.setForeground(Color.RED);
+//					contraseniaWrong.setForeground(Color.RED);
+//				}
 		    }
 		}
 	}
