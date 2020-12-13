@@ -31,10 +31,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JSplitPane;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
+import java.awt.Font;
 
 public class VentanaInicio extends JFrame {
 
@@ -62,7 +65,7 @@ public class VentanaInicio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaInicio frame = new VentanaInicio();
+					VentanaInicio frame = new VentanaInicio(null, null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -73,7 +76,7 @@ public class VentanaInicio extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaInicio() {
+	public VentanaInicio(String usuario, String password) {
 		setTitle("Camping Mudez");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(VentanaInicio.class.getResource("/presentacion/campingMudez.png")));
@@ -200,21 +203,26 @@ public class VentanaInicio extends JFrame {
 		final Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		tbUsuario.add(horizontalStrut_2);
 
-		JLabel lblAvatar = new JLabel("AVATAR");
+		JLabel lblAvatar = new JLabel("");
+		lblAvatar.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/avatarUsuario.png")));
 		lblAvatar.setBackground(colorFondo);
 		tbUsuario.add(lblAvatar);
 
 		final Component horizontalStrut = Box.createHorizontalStrut(20);
 		tbUsuario.add(horizontalStrut);
 
-		JLabel lblName = new JLabel("NAME");
+		JLabel lblName = new JLabel(usuario);
+		lblName.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		lblName.setBackground(colorFondo);
 		tbUsuario.add(lblName);
 
 		final Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		tbUsuario.add(horizontalStrut_1);
 
-		JLabel lblUltimaConexion = new JLabel("ULTIMA CONEXION");
+		String ultimaConexion = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")).toString();
+		JLabel lblUltimaConexion = new JLabel(ultimaConexion);
+		lblUltimaConexion.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		lblUltimaConexion.setToolTipText("Fecha y hora de la últiam vez que entraste a la aplicación");
 		lblUltimaConexion.setBackground(colorFondo);
 		tbUsuario.add(lblUltimaConexion);
 
@@ -222,6 +230,7 @@ public class VentanaInicio extends JFrame {
 		tbUsuario.add(horizontalGlue);
 
 		JButton btnConfiguracion = new JButton("");
+		btnConfiguracion.setToolTipText("Permite configurar la información de tu usuario");
 		btnConfiguracion.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoConfiguracion.png")));
 		btnConfiguracion.setBackground(colorFondo);
 		btnConfiguracion.setFocusPainted(false);
@@ -231,6 +240,8 @@ public class VentanaInicio extends JFrame {
 		tbUsuario.add(horizontalStrut_3);
 
 		final JButton btnLogOut = new JButton("");
+		btnLogOut.addActionListener(new BtnLogOutActionListener());
+		btnLogOut.setToolTipText("Al hacer click, saldrás de la aplicación a la ventana de login");
 		btnLogOut.setBackground(colorFondo);
 		btnLogOut.setFocusPainted(false);
 		btnLogOut.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoLogout.png")));
@@ -257,6 +268,13 @@ public class VentanaInicio extends JFrame {
 	private class BtnSeleccionarGestorActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, arg0.getActionCommand());
+		}
+	}
+	private class BtnLogOutActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			ventanaLogin ventanaLogin = new ventanaLogin();
+			dispose();
+			ventanaLogin.getFrame().setVisible(true);
 		}
 	}
 }

@@ -57,9 +57,9 @@ public class ventanaLogin {
 	private JButton btnEspaniol;
 	private JButton btnIngles;
 	
-	File file = new File("./credenciales.txt");
-	public String USER = "IPOMudez";
-	public String PASSWORD = "mudez";
+	File file = new File("./src/persistencia/credenciales-usuario.txt");
+	private String USER;
+	private String PASSWORD;
 	Icon wrong = new ImageIcon(ventanaLogin.class.getResource("/presentacion/iconoWrong.png"));
 	private JLabel lblWrong;
 	private JLabel lblWrongPassword;
@@ -86,6 +86,10 @@ public class ventanaLogin {
 	 */
 	public ventanaLogin() {
 		initialize();
+	}
+	
+	public JFrame getFrame() {
+		return this.frmCampingMudez;
 	}
 
 	/**
@@ -241,6 +245,7 @@ public class ventanaLogin {
 		pnlTFLogin.add(lblOlvido, gbc_lblOlvido);
 
 		lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
+		lblInfoLegal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInfoLegal.setForeground(Color.BLACK);
 		lblInfoLegal.setBackground(Color.WHITE);
 		frmCampingMudez.getContentPane().add(lblInfoLegal, BorderLayout.SOUTH);
@@ -259,11 +264,17 @@ public class ventanaLogin {
 	          if(file.exists()){
 
 	            Scanner scan = new Scanner(file);
-
-	            txtNombreUsuario.setText(scan.nextLine());  
-	            pwfContrasenia.setText(scan.nextLine());
+	            USER = scan.nextLine();
+	            PASSWORD = scan.nextLine();
+	            txtNombreUsuario.setText(USER);  
+	            pwfContrasenia.setText(PASSWORD);
 	            chckbxRecuerdame.setSelected(true);
 	            scan.close();
+	          } else {
+	        	  File credencialesIniciales = new File("./credenciales.txt");
+	        	  Scanner scan = new Scanner(credencialesIniciales);
+		          USER = scan.nextLine();
+		          PASSWORD = scan.nextLine();
 	          }
 
 	        } catch (FileNotFoundException e) {         
@@ -283,6 +294,10 @@ public class ventanaLogin {
 
         } catch (IOException e) { e.printStackTrace(); } 
 	}
+	
+	public boolean delete() {
+		return file.delete();
+	}
 
 	private class MiFocusListener extends FocusAdapter {
 		@Override
@@ -299,7 +314,8 @@ public class ventanaLogin {
 			// CHECKEO DE CREDENCIALES
 			if(txtNombreUsuario.getText().equals(USER) && String.valueOf(pwfContrasenia.getPassword()).equals(PASSWORD)) {
 				if(chckbxRecuerdame.isSelected()) save();
-				VentanaInicio inicio = new VentanaInicio();
+				delete();
+				VentanaInicio inicio = new VentanaInicio(USER, PASSWORD);
 				frmCampingMudez.dispose();
 				inicio.setVisible(true);
 				// Hacer que la frame ocupe toda la pantalla
@@ -316,6 +332,7 @@ public class ventanaLogin {
 					lblMensajeError.setText("Contraseña incorrecta. Intente de nuevo.");
 					lblMensajeError.setForeground(Color.RED);
 				}
+				// Añadir else if con el de la contraseña y el else para mostrar que ambos son incorrectos
 			}
 		}
 	}
@@ -324,22 +341,27 @@ public class ventanaLogin {
 		public void keyReleased(KeyEvent e) {
 			if (e.getKeyCode()==KeyEvent.VK_ENTER){
 				// CHECKEO DE CREDENCIALES
-//				if(txtNombreUsuario.getText() == USER && String.valueOf(pwfContrasenia.getPassword()) == PASSWORD) {
+				if(txtNombreUsuario.getText() == USER && String.valueOf(pwfContrasenia.getPassword()) == PASSWORD) {
 					if(chckbxRecuerdame.isSelected()) save();
-					VentanaInicio inicio = new VentanaInicio();
+					else delete();
+					VentanaInicio inicio = new VentanaInicio(USER, PASSWORD);
 					frmCampingMudez.dispose();
 					inicio.setVisible(true);
 					// Hacer que la frame ocupe toda la pantalla
 					inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//				}
-//				else {
-//					lblWrong.setIcon(wrong);
-//					lblWrongPassword.setIcon(wrong);
-//					TextPrompt nombreUsuarioWrong = new TextPrompt("Nombre de usuario incorrecto. Intente de nuevo.", txtNombreUsuario);
-//					TextPrompt contraseniaWrong = new TextPrompt("Contraseña incorrecta. Intente de nuevo.", pwfContrasenia);
-//					nombreUsuarioWrong.setForeground(Color.RED);
-//					contraseniaWrong.setForeground(Color.RED);
-//				}
+				}
+				else {
+					lblWrong.setIcon(wrong);
+					lblWrongPassword.setIcon(wrong);
+					if (!txtNombreUsuario.getText().equals(USER)) {
+						lblMensajeError.setText("Nombre de usuario incorrecto. Intente de nuevo.");
+						lblMensajeError.setForeground(Color.RED);
+					}
+					else {
+						lblMensajeError.setText("Contraseña incorrecta. Intente de nuevo.");
+						lblMensajeError.setForeground(Color.RED);
+					}
+				}
 		    }
 		}
 	}
