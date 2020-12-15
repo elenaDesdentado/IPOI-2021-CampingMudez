@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -24,6 +25,8 @@ import javax.swing.event.ListSelectionListener;
 
 import dominio.Monitor;
 import persistencia.Monitores;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelMonitores extends JPanel {
 	private JSplitPane splitPane;
@@ -40,7 +43,7 @@ public class PanelMonitores extends JPanel {
 	private Color colorBoton = new Color(159, 177, 57);
 	private Color colorBotonCritico = new Color(190, 68, 36);
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
-	
+
 	private Monitores monitoresDb = new Monitores(new ArrayList<Monitor>());
 	/*
 	 * Monitores iniciales de ejemplo.
@@ -55,25 +58,36 @@ public class PanelMonitores extends JPanel {
 	public PanelMonitores() {
 
 		/*
-		 * Añade los monitores de ejemplo a la "persistencia" 
+		 * Añade los monitores de ejemplo a la "persistencia"
 		 */
-		ArrayList<String> idiomas1 = new ArrayList<String>(); idiomas1.add("Castellano"); idiomas1.add("Inglés"); idiomas1.add("Francés");
-		ArrayList<String> idiomas2 = new ArrayList<String>(); idiomas2.add("Castellano"); idiomas2.add("Francés");
-		ArrayList<String> idiomas3 = new ArrayList<String>(); idiomas3.add("Castellano"); idiomas3.add("Noruego"); idiomas3.add("Alemán");
+		ArrayList<String> idiomas1 = new ArrayList<String>();
+		idiomas1.add("Castellano");
+		idiomas1.add("Inglés");
+		idiomas1.add("Francés");
+		ArrayList<String> idiomas2 = new ArrayList<String>();
+		idiomas2.add("Castellano");
+		idiomas2.add("Francés");
+		ArrayList<String> idiomas3 = new ArrayList<String>();
+		idiomas3.add("Castellano");
+		idiomas3.add("Noruego");
+		idiomas3.add("Alemán");
 		Monitor monitorEjemplo1 = new Monitor("Juan", "Marín Prieto", "05718928T", "654738273", null,
-				"juanmapriSi@gmail.com", "Estudios Universitarios", "Disponible", "8:00-15:00", 1000.0, 24, idiomas1, "./avatarMonitorEjemplo1.png");
+				"juanmapriSi@gmail.com", "Estudios Universitarios", "Disponible", "8:00-15:00", 1000.0, 24, idiomas1,
+				"./avatarMonitorEjemplo1.png");
 		Monitor monitorEjemplo2 = new Monitor("Eva", "Grande Milagro", "05283928L", "654839283", "926 46 82 91",
 				"powerJapan90@yahoo.com", "Educación Secundaria Obligatoria", "Baja laboral", "17:30-22:30", 1235.5, 20,
 				idiomas2, "./avatarMonitorEjemplo2.png");
 		Monitor monitorEjemplo3 = new Monitor("Martín", "García Ortega", "05673822Q", "625890973", null,
 				"destroyerManhattan@gmail.com", "Estudios post-universitarios", "Vacaciones", "15:00-23:00", 1540.0, 30,
 				idiomas3, "./avatarMonitorEjemplo3.png");
-		monitoresDb.addMonitor(monitorEjemplo1); monitoresDb.addMonitor(monitorEjemplo2); monitoresDb.addMonitor(monitorEjemplo3); 
+		monitoresDb.addMonitor(monitorEjemplo1);
+		monitoresDb.addMonitor(monitorEjemplo2);
+		monitoresDb.addMonitor(monitorEjemplo3);
 
 		panelEjemplo1 = new PanelMonitorRenderer(monitorEjemplo1);
 		panelEjemplo2 = new PanelMonitorRenderer(monitorEjemplo2);
 		panelEjemplo3 = new PanelMonitorRenderer(monitorEjemplo3);
-		
+
 		setLayout(new BorderLayout(0, 0));
 
 		splitPane = new JSplitPane();
@@ -91,7 +105,7 @@ public class PanelMonitores extends JPanel {
 		lstMonitores = new JList();
 		lstMonitores.addListSelectionListener(new LstMonitoresListSelectionListener());
 		DefaultListModel lstModel = new DefaultListModel();
-		
+
 		lstModel.addElement(panelEjemplo1);
 		lstModel.addElement(panelEjemplo2);
 		lstModel.addElement(panelEjemplo3);
@@ -114,6 +128,7 @@ public class PanelMonitores extends JPanel {
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
 
 		btnAñadirMonitor = new JButton("Añadir nuevo monitor");
+		btnAñadirMonitor.addActionListener(new BtnAñadirMonitorActionListener());
 		btnAñadirMonitor.setForeground(Color.BLACK);
 		btnAñadirMonitor.setBackground(colorBoton);
 		btnAñadirMonitor.setFocusPainted(false);
@@ -144,6 +159,7 @@ public class PanelMonitores extends JPanel {
 		pnlGestionBusqueda.add(lblBarraBusqueda, gbc_lblBarraBusqueda);
 
 		txtBarraBusqueda = new JTextField();
+		txtBarraBusqueda.addActionListener(new TxtBarraBusquedaActionListener());
 		GridBagConstraints gbc_txtBarraBusqueda = new GridBagConstraints();
 		gbc_txtBarraBusqueda.gridwidth = 2;
 		gbc_txtBarraBusqueda.insets = new Insets(0, 0, 5, 5);
@@ -157,23 +173,16 @@ public class PanelMonitores extends JPanel {
 		JPanel formularioVacio = new PanelFormularioActividadesInicio();
 
 		pnlFormularioMons.add(formularioVacio);
-		
+
 	}
 
 	private class LstMonitoresListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
-			/*
-			 * Mejor usar el getIndex() con un ArrayList con la info de los paneles (es
-			 * decir, objetos de tipo Monitor) y manejar el arrayList. Es decir, si
-			 * selecciono el primer monitor, su index sera el 0, accedo al objeto de tipo
-			 * Monitor en el ArrayList de Monitores y con eso creo el formulario. Lo mismo
-			 * aplica a cabañas, campings, rutas y actividades.
-			 * Maybe seria mejor crear el panel de monitor en un metodo a parte, que lo añada 
-			 * SI NO EXISTE en el pnlFormularioMons y que luego lo haga visible
-			 */
 			Monitor monitorSeleccionado = monitoresDb.getMonitores().get(lstMonitores.getSelectedIndex());
-			PanelFormularioMonitores panelMonitorInfoCompleta = new PanelFormularioMonitores(monitoresDb, lstMonitores.getSelectedIndex());
-			panelMonitorInfoCompleta.lblAvatar.setIcon(new ImageIcon(PanelMonitorRenderer.class.getResource(monitorSeleccionado.getAvatar())));
+			PanelFormularioMonitores panelMonitorInfoCompleta = new PanelFormularioMonitores(lstMonitores, monitoresDb,
+					lstMonitores.getSelectedIndex());
+			panelMonitorInfoCompleta.lblAvatar
+					.setIcon(new ImageIcon(PanelMonitorRenderer.class.getResource(monitorSeleccionado.getAvatar())));
 			panelMonitorInfoCompleta.txtNombre.setText(monitorSeleccionado.getNombre());
 			panelMonitorInfoCompleta.txtApellidos.setText(monitorSeleccionado.getApellidos());
 			panelMonitorInfoCompleta.ftxtDNI.setText(monitorSeleccionado.getDni());
@@ -183,13 +192,14 @@ public class PanelMonitores extends JPanel {
 			panelMonitorInfoCompleta.cbEstudios.setSelectedItem(monitorSeleccionado.getEstudios());
 			panelMonitorInfoCompleta.txtSueldo.setText(monitorSeleccionado.getSueldo().toString());
 			panelMonitorInfoCompleta.cbHorario.setSelectedItem(monitorSeleccionado.getHorario());
+			panelMonitorInfoCompleta.cbDisponibilidad.setSelectedItem(monitorSeleccionado.getDisponibilidad());
 			DefaultListModel model = new DefaultListModel();
-			for(String idioma : monitorSeleccionado.getIdiomas())
+			for (String idioma : monitorSeleccionado.getIdiomas())
 				model.addElement(idioma);
 			panelMonitorInfoCompleta.lstIdiomas.setModel(model);
-			pnlFormularioMons.add(panelMonitorInfoCompleta, monitorSeleccionado.getDni()); 
+			pnlFormularioMons.add(panelMonitorInfoCompleta, monitorSeleccionado.getDni());
 			((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, monitorSeleccionado.getDni());
-			
+
 			panelMonitorInfoCompleta.btnAniadirAvatar.setEnabled(false);
 			panelMonitorInfoCompleta.btnAplicarCambios.setEnabled(false);
 			panelMonitorInfoCompleta.btnCancelar.setEnabled(false);
@@ -204,9 +214,40 @@ public class PanelMonitores extends JPanel {
 			panelMonitorInfoCompleta.txtSueldo.setEnabled(false);
 			panelMonitorInfoCompleta.cbHorario.setEnabled(false);
 			panelMonitorInfoCompleta.cbEstudios.setEnabled(false);
-			
+			panelMonitorInfoCompleta.cbDisponibilidad.setEnabled(false);
+
 			UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
 			UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
+		}
+	}
+
+	private class TxtBarraBusquedaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String nombreMonitor;
+			Monitor monitor;
+			int result = -1, i = 0;
+			DefaultListModel modeloMonitores = (DefaultListModel) lstMonitores.getModel();
+			for (; i < modeloMonitores.getSize(); ++i) {
+				monitor = monitoresDb.getMonitores().get(i);
+				nombreMonitor = monitor.getNombre() + " " + monitor.getApellidos();
+				if (nombreMonitor.equals(txtBarraBusqueda.getText())) {
+					result = i;
+					break;
+				}
+			}
+			if (result != -1)
+				lstMonitores.setSelectedIndex(i);
+			else
+				JOptionPane.showMessageDialog(null, "El monitor que has buscado no existe en la lista",
+						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	private class BtnAñadirMonitorActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			PanelFormularioMonitores panelMonitorInfoCompleta = new PanelFormularioMonitores(lstMonitores, monitoresDb,
+					lstMonitores.getModel().getSize());
+			pnlFormularioMons.add(panelMonitorInfoCompleta, "Nuevo monitor");
+			((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, "Nuevo monitor");
 		}
 	}
 }

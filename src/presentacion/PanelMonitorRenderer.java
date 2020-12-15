@@ -30,7 +30,7 @@ public class PanelMonitorRenderer extends JPanel {
 		setMinimumSize(new Dimension(10, 2));
 		setMaximumSize(new Dimension(32767, 5));
 		this.monitor = monitor;
-		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informaci\u00F3n del monitor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY));
+		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informacion del monitor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY));
 		setLayout(null);
 
 		lblAvatar = new JLabel("");

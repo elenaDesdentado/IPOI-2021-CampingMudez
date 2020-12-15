@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,6 +18,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -33,6 +35,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ventanaLogin {
 
@@ -162,7 +166,7 @@ public class ventanaLogin {
 
 		pnlLogin.add(pnlTFLogin, BorderLayout.CENTER);
 		GridBagLayout gbl_pnlTFLogin = new GridBagLayout();
-		gbl_pnlTFLogin.columnWidths = new int[] { 254, 450, 182, 0 };
+		gbl_pnlTFLogin.columnWidths = new int[] { 254, 423, 182, 0 };
 		gbl_pnlTFLogin.rowHeights = new int[] { 0, 0, 0, 0, 27, 0, 37, 0, 0 };
 		gbl_pnlTFLogin.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gbl_pnlTFLogin.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -237,8 +241,13 @@ public class ventanaLogin {
 		gbc_btnLogin.gridy = 5;
 		pnlTFLogin.add(btnLogin, gbc_btnLogin);
 
-		lblOlvido = new JLabel("Olvidé mi contraseña o usuario");
+		lblOlvido = new JLabel("<html><u>Olvidé mi contraseña o usuario</u></html>");
+		lblOlvido.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOlvido.addMouseListener(new LblOlvidoMouseListener());
+		lblOlvido.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblOlvido.setForeground(Color.BLUE);
 		GridBagConstraints gbc_lblOlvido = new GridBagConstraints();
+		gbc_lblOlvido.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblOlvido.insets = new Insets(0, 0, 0, 5);
 		gbc_lblOlvido.gridx = 1;
 		gbc_lblOlvido.gridy = 7;
@@ -314,7 +323,7 @@ public class ventanaLogin {
 			// CHECKEO DE CREDENCIALES
 			if(txtNombreUsuario.getText().equals(USER) && String.valueOf(pwfContrasenia.getPassword()).equals(PASSWORD)) {
 				if(chckbxRecuerdame.isSelected()) save();
-				delete();
+				else delete();
 				VentanaInicio inicio = new VentanaInicio(USER, PASSWORD);
 				frmCampingMudez.dispose();
 				inicio.setVisible(true);
@@ -363,6 +372,12 @@ public class ventanaLogin {
 					}
 				}
 		    }
+		}
+	}
+	private class LblOlvidoMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			JOptionPane.showMessageDialog(frmCampingMudez, "Pedira cambiar la contraseña o el usuario", "Reestablecer credenciales", JOptionPane.INFORMATION_MESSAGE);;
 		}
 	}
 }

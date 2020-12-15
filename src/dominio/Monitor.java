@@ -34,6 +34,9 @@ public class Monitor {
 		this.avatar = avatar;
 	}
 	
+	public Monitor() {
+		
+	}
 
 	public String getAvatar() {
 		return avatar;

@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -173,6 +174,7 @@ public class PanelActividades extends JPanel {
 		pnlGestionBusqueda.add(lblBarraBusqueda, gbc_lblBarraBusqueda);
 
 		txtBarraBusqueda = new JTextField();
+		txtBarraBusqueda.addActionListener(new TxtBarraBusquedaActionListener());
 		GridBagConstraints gbc_txtBarraBusqueda = new GridBagConstraints();
 		gbc_txtBarraBusqueda.gridwidth = 2;
 		gbc_txtBarraBusqueda.insets = new Insets(0, 0, 5, 5);
@@ -219,6 +221,27 @@ public class PanelActividades extends JPanel {
 			panelActividadInfoCompleta.cbDestinatarios.setEnabled(false);
 			panelActividadInfoCompleta.cbArea.setEnabled(false);
 			panelActividadInfoCompleta.cbHorario.setEnabled(false);
+		}
+	}
+	private class TxtBarraBusquedaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String nombreActividad;
+			Actividad actividad;
+			int result = -1, i = 0;
+			DefaultListModel modeloMonitores = (DefaultListModel) lstActividades.getModel();
+			for (; i < modeloMonitores.getSize(); ++i) {
+				actividad = actividadesDb.getActividades().get(i);
+				nombreActividad = actividad.getNombre();
+				if (nombreActividad.equals(txtBarraBusqueda.getText())) {
+					result = i;
+					break;
+				}
+			}
+			if (result != -1)
+				lstActividades.setSelectedIndex(i);
+			else
+				JOptionPane.showMessageDialog(null, "La actividad que has buscado no existe en la lista",
+						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
