@@ -53,6 +53,7 @@ public class PanelActividades extends JPanel {
 	private PanelActividadRenderer panelEjemplo3;
 	private PanelActividadRenderer panelEjemplo4;
 	private PanelActividadRenderer panelEjemplo5;
+	private JLabel lblLupa;
 
 	/**
 	 * Create the panel.
@@ -136,9 +137,9 @@ public class PanelActividades extends JPanel {
 		pnlGestionBusqueda.setBackground(colorBarraBusqueda);
 		add(pnlGestionBusqueda, BorderLayout.NORTH);
 		GridBagLayout gbl_pnlGestionBusqueda = new GridBagLayout();
-		gbl_pnlGestionBusqueda.columnWidths = new int[] { 56, 83, 171, 0, 0, 0, 0, 0, 0 };
+		gbl_pnlGestionBusqueda.columnWidths = new int[] { 56, 83, 171, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_pnlGestionBusqueda.rowHeights = new int[] { 19, 33, 0, 0 };
-		gbl_pnlGestionBusqueda.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,
+		gbl_pnlGestionBusqueda.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
@@ -183,6 +184,14 @@ public class PanelActividades extends JPanel {
 		gbc_txtBarraBusqueda.gridy = 1;
 		pnlGestionBusqueda.add(txtBarraBusqueda, gbc_txtBarraBusqueda);
 		txtBarraBusqueda.setColumns(10);
+		
+		lblLupa = new JLabel("");
+		lblLupa.setIcon(new ImageIcon(PanelActividades.class.getResource("/presentacion/lupa.png")));
+		GridBagConstraints gbc_lblLupa = new GridBagConstraints();
+		gbc_lblLupa.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLupa.gridx = 8;
+		gbc_lblLupa.gridy = 1;
+		pnlGestionBusqueda.add(lblLupa, gbc_lblLupa);
 
 		// PANELES PARA EL CARD LAYOUT
 		JPanel formularioVacio = new PanelFormularioActividadesInicio();
@@ -211,7 +220,6 @@ public class PanelActividades extends JPanel {
 			
 			panelActividadInfoCompleta.btnAniadirAvatar.setEnabled(false);
 			panelActividadInfoCompleta.btnAplicarCambios.setEnabled(false);
-			panelActividadInfoCompleta.btnCancelar.setEnabled(false);
 			panelActividadInfoCompleta.txtNombre.setEditable(false);
 			panelActividadInfoCompleta.txtMonitor.setEditable(false);
 			panelActividadInfoCompleta.txtPrecio.setEditable(false);

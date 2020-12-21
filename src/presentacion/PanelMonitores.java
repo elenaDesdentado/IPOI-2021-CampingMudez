@@ -202,7 +202,6 @@ public class PanelMonitores extends JPanel {
 
 			panelMonitorInfoCompleta.btnAniadirAvatar.setEnabled(false);
 			panelMonitorInfoCompleta.btnAplicarCambios.setEnabled(false);
-			panelMonitorInfoCompleta.btnCancelar.setEnabled(false);
 			panelMonitorInfoCompleta.btnAniadirIdioma.setEnabled(false);
 			panelMonitorInfoCompleta.lstIdiomas.setEnabled(false);
 			panelMonitorInfoCompleta.txtNombre.setEnabled(false);

@@ -16,6 +16,9 @@ import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder;
 
 public class PanelFormularioActividades extends JPanel {
 	public JLabel lblFoto;
@@ -39,7 +42,6 @@ public class PanelFormularioActividades extends JPanel {
 	public JTextArea tADescripcion;
 	public JTextArea tAMateriales;
 	public JButton btnAplicarCambios;
-	public JButton btnCancelar;
 	
 	private Color colorFondo = new Color(255, 255, 255);
 	private Color colorBoton = new Color(159, 177, 57);
@@ -236,6 +238,7 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblDescripcion, gbc_lblDescripcion);
 		
 		tADescripcion = new JTextArea();
+		tADescripcion.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		tADescripcion.setEditable(false);
 		tADescripcion.setLineWrap(true);
 		GridBagConstraints gbc_tADescripcion = new GridBagConstraints();
@@ -256,6 +259,7 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblMateriales, gbc_lblMateriales);
 		
 		tAMateriales = new JTextArea();
+		tAMateriales.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		tAMateriales.setEditable(false);
 		tAMateriales.setLineWrap(true);
 		GridBagConstraints gbc_tAMateriales = new GridBagConstraints();
@@ -265,15 +269,6 @@ public class PanelFormularioActividades extends JPanel {
 		gbc_tAMateriales.gridx = 6;
 		gbc_tAMateriales.gridy = 10;
 		add(tAMateriales, gbc_tAMateriales);
-		
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setEnabled(false);
-		btnCancelar.setForeground(Color.BLACK);
-		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCancelar.gridx = 6;
-		gbc_btnCancelar.gridy = 13;
-		add(btnCancelar, gbc_btnCancelar);
 		
 		btnAplicarCambios = new JButton("Aplicar cambios");
 		btnAplicarCambios.setEnabled(false);
@@ -291,7 +286,6 @@ public class PanelFormularioActividades extends JPanel {
 		public void actionPerformed(ActionEvent arg0) {
 			btnAniadirAvatar.setEnabled(true);
 			btnAplicarCambios.setEnabled(true);
-			btnCancelar.setEnabled(true);
 			txtNombre.setEditable(true);
 			txtMonitor.setEditable(true);
 			txtPrecio.setEditable(true);

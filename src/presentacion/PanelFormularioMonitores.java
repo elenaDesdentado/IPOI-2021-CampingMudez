@@ -43,13 +43,11 @@ public class PanelFormularioMonitores extends JPanel {
 	private JLabel lblApellidos;
 	private JLabel lblDNI;
 	private JLabel lblMovil;
-	private JLabel lblFijo;
 	private JLabel lblCorreo;
 	private JLabel lblIdiomas;
 	public JTextField txtNombre;
 	public JTextField txtApellidos;
 	public JButton btnAplicarCambios;
-	public JButton btnCancelar;
 
 	private Color colorFondo = new Color(255, 255, 255);
 	private Color colorBoton = new Color(159, 177, 57);
@@ -70,6 +68,7 @@ public class PanelFormularioMonitores extends JPanel {
 	private JLabel lblDisponibilidad;
 	private JList lstMonitores;
 	public JComboBox cbDisponibilidad;
+	private JLabel lblFijo;
 
 	/**
 	 * Create the panel.
@@ -82,11 +81,11 @@ public class PanelFormularioMonitores extends JPanel {
 
 		setBackground(colorFondo);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 23, 86, 0, 41, 61, 0, 44, 37, 0, 108, 44, 103, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 28, 0, 0, 0, 0, 0, 0, 0, 24, 40, 39, 34, 32, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
+		gridBagLayout.columnWidths = new int[] { 23, 86, 0, 41, 61, 0, 20, 0, 108, 44, 103, 10, 0 };
+		gridBagLayout.rowHeights = new int[] { 28, 0, 0, 0, 0, 0, 0, 0, 24, 60, 39, 34, 32, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
@@ -103,7 +102,7 @@ public class PanelFormularioMonitores extends JPanel {
 		btnModificar.addActionListener(new BtnModificarActionListener());
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
 		gbc_btnModificar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnModificar.gridx = 11;
+		gbc_btnModificar.gridx = 10;
 		gbc_btnModificar.gridy = 1;
 		add(btnModificar, gbc_btnModificar);
 
@@ -112,7 +111,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNombre.gridx = 8;
+		gbc_lblNombre.gridx = 7;
 		gbc_lblNombre.gridy = 2;
 		add(lblNombre, gbc_lblNombre);
 
@@ -121,7 +120,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_txtNombre.anchor = GridBagConstraints.SOUTH;
 		gbc_txtNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_txtNombre.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtNombre.gridx = 9;
+		gbc_txtNombre.gridx = 8;
 		gbc_txtNombre.gridy = 2;
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
@@ -140,7 +139,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_lblApellidos = new GridBagConstraints();
 		gbc_lblApellidos.anchor = GridBagConstraints.EAST;
 		gbc_lblApellidos.insets = new Insets(0, 0, 5, 5);
-		gbc_lblApellidos.gridx = 8;
+		gbc_lblApellidos.gridx = 7;
 		gbc_lblApellidos.gridy = 3;
 		add(lblApellidos, gbc_lblApellidos);
 
@@ -149,7 +148,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_txtApellidos.gridwidth = 2;
 		gbc_txtApellidos.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtApellidos.insets = new Insets(0, 0, 5, 5);
-		gbc_txtApellidos.gridx = 9;
+		gbc_txtApellidos.gridx = 8;
 		gbc_txtApellidos.gridy = 3;
 		add(txtApellidos, gbc_txtApellidos);
 		txtApellidos.setColumns(10);
@@ -158,7 +157,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_lblDNI = new GridBagConstraints();
 		gbc_lblDNI.anchor = GridBagConstraints.EAST;
 		gbc_lblDNI.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDNI.gridx = 8;
+		gbc_lblDNI.gridx = 7;
 		gbc_lblDNI.gridy = 4;
 		add(lblDNI, gbc_lblDNI);
 
@@ -166,7 +165,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_ftxtDNI = new GridBagConstraints();
 		gbc_ftxtDNI.insets = new Insets(0, 0, 5, 5);
 		gbc_ftxtDNI.fill = GridBagConstraints.HORIZONTAL;
-		gbc_ftxtDNI.gridx = 9;
+		gbc_ftxtDNI.gridx = 8;
 		gbc_ftxtDNI.gridy = 4;
 		add(ftxtDNI, gbc_ftxtDNI);
 
@@ -191,7 +190,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_lblMovil = new GridBagConstraints();
 		gbc_lblMovil.anchor = GridBagConstraints.EAST;
 		gbc_lblMovil.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMovil.gridx = 8;
+		gbc_lblMovil.gridx = 7;
 		gbc_lblMovil.gridy = 5;
 		add(lblMovil, gbc_lblMovil);
 
@@ -200,7 +199,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_ftxtMovil.gridwidth = 2;
 		gbc_ftxtMovil.insets = new Insets(0, 0, 5, 5);
 		gbc_ftxtMovil.fill = GridBagConstraints.HORIZONTAL;
-		gbc_ftxtMovil.gridx = 9;
+		gbc_ftxtMovil.gridx = 8;
 		gbc_ftxtMovil.gridy = 5;
 		add(ftxtMovil, gbc_ftxtMovil);
 
@@ -211,12 +210,12 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblSueldo.gridx = 1;
 		gbc_lblSueldo.gridy = 6;
 		add(lblSueldo, gbc_lblSueldo);
-
+		
 		lblFijo = new JLabel("Teléfono fijo:");
 		GridBagConstraints gbc_lblFijo = new GridBagConstraints();
-		gbc_lblFijo.anchor = GridBagConstraints.EAST;
 		gbc_lblFijo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFijo.gridx = 8;
+		gbc_lblFijo.anchor = GridBagConstraints.EAST;
+		gbc_lblFijo.gridx = 7;
 		gbc_lblFijo.gridy = 6;
 		add(lblFijo, gbc_lblFijo);
 
@@ -225,7 +224,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_ftxtFijo.gridwidth = 2;
 		gbc_ftxtFijo.insets = new Insets(0, 0, 5, 5);
 		gbc_ftxtFijo.fill = GridBagConstraints.HORIZONTAL;
-		gbc_ftxtFijo.gridx = 9;
+		gbc_ftxtFijo.gridx = 8;
 		gbc_ftxtFijo.gridy = 6;
 		add(ftxtFijo, gbc_ftxtFijo);
 
@@ -252,7 +251,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_lblCorreo = new GridBagConstraints();
 		gbc_lblCorreo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCorreo.anchor = GridBagConstraints.EAST;
-		gbc_lblCorreo.gridx = 8;
+		gbc_lblCorreo.gridx = 7;
 		gbc_lblCorreo.gridy = 7;
 		add(lblCorreo, gbc_lblCorreo);
 
@@ -261,7 +260,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_txtCorreo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtCorreo.gridwidth = 3;
 		gbc_txtCorreo.insets = new Insets(0, 0, 5, 5);
-		gbc_txtCorreo.gridx = 9;
+		gbc_txtCorreo.gridx = 8;
 		gbc_txtCorreo.gridy = 7;
 		add(txtCorreo, gbc_txtCorreo);
 		txtCorreo.setColumns(10);
@@ -290,7 +289,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_lblEstudios = new GridBagConstraints();
 		gbc_lblEstudios.anchor = GridBagConstraints.EAST;
 		gbc_lblEstudios.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstudios.gridx = 8;
+		gbc_lblEstudios.gridx = 7;
 		gbc_lblEstudios.gridy = 8;
 		add(lblEstudios, gbc_lblEstudios);
 
@@ -301,7 +300,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_cbEstudios.gridwidth = 3;
 		gbc_cbEstudios.insets = new Insets(0, 0, 5, 5);
 		gbc_cbEstudios.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbEstudios.gridx = 9;
+		gbc_cbEstudios.gridx = 8;
 		gbc_cbEstudios.gridy = 8;
 		add(cbEstudios, gbc_cbEstudios);
 
@@ -309,7 +308,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_lblIdiomas = new GridBagConstraints();
 		gbc_lblIdiomas.anchor = GridBagConstraints.EAST;
 		gbc_lblIdiomas.insets = new Insets(0, 0, 5, 5);
-		gbc_lblIdiomas.gridx = 8;
+		gbc_lblIdiomas.gridx = 7;
 		gbc_lblIdiomas.gridy = 9;
 		add(lblIdiomas, gbc_lblIdiomas);
 
@@ -318,7 +317,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_spIdiomas.gridwidth = 2;
 		gbc_spIdiomas.insets = new Insets(0, 0, 5, 5);
 		gbc_spIdiomas.fill = GridBagConstraints.BOTH;
-		gbc_spIdiomas.gridx = 9;
+		gbc_spIdiomas.gridx = 8;
 		gbc_spIdiomas.gridy = 9;
 		add(spIdiomas, gbc_spIdiomas);
 
@@ -330,18 +329,9 @@ public class PanelFormularioMonitores extends JPanel {
 		btnAniadirIdioma.addActionListener(new BtnAniadirIdiomaActionListener());
 		GridBagConstraints gbc_btnAniadirIdioma = new GridBagConstraints();
 		gbc_btnAniadirIdioma.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAniadirIdioma.gridx = 11;
+		gbc_btnAniadirIdioma.gridx = 10;
 		gbc_btnAniadirIdioma.gridy = 9;
 		add(btnAniadirIdioma, gbc_btnAniadirIdioma);
-
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new BtnCancelarActionListener());
-		btnCancelar.setForeground(Color.BLACK);
-		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCancelar.gridx = 9;
-		gbc_btnCancelar.gridy = 11;
-		add(btnCancelar, gbc_btnCancelar);
 
 		btnAplicarCambios = new JButton("Aplicar cambios");
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
@@ -349,7 +339,7 @@ public class PanelFormularioMonitores extends JPanel {
 		btnAplicarCambios.setBackground(colorBoton);
 		GridBagConstraints gbc_btnAplicarCambios = new GridBagConstraints();
 		gbc_btnAplicarCambios.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAplicarCambios.gridx = 11;
+		gbc_btnAplicarCambios.gridx = 10;
 		gbc_btnAplicarCambios.gridy = 11;
 		add(btnAplicarCambios, gbc_btnAplicarCambios);
 	}
@@ -358,7 +348,6 @@ public class PanelFormularioMonitores extends JPanel {
 		public void actionPerformed(ActionEvent arg0) {
 			btnAniadirAvatar.setEnabled(true);
 			btnAplicarCambios.setEnabled(true);
-			btnCancelar.setEnabled(true);
 			btnAniadirIdioma.setEnabled(true);
 			lstIdiomas.setEnabled(true);
 			txtNombre.setEnabled(true);
@@ -403,10 +392,10 @@ public class PanelFormularioMonitores extends JPanel {
 			monitor.setSueldo(Double.valueOf(txtSueldo.getText()));
 			monitor.setEstudios((String) cbEstudios.getSelectedItem());
 			monitor.setHorario((String) cbHorario.getSelectedItem());
-			monitor.setDisponibilidad((String) cbDisponibilidad.getSelectedItem());
+			/*monitor.setDisponibilidad((String) cbDisponibilidad.getSelectedItem());
 			String iconfilename = ((ImageIcon) lblAvatar.getIcon()).getDescription();
 			String fileName = "./" + iconfilename.substring(iconfilename.lastIndexOf('\\') + 1);
-			monitor.setAvatar(fileName);
+			monitor.setAvatar(fileName);*/
 			DefaultListModel modelo = (DefaultListModel) lstIdiomas.getModel();
 			ArrayList<String> nuevosIdiomas = new ArrayList<String>();
 			for (int i = 0; i < modelo.getSize(); ++i)
@@ -420,12 +409,6 @@ public class PanelFormularioMonitores extends JPanel {
 				modeloMonitores.add(indice, new PanelMonitorRenderer(monitor));
 			}
 			
-		}
-	}
-
-	private class BtnCancelarActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			;
 		}
 	}
 
