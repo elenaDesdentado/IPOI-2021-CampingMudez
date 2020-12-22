@@ -61,8 +61,10 @@ public class Monitor {
 	}
 
 	public void setNombre(String nombre) throws Exception {
-		if(nombre == "")
+		if(nombre.equals("")) {
+			System.out.println("Sisi nombre es : "+ nombre);
 			throw new Exception();
+		}
 		this.nombre = nombre;
 	}
 
@@ -71,7 +73,7 @@ public class Monitor {
 	}
 
 	public void setApellidos(String apellidos) throws Exception {
-		if(apellidos == "")
+		if(apellidos.equals(""))
 			throw new Exception();
 		this.apellidos = apellidos;
 	}
@@ -81,7 +83,7 @@ public class Monitor {
 	}
 
 	public void setDni(String dni) throws Exception {
-		if(dni == "")
+		if(dni.equals("XXXXXXX X"))
 			throw new Exception();
 		this.dni = dni;
 	}
@@ -91,7 +93,7 @@ public class Monitor {
 	}
 
 	public void setMovil(String movil) throws Exception {
-		if(movil == "")
+		if(movil.equals("*** ** ** **"))
 			throw new Exception();
 		this.movil = movil;
 	}
@@ -109,7 +111,7 @@ public class Monitor {
 	}
 
 	public void setCorreo(String correo) throws Exception {
-		if(correo == "")
+		if(correo.equals(""))
 			throw new Exception();
 		this.correo = correo;
 	}
@@ -143,7 +145,7 @@ public class Monitor {
 	}
 
 	public void setSueldo(Double sueldo) throws Exception {
-		if(sueldo.toString() == "")
+		if(sueldo.toString().equals(""))
 			throw new Exception();
 		this.sueldo = sueldo;
 	}

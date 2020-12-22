@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -27,6 +28,9 @@ import dominio.Monitor;
 import persistencia.Monitores;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class PanelMonitores extends JPanel {
 	private JSplitPane splitPane;
@@ -51,6 +55,7 @@ public class PanelMonitores extends JPanel {
 	private PanelMonitorRenderer panelEjemplo1;
 	private PanelMonitorRenderer panelEjemplo2;
 	private PanelMonitorRenderer panelEjemplo3;
+	private JLabel lblLupa;
 
 	/**
 	 * Create the panel.
@@ -120,9 +125,9 @@ public class PanelMonitores extends JPanel {
 		pnlGestionBusqueda.setBackground(colorBarraBusqueda);
 		add(pnlGestionBusqueda, BorderLayout.NORTH);
 		GridBagLayout gbl_pnlGestionBusqueda = new GridBagLayout();
-		gbl_pnlGestionBusqueda.columnWidths = new int[] { 56, 83, 171, 0, 0, 0, 0, 0, 0 };
+		gbl_pnlGestionBusqueda.columnWidths = new int[] { 56, 83, 171, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_pnlGestionBusqueda.rowHeights = new int[] { 19, 33, 0, 0 };
-		gbl_pnlGestionBusqueda.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,
+		gbl_pnlGestionBusqueda.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
@@ -139,6 +144,7 @@ public class PanelMonitores extends JPanel {
 		pnlGestionBusqueda.add(btnAniadirMonitor, gbc_btnAniadirMonitor);
 
 		btnEliminarMonitor = new JButton("Dar de baja al monitor");
+		btnEliminarMonitor.addActionListener(new BtnEliminarMonitorActionListener());
 		btnEliminarMonitor.setForeground(Color.BLACK);
 		btnEliminarMonitor.setBackground(colorBotonCritico);
 		btnEliminarMonitor.setFocusPainted(false);
@@ -159,7 +165,7 @@ public class PanelMonitores extends JPanel {
 		pnlGestionBusqueda.add(lblBarraBusqueda, gbc_lblBarraBusqueda);
 
 		txtBarraBusqueda = new JTextField();
-		txtBarraBusqueda.addActionListener(new TxtBarraBusquedaActionListener());
+		txtBarraBusqueda.addActionListener(new BusquedaActionListener());
 		GridBagConstraints gbc_txtBarraBusqueda = new GridBagConstraints();
 		gbc_txtBarraBusqueda.gridwidth = 2;
 		gbc_txtBarraBusqueda.insets = new Insets(0, 0, 5, 5);
@@ -169,17 +175,28 @@ public class PanelMonitores extends JPanel {
 		pnlGestionBusqueda.add(txtBarraBusqueda, gbc_txtBarraBusqueda);
 		txtBarraBusqueda.setColumns(10);
 
+		lblLupa = new JLabel("");
+		lblLupa.addMouseListener(new LblLupaMouseListener());
+		lblLupa.setIcon(new ImageIcon(PanelMonitores.class.getResource("/presentacion/lupa.png")));
+		lblLupa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		GridBagConstraints gbc_lblLupa = new GridBagConstraints();
+		gbc_lblLupa.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLupa.gridx = 8;
+		gbc_lblLupa.gridy = 1;
+		pnlGestionBusqueda.add(lblLupa, gbc_lblLupa);
+
 		// PANELES PARA EL CARD LAYOUT
 		JPanel formularioVacio = new PanelFormularioActividadesInicio();
 
-		pnlFormularioMons.add(formularioVacio);
+		pnlFormularioMons.add(formularioVacio, "Formulario vacio");
 
 	}
 
 	private class LstMonitoresListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
 			if (monitoresDb.getMonitores().get(lstMonitores.getModel().getSize() - 1).getAvatar() == null)
-				//En caso de jar incompleta la agregacion de un nuevo monitor, eliminarlo de la lista
+				// En caso de dejar incompleta la agregacion de un nuevo monitor, eliminarlo de
+				// la lista
 				monitoresDb.getMonitores().remove(lstMonitores.getModel().getSize() - 1);
 			if (lstMonitores.getSelectedIndex() != -1) {
 				Monitor monitorSeleccionado = monitoresDb.getMonitores().get(lstMonitores.getSelectedIndex());
@@ -226,7 +243,7 @@ public class PanelMonitores extends JPanel {
 		}
 	}
 
-	private class TxtBarraBusquedaActionListener implements ActionListener {
+	private class BusquedaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			String nombreMonitor;
 			Monitor monitor;
@@ -258,6 +275,47 @@ public class PanelMonitores extends JPanel {
 			// Añadir monitor vacio a la lista, si no se completa el formulario, se elimina.
 			monitoresDb.addMonitor(new Monitor());
 			((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, "Nuevo monitor");
+		}
+	}
+
+	private class BtnEliminarMonitorActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int opcion = JOptionPane.showOptionDialog(null,
+					"¿Está seguro de eliminar el monitor seleccionado en la lista?", "Elminar monitor",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+			if (opcion == JOptionPane.YES_OPTION) {
+				int indiceMonitorElminado = lstMonitores.getSelectedIndex();
+				DefaultListModel modelo = (DefaultListModel) lstMonitores.getModel();
+				modelo.remove(indiceMonitorElminado);
+				monitoresDb.getMonitores().remove(indiceMonitorElminado);
+				((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, "Formulario vacio");
+			}
+			if (monitoresDb.getMonitores().size() == 0)
+				((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, "Formulario vacio");
+		}
+	}
+
+	// No podemos usar el actionPerformed porque no esta permitido en las JLabel
+	private class LblLupaMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			String nombreMonitor;
+			Monitor monitor;
+			int result = -1, i = 0;
+			DefaultListModel modeloMonitores = (DefaultListModel) lstMonitores.getModel();
+			for (; i < modeloMonitores.getSize(); ++i) {
+				monitor = monitoresDb.getMonitores().get(i);
+				nombreMonitor = monitor.getNombre() + " " + monitor.getApellidos();
+				if (nombreMonitor.equals(txtBarraBusqueda.getText())) {
+					result = i;
+					break;
+				}
+			}
+			if (result != -1)
+				lstMonitores.setSelectedIndex(i);
+			else
+				JOptionPane.showMessageDialog(null, "El monitor que has buscado no existe en la lista",
+						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

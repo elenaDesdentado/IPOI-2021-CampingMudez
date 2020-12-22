@@ -186,7 +186,7 @@ public class PanelFormularioMonitores extends JPanel {
 
 		MaskFormatter formatoDNI;
 		try {
-			formatoDNI = new MaskFormatter("########'-U");
+			formatoDNI = new MaskFormatter("########' U");
 			formatoDNI.setPlaceholderCharacter('X');
 			ftxtDNI = new JFormattedTextField(formatoDNI);
 		} catch (ParseException e) {
@@ -226,7 +226,7 @@ public class PanelFormularioMonitores extends JPanel {
 
 		MaskFormatter formatoMovil;
 		try {
-			formatoMovil = new MaskFormatter("###'-##'-##'-##");
+			formatoMovil = new MaskFormatter("###' ##' ##' ##");
 			formatoMovil.setPlaceholderCharacter('*');
 			ftxtMovil = new JFormattedTextField(formatoMovil);
 		} catch (ParseException e) {
@@ -258,7 +258,7 @@ public class PanelFormularioMonitores extends JPanel {
 
 		MaskFormatter formatoFijo;
 		try {
-			formatoFijo = new MaskFormatter("###'-##'-##'-##");
+			formatoFijo = new MaskFormatter("###' ##' ##' ##");
 			formatoFijo.setPlaceholderCharacter('*');
 			ftxtFijo = new JFormattedTextField(formatoFijo);
 		} catch (ParseException e) {
@@ -428,7 +428,9 @@ public class PanelFormularioMonitores extends JPanel {
 				monitor.setApellidos(txtApellidos.getText());
 				monitor.setEdad((Integer) spnEdad.getValue());
 				monitor.setDni(ftxtDNI.getText());
+				System.out.println(ftxtDNI.getText());
 				monitor.setMovil(ftxtMovil.getText());
+				System.out.println(ftxtMovil.getText());
 				monitor.setFijo(ftxtFijo.getText());
 				monitor.setCorreo(txtCorreo.getText());
 				monitor.setSueldo(Double.valueOf(txtSueldo.getText()));
@@ -449,7 +451,6 @@ public class PanelFormularioMonitores extends JPanel {
 				JOptionPane.showMessageDialog(null,
 						"Se ha producido un error. Por favor, asegúrese que ha rellenado al información en todos los campos.",
 						"Error al aplicar cmabios", JOptionPane.ERROR_MESSAGE);
-				ex.printStackTrace();
 			}
 		}
 	}
