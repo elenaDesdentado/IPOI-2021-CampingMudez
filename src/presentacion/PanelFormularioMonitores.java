@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
 
 import dominio.Monitor;
 import persistencia.Monitores;
@@ -28,6 +29,7 @@ import persistencia.Monitores;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
@@ -182,7 +184,14 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblDNI.gridy = 5;
 		add(lblDNI, gbc_lblDNI);
 
-		ftxtDNI = new JFormattedTextField();
+		MaskFormatter formatoDNI;
+		try {
+			formatoDNI = new MaskFormatter("########'-U");
+			formatoDNI.setPlaceholderCharacter('X');
+			ftxtDNI = new JFormattedTextField(formatoDNI);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		GridBagConstraints gbc_ftxtDNI = new GridBagConstraints();
 		gbc_ftxtDNI.insets = new Insets(0, 0, 5, 5);
 		gbc_ftxtDNI.fill = GridBagConstraints.HORIZONTAL;
@@ -215,7 +224,14 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblMovil.gridy = 6;
 		add(lblMovil, gbc_lblMovil);
 
-		ftxtMovil = new JFormattedTextField();
+		MaskFormatter formatoMovil;
+		try {
+			formatoMovil = new MaskFormatter("###'-##'-##'-##");
+			formatoMovil.setPlaceholderCharacter('*');
+			ftxtMovil = new JFormattedTextField(formatoMovil);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		GridBagConstraints gbc_ftxtMovil = new GridBagConstraints();
 		gbc_ftxtMovil.gridwidth = 2;
 		gbc_ftxtMovil.insets = new Insets(0, 0, 5, 5);
@@ -240,7 +256,14 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblFijo.gridy = 7;
 		add(lblFijo, gbc_lblFijo);
 
-		ftxtFijo = new JFormattedTextField();
+		MaskFormatter formatoFijo;
+		try {
+			formatoFijo = new MaskFormatter("###'-##'-##'-##");
+			formatoFijo.setPlaceholderCharacter('*');
+			ftxtFijo = new JFormattedTextField(formatoFijo);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		GridBagConstraints gbc_ftxtFijo = new GridBagConstraints();
 		gbc_ftxtFijo.gridwidth = 2;
 		gbc_ftxtFijo.insets = new Insets(0, 0, 5, 5);

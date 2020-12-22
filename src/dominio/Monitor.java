@@ -60,7 +60,9 @@ public class Monitor {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws Exception {
+		if(nombre == "")
+			throw new Exception();
 		this.nombre = nombre;
 	}
 
@@ -68,7 +70,9 @@ public class Monitor {
 		return apellidos;
 	}
 
-	public void setApellidos(String apellidos) {
+	public void setApellidos(String apellidos) throws Exception {
+		if(apellidos == "")
+			throw new Exception();
 		this.apellidos = apellidos;
 	}
 
@@ -76,7 +80,9 @@ public class Monitor {
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	public void setDni(String dni) throws Exception {
+		if(dni == "")
+			throw new Exception();
 		this.dni = dni;
 	}
 
@@ -84,7 +90,9 @@ public class Monitor {
 		return movil;
 	}
 
-	public void setMovil(String movil) {
+	public void setMovil(String movil) throws Exception {
+		if(movil == "")
+			throw new Exception();
 		this.movil = movil;
 	}
 
@@ -100,7 +108,9 @@ public class Monitor {
 		return correo;
 	}
 
-	public void setCorreo(String correo) {
+	public void setCorreo(String correo) throws Exception {
+		if(correo == "")
+			throw new Exception();
 		this.correo = correo;
 	}
 
@@ -132,7 +142,9 @@ public class Monitor {
 		return sueldo;
 	}
 
-	public void setSueldo(Double sueldo) {
+	public void setSueldo(Double sueldo) throws Exception {
+		if(sueldo.toString() == "")
+			throw new Exception();
 		this.sueldo = sueldo;
 	}
 
