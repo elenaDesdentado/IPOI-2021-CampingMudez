@@ -21,12 +21,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import dominio.Actividad;
 import dominio.Monitor;
 import persistencia.Actividades;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelActividades extends JPanel {
 	private JSplitPane splitPane;
@@ -123,8 +126,6 @@ public class PanelActividades extends JPanel {
 		lstActividades.setMinimumSize(new Dimension(440, 23));
 		scrollPaneListaActs.setViewportView(lstActividades);
 
-		// lstActividades.addListSelectionListener(new
-		// LstActividadesListSelectionListener());
 		DefaultListModel lstModel = new DefaultListModel();
 
 		lstModel.addElement(panelEjemplo1);
@@ -152,6 +153,7 @@ public class PanelActividades extends JPanel {
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
 
 		btnCrearActividad = new JButton("Crear Actividad");
+		btnCrearActividad.addActionListener(new BtnCrearActividadActionListener());
 		btnCrearActividad.setForeground(Color.BLACK);
 		btnCrearActividad.setBackground(colorBoton);
 		btnCrearActividad.setFocusPainted(false);
@@ -162,6 +164,7 @@ public class PanelActividades extends JPanel {
 		pnlGestionBusqueda.add(btnCrearActividad, gbc_btnCrearActividad);
 
 		btnEliminarActividad = new JButton("Eliminar Actividad");
+		btnEliminarActividad.addActionListener(new BtnEliminarActividadActionListener());
 		btnEliminarActividad.setForeground(Color.BLACK);
 		btnEliminarActividad.setBackground(colorBotonCritico);
 		btnEliminarActividad.setFocusPainted(false);
@@ -193,6 +196,7 @@ public class PanelActividades extends JPanel {
 		txtBarraBusqueda.setColumns(10);
 
 		lblLupa = new JLabel("");
+		lblLupa.addMouseListener(new LblLupaMouseListener());
 		lblLupa.setIcon(new ImageIcon(PanelActividades.class.getResource("/presentacion/lupa.png")));
 		GridBagConstraints gbc_lblLupa = new GridBagConstraints();
 		gbc_lblLupa.insets = new Insets(0, 0, 5, 5);
@@ -203,44 +207,105 @@ public class PanelActividades extends JPanel {
 		// PANELES PARA EL CARD LAYOUT
 		JPanel formularioVacio = new PanelFormularioActividadesInicio();
 
-		pnlFormularioActs.add(formularioVacio);
+		pnlFormularioActs.add(formularioVacio, "Formulario vacio");
 
 	}
 
 	private class LstActividadesListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
-			Actividad actividadSeleccionada = actividadesDb.getActividades().get(lstActividades.getSelectedIndex());
-			PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades();
-			panelActividadInfoCompleta.lblFoto.setIcon(actividadSeleccionada.getFotoActividad());
-			panelActividadInfoCompleta.txtNombre.setText(actividadSeleccionada.getNombre());
-			panelActividadInfoCompleta.txtMonitor.setText(actividadSeleccionada.getMonitor());
-			panelActividadInfoCompleta.spinCupo.setValue(actividadSeleccionada.getCupo());
-			panelActividadInfoCompleta.cbDestinatarios.setSelectedItem(actividadSeleccionada.getDestinatario());
-			panelActividadInfoCompleta.cbArea.setSelectedItem(actividadSeleccionada.getArea());
-			panelActividadInfoCompleta.tADescripcion.setText(actividadSeleccionada.getDescripcion());
-			panelActividadInfoCompleta.tAMateriales.setText(actividadSeleccionada.getMateriales());
-			panelActividadInfoCompleta.txtPrecio.setText(actividadSeleccionada.getPrecio().toString());
-			panelActividadInfoCompleta.cbHorario.setSelectedItem(actividadSeleccionada.getHorario());
-
-			pnlFormularioActs.add(panelActividadInfoCompleta, actividadSeleccionada.getNombre());
-			((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, actividadSeleccionada.getNombre());
-
-			panelActividadInfoCompleta.btnAniadirAvatar.setEnabled(false);
-			panelActividadInfoCompleta.btnAplicarCambios.setEnabled(false);
-			panelActividadInfoCompleta.txtNombre.setEditable(false);
-			panelActividadInfoCompleta.txtMonitor.setEditable(false);
-			panelActividadInfoCompleta.txtPrecio.setEditable(false);
-			panelActividadInfoCompleta.spinCupo.setEnabled(false);
-			panelActividadInfoCompleta.tADescripcion.setEnabled(false);
-			panelActividadInfoCompleta.tAMateriales.setEnabled(false);
-			panelActividadInfoCompleta.cbDestinatarios.setEnabled(false);
-			panelActividadInfoCompleta.cbArea.setEnabled(false);
-			panelActividadInfoCompleta.cbHorario.setEnabled(false);
+			if (actividadesDb.getActividades().get(lstActividades.getModel().getSize() - 1).getFotoActividad() == null)
+				// En caso de dejar incompleta la agregacion de un nuevo monitor, eliminarlo de
+				// la lista
+				actividadesDb.getActividades().remove(lstActividades.getModel().getSize() - 1);
+			if (lstActividades.getSelectedIndex() != -1) {
+				Actividad actividadSeleccionada = actividadesDb.getActividades().get(lstActividades.getSelectedIndex());
+				PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstActividades, actividadesDb,
+						lstActividades.getModel().getSize());
+				panelActividadInfoCompleta.lblFoto.setIcon(actividadSeleccionada.getFotoActividad());
+				panelActividadInfoCompleta.txtNombre.setText(actividadSeleccionada.getNombre());
+				panelActividadInfoCompleta.txtMonitor.setText(actividadSeleccionada.getMonitor());
+				panelActividadInfoCompleta.spinCupo.setValue(actividadSeleccionada.getCupo());
+				panelActividadInfoCompleta.cbDestinatarios.setSelectedItem(actividadSeleccionada.getDestinatario());
+				panelActividadInfoCompleta.cbArea.setSelectedItem(actividadSeleccionada.getArea());
+				panelActividadInfoCompleta.tADescripcion.setText(actividadSeleccionada.getDescripcion());
+				panelActividadInfoCompleta.tAMateriales.setText(actividadSeleccionada.getMateriales());
+				panelActividadInfoCompleta.txtPrecio.setText(actividadSeleccionada.getPrecio().toString());
+				panelActividadInfoCompleta.cbHorario.setSelectedItem(actividadSeleccionada.getHorario());
+	
+				pnlFormularioActs.add(panelActividadInfoCompleta, actividadSeleccionada.getNombre());
+				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, actividadSeleccionada.getNombre());
+	
+				panelActividadInfoCompleta.btnAniadirAvatar.setEnabled(false);
+				panelActividadInfoCompleta.btnAplicarCambios.setEnabled(false);
+				panelActividadInfoCompleta.txtNombre.setEditable(false);
+				panelActividadInfoCompleta.txtMonitor.setEditable(false);
+				panelActividadInfoCompleta.txtPrecio.setEditable(false);
+				panelActividadInfoCompleta.spinCupo.setEnabled(false);
+				panelActividadInfoCompleta.tADescripcion.setEnabled(false);
+				panelActividadInfoCompleta.tAMateriales.setEnabled(false);
+				panelActividadInfoCompleta.cbDestinatarios.setEnabled(false);
+				panelActividadInfoCompleta.cbArea.setEnabled(false);
+				panelActividadInfoCompleta.cbHorario.setEnabled(false);
+				
+				UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
+				UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
+			}
 		}
 	}
 
 	private class TxtBarraBusquedaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			String nombreActividad;
+			Actividad actividad;
+			int result = -1, i = 0;
+			DefaultListModel modeloMonitores = (DefaultListModel) lstActividades.getModel();
+			for (; i < modeloMonitores.getSize(); ++i) {
+				actividad = actividadesDb.getActividades().get(i);
+				nombreActividad = actividad.getNombre();
+				if (nombreActividad.equals(txtBarraBusqueda.getText())) {
+					result = i;
+					break;
+				}
+			}
+			if (result != -1)
+				lstActividades.setSelectedIndex(i);
+			else
+				JOptionPane.showMessageDialog(null, "La actividad que has buscado no existe en la lista",
+						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	private class BtnCrearActividadActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			lstActividades.clearSelection();
+			PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstActividades, actividadesDb,
+					lstActividades.getModel().getSize());
+			panelActividadInfoCompleta.btnModificar.setEnabled(false);
+			pnlFormularioActs.add(panelActividadInfoCompleta, "Nueva actividad");
+			// Añadir monitor vacio a la lista, si no se completa el formulario, se elimina.
+			actividadesDb.addActividad(new Actividad());
+			((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Nueva actividad");
+		}
+	}
+	private class BtnEliminarActividadActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			int opcion = JOptionPane.showOptionDialog(null,
+					"¿Está seguro de eliminar la actividad seleccionaa en la lista?", "Elminar actividad",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+			if (opcion == JOptionPane.YES_OPTION) {
+				int indiceActividadElminada = lstActividades.getSelectedIndex();
+				DefaultListModel modelo = (DefaultListModel) lstActividades.getModel();
+				modelo.remove(indiceActividadElminada);
+				actividadesDb.getActividades().remove(indiceActividadElminada);
+				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Formulario vacio");
+			}
+			if (actividadesDb.getActividades().size() == 0)
+				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Formulario vacio");
+		}
+	}
+	
+	private class LblLupaMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
 			String nombreActividad;
 			Actividad actividad;
 			int result = -1, i = 0;

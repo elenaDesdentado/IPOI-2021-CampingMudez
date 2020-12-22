@@ -62,7 +62,6 @@ public class Monitor {
 
 	public void setNombre(String nombre) throws Exception {
 		if(nombre.equals("")) {
-			System.out.println("Sisi nombre es : "+ nombre);
 			throw new Exception();
 		}
 		this.nombre = nombre;

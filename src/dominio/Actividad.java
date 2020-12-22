@@ -30,11 +30,17 @@ public class Actividad {
 		this.fotoActividad = fotoActividad;
 	}
 
+	public Actividad() {
+	
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws Exception {
+		if(nombre.equals(""))
+			throw new Exception();
 		this.nombre = nombre;
 	}
 
@@ -42,7 +48,9 @@ public class Actividad {
 		return monitor;
 	}
 
-	public void setMonitor(String monitor) {
+	public void setMonitor(String monitor) throws Exception {
+		if(monitor.equals(""))
+			throw new Exception();
 		this.monitor = monitor;
 	}
 
@@ -74,7 +82,9 @@ public class Actividad {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
+	public void setDescripcion(String descripcion) throws Exception {
+		if(descripcion.equals(""))
+			throw new Exception();
 		this.descripcion = descripcion;
 	}
 
@@ -82,7 +92,9 @@ public class Actividad {
 		return materiales;
 	}
 
-	public void setMateriales(String materiales) {
+	public void setMateriales(String materiales) throws Exception {
+		if(materiales.equals(""))
+			throw new Exception();
 		this.materiales = materiales;
 	}
 
@@ -98,7 +110,9 @@ public class Actividad {
 		return precio;
 	}
 
-	public void setPrecio(Double precio) {
+	public void setPrecio(Double precio) throws Exception {
+		if(precio.toString().equals(""))
+			throw new Exception();
 		this.precio = precio;
 	}
 
