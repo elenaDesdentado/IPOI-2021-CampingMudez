@@ -30,6 +30,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class PanelFormularioMonitores extends JPanel {
 
@@ -61,7 +63,7 @@ public class PanelFormularioMonitores extends JPanel {
 	public JButton btnAniadirIdioma;
 	public JList lstIdiomas;
 	private JLabel lblSimboloEuros;
-	private JButton btnModificar;
+	public JButton btnModificar;
 
 	private int indice; // Indice del monitor en la lsita
 	private Monitores monitoresDb;
@@ -69,6 +71,8 @@ public class PanelFormularioMonitores extends JPanel {
 	private JList lstMonitores;
 	public JComboBox cbDisponibilidad;
 	private JLabel lblFijo;
+	private JLabel lblEdad;
+	public JSpinner spnEdad;
 
 	/**
 	 * Create the panel.
@@ -82,10 +86,10 @@ public class PanelFormularioMonitores extends JPanel {
 		setBackground(colorFondo);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 23, 86, 0, 41, 61, 0, 20, 0, 108, 44, 103, 10, 0 };
-		gridBagLayout.rowHeights = new int[] { 28, 0, 0, 0, 0, 0, 0, 0, 24, 60, 39, 34, 32, 0 };
+		gridBagLayout.rowHeights = new int[] { 28, 0, 0, 0, 0, 0, 0, 0, 0, 24, 60, 39, 34, 32, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
@@ -152,13 +156,30 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_txtApellidos.gridy = 3;
 		add(txtApellidos, gbc_txtApellidos);
 		txtApellidos.setColumns(10);
+		
+		lblEdad = new JLabel("Edad:");
+		GridBagConstraints gbc_lblEdad = new GridBagConstraints();
+		gbc_lblEdad.anchor = GridBagConstraints.EAST;
+		gbc_lblEdad.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEdad.gridx = 7;
+		gbc_lblEdad.gridy = 4;
+		add(lblEdad, gbc_lblEdad);
+		
+		spnEdad = new JSpinner();
+		spnEdad.setModel(new SpinnerNumberModel(16, 16, 67, 1));
+		GridBagConstraints gbc_spnEdad = new GridBagConstraints();
+		gbc_spnEdad.anchor = GridBagConstraints.WEST;
+		gbc_spnEdad.insets = new Insets(0, 0, 5, 5);
+		gbc_spnEdad.gridx = 8;
+		gbc_spnEdad.gridy = 4;
+		add(spnEdad, gbc_spnEdad);
 
 		lblDNI = new JLabel("DNI/NIF:");
 		GridBagConstraints gbc_lblDNI = new GridBagConstraints();
 		gbc_lblDNI.anchor = GridBagConstraints.EAST;
 		gbc_lblDNI.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDNI.gridx = 7;
-		gbc_lblDNI.gridy = 4;
+		gbc_lblDNI.gridy = 5;
 		add(lblDNI, gbc_lblDNI);
 
 		ftxtDNI = new JFormattedTextField();
@@ -166,7 +187,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_ftxtDNI.insets = new Insets(0, 0, 5, 5);
 		gbc_ftxtDNI.fill = GridBagConstraints.HORIZONTAL;
 		gbc_ftxtDNI.gridx = 8;
-		gbc_ftxtDNI.gridy = 4;
+		gbc_ftxtDNI.gridy = 5;
 		add(ftxtDNI, gbc_ftxtDNI);
 
 		txtSueldo = new JTextField();
@@ -175,7 +196,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_txtSueldo.insets = new Insets(0, 0, 5, 5);
 		gbc_txtSueldo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtSueldo.gridx = 2;
-		gbc_txtSueldo.gridy = 6;
+		gbc_txtSueldo.gridy = 7;
 		add(txtSueldo, gbc_txtSueldo);
 		txtSueldo.setColumns(10);
 
@@ -183,7 +204,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_lblSimboloEuros = new GridBagConstraints();
 		gbc_lblSimboloEuros.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSimboloEuros.gridx = 5;
-		gbc_lblSimboloEuros.gridy = 6;
+		gbc_lblSimboloEuros.gridy = 7;
 		add(lblSimboloEuros, gbc_lblSimboloEuros);
 
 		lblMovil = new JLabel("Teléfono móvil:");
@@ -191,7 +212,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblMovil.anchor = GridBagConstraints.EAST;
 		gbc_lblMovil.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMovil.gridx = 7;
-		gbc_lblMovil.gridy = 5;
+		gbc_lblMovil.gridy = 6;
 		add(lblMovil, gbc_lblMovil);
 
 		ftxtMovil = new JFormattedTextField();
@@ -200,7 +221,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_ftxtMovil.insets = new Insets(0, 0, 5, 5);
 		gbc_ftxtMovil.fill = GridBagConstraints.HORIZONTAL;
 		gbc_ftxtMovil.gridx = 8;
-		gbc_ftxtMovil.gridy = 5;
+		gbc_ftxtMovil.gridy = 6;
 		add(ftxtMovil, gbc_ftxtMovil);
 
 		lblSueldo = new JLabel("Sueldo:");
@@ -208,15 +229,15 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblSueldo.anchor = GridBagConstraints.EAST;
 		gbc_lblSueldo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSueldo.gridx = 1;
-		gbc_lblSueldo.gridy = 6;
+		gbc_lblSueldo.gridy = 7;
 		add(lblSueldo, gbc_lblSueldo);
-		
+
 		lblFijo = new JLabel("Teléfono fijo:");
 		GridBagConstraints gbc_lblFijo = new GridBagConstraints();
 		gbc_lblFijo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFijo.anchor = GridBagConstraints.EAST;
 		gbc_lblFijo.gridx = 7;
-		gbc_lblFijo.gridy = 6;
+		gbc_lblFijo.gridy = 7;
 		add(lblFijo, gbc_lblFijo);
 
 		ftxtFijo = new JFormattedTextField();
@@ -225,7 +246,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_ftxtFijo.insets = new Insets(0, 0, 5, 5);
 		gbc_ftxtFijo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_ftxtFijo.gridx = 8;
-		gbc_ftxtFijo.gridy = 6;
+		gbc_ftxtFijo.gridy = 7;
 		add(ftxtFijo, gbc_ftxtFijo);
 
 		lblHorario = new JLabel("Horario:");
@@ -233,7 +254,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblHorario.anchor = GridBagConstraints.EAST;
 		gbc_lblHorario.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHorario.gridx = 1;
-		gbc_lblHorario.gridy = 7;
+		gbc_lblHorario.gridy = 8;
 		add(lblHorario, gbc_lblHorario);
 
 		cbHorario = new JComboBox();
@@ -244,7 +265,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_cbHorario.insets = new Insets(0, 0, 5, 5);
 		gbc_cbHorario.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbHorario.gridx = 2;
-		gbc_cbHorario.gridy = 7;
+		gbc_cbHorario.gridy = 8;
 		add(cbHorario, gbc_cbHorario);
 
 		lblCorreo = new JLabel("Correo electrónico:");
@@ -252,7 +273,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblCorreo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCorreo.anchor = GridBagConstraints.EAST;
 		gbc_lblCorreo.gridx = 7;
-		gbc_lblCorreo.gridy = 7;
+		gbc_lblCorreo.gridy = 8;
 		add(lblCorreo, gbc_lblCorreo);
 
 		txtCorreo = new JTextField();
@@ -261,7 +282,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_txtCorreo.gridwidth = 3;
 		gbc_txtCorreo.insets = new Insets(0, 0, 5, 5);
 		gbc_txtCorreo.gridx = 8;
-		gbc_txtCorreo.gridy = 7;
+		gbc_txtCorreo.gridy = 8;
 		add(txtCorreo, gbc_txtCorreo);
 		txtCorreo.setColumns(10);
 
@@ -271,7 +292,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblDisponibilidad.anchor = GridBagConstraints.EAST;
 		gbc_lblDisponibilidad.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDisponibilidad.gridx = 1;
-		gbc_lblDisponibilidad.gridy = 8;
+		gbc_lblDisponibilidad.gridy = 9;
 		add(lblDisponibilidad, gbc_lblDisponibilidad);
 
 		cbDisponibilidad = new JComboBox();
@@ -282,7 +303,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_cbDisponibilidad.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDisponibilidad.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbDisponibilidad.gridx = 2;
-		gbc_cbDisponibilidad.gridy = 8;
+		gbc_cbDisponibilidad.gridy = 9;
 		add(cbDisponibilidad, gbc_cbDisponibilidad);
 
 		lblEstudios = new JLabel("Nivel de estudios:");
@@ -290,7 +311,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblEstudios.anchor = GridBagConstraints.EAST;
 		gbc_lblEstudios.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEstudios.gridx = 7;
-		gbc_lblEstudios.gridy = 8;
+		gbc_lblEstudios.gridy = 9;
 		add(lblEstudios, gbc_lblEstudios);
 
 		cbEstudios = new JComboBox();
@@ -301,7 +322,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_cbEstudios.insets = new Insets(0, 0, 5, 5);
 		gbc_cbEstudios.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbEstudios.gridx = 8;
-		gbc_cbEstudios.gridy = 8;
+		gbc_cbEstudios.gridy = 9;
 		add(cbEstudios, gbc_cbEstudios);
 
 		lblIdiomas = new JLabel("Idiomas:");
@@ -309,7 +330,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblIdiomas.anchor = GridBagConstraints.EAST;
 		gbc_lblIdiomas.insets = new Insets(0, 0, 5, 5);
 		gbc_lblIdiomas.gridx = 7;
-		gbc_lblIdiomas.gridy = 9;
+		gbc_lblIdiomas.gridy = 10;
 		add(lblIdiomas, gbc_lblIdiomas);
 
 		spIdiomas = new JScrollPane();
@@ -318,7 +339,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_spIdiomas.insets = new Insets(0, 0, 5, 5);
 		gbc_spIdiomas.fill = GridBagConstraints.BOTH;
 		gbc_spIdiomas.gridx = 8;
-		gbc_spIdiomas.gridy = 9;
+		gbc_spIdiomas.gridy = 10;
 		add(spIdiomas, gbc_spIdiomas);
 
 		DefaultListModel model = new DefaultListModel();
@@ -330,7 +351,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_btnAniadirIdioma = new GridBagConstraints();
 		gbc_btnAniadirIdioma.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAniadirIdioma.gridx = 10;
-		gbc_btnAniadirIdioma.gridy = 9;
+		gbc_btnAniadirIdioma.gridy = 10;
 		add(btnAniadirIdioma, gbc_btnAniadirIdioma);
 
 		btnAplicarCambios = new JButton("Aplicar cambios");
@@ -340,7 +361,7 @@ public class PanelFormularioMonitores extends JPanel {
 		GridBagConstraints gbc_btnAplicarCambios = new GridBagConstraints();
 		gbc_btnAplicarCambios.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAplicarCambios.gridx = 10;
-		gbc_btnAplicarCambios.gridy = 11;
+		gbc_btnAplicarCambios.gridy = 12;
 		add(btnAplicarCambios, gbc_btnAplicarCambios);
 	}
 
@@ -352,6 +373,7 @@ public class PanelFormularioMonitores extends JPanel {
 			lstIdiomas.setEnabled(true);
 			txtNombre.setEnabled(true);
 			txtApellidos.setEnabled(true);
+			spnEdad.setEnabled(true);
 			ftxtDNI.setEnabled(true);
 			ftxtMovil.setEnabled(true);
 			ftxtFijo.setEnabled(true);
@@ -367,7 +389,9 @@ public class PanelFormularioMonitores extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			String nuevoIdioma = JOptionPane.showInputDialog("Introduzca un nuevo idioma");
 			Monitor monitor = monitoresDb.getMonitores().get(indice);
-			monitor.getIdiomas().add(nuevoIdioma);	// En caso de nuevo panel con nuevop monitor, crear lista vacia y setear y tal...
+			if(monitor.getIdiomas() == null) 
+				monitor.setIdiomas(new ArrayList<String>());
+			monitor.getIdiomas().add(nuevoIdioma);
 			DefaultListModel modeloLista = (DefaultListModel) lstIdiomas.getModel();
 			modeloLista.addElement(nuevoIdioma);
 		}
@@ -375,40 +399,35 @@ public class PanelFormularioMonitores extends JPanel {
 
 	private class BtnAplicarCambiosActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			Monitor monitor = null;
+			Monitor monitor = monitoresDb.getMonitores().get(indice);
 			try {
-				monitor = monitoresDb.getMonitores().get(indice);
-			} catch (IndexOutOfBoundsException ex) {
-				monitoresDb.addMonitor(new Monitor());
-				monitor = monitoresDb.getMonitores().get(indice);
-			}
-
-			monitor.setNombre(txtNombre.getText());
-			monitor.setApellidos(txtApellidos.getText());
-			monitor.setDni(ftxtDNI.getText());
-			monitor.setMovil(ftxtMovil.getText());
-			monitor.setFijo(ftxtFijo.getText());
-			monitor.setCorreo(txtCorreo.getText());
-			monitor.setSueldo(Double.valueOf(txtSueldo.getText()));
-			monitor.setEstudios((String) cbEstudios.getSelectedItem());
-			monitor.setHorario((String) cbHorario.getSelectedItem());
-			/*monitor.setDisponibilidad((String) cbDisponibilidad.getSelectedItem());
-			String iconfilename = ((ImageIcon) lblAvatar.getIcon()).getDescription();
-			String fileName = "./" + iconfilename.substring(iconfilename.lastIndexOf('\\') + 1);
-			monitor.setAvatar(fileName);*/
-			DefaultListModel modelo = (DefaultListModel) lstIdiomas.getModel();
-			ArrayList<String> nuevosIdiomas = new ArrayList<String>();
-			for (int i = 0; i < modelo.getSize(); ++i)
-				nuevosIdiomas.add(modelo.get(i).toString());
-			monitor.setIdiomas(nuevosIdiomas);
-			// Alguna forma mas eficiente de refrescar las listas?
-			DefaultListModel modeloMonitores = (DefaultListModel) lstMonitores.getModel();
-			try {
+				monitor.setNombre(txtNombre.getText());
+				monitor.setApellidos(txtApellidos.getText());
+				monitor.setEdad((Integer) spnEdad.getValue());
+				monitor.setDni(ftxtDNI.getText());
+				monitor.setMovil(ftxtMovil.getText());
+				monitor.setFijo(ftxtFijo.getText());
+				monitor.setCorreo(txtCorreo.getText());
+				monitor.setSueldo(Double.valueOf(txtSueldo.getText()));
+				monitor.setEstudios((String) cbEstudios.getSelectedItem());
+				monitor.setHorario((String) cbHorario.getSelectedItem());
+				monitor.setDisponibilidad((String) cbDisponibilidad.getSelectedItem());
+				monitor.setAvatar((ImageIcon) lblAvatar.getIcon());
+				DefaultListModel modelo = (DefaultListModel) lstIdiomas.getModel();
+				ArrayList<String> nuevosIdiomas = new ArrayList<String>();
+				for (int i = 0; i < modelo.getSize(); ++i)
+					nuevosIdiomas.add(modelo.get(i).toString());
+				monitor.setIdiomas(nuevosIdiomas);
+				DefaultListModel modeloMonitores = (DefaultListModel) lstMonitores.getModel();
+				if(modeloMonitores.getSize() == indice)
+					modeloMonitores.addElement(null);	//En caso de nuevo monitor, agregarlo al modelo
 				modeloMonitores.set(indice, new PanelMonitorRenderer(monitor));
-			} catch (IndexOutOfBoundsException ex) {
-				modeloMonitores.add(indice, new PanelMonitorRenderer(monitor));
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null,
+						"Se ha producido un error. Por favor, asegúrese que ha rellenado al información en todos los campos.",
+						"Error al aplicar cmabios", JOptionPane.ERROR_MESSAGE);
+				ex.printStackTrace();
 			}
-			
 		}
 	}
 
@@ -418,7 +437,15 @@ public class PanelFormularioMonitores extends JPanel {
 			int valorDevuelto = fcAbrir.showOpenDialog(null);
 			if (valorDevuelto == JFileChooser.APPROVE_OPTION) {
 				File file = fcAbrir.getSelectedFile();
-				lblAvatar.setIcon(new ImageIcon(file.getAbsolutePath()));
+				Image imagenOriginal;
+				try {
+					imagenOriginal = ImageIO.read(file);
+					Image imagenEscalada = imagenOriginal.getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+					ImageIcon iconoLabel = new ImageIcon(imagenEscalada);
+					lblAvatar.setIcon(iconoLabel);
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
 			}
 		}
 	}

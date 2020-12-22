@@ -31,7 +31,7 @@ public class PanelActividadRenderer extends JPanel {
 		setLayout(null);
 
 		lblFoto = new JLabel("");
-		lblFoto.setIcon(new ImageIcon(PanelActividadRenderer.class.getResource(actividad.getFotoActividad())));
+		lblFoto.setIcon(actividad.getFotoActividad());
 		lblFoto.setBounds(10, 10, 131, 186);
 		add(lblFoto);
 

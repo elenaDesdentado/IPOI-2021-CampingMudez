@@ -64,29 +64,35 @@ public class PanelActividades extends JPanel {
 		 */
 		Actividad actividad1 = new Actividad("Paintball", "Juan Marín Prieto", 10, "Adultos", "Ciervo",
 				"El paintball es un juego de estrategia en el que compiten normalmente dos equipos. Cada jugador tiene algo "
-				+ "parecido a una pistola de bolas de pintura, y el objetivo puede variar según la modalidad del juego que es"
-				+ "cojas: atrapar la bandera, eliminar al equipo contrario, rescatar al presidente...",
-				"Incluye la equipación", "16:00-18:00", 20.5, "./fotoPaintball.jpg");
+						+ "parecido a una pistola de bolas de pintura, y el objetivo puede variar según la modalidad del juego que es"
+						+ "cojas: atrapar la bandera, eliminar al equipo contrario, rescatar al presidente...",
+				"Incluye la equipación", "16:00-18:00", 20.5,
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoPaintball.jpg")));
 		Actividad actividad2 = new Actividad("Espeleología subacuática", "Martín García Ortega", 5, "Adultos", "Salmón",
 				"Cuevas bajo el agua. Si descubrir los secretos de las cuevas y galerías nos abre un mundo, imagínate la "
-				+ "sensación cuando esto ocurre debajo del agua. ",
-				"Incluye la equipación", "11:00-12:00", 150.0, "./fotoEspeleologiaAcuatica.jpg");
-		Actividad actividad3 = new Actividad("Karts Infantil", "Martín García Ortega", 8, "Niños de 12 a 14 años", "Escorpión",
+						+ "sensación cuando esto ocurre debajo del agua. ",
+				"Incluye la equipación", "11:00-12:00", 150.0,
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoEspeleologiaAcuatica.jpg")));
+		Actividad actividad3 = new Actividad("Karts Infantil", "Martín García Ortega", 8, "Niños de 12 a 14 años",
+				"Escorpión",
 				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
-				+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
-				+ "toda la adrenalina generada sin preocupaciones.",
-				"Incluye el kart y la equipación", "9:00-12:00", 14.5, "./fotoKartInf.jpg");
+						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
+						+ "toda la adrenalina generada sin preocupaciones.",
+				"Incluye el kart y la equipación", "9:00-12:00", 14.5,
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartInf.jpg")));
 		Actividad actividad4 = new Actividad("Karts Junior", "Juan Marín Prieto", 10, "Niños de 14 a 17 años", "Ciervo",
 				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
-				+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
-				+ "toda la adrenalina generada sin preocupaciones.",
-				"Incluye el kart y la equipación", "10:00-11:30", 18.5, "./fotoKartJunior.jpg");
+						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
+						+ "toda la adrenalina generada sin preocupaciones.",
+				"Incluye el kart y la equipación", "10:00-11:30", 18.5,
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartJunior.jpg")));
 		Actividad actividad5 = new Actividad("Karts Adultos", "Juan Marín Prieto", 12, "Adultos", "Águila",
 				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
-				+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
-				+ "toda la adrenalina generada sin preocupaciones.",
-				"Incluye el kart y la equipación", "19:00-21:00", 22.5, "./fotoKartAdultos.jpg");
-		
+						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
+						+ "toda la adrenalina generada sin preocupaciones.",
+				"Incluye el kart y la equipación", "19:00-21:00", 22.5,
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartAdultos.jpg")));
+
 		actividadesDb.addActividad(actividad1);
 		actividadesDb.addActividad(actividad2);
 		actividadesDb.addActividad(actividad3);
@@ -97,7 +103,7 @@ public class PanelActividades extends JPanel {
 		panelEjemplo3 = new PanelActividadRenderer(actividad3);
 		panelEjemplo4 = new PanelActividadRenderer(actividad4);
 		panelEjemplo5 = new PanelActividadRenderer(actividad5);
-		
+
 		setLayout(new BorderLayout(0, 0));
 
 		splitPane = new JSplitPane();
@@ -116,16 +122,17 @@ public class PanelActividades extends JPanel {
 		lstActividades.addListSelectionListener(new LstActividadesListSelectionListener());
 		lstActividades.setMinimumSize(new Dimension(440, 23));
 		scrollPaneListaActs.setViewportView(lstActividades);
-		
-		//lstActividades.addListSelectionListener(new LstActividadesListSelectionListener());
+
+		// lstActividades.addListSelectionListener(new
+		// LstActividadesListSelectionListener());
 		DefaultListModel lstModel = new DefaultListModel();
-		
+
 		lstModel.addElement(panelEjemplo1);
 		lstModel.addElement(panelEjemplo2);
 		lstModel.addElement(panelEjemplo3);
 		lstModel.addElement(panelEjemplo4);
 		lstModel.addElement(panelEjemplo5);
-		
+
 		lstActividades.setModel(lstModel);
 		lstActividades.setFixedCellHeight(220);
 		lstActividades.setCellRenderer(new ActividadRenderer());
@@ -184,7 +191,7 @@ public class PanelActividades extends JPanel {
 		gbc_txtBarraBusqueda.gridy = 1;
 		pnlGestionBusqueda.add(txtBarraBusqueda, gbc_txtBarraBusqueda);
 		txtBarraBusqueda.setColumns(10);
-		
+
 		lblLupa = new JLabel("");
 		lblLupa.setIcon(new ImageIcon(PanelActividades.class.getResource("/presentacion/lupa.png")));
 		GridBagConstraints gbc_lblLupa = new GridBagConstraints();
@@ -204,7 +211,7 @@ public class PanelActividades extends JPanel {
 		public void valueChanged(ListSelectionEvent e) {
 			Actividad actividadSeleccionada = actividadesDb.getActividades().get(lstActividades.getSelectedIndex());
 			PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades();
-			panelActividadInfoCompleta.lblFoto.setIcon(new ImageIcon(PanelMonitorRenderer.class.getResource(actividadSeleccionada.getFotoActividad())));
+			panelActividadInfoCompleta.lblFoto.setIcon(actividadSeleccionada.getFotoActividad());
 			panelActividadInfoCompleta.txtNombre.setText(actividadSeleccionada.getNombre());
 			panelActividadInfoCompleta.txtMonitor.setText(actividadSeleccionada.getMonitor());
 			panelActividadInfoCompleta.spinCupo.setValue(actividadSeleccionada.getCupo());
@@ -214,10 +221,10 @@ public class PanelActividades extends JPanel {
 			panelActividadInfoCompleta.tAMateriales.setText(actividadSeleccionada.getMateriales());
 			panelActividadInfoCompleta.txtPrecio.setText(actividadSeleccionada.getPrecio().toString());
 			panelActividadInfoCompleta.cbHorario.setSelectedItem(actividadSeleccionada.getHorario());
-			
+
 			pnlFormularioActs.add(panelActividadInfoCompleta, actividadSeleccionada.getNombre());
 			((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, actividadSeleccionada.getNombre());
-			
+
 			panelActividadInfoCompleta.btnAniadirAvatar.setEnabled(false);
 			panelActividadInfoCompleta.btnAplicarCambios.setEnabled(false);
 			panelActividadInfoCompleta.txtNombre.setEditable(false);
@@ -231,6 +238,7 @@ public class PanelActividades extends JPanel {
 			panelActividadInfoCompleta.cbHorario.setEnabled(false);
 		}
 	}
+
 	private class TxtBarraBusquedaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			String nombreActividad;

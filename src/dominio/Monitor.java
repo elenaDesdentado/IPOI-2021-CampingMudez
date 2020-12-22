@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public class Monitor {
 	private String nombre;
 	private String apellidos;
@@ -15,10 +17,10 @@ public class Monitor {
 	private Double sueldo;
 	private int edad;
 	ArrayList<String> idiomas;
-	private String avatar;
+	private ImageIcon avatar;
 
 	public Monitor(String nombre, String apellidos, String dni, String movil, String fijo, String correo,
-			String estudios, String disponibilidad, String horario, Double sueldo, int edad, ArrayList<String> idiomas, String avatar) {
+			String estudios, String disponibilidad, String horario, Double sueldo, int edad, ArrayList<String> idiomas, ImageIcon avatar) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.dni = dni;
@@ -38,11 +40,11 @@ public class Monitor {
 		
 	}
 
-	public String getAvatar() {
+	public ImageIcon getAvatar() {
 		return avatar;
 	}
 
-	public void setAvatar(String avatar) {
+	public void setAvatar(ImageIcon avatar) {
 		this.avatar = avatar;
 	}
 

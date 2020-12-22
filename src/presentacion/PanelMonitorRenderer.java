@@ -34,7 +34,7 @@ public class PanelMonitorRenderer extends JPanel {
 		setLayout(null);
 
 		lblAvatar = new JLabel("");
-		lblAvatar.setIcon(new ImageIcon(PanelMonitorRenderer.class.getResource(monitor.getAvatar())));
+		lblAvatar.setIcon(monitor.getAvatar());
 		lblAvatar.setBounds(10, 10, 131, 186);
 		add(lblAvatar);
 

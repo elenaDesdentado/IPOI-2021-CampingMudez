@@ -33,7 +33,7 @@ public class PanelMonitores extends JPanel {
 	private JPanel pnlFormularioMons;
 	private JPanel pnlGestionBusqueda;
 	private JScrollPane scrollPaneListaMons;
-	private JButton btnAñadirMonitor;
+	private JButton btnAniadirMonitor;
 	private JButton btnEliminarMonitor;
 	private JLabel lblBarraBusqueda;
 	private JTextField txtBarraBusqueda;
@@ -73,13 +73,13 @@ public class PanelMonitores extends JPanel {
 		idiomas3.add("Alemán");
 		Monitor monitorEjemplo1 = new Monitor("Juan", "Marín Prieto", "05718928T", "654738273", null,
 				"juanmapriSi@gmail.com", "Estudios Universitarios", "Disponible", "8:00-15:00", 1000.0, 24, idiomas1,
-				"./avatarMonitorEjemplo1.png");
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo1.png")));
 		Monitor monitorEjemplo2 = new Monitor("Eva", "Grande Milagro", "05283928L", "654839283", "926 46 82 91",
 				"powerJapan90@yahoo.com", "Educación Secundaria Obligatoria", "Baja laboral", "17:30-22:30", 1235.5, 20,
-				idiomas2, "./avatarMonitorEjemplo2.png");
+				idiomas2, new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo2.png")));
 		Monitor monitorEjemplo3 = new Monitor("Martín", "García Ortega", "05673822Q", "625890973", null,
 				"destroyerManhattan@gmail.com", "Estudios post-universitarios", "Vacaciones", "15:00-23:00", 1540.0, 30,
-				idiomas3, "./avatarMonitorEjemplo3.png");
+				idiomas3, new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo3.png")));
 		monitoresDb.addMonitor(monitorEjemplo1);
 		monitoresDb.addMonitor(monitorEjemplo2);
 		monitoresDb.addMonitor(monitorEjemplo3);
@@ -127,16 +127,16 @@ public class PanelMonitores extends JPanel {
 		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
 
-		btnAñadirMonitor = new JButton("Añadir nuevo monitor");
-		btnAñadirMonitor.addActionListener(new BtnAñadirMonitorActionListener());
-		btnAñadirMonitor.setForeground(Color.BLACK);
-		btnAñadirMonitor.setBackground(colorBoton);
-		btnAñadirMonitor.setFocusPainted(false);
-		GridBagConstraints gbc_btnAñadirMonitor = new GridBagConstraints();
-		gbc_btnAñadirMonitor.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAñadirMonitor.gridx = 1;
-		gbc_btnAñadirMonitor.gridy = 1;
-		pnlGestionBusqueda.add(btnAñadirMonitor, gbc_btnAñadirMonitor);
+		btnAniadirMonitor = new JButton("Añadir nuevo monitor");
+		btnAniadirMonitor.addActionListener(new BtnAniadirMonitorActionListener());
+		btnAniadirMonitor.setForeground(Color.BLACK);
+		btnAniadirMonitor.setBackground(colorBoton);
+		btnAniadirMonitor.setFocusPainted(false);
+		GridBagConstraints gbc_btnAniadirMonitor = new GridBagConstraints();
+		gbc_btnAniadirMonitor.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAniadirMonitor.gridx = 1;
+		gbc_btnAniadirMonitor.gridy = 1;
+		pnlGestionBusqueda.add(btnAniadirMonitor, gbc_btnAniadirMonitor);
 
 		btnEliminarMonitor = new JButton("Dar de baja al monitor");
 		btnEliminarMonitor.setForeground(Color.BLACK);
@@ -178,45 +178,51 @@ public class PanelMonitores extends JPanel {
 
 	private class LstMonitoresListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
-			Monitor monitorSeleccionado = monitoresDb.getMonitores().get(lstMonitores.getSelectedIndex());
-			PanelFormularioMonitores panelMonitorInfoCompleta = new PanelFormularioMonitores(lstMonitores, monitoresDb,
-					lstMonitores.getSelectedIndex());
-			panelMonitorInfoCompleta.lblAvatar
-					.setIcon(new ImageIcon(PanelMonitorRenderer.class.getResource(monitorSeleccionado.getAvatar())));
-			panelMonitorInfoCompleta.txtNombre.setText(monitorSeleccionado.getNombre());
-			panelMonitorInfoCompleta.txtApellidos.setText(monitorSeleccionado.getApellidos());
-			panelMonitorInfoCompleta.ftxtDNI.setText(monitorSeleccionado.getDni());
-			panelMonitorInfoCompleta.ftxtMovil.setText(monitorSeleccionado.getMovil());
-			panelMonitorInfoCompleta.ftxtFijo.setText(monitorSeleccionado.getFijo());
-			panelMonitorInfoCompleta.txtCorreo.setText(monitorSeleccionado.getCorreo());
-			panelMonitorInfoCompleta.cbEstudios.setSelectedItem(monitorSeleccionado.getEstudios());
-			panelMonitorInfoCompleta.txtSueldo.setText(monitorSeleccionado.getSueldo().toString());
-			panelMonitorInfoCompleta.cbHorario.setSelectedItem(monitorSeleccionado.getHorario());
-			panelMonitorInfoCompleta.cbDisponibilidad.setSelectedItem(monitorSeleccionado.getDisponibilidad());
-			DefaultListModel model = new DefaultListModel();
-			for (String idioma : monitorSeleccionado.getIdiomas())
-				model.addElement(idioma);
-			panelMonitorInfoCompleta.lstIdiomas.setModel(model);
-			pnlFormularioMons.add(panelMonitorInfoCompleta, monitorSeleccionado.getDni());
-			((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, monitorSeleccionado.getDni());
+			if (monitoresDb.getMonitores().get(lstMonitores.getModel().getSize() - 1).getAvatar() == null)
+				//En caso de jar incompleta la agregacion de un nuevo monitor, eliminarlo de la lista
+				monitoresDb.getMonitores().remove(lstMonitores.getModel().getSize() - 1);
+			if (lstMonitores.getSelectedIndex() != -1) {
+				Monitor monitorSeleccionado = monitoresDb.getMonitores().get(lstMonitores.getSelectedIndex());
+				PanelFormularioMonitores panelMonitorInfoCompleta = new PanelFormularioMonitores(lstMonitores,
+						monitoresDb, lstMonitores.getSelectedIndex());
+				panelMonitorInfoCompleta.lblAvatar.setIcon(monitorSeleccionado.getAvatar());
+				panelMonitorInfoCompleta.txtNombre.setText(monitorSeleccionado.getNombre());
+				panelMonitorInfoCompleta.spnEdad.setValue(monitorSeleccionado.getEdad());
+				panelMonitorInfoCompleta.txtApellidos.setText(monitorSeleccionado.getApellidos());
+				panelMonitorInfoCompleta.ftxtDNI.setText(monitorSeleccionado.getDni());
+				panelMonitorInfoCompleta.ftxtMovil.setText(monitorSeleccionado.getMovil());
+				panelMonitorInfoCompleta.ftxtFijo.setText(monitorSeleccionado.getFijo());
+				panelMonitorInfoCompleta.txtCorreo.setText(monitorSeleccionado.getCorreo());
+				panelMonitorInfoCompleta.cbEstudios.setSelectedItem(monitorSeleccionado.getEstudios());
+				panelMonitorInfoCompleta.txtSueldo.setText(monitorSeleccionado.getSueldo().toString());
+				panelMonitorInfoCompleta.cbHorario.setSelectedItem(monitorSeleccionado.getHorario());
+				panelMonitorInfoCompleta.cbDisponibilidad.setSelectedItem(monitorSeleccionado.getDisponibilidad());
+				DefaultListModel model = new DefaultListModel();
+				for (String idioma : monitorSeleccionado.getIdiomas())
+					model.addElement(idioma);
+				panelMonitorInfoCompleta.lstIdiomas.setModel(model);
+				pnlFormularioMons.add(panelMonitorInfoCompleta, monitorSeleccionado.getDni());
+				((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, monitorSeleccionado.getDni());
 
-			panelMonitorInfoCompleta.btnAniadirAvatar.setEnabled(false);
-			panelMonitorInfoCompleta.btnAplicarCambios.setEnabled(false);
-			panelMonitorInfoCompleta.btnAniadirIdioma.setEnabled(false);
-			panelMonitorInfoCompleta.lstIdiomas.setEnabled(false);
-			panelMonitorInfoCompleta.txtNombre.setEnabled(false);
-			panelMonitorInfoCompleta.txtApellidos.setEnabled(false);
-			panelMonitorInfoCompleta.ftxtDNI.setEnabled(false);
-			panelMonitorInfoCompleta.ftxtMovil.setEnabled(false);
-			panelMonitorInfoCompleta.ftxtFijo.setEnabled(false);
-			panelMonitorInfoCompleta.txtCorreo.setEnabled(false);
-			panelMonitorInfoCompleta.txtSueldo.setEnabled(false);
-			panelMonitorInfoCompleta.cbHorario.setEnabled(false);
-			panelMonitorInfoCompleta.cbEstudios.setEnabled(false);
-			panelMonitorInfoCompleta.cbDisponibilidad.setEnabled(false);
+				panelMonitorInfoCompleta.btnAniadirAvatar.setEnabled(false);
+				panelMonitorInfoCompleta.btnAplicarCambios.setEnabled(false);
+				panelMonitorInfoCompleta.btnAniadirIdioma.setEnabled(false);
+				panelMonitorInfoCompleta.lstIdiomas.setEnabled(false);
+				panelMonitorInfoCompleta.txtNombre.setEnabled(false);
+				panelMonitorInfoCompleta.txtApellidos.setEnabled(false);
+				panelMonitorInfoCompleta.spnEdad.setEnabled(false);
+				panelMonitorInfoCompleta.ftxtDNI.setEnabled(false);
+				panelMonitorInfoCompleta.ftxtMovil.setEnabled(false);
+				panelMonitorInfoCompleta.ftxtFijo.setEnabled(false);
+				panelMonitorInfoCompleta.txtCorreo.setEnabled(false);
+				panelMonitorInfoCompleta.txtSueldo.setEnabled(false);
+				panelMonitorInfoCompleta.cbHorario.setEnabled(false);
+				panelMonitorInfoCompleta.cbEstudios.setEnabled(false);
+				panelMonitorInfoCompleta.cbDisponibilidad.setEnabled(false);
 
-			UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
-			UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
+				UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
+				UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
+			}
 		}
 	}
 
@@ -241,11 +247,16 @@ public class PanelMonitores extends JPanel {
 						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	private class BtnAñadirMonitorActionListener implements ActionListener {
+
+	private class BtnAniadirMonitorActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			lstMonitores.clearSelection();
 			PanelFormularioMonitores panelMonitorInfoCompleta = new PanelFormularioMonitores(lstMonitores, monitoresDb,
 					lstMonitores.getModel().getSize());
+			panelMonitorInfoCompleta.btnModificar.setEnabled(false);
 			pnlFormularioMons.add(panelMonitorInfoCompleta, "Nuevo monitor");
+			// Añadir monitor vacio a la lista, si no se completa el formulario, se elimina.
+			monitoresDb.addMonitor(new Monitor());
 			((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, "Nuevo monitor");
 		}
 	}
