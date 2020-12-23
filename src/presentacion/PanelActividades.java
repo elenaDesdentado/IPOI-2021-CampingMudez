@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -197,6 +198,7 @@ public class PanelActividades extends JPanel {
 
 		lblLupa = new JLabel("");
 		lblLupa.addMouseListener(new LblLupaMouseListener());
+		lblLupa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblLupa.setIcon(new ImageIcon(PanelActividades.class.getResource("/presentacion/lupa.png")));
 		GridBagConstraints gbc_lblLupa = new GridBagConstraints();
 		gbc_lblLupa.insets = new Insets(0, 0, 5, 5);
@@ -220,7 +222,7 @@ public class PanelActividades extends JPanel {
 			if (lstActividades.getSelectedIndex() != -1) {
 				Actividad actividadSeleccionada = actividadesDb.getActividades().get(lstActividades.getSelectedIndex());
 				PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstActividades, actividadesDb,
-						lstActividades.getModel().getSize());
+						lstActividades.getSelectedIndex());
 				panelActividadInfoCompleta.lblFoto.setIcon(actividadSeleccionada.getFotoActividad());
 				panelActividadInfoCompleta.txtNombre.setText(actividadSeleccionada.getNombre());
 				panelActividadInfoCompleta.txtMonitor.setText(actividadSeleccionada.getMonitor());

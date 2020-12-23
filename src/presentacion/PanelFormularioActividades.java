@@ -116,7 +116,6 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblNombre, gbc_lblNombre);
 
 		txtNombre = new JTextField();
-		txtNombre.setEditable(false);
 		GridBagConstraints gbc_txtNombre = new GridBagConstraints();
 		gbc_txtNombre.anchor = GridBagConstraints.SOUTH;
 		gbc_txtNombre.gridwidth = 2;
@@ -129,7 +128,6 @@ public class PanelFormularioActividades extends JPanel {
 
 		btnAniadirAvatar = new JButton("Añadir foto...");
 		btnAniadirAvatar.addActionListener(new BtnAniadirAvatarActionListener());
-		btnAniadirAvatar.setEnabled(false);
 		GridBagConstraints gbc_btnAniadirAvatar = new GridBagConstraints();
 		gbc_btnAniadirAvatar.gridwidth = 3;
 		gbc_btnAniadirAvatar.insets = new Insets(0, 0, 5, 5);
@@ -147,7 +145,6 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblMonitor, gbc_lblMonitor);
 
 		txtMonitor = new JTextField();
-		txtMonitor.setEditable(false);
 		GridBagConstraints gbc_txtMonitor = new GridBagConstraints();
 		gbc_txtMonitor.gridwidth = 2;
 		gbc_txtMonitor.insets = new Insets(0, 0, 5, 5);
@@ -166,7 +163,6 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblCupo, gbc_lblCupo);
 
 		spinCupo = new JSpinner();
-		spinCupo.setEnabled(false);
 		spinCupo.setModel(new SpinnerNumberModel(1, 1, 15, 1));
 		GridBagConstraints gbc_spinCupo = new GridBagConstraints();
 		gbc_spinCupo.anchor = GridBagConstraints.WEST;
@@ -184,7 +180,6 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblPrecio, gbc_lblPrecio);
 
 		txtPrecio = new JTextField();
-		txtPrecio.setEditable(false);
 		GridBagConstraints gbc_txtPrecio = new GridBagConstraints();
 		gbc_txtPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_txtPrecio.fill = GridBagConstraints.HORIZONTAL;
@@ -210,8 +205,6 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblDestinatarios, gbc_lblDestinatarios);
 
 		cbDestinatarios = new JComboBox();
-		cbDestinatarios.setEditable(true);
-		cbDestinatarios.setEnabled(false);
 		cbDestinatarios.setModel(new DefaultComboBoxModel(new String[] { "Niños de menos de 12 años",
 				"Niños de 12 a 14 años", "Niños de 14 a 17 años", "Adultos", "Adultos de más de 65 años" }));
 		GridBagConstraints gbc_cbDestinatarios = new GridBagConstraints();
@@ -230,8 +223,6 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblHorario, gbc_lblHorario);
 
 		cbHorario = new JComboBox();
-		cbHorario.setEnabled(false);
-		cbHorario.setEditable(true);
 		cbHorario.setModel(new DefaultComboBoxModel(new String[] { "9:00-12:00", "10:00-11:30", "11:00-12:00",
 				"15:30-17:00", "16:00-18:00", "19:00-21:00" }));
 		GridBagConstraints gbc_cbHorario = new GridBagConstraints();
@@ -251,8 +242,6 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblArea, gbc_lblArea);
 
 		cbArea = new JComboBox();
-		cbArea.setEditable(true);
-		cbArea.setEnabled(false);
 		cbArea.setModel(new DefaultComboBoxModel(new String[] { "Escorpión", "Ciervo", "Salmón", "Águila" }));
 		GridBagConstraints gbc_cbArea = new GridBagConstraints();
 		gbc_cbArea.insets = new Insets(0, 0, 5, 5);
@@ -302,7 +291,6 @@ public class PanelFormularioActividades extends JPanel {
 
 		btnAplicarCambios = new JButton("Aplicar cambios");
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
-		btnAplicarCambios.setEnabled(false);
 		btnAplicarCambios.setForeground(Color.BLACK);
 		btnAplicarCambios.setBackground(colorBoton);
 		GridBagConstraints gbc_btnAplicarCambios = new GridBagConstraints();
