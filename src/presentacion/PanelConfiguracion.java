@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
@@ -19,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 
 import dominio.Usuario;
 import persistencia.Usuarios;
@@ -28,6 +30,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 
 public class PanelConfiguracion extends JPanel {
@@ -60,7 +63,7 @@ public class PanelConfiguracion extends JPanel {
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 72, 0, 0, 64, 79, 61, 112, 112, 0, 0, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 68, 0, 0, 10, 0, 47, 15, 15, 20, 0, 15, 0, 15, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 57, 0, 0, 10, 0, 47, 15, 15, 20, 0, 15, 0, 15, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
@@ -200,7 +203,7 @@ public class PanelConfiguracion extends JPanel {
 				Image imagenOriginal;
 				try {
 					imagenOriginal = ImageIO.read(file);
-					Image imagenEscalada = imagenOriginal.getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+					Image imagenEscalada = imagenOriginal.getScaledInstance(214, 214, java.awt.Image.SCALE_SMOOTH);
 					ImageIcon iconoLabel = new ImageIcon(imagenEscalada);
 					lblAvatar.setIcon(iconoLabel);
 				} catch (IOException ex) {
@@ -219,13 +222,41 @@ public class PanelConfiguracion extends JPanel {
 							"Cambios cuenta de usuario", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 							options, options[0]);
 					if (seleccion == 0) {
-						if (pwfPassword.getPassword().toString()
-								.equals(pwfPasswordConfirmada.getPassword().toString())) {
-							usuarios.eliminarUsuario(usuarioPrincipal);
-							usuarioPrincipal.setAvatar((ImageIcon) lblAvatar.getIcon());
+						System.out.print(pwfPassword.getPassword());
+						System.out.print(pwfPasswordConfirmada.getPassword());
+						
+						if (Arrays.equals(pwfPassword.getPassword(), pwfPasswordConfirmada.getPassword())) {
+							int indexUsuario = usuarios.getUsuarios().indexOf(usuarioPrincipal);
+							Image imagenEscalada = ((ImageIcon) lblAvatar.getIcon()).getImage().getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH);
+							ImageIcon iconoLabel = new ImageIcon(imagenEscalada);
+							usuarioPrincipal.setAvatar(iconoLabel);
 							usuarioPrincipal.setNombreUsuario(txtNombreUsuario.getText());
 							usuarioPrincipal.setPassword(pwfPassword.getPassword().toString());
-							usuarios.addUsuario(usuarioPrincipal);
+							usuarios.getUsuarios().set(indexUsuario, usuarioPrincipal);
+							
+							Component[] components = framePadre.getContentPane().getComponents();
+							for(int i=0; i<components.length; i++) {
+								if (components[i] instanceof JPanel && components[i].getName().equals("pnlMenu")) {
+									System.out.println(components[i].getName());
+									Component[] comMenu = ((Container) components[i]).getComponents();
+									for(int j=0; j<comMenu.length; j++) {
+										if (comMenu[j] instanceof JToolBar && comMenu[j].getName().equals("tbUsuario")) {
+											System.out.println(comMenu[j].getName());
+											Component[] comTB = ((Container) comMenu[j]).getComponents();
+											for (int k=0; k<comTB.length; k++) {
+												System.out.print(comTB[k].toString());
+												if (comTB[k] instanceof JLabel && comTB[k].getName().equals("lblAvatar")) {
+													((JLabel) comTB[k]).setIcon(usuarioPrincipal.getAvatar());	
+												} 
+												if (comTB[k] instanceof JLabel && comTB[k].getName().equals("lblName")) {
+													((JLabel) comTB[k]).setText(usuarioPrincipal.getNombreUsuario());
+													break;
+												}
+											}
+										}
+									}
+								}
+							}
 						}
 
 						try {
@@ -241,10 +272,6 @@ public class PanelConfiguracion extends JPanel {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						
-						framePadre.repaint();
-						framePadre.revalidate();
-						
 					} else if (seleccion == 1) {
 						pwfPassword.setText("");
 						pwfPasswordConfirmada.setText("");

@@ -63,8 +63,11 @@ public class VentanaInicio extends JFrame {
 	private Color colorBotonesGestion = new Color (243, 243, 245);
 	
 	public JLabel lblAvatar;
+	private JLabel lblName;
 	private JPanel pnlMenu;
 	
+	private Usuarios usuarios;
+	private Usuario usuarioPrincipal;
 
 	/**
 	 * Launch the application.
@@ -96,9 +99,11 @@ public class VentanaInicio extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		Usuario usuarioPrincipal = usuarios.getUsuario(usuarios.getUsuarios(), usuario);
+		this.usuarios = usuarios;
+		this.usuarioPrincipal = usuarios.getUsuario();
 		
 		JToolBar tbGestion = new JToolBar();
+		tbGestion.setName("tbGestion");
 		tbGestion.setBackground(colorTbGestion);
 		tbGestion.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
@@ -163,6 +168,7 @@ public class VentanaInicio extends JFrame {
 		tbGestion.add(verticalGlue_1);
 
 		pnlListaFormulario = new JPanel();
+		pnlListaFormulario.setName("pnlListaFormulario");
 		pnlListaFormulario.setBackground(colorFondo);
 		pnlListaFormulario.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(pnlListaFormulario, BorderLayout.CENTER);
@@ -183,11 +189,13 @@ public class VentanaInicio extends JFrame {
 		pnlListaFormulario.add(pnlConfiguracion, "Configuración");
 
 		JLabel lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
+		lblInfoLegal.setName("lblInfoLegal");
 		lblInfoLegal.setBackground(colorBarraBusqueda);
 		lblInfoLegal.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblInfoLegal, BorderLayout.SOUTH);
 
 		pnlMenu = new JPanel();
+		pnlMenu.setName("pnlMenu");
 		pnlMenu.setBackground(colorFondo);
 		pnlMenu.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		contentPane.add(pnlMenu, BorderLayout.NORTH);
@@ -199,6 +207,8 @@ public class VentanaInicio extends JFrame {
 		pnlMenu.setLayout(gbl_pnlMenu);
 
 		JToolBar tbUsuario = new JToolBar();
+		tbUsuario.setMaximumSize(new Dimension(13, 25));
+		tbUsuario.setName("tbUsuario");
 		tbUsuario.setBackground(colorFondo);
 		tbUsuario.setBorder(new TitledBorder(null, "Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		tbUsuario.setFloatable(false);
@@ -212,19 +222,23 @@ public class VentanaInicio extends JFrame {
 		pnlMenu.add(tbUsuario, gbc_tbUsuario);
 
 		final Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		horizontalStrut_2.setName("horizontalStrut_2");
 		tbUsuario.add(horizontalStrut_2);
 
-		lblAvatar = new JLabel("");
-		lblAvatar.setIcon(usuarioPrincipal.getAvatar());
-		lblAvatar.setBackground(colorFondo);
+		this.lblAvatar = new JLabel("");
+		lblAvatar.setName("lblAvatar");
+		this.lblAvatar.setIcon(usuarioPrincipal.getAvatar());
+		this.lblAvatar.setBackground(colorFondo);
 		tbUsuario.add(lblAvatar);
 
 		final Component horizontalStrut = Box.createHorizontalStrut(20);
+		horizontalStrut.setName("horizontalStrut");
 		tbUsuario.add(horizontalStrut);
 
-		JLabel lblName = new JLabel(usuarioPrincipal.getNombreUsuario());
-		lblName.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		lblName.setBackground(colorFondo);
+		this.lblName = new JLabel(usuarioPrincipal.getNombreUsuario());
+		lblName.setName("lblName");
+		this.lblName.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		this.lblName.setBackground(colorFondo);
 		tbUsuario.add(lblName);
 
 		final Component horizontalStrut_1 = Box.createHorizontalStrut(20);
@@ -260,6 +274,7 @@ public class VentanaInicio extends JFrame {
 		tbUsuario.add(btnLogOut);
 
 		JMenuBar mnbAyuda = new JMenuBar();
+		mnbAyuda.setName("mnbAyuda");
 		mnbAyuda.setBackground(colorFondo);
 		GridBagConstraints gbc_mnbAyuda = new GridBagConstraints();
 		gbc_mnbAyuda.fill = GridBagConstraints.BOTH;
@@ -280,6 +295,7 @@ public class VentanaInicio extends JFrame {
 	private class BtnSeleccionarGestorActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, arg0.getActionCommand());
+			pnlMenu.repaint();
 		}
 	}
 	private class BtnLogOutActionListener implements ActionListener {

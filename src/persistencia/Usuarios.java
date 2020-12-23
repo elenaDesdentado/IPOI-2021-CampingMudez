@@ -21,12 +21,13 @@ public class Usuarios {
 		return usuarios;
 	}
 	
-	public Usuario getUsuario (ArrayList<Usuario> usuarios, String nombreUsuario) {
-		for (int i=0; i< usuarios.size(); i++) {
+	//public Usuario getUsuario (ArrayList<Usuario> usuarios, String nombreUsuario) {
+		/*for (int i=0; i< usuarios.size(); i++) {
 			if (usuarios.get(i).getNombreUsuario().equals(nombreUsuario))
 				return usuarios.get(i);
-		}
-		return null;
+		}*/
+	public Usuario getUsuario() {
+		return this.usuarios.get(0);
 	}
 
 	public void setUsuarios(ArrayList<Usuario> usuarios) {
