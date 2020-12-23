@@ -1,10 +1,9 @@
 package dominio;
 
-import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 
 public class Actividad {
+
 	private String nombre;
 	private String monitor;
 	private int cupo;
@@ -15,7 +14,7 @@ public class Actividad {
 	private String horario;
 	private Double precio;
 	private ImageIcon fotoActividad;
-	
+
 	public Actividad(String nombre, String monitor, int cupo, String destinatario, String area, String descripcion,
 			String materiales, String horario, Double precio, ImageIcon fotoActividad) {
 		this.nombre = nombre;
@@ -31,7 +30,6 @@ public class Actividad {
 	}
 
 	public Actividad() {
-	
 	}
 
 	public String getNombre() {

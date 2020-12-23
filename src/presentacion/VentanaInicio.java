@@ -26,6 +26,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
+
+import dominio.Usuario;
+import persistencia.Usuarios;
+
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -58,7 +62,7 @@ public class VentanaInicio extends JFrame {
 	private Color colorTbGestion = new Color(74, 103, 49);
 	private Color colorBotonesGestion = new Color (243, 243, 245);
 	
-	private JLabel lblAvatar;
+	public JLabel lblAvatar;
 	private JPanel pnlMenu;
 	
 
@@ -69,7 +73,7 @@ public class VentanaInicio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaInicio frame = new VentanaInicio(null, null);
+					VentanaInicio frame = new VentanaInicio(null, null, null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,7 +84,7 @@ public class VentanaInicio extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaInicio(String usuario, String password) {
+	public VentanaInicio(String usuario, String password, Usuarios usuarios) {
 		setTitle("Camping Mudez");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(VentanaInicio.class.getResource("/presentacion/campingMudez.png")));
@@ -91,7 +95,9 @@ public class VentanaInicio extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-
+		
+		Usuario usuarioPrincipal = usuarios.getUsuario(usuarios.getUsuarios(), usuario);
+		
 		JToolBar tbGestion = new JToolBar();
 		tbGestion.setBackground(colorTbGestion);
 		tbGestion.setBorder(new TitledBorder(
@@ -167,7 +173,7 @@ public class VentanaInicio extends JFrame {
 		pnlMonitores = new PanelMonitores();
 		pnlReservas = new JPanel();
 		pnlRutas = new JPanel();
-		pnlConfiguracion = new PanelConfiguracion(this);
+		pnlConfiguracion = new PanelConfiguracion(this, usuarios, usuarioPrincipal);
 		pnlActividades.setBackground(colorFondo);
 		pnlMonitores.setBackground(colorFondo);
 		pnlListaFormulario.add(pnlActividades, "Actividades");
@@ -209,14 +215,14 @@ public class VentanaInicio extends JFrame {
 		tbUsuario.add(horizontalStrut_2);
 
 		lblAvatar = new JLabel("");
-		lblAvatar.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/avatarUsuario.png")));
+		lblAvatar.setIcon(usuarioPrincipal.getAvatar());
 		lblAvatar.setBackground(colorFondo);
 		tbUsuario.add(lblAvatar);
 
 		final Component horizontalStrut = Box.createHorizontalStrut(20);
 		tbUsuario.add(horizontalStrut);
 
-		JLabel lblName = new JLabel(usuario);
+		JLabel lblName = new JLabel(usuarioPrincipal.getNombreUsuario());
 		lblName.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		lblName.setBackground(colorFondo);
 		tbUsuario.add(lblName);

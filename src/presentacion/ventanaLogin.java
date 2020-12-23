@@ -23,6 +23,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
+
+import dominio.Usuario;
+import persistencia.Usuarios;
+
 import javax.swing.JPasswordField;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -34,6 +38,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -68,6 +73,8 @@ public class ventanaLogin {
 	private JLabel lblWrongUsuario;
 	private JLabel lblWrongPassword;
 	private JLabel lblMensajeError;
+	
+	private Usuarios usuarios = new Usuarios();
 
 	/**
 	 * Launch the application.
@@ -320,13 +327,15 @@ public class ventanaLogin {
 	
 	private class BtnLoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			lblWrongUsuario.setIcon(null);
-			lblWrongPassword.setIcon(null);
+			Usuario nuevoUsuario = new Usuario(new ImageIcon(VentanaInicio.class.getResource("/presentacion/avatarUsuario.png")), USER, PASSWORD);
+			usuarios.addUsuario(nuevoUsuario);
+			
+			lblWrongUsuario.setIcon(null); lblWrongPassword.setIcon(null);
 			// CHECKEO DE CREDENCIALES
 			if(txtNombreUsuario.getText().equals(USER) && String.valueOf(pwfContrasenia.getPassword()).equals(PASSWORD)) {
 				if(chckbxRecuerdame.isSelected()) save();
 				else delete();
-				VentanaInicio inicio = new VentanaInicio(USER, PASSWORD);
+				VentanaInicio inicio = new VentanaInicio(USER, PASSWORD, usuarios);
 				frmCampingMudez.dispose();
 				inicio.setVisible(true);
 				// Hacer que la frame ocupe toda la pantalla
@@ -355,7 +364,7 @@ public class ventanaLogin {
 				if(txtNombreUsuario.getText() == USER && String.valueOf(pwfContrasenia.getPassword()) == PASSWORD) {
 					if(chckbxRecuerdame.isSelected()) save();
 					else delete();
-					VentanaInicio inicio = new VentanaInicio(USER, PASSWORD);
+					VentanaInicio inicio = new VentanaInicio(USER, PASSWORD, usuarios);
 					frmCampingMudez.dispose();
 					inicio.setVisible(true);
 					// Hacer que la frame ocupe toda la pantalla
