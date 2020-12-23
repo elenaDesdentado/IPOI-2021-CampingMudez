@@ -58,6 +58,9 @@ public class VentanaInicio extends JFrame {
 	private Color colorTbGestion = new Color(74, 103, 49);
 	private Color colorBotonesGestion = new Color (243, 243, 245);
 	
+	private JLabel lblAvatar;
+	private JPanel pnlMenu;
+	
 
 	/**
 	 * Launch the application.
@@ -164,7 +167,7 @@ public class VentanaInicio extends JFrame {
 		pnlMonitores = new PanelMonitores();
 		pnlReservas = new JPanel();
 		pnlRutas = new JPanel();
-		pnlConfiguracion = new PanelConfiguracion();
+		pnlConfiguracion = new PanelConfiguracion(this);
 		pnlActividades.setBackground(colorFondo);
 		pnlMonitores.setBackground(colorFondo);
 		pnlListaFormulario.add(pnlActividades, "Actividades");
@@ -172,15 +175,13 @@ public class VentanaInicio extends JFrame {
 		pnlListaFormulario.add(pnlReservas, "Reservas");
 		pnlListaFormulario.add(pnlRutas, "Rutas");
 		pnlListaFormulario.add(pnlConfiguracion, "Configuración");
-		
-		
 
 		JLabel lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
 		lblInfoLegal.setBackground(colorBarraBusqueda);
 		lblInfoLegal.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblInfoLegal, BorderLayout.SOUTH);
 
-		JPanel pnlMenu = new JPanel();
+		pnlMenu = new JPanel();
 		pnlMenu.setBackground(colorFondo);
 		pnlMenu.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		contentPane.add(pnlMenu, BorderLayout.NORTH);
@@ -207,7 +208,7 @@ public class VentanaInicio extends JFrame {
 		final Component horizontalStrut_2 = Box.createHorizontalStrut(20);
 		tbUsuario.add(horizontalStrut_2);
 
-		JLabel lblAvatar = new JLabel("");
+		lblAvatar = new JLabel("");
 		lblAvatar.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/avatarUsuario.png")));
 		lblAvatar.setBackground(colorFondo);
 		tbUsuario.add(lblAvatar);
@@ -286,5 +287,5 @@ public class VentanaInicio extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Configuración");
 		}
-	}
+	}	
 }

@@ -65,7 +65,7 @@ public class ventanaLogin {
 	private String USER;
 	private String PASSWORD;
 	Icon wrong = new ImageIcon(ventanaLogin.class.getResource("/presentacion/iconoWrong.png"));
-	private JLabel lblWrong;
+	private JLabel lblWrongUsuario;
 	private JLabel lblWrongPassword;
 	private JLabel lblMensajeError;
 
@@ -188,13 +188,13 @@ public class ventanaLogin {
 		
 		pwfContrasenia.addFocusListener(new MiFocusListener());
 		
-		lblWrong = new JLabel("");
-		GridBagConstraints gbc_lblWrong = new GridBagConstraints();
-		gbc_lblWrong.anchor = GridBagConstraints.WEST;
-		gbc_lblWrong.insets = new Insets(0, 0, 5, 0);
-		gbc_lblWrong.gridx = 2;
-		gbc_lblWrong.gridy = 0;
-		pnlTFLogin.add(lblWrong, gbc_lblWrong);
+		lblWrongUsuario = new JLabel("");
+		GridBagConstraints gbc_lblWrongUsuario = new GridBagConstraints();
+		gbc_lblWrongUsuario.anchor = GridBagConstraints.WEST;
+		gbc_lblWrongUsuario.insets = new Insets(0, 0, 5, 0);
+		gbc_lblWrongUsuario.gridx = 2;
+		gbc_lblWrongUsuario.gridy = 0;
+		pnlTFLogin.add(lblWrongUsuario, gbc_lblWrongUsuario);
 		
 		GridBagConstraints gbc_pwfContrasenia = new GridBagConstraints();
 		gbc_pwfContrasenia.insets = new Insets(0, 0, 5, 5);
@@ -320,6 +320,8 @@ public class ventanaLogin {
 	
 	private class BtnLoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+			lblWrongUsuario.setIcon(null);
+			lblWrongPassword.setIcon(null);
 			// CHECKEO DE CREDENCIALES
 			if(txtNombreUsuario.getText().equals(USER) && String.valueOf(pwfContrasenia.getPassword()).equals(PASSWORD)) {
 				if(chckbxRecuerdame.isSelected()) save();
@@ -329,19 +331,19 @@ public class ventanaLogin {
 				inicio.setVisible(true);
 				// Hacer que la frame ocupe toda la pantalla
 				inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
-			}
-			else {
-				lblWrong.setIcon(wrong);
+			} else if(!(txtNombreUsuario.getText().equals(USER)) && !(String.valueOf(pwfContrasenia.getPassword()).equals(PASSWORD))) {
+				lblWrongUsuario.setIcon(wrong);
 				lblWrongPassword.setIcon(wrong);
-				if (!txtNombreUsuario.getText().equals(USER)) {
-					lblMensajeError.setText("Nombre de usuario incorrecto. Intente de nuevo.");
-					lblMensajeError.setForeground(Color.RED);
-				}
-				else {
-					lblMensajeError.setText("Contraseña incorrecta. Intente de nuevo.");
-					lblMensajeError.setForeground(Color.RED);
-				}
-				// Añadir else if con el de la contraseña y el else para mostrar que ambos son incorrectos
+				lblMensajeError.setText("Nombre de usuario y contraseña incorrectos. Intente de nuevo.");
+				lblMensajeError.setForeground(Color.RED);
+			} else if (!txtNombreUsuario.getText().equals(USER)){
+				lblWrongUsuario.setIcon(wrong);
+				lblMensajeError.setText("Nombre de usuario incorrecto. Intente de nuevo.");
+				lblMensajeError.setForeground(Color.RED);
+			} else if (!String.valueOf(pwfContrasenia.getPassword()).equals(PASSWORD)) {
+				lblWrongPassword.setIcon(wrong);
+				lblMensajeError.setText("Contraseña incorrecta. Intente de nuevo.");
+				lblMensajeError.setForeground(Color.RED);
 			}
 		}
 	}
@@ -360,7 +362,7 @@ public class ventanaLogin {
 					inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
 				}
 				else {
-					lblWrong.setIcon(wrong);
+					lblWrongUsuario.setIcon(wrong);
 					lblWrongPassword.setIcon(wrong);
 					if (!txtNombreUsuario.getText().equals(USER)) {
 						lblMensajeError.setText("Nombre de usuario incorrecto. Intente de nuevo.");
