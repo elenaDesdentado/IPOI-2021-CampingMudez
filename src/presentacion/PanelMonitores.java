@@ -280,10 +280,15 @@ public class PanelMonitores extends JPanel {
 
 	private class BtnEliminarMonitorActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			String[] options = {"Sí", "No"};
+			int seleccion = JOptionPane.showOptionDialog(null, "¿Está seguro de eliminar el monitor "
+					+ "seleccionado en la lista?", "Eliminar monitor", JOptionPane.DEFAULT_OPTION, 
+					JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+			if (seleccion == 0) {/*
 			int opcion = JOptionPane.showOptionDialog(null,
 					"¿Está seguro de eliminar el monitor seleccionado en la lista?", "Elminar monitor",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-			if (opcion == JOptionPane.YES_OPTION) {
+			if (opcion == JOptionPane.YES_OPTION) {*/
 				int indiceMonitorElminado = lstMonitores.getSelectedIndex();
 				DefaultListModel modelo = (DefaultListModel) lstMonitores.getModel();
 				modelo.remove(indiceMonitorElminado);

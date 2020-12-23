@@ -290,10 +290,12 @@ public class PanelActividades extends JPanel {
 	}
 	private class BtnEliminarActividadActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			int opcion = JOptionPane.showOptionDialog(null,
-					"¿Está seguro de eliminar la actividad seleccionaa en la lista?", "Elminar actividad",
-					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-			if (opcion == JOptionPane.YES_OPTION) {
+			
+			String[] options = {"Sí", "No"};
+			int seleccion = JOptionPane.showOptionDialog(null, "¿Está seguro de eliminar la actividad "
+					+ "seleccionada en la lista?", "Eliminar actividad", JOptionPane.DEFAULT_OPTION, 
+					JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+			if (seleccion == 0) {
 				int indiceActividadElminada = lstActividades.getSelectedIndex();
 				DefaultListModel modelo = (DefaultListModel) lstActividades.getModel();
 				modelo.remove(indiceActividadElminada);

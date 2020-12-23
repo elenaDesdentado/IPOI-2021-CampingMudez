@@ -46,6 +46,7 @@ public class VentanaInicio extends JFrame {
 	private JPanel pnlMonitores;
 	private JPanel pnlReservas;
 	private JPanel pnlRutas;
+	private JPanel pnlConfiguracion;
 	private JButton btnGestorReservas;
 	private JButton btnGestorActividades;
 	private JButton btnGestorMonitores;
@@ -163,12 +164,15 @@ public class VentanaInicio extends JFrame {
 		pnlMonitores = new PanelMonitores();
 		pnlReservas = new JPanel();
 		pnlRutas = new JPanel();
+		pnlConfiguracion = new PanelConfiguracion();
 		pnlActividades.setBackground(colorFondo);
 		pnlMonitores.setBackground(colorFondo);
 		pnlListaFormulario.add(pnlActividades, "Actividades");
 		pnlListaFormulario.add(pnlMonitores, "Monitores");
 		pnlListaFormulario.add(pnlReservas, "Reservas");
 		pnlListaFormulario.add(pnlRutas, "Rutas");
+		pnlListaFormulario.add(pnlConfiguracion, "Configuración");
+		
 		
 
 		JLabel lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
@@ -230,6 +234,7 @@ public class VentanaInicio extends JFrame {
 		tbUsuario.add(horizontalGlue);
 
 		JButton btnConfiguracion = new JButton("");
+		btnConfiguracion.addActionListener(new BtnConfiguracionActionListener());
 		btnConfiguracion.setToolTipText("Permite configurar la información de tu usuario");
 		btnConfiguracion.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoConfiguracion.png")));
 		btnConfiguracion.setBackground(colorFondo);
@@ -275,6 +280,11 @@ public class VentanaInicio extends JFrame {
 			ventanaLogin ventanaLogin = new ventanaLogin();
 			dispose();
 			ventanaLogin.getFrame().setVisible(true);
+		}
+	}
+	private class BtnConfiguracionActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Configuración");
 		}
 	}
 }

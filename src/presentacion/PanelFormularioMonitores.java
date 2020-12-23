@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.text.MaskFormatter;
 
 import dominio.Monitor;
@@ -410,7 +411,8 @@ public class PanelFormularioMonitores extends JPanel {
 
 	private class BtnAniadirIdiomaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String nuevoIdioma = JOptionPane.showInputDialog("Introduzca un nuevo idioma");
+			String nuevoIdioma = (String) JOptionPane.showInputDialog(null, "Introduzca un "
+					+ "nuevo idioma", "Idioma", indice, null, null, null);
 			Monitor monitor = monitoresDb.getMonitores().get(indice);
 			if(monitor.getIdiomas() == null) 
 				monitor.setIdiomas(new ArrayList<String>());
