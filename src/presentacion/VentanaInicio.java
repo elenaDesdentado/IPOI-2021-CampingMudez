@@ -177,7 +177,7 @@ public class VentanaInicio extends JFrame {
 		// Añadiendo los paneles al panel con cardLayout
 		pnlActividades = new PanelActividades();
 		pnlMonitores = new PanelMonitores();
-		pnlReservas = new JPanel();
+		pnlReservas = new PanelAlojamientos();
 		pnlRutas = new JPanel();
 		pnlConfiguracion = new PanelConfiguracion(this, usuarios, usuarioPrincipal);
 		pnlActividades.setBackground(colorFondo);
