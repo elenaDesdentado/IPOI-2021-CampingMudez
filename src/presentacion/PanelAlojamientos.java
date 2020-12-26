@@ -26,6 +26,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import dominio.Alojamiento;
+import dominio.Bungalow;
+import dominio.Parcela;
 import persistencia.Alojamientos;
 import persistencia.Alojamientos;
 import java.awt.event.ActionListener;
@@ -56,6 +58,8 @@ public class PanelAlojamientos extends JPanel {
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
 
 	private Alojamientos alojamientosDb = new Alojamientos(new ArrayList<Alojamiento>());
+	
+	private DefaultListModel modeloOriginal;
 	/*
 	 * Alojamientoes iniciales de ejemplo.
 	 */
@@ -88,14 +92,16 @@ public class PanelAlojamientos extends JPanel {
 		Image imagenEscalada4 = image4.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
 		image4 = new ImageIcon(imagenEscalada4);
 
-		Alojamiento AlojamientoEjemplo1 = new Alojamiento("Escorpión", 4, "El Páramo", "Descripción...", 43.5, 32,
-				"Libre", image1);
-		Alojamiento AlojamientoEjemplo2 = new Alojamiento("Salmón", 5, "Rio Mudez", "Descripción...", 34.4, 23,
-				"Libre", image2);
-		Alojamiento AlojamientoEjemplo3 = new Alojamiento("Salmón", 5, "Lagunas Claras", "Descripción...", 23.5, 15,
-				"Ocupada", image3);
-		Alojamiento AlojamientoEjemplo4 = new Alojamiento("Ciervo", 3, "Las colinas", "Descripción...", 43.5, 32,
-				"Libre", image4);
+		Parcela AlojamientoEjemplo1 = new Parcela("Escorpión", 4, "El Páramo", "Descripción...", 43.5, 32.0, "Libre",
+				"Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón: 1 km", true, false, true, true, true, false,
+				image1);
+		Parcela AlojamientoEjemplo2 = new Parcela("Salmón", 5, "Rio Mudez", "Descripción...", 34.4, 23.0, "Libre",
+				"Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón: 1 km", true, false, true, true, true, true,
+				image2);
+		Bungalow AlojamientoEjemplo3 = new Bungalow("Salmón", 5, "Lagunas Claras", "Descripción...", 23.5, 15.5,
+				"Ocupada", true, 6, true, false, true, true, false, false, true, true, false, image3);
+		Bungalow AlojamientoEjemplo4 = new Bungalow("Ciervo", 3, "Las colinas", "Descripción...", 43.5, 32, "Libre",
+				true, 4, false, false, true, true, true, false, true, true, false, image4);
 		alojamientosDb.addAlojamiento(AlojamientoEjemplo1);
 		alojamientosDb.addAlojamiento(AlojamientoEjemplo2);
 		alojamientosDb.addAlojamiento(AlojamientoEjemplo3);
@@ -105,7 +111,6 @@ public class PanelAlojamientos extends JPanel {
 		panelEjemplo2 = new PanelAlojamientoRenderer(AlojamientoEjemplo2);
 		panelEjemplo3 = new PanelAlojamientoRenderer(AlojamientoEjemplo3);
 		panelEjemplo4 = new PanelAlojamientoRenderer(AlojamientoEjemplo4);
-		
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -122,23 +127,25 @@ public class PanelAlojamientos extends JPanel {
 		splitPane.setLeftComponent(scrollPaneListaAlojs);
 
 		lstAlojamientos = new JList();
-		DefaultListModel lstModel = new DefaultListModel();
+		modeloOriginal = new DefaultListModel();
 
-		lstModel.addElement(panelEjemplo1);
-		lstModel.addElement(panelEjemplo2);
-		lstModel.addElement(panelEjemplo3);
-		lstModel.addElement(panelEjemplo4);
-		lstAlojamientos.setModel(lstModel);
+		modeloOriginal.addElement(panelEjemplo1);
+		modeloOriginal.addElement(panelEjemplo2);
+		modeloOriginal.addElement(panelEjemplo3);
+		modeloOriginal.addElement(panelEjemplo4);
+		lstAlojamientos.setModel(modeloOriginal);
 		lstAlojamientos.setFixedCellHeight(220);
 		lstAlojamientos.setCellRenderer(new ActividadRenderer());
 
-		lstAlojamientos.setMinimumSize(new Dimension(200, 23));
+		lstAlojamientos.setMinimumSize(new Dimension(200, 250));
 		scrollPaneListaAlojs.setViewportView(lstAlojamientos);
-		
+
 		cbFiltro = new JComboBox();
+		cbFiltro.addActionListener(new CbFiltroActionListener());
 		cbFiltro.setFont(new Font("Tahoma", Font.BOLD, 11));
 		cbFiltro.setToolTipText("Permite filtrar por tipo de alojamiento y listar los que convenga");
-		cbFiltro.setModel(new DefaultComboBoxModel(new String[] {"Parcelas", "Cabañas", "Parcelas y cabañas"}));
+		cbFiltro.setModel(new DefaultComboBoxModel(new String[] { "Parcelas", "Cabañas", "Parcelas y cabañas" }));
+		cbFiltro.setSelectedIndex(2);
 		scrollPaneListaAlojs.setColumnHeaderView(cbFiltro);
 
 		pnlGestionBusqueda = new JPanel();
@@ -206,5 +213,27 @@ public class PanelAlojamientos extends JPanel {
 
 		pnlFormularioAlojs.add(formularioVacio, "Formulario vacio");
 
+	}
+
+	private class CbFiltroActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			DefaultListModel modeloFiltrado = new DefaultListModel();
+			for (int i = 0; i < lstAlojamientos.getModel().getSize(); ++i) {
+				if (((String)cbFiltro.getSelectedItem()).equals("Parcelas")) {
+					if(alojamientosDb.getAlojamientos().get(i) instanceof Parcela) 
+						modeloFiltrado.addElement(modeloOriginal.getElementAt(i));
+				}
+				else if (((String)cbFiltro.getSelectedItem()).equals("Cabañas")) {
+					if(alojamientosDb.getAlojamientos().get(i) instanceof Bungalow)
+						modeloFiltrado.addElement(modeloOriginal.getElementAt(i));
+				}
+				else {
+					lstAlojamientos.setModel(modeloOriginal);
+					break;	//No se toca el modelo porque se selecciono "Parcelas y cabañas"
+				}
+			}
+			if(modeloFiltrado.getSize() != 0) 
+				lstAlojamientos.setModel(modeloFiltrado);
+		}
 	}
 }

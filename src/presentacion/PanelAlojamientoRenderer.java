@@ -24,6 +24,12 @@ public class PanelAlojamientoRenderer extends JPanel {
 	private Alojamiento Alojamiento;
 	private JLabel lblValoracion;
 	private JLabel lblClientes;
+	
+	private Color escorpion = new Color(229, 190, 1);
+	private Color salmon = new Color(59, 131, 189);
+	private Color ciervo = new Color(45, 87, 44);
+	private Color aguila = new Color(194, 155, 97);
+	
 
 	/**
 	 * Create the panel.
@@ -42,53 +48,60 @@ public class PanelAlojamientoRenderer extends JPanel {
 		lblNombre = new JLabel(alojamiento.getNombre());
 		lblNombre.setFont(new Font("Verdana", Font.BOLD, 14));
 		lblNombre.setToolTipText("Nombre del Alojamiento");
-		lblNombre.setBounds(177, 29, 263, 29);
+		lblNombre.setBounds(177, 21, 263, 29);
 		add(lblNombre);
 
-		lblTipo = new JLabel((alojamiento instanceof Parcela) ? "Pacerla" : "Bungalow");
+		lblTipo = new JLabel((alojamiento instanceof Parcela) ? "Parcela" : "Cabaña");
 		lblTipo.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblTipo.setBounds(177, 67, 208, 28);
+		lblTipo.setBounds(177, 49, 208, 28);
 		add(lblTipo);
 
 		lblDisponibilidad = new JLabel(alojamiento.getDisponibilidad());
 		lblDisponibilidad.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblDisponibilidad.setBounds(177, 95, 114, 28);
+		lblDisponibilidad.setBounds(177, 77, 114, 28);
 		add(lblDisponibilidad);
+		switch(lblDisponibilidad.getText()) {
+			
+		}
 
-		lblTamanio = new JLabel(alojamiento.getTamanio() + "m<sup>2</sup>");
+		lblTamanio = new JLabel(); 
+		lblTamanio.setText("<html>" + alojamiento.getTamanio() + "m<sup>2</sup></html>");
 		lblTamanio.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblTamanio.setBounds(177, 129, 145, 28);
+		lblTamanio.setBounds(177, 103, 145, 28);
 		add(lblTamanio);
 
 		lblArea = new JLabel(alojamiento.getArea());
 		switch (lblArea.getText()) {
 		case "Escorpión":
-			lblArea.setForeground(new Color(229, 190, 1));
+			lblArea.setForeground(escorpion);
 			break;
 		case "Ciervo":
-			lblArea.setForeground(new Color(45, 87, 44));
+			lblArea.setForeground(ciervo);
 			break;
 		case "Salmón":
-			lblArea.setForeground(new Color(59, 131, 189));
+			lblArea.setForeground(salmon);
 			break;
 		case "Águila":
-			lblArea.setForeground(new Color(194, 155, 97));
+			lblArea.setForeground(aguila);
 			break;
 		}
 		lblArea.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblArea.setBounds(177, 175, 145, 21);
+		lblArea.setBounds(177, 142, 145, 21);
 		add(lblArea);
 
 		lblValoracion = new JLabel();
-		lblValoracion.setIcon(new ImageIcon(
-				PanelAlojamientoRenderer.class.getResource("./estrellas" + alojamiento.getValoracion() + ".PNG")));
+		ImageIcon image = new ImageIcon(
+				PanelAlojamientoRenderer.class.getResource("./estrellas" + alojamiento.getValoracion() + ".PNG"));
+		Image imagenEscalada1 = image.getImage().getScaledInstance(128, 20, java.awt.Image.SCALE_SMOOTH);
+		image = new ImageIcon(imagenEscalada1);
+		lblValoracion.setIcon(image);
 		lblValoracion.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblValoracion.setBounds(194, 225, 145, 21);
+		lblValoracion.setBounds(177, 174, 208, 21);
 		add(lblValoracion);
 
 		lblClientes = new JLabel("Valoración de los clientes:");
 		lblClientes.setFont(new Font("Verdana", Font.PLAIN, 12));
-		lblClientes.setBounds(10, 225, 164, 21);
+		lblClientes.setBounds(10, 175, 164, 21);
 		add(lblClientes);
 
 	}
