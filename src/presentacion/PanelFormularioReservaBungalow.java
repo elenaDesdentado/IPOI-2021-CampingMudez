@@ -57,10 +57,10 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		panel = new JPanel();
 		scrollPane.setViewportView(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{20, 60, 40, 10, 157, 31, 0, 105, 159, 25, 10, 20, 0};
-		gbl_panel.rowHeights = new int[]{20, 0, 20, 0, 157, 20, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 45, 0};
+		gbl_panel.columnWidths = new int[]{20, 60, 40, 10, 157, 31, 0, 90, 159, 25, 10, 20, 0};
+		gbl_panel.rowHeights = new int[]{20, 0, 20, 0, 157, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 45, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		progressBar = new JProgressBar();
@@ -99,7 +99,6 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		tPDescripcion = new JTextPane();
 		tPDescripcion.setContentType("text/html");
 		GridBagConstraints gbc_tPDescripcion = new GridBagConstraints();
-		gbc_tPDescripcion.gridheight = 2;
 		gbc_tPDescripcion.gridwidth = 3;
 		gbc_tPDescripcion.insets = new Insets(0, 0, 5, 5);
 		gbc_tPDescripcion.fill = GridBagConstraints.BOTH;
@@ -120,7 +119,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_lblValoracionCliente.anchor = GridBagConstraints.EAST;
 		gbc_lblValoracionCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblValoracionCliente.gridx = 4;
-		gbc_lblValoracionCliente.gridy = 7;
+		gbc_lblValoracionCliente.gridy = 6;
 		panel.add(lblValoracionCliente, gbc_lblValoracionCliente);
 		
 		lblEstrellas = new JLabel("");
@@ -128,7 +127,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_lblEstrellas.gridwidth = 2;
 		gbc_lblEstrellas.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEstrellas.gridx = 5;
-		gbc_lblEstrellas.gridy = 7;
+		gbc_lblEstrellas.gridy = 6;
 		panel.add(lblEstrellas, gbc_lblEstrellas);
 		
 		lblServiciosOfertados = new JLabel("Servicios ofertados:");
@@ -137,7 +136,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_lblServiciosOfertados.gridwidth = 4;
 		gbc_lblServiciosOfertados.insets = new Insets(0, 0, 5, 5);
 		gbc_lblServiciosOfertados.gridx = 1;
-		gbc_lblServiciosOfertados.gridy = 9;
+		gbc_lblServiciosOfertados.gridy = 8;
 		panel.add(lblServiciosOfertados, gbc_lblServiciosOfertados);
 		
 		chckbxGolf = new JCheckBox("Acceso pista de golf (50€)");
@@ -146,7 +145,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_chckbxGolf.gridwidth = 4;
 		gbc_chckbxGolf.insets = new Insets(0, 0, 5, 5);
 		gbc_chckbxGolf.gridx = 1;
-		gbc_chckbxGolf.gridy = 10;
+		gbc_chckbxGolf.gridy = 9;
 		panel.add(chckbxGolf, gbc_chckbxGolf);
 		
 		chckbxCarbon = new JCheckBox("Bolsa de carbón (5€)");
@@ -155,7 +154,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_chckbxCarbon.gridwidth = 4;
 		gbc_chckbxCarbon.insets = new Insets(0, 0, 5, 5);
 		gbc_chckbxCarbon.gridx = 1;
-		gbc_chckbxCarbon.gridy = 11;
+		gbc_chckbxCarbon.gridy = 10;
 		panel.add(chckbxCarbon, gbc_chckbxCarbon);
 		
 		chckbxGaraje = new JCheckBox("Acceso a garaje (15€)");
@@ -164,7 +163,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_chckbxGaraje.gridwidth = 4;
 		gbc_chckbxGaraje.insets = new Insets(0, 0, 5, 5);
 		gbc_chckbxGaraje.gridx = 1;
-		gbc_chckbxGaraje.gridy = 12;
+		gbc_chckbxGaraje.gridy = 11;
 		panel.add(chckbxGaraje, gbc_chckbxGaraje);
 		
 		chckbxCama = new JCheckBox("Cama extra (10€)");
@@ -173,7 +172,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_chckbxCama.gridwidth = 4;
 		gbc_chckbxCama.insets = new Insets(0, 0, 5, 5);
 		gbc_chckbxCama.gridx = 1;
-		gbc_chckbxCama.gridy = 13;
+		gbc_chckbxCama.gridy = 12;
 		panel.add(chckbxCama, gbc_chckbxCama);
 		
 		lblPrecioNoche = new JLabel("Precio por noche:");
@@ -181,7 +180,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_lblPrecioNoche.anchor = GridBagConstraints.EAST;
 		gbc_lblPrecioNoche.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecioNoche.gridx = 8;
-		gbc_lblPrecioNoche.gridy = 13;
+		gbc_lblPrecioNoche.gridy = 12;
 		panel.add(lblPrecioNoche, gbc_lblPrecioNoche);
 		
 		lblPrecio = new JLabel("");
@@ -189,7 +188,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		GridBagConstraints gbc_lblPrecio = new GridBagConstraints();
 		gbc_lblPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecio.gridx = 9;
-		gbc_lblPrecio.gridy = 13;
+		gbc_lblPrecio.gridy = 12;
 		panel.add(lblPrecio, gbc_lblPrecio);
 		
 		lblEuros = new JLabel("€");
@@ -197,7 +196,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_lblEuros.anchor = GridBagConstraints.WEST;
 		gbc_lblEuros.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEuros.gridx = 10;
-		gbc_lblEuros.gridy = 13;
+		gbc_lblEuros.gridy = 12;
 		panel.add(lblEuros, gbc_lblEuros);
 		
 		chckbxLimpieza = new JCheckBox("Servicio de limpieza (15€)");
@@ -206,7 +205,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_chckbxLimpieza.gridwidth = 4;
 		gbc_chckbxLimpieza.insets = new Insets(0, 0, 5, 5);
 		gbc_chckbxLimpieza.gridx = 1;
-		gbc_chckbxLimpieza.gridy = 14;
+		gbc_chckbxLimpieza.gridy = 13;
 		panel.add(chckbxLimpieza, gbc_chckbxLimpieza);
 		
 		chckbxLavavajillas = new JCheckBox("Lavavajillas (10€)");
@@ -215,11 +214,12 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_chckbxLavavajillas.gridwidth = 4;
 		gbc_chckbxLavavajillas.insets = new Insets(0, 0, 5, 5);
 		gbc_chckbxLavavajillas.gridx = 1;
-		gbc_chckbxLavavajillas.gridy = 15;
+		gbc_chckbxLavavajillas.gridy = 14;
 		panel.add(chckbxLavavajillas, gbc_chckbxLavavajillas);
 		
 		btnSiguiente = new JButton("Siguiente");
 		GridBagConstraints gbc_btnSiguiente = new GridBagConstraints();
+		gbc_btnSiguiente.anchor = GridBagConstraints.EAST;
 		gbc_btnSiguiente.gridwidth = 2;
 		gbc_btnSiguiente.insets = new Insets(0, 0, 5, 5);
 		gbc_btnSiguiente.gridx = 9;

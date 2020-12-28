@@ -5,16 +5,16 @@ import javax.swing.ImageIcon;
 public class Bungalow extends Alojamiento {
 
 	private boolean jardin;
-	private int capacidadMinima;
+	private int capacidadMaxima;
 	private boolean wifi, piscina, barbacoa;
 	private boolean golf, carbon, garaje, cama, limpieza, lavavajillas;
 
 	public Bungalow(String area, int valoracion, String nombre, String descripcion, double tamanio, double precio,
-			String disponibilidad, boolean jardin, int capacidadMinima, boolean wifi, boolean piscina, boolean barbacoa,
+			String disponibilidad, boolean jardin, int capacidadMaxima, boolean wifi, boolean piscina, boolean barbacoa,
 			boolean golf, boolean carbon, boolean garaje, boolean cama, boolean limpieza, boolean lavavajillas, ImageIcon foto) {
 		super(area, valoracion, nombre, descripcion, tamanio, precio, disponibilidad, foto);
 		this.jardin = jardin;
-		this.capacidadMinima = capacidadMinima;
+		this.capacidadMaxima = capacidadMaxima;
 		this.wifi = wifi;
 		this.piscina = piscina;
 		this.barbacoa = barbacoa;
@@ -38,12 +38,12 @@ public class Bungalow extends Alojamiento {
 		this.jardin = jardin;
 	}
 
-	public int getCapacidadMinima() {
-		return capacidadMinima;
+	public int getCapacidadMaxima() {
+		return capacidadMaxima;
 	}
 
-	public void setCapacidadMinima(int capacidadMinima) {
-		this.capacidadMinima = capacidadMinima;
+	public void setCapacidadMaxima(int capacidadMaxima) {
+		this.capacidadMaxima = capacidadMaxima;
 	}
 
 	public boolean isWifi() {

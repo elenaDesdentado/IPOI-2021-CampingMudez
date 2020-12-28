@@ -47,7 +47,6 @@ public class PanelAlojamientos extends JPanel {
 	private JPanel pnlFormularioAlojs;
 	private JPanel pnlGestionBusqueda;
 	private JScrollPane scrollPaneListaAlojs;
-	private JButton btnReserva;
 	private JButton btnCancelar;
 	private JLabel lblBarraBusqueda;
 	private JTextField txtBarraBusqueda;
@@ -94,10 +93,10 @@ public class PanelAlojamientos extends JPanel {
 		image4 = new ImageIcon(imagenEscalada4);
 
 		Parcela AlojamientoEjemplo1 = new Parcela("Escorpión", 4, "El Páramo", "Descripción...", 43.5, 32.0, "Libre",
-				"Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón: 1 km", true, false, true, true, true, false,
-				image1);
+				"Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón (1 km)", true, false, true, true, true,
+				false, image1);
 		Parcela AlojamientoEjemplo2 = new Parcela("Salmón", 5, "Rio Mudez", "Descripción...", 34.4, 23.0, "Libre",
-				"Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón: 1 km", true, false, true, true, true, true,
+				"Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón (1 km)", true, false, true, true, true, true,
 				image2);
 		Bungalow AlojamientoEjemplo3 = new Bungalow("Salmón", 5, "Lagunas Claras", "Descripción...", 23.5, 15.5,
 				"Ocupada", true, 6, true, false, true, true, false, false, true, true, false, image3);
@@ -160,26 +159,16 @@ public class PanelAlojamientos extends JPanel {
 				Double.MIN_VALUE };
 		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
-
-		btnReserva = new JButton("Reservar alojamiento");
-		btnReserva.setForeground(Color.BLACK);
-		btnReserva.setBackground(colorBoton);
-		btnReserva.setFocusPainted(false);
-		GridBagConstraints gbc_btnReserva = new GridBagConstraints();
-		gbc_btnReserva.insets = new Insets(0, 0, 5, 5);
-		gbc_btnReserva.gridx = 1;
-		gbc_btnReserva.gridy = 1;
-		pnlGestionBusqueda.add(btnReserva, gbc_btnReserva);
-
-		btnCancelar = new JButton("Cancelar una reserva");
-		btnCancelar.setForeground(Color.BLACK);
-		btnCancelar.setBackground(colorBotonCritico);
-		btnCancelar.setFocusPainted(false);
-		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCancelar.gridx = 2;
-		gbc_btnCancelar.gridy = 1;
-		pnlGestionBusqueda.add(btnCancelar, gbc_btnCancelar);
+		
+				btnCancelar = new JButton("Cancelar una reserva");
+				btnCancelar.setForeground(Color.BLACK);
+				btnCancelar.setBackground(colorBotonCritico);
+				btnCancelar.setFocusPainted(false);
+				GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+				gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
+				gbc_btnCancelar.gridx = 1;
+				gbc_btnCancelar.gridy = 1;
+				pnlGestionBusqueda.add(btnCancelar, gbc_btnCancelar);
 
 		lblBarraBusqueda = new JLabel("Barra de búsqueda:");
 		lblBarraBusqueda.setBackground(colorFondo);
@@ -263,7 +252,14 @@ public class PanelAlojamientos extends JPanel {
 					panelAlojamientoInfoCompleta.chckbxMascotas
 							.setEnabled(((Parcela) alojamientoSeleccionado).isMascotas());
 
-					panelAlojamientoInfoCompleta.tPDescripcion.setText(alojamientoSeleccionado.getDescripcion());
+					panelAlojamientoInfoCompleta.tPDescripcion.setText("<html><pre>"
+							+ alojamientoSeleccionado.getDescripcion() + "\n - Tipo de parcela: "
+							+ alojamientoSeleccionado.getArea() + "\n - Superficie de la parcela: "
+							+ String.valueOf(alojamientoSeleccionado.getTamanio()) + "m<sup>2</sup>" + "\n - Sombra: "
+							+ ((Parcela) alojamientoSeleccionado).getSombra() + "\n - Tipo de suelo: "
+							+ ((Parcela) alojamientoSeleccionado).getSuelo() + "\n - Zona de baño: "
+							+ ((Parcela) alojamientoSeleccionado).getBanio() + "\n - Restaurantes cercanos: "
+							+ ((Parcela) alojamientoSeleccionado).getRestaurante() + "</pre></html>");
 
 					pnlFormularioAlojs.add(panelAlojamientoInfoCompleta, alojamientoSeleccionado.getNombre());
 					((CardLayout) pnlFormularioAlojs.getLayout()).show(pnlFormularioAlojs,
@@ -278,6 +274,8 @@ public class PanelAlojamientos extends JPanel {
 					UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
 					UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
 				} else if (alojamientoSeleccionado instanceof Bungalow) {
+					String jardin = "", wifi = "", piscina = "", barbacoa = "";
+
 					PanelFormularioReservaBungalow panelAlojamientoInfoCompleta = new PanelFormularioReservaBungalow(
 							lstAlojamientos, alojamientosDb, lstAlojamientos.getSelectedIndex());
 
@@ -297,7 +295,28 @@ public class PanelAlojamientos extends JPanel {
 					panelAlojamientoInfoCompleta.chckbxLavavajillas
 							.setEnabled(((Bungalow) alojamientoSeleccionado).isLavavajillas());
 
-					panelAlojamientoInfoCompleta.tPDescripcion.setText(alojamientoSeleccionado.getDescripcion());
+					if (((Bungalow) alojamientoSeleccionado).isJardin())
+						jardin = "Sí";
+					else
+						jardin = "No";
+					if (((Bungalow) alojamientoSeleccionado).isWifi())
+						wifi = "Sí";
+					else
+						wifi = "No";
+					if (((Bungalow) alojamientoSeleccionado).isPiscina())
+						piscina = "Sí";
+					else
+						piscina = "No";
+					if (((Bungalow) alojamientoSeleccionado).isBarbacoa()) barbacoa = "Sí";
+					else barbacoa = "No";
+
+					panelAlojamientoInfoCompleta.tPDescripcion
+							.setText("<html><pre>" + alojamientoSeleccionado.getDescripcion() + "\n - Jardin: " + jardin
+									+ "\n - Superficie: " + alojamientoSeleccionado.getTamanio() + "m<sup>2</sup>"
+									+ "\n - Capacidad máxima de personas: "
+									+ String.valueOf(((Bungalow) alojamientoSeleccionado).getCapacidadMaxima())
+									+ "personas \n - WiFi: " + wifi + "\n - Piscina: " + piscina
+									+ "\n - Barbacoa exterior: " + barbacoa + "</pre></html>");
 
 					pnlFormularioAlojs.add(panelAlojamientoInfoCompleta, alojamientoSeleccionado.getNombre());
 					((CardLayout) pnlFormularioAlojs.getLayout()).show(pnlFormularioAlojs,
