@@ -15,7 +15,7 @@ public class Alojamiento {
 	private double precio;
 	private String disponibilidad;
 	private ImageIcon foto;
-	ArrayList<Calendar> fechasReservadas;	//Consturctor o no?
+	ArrayList<Calendar> fechasReservadas;	//Constructor o no?
 	
 	public Alojamiento(String area, int valoracion, String nombre, String descripcion, double tamanio, double precio,
 			String disponibilidad, ImageIcon foto) {

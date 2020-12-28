@@ -25,6 +25,7 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import dominio.Actividad;
 import dominio.Alojamiento;
 import dominio.Bungalow;
 import dominio.Parcela;
@@ -58,7 +59,7 @@ public class PanelAlojamientos extends JPanel {
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
 
 	private Alojamientos alojamientosDb = new Alojamientos(new ArrayList<Alojamiento>());
-	
+
 	private DefaultListModel modeloOriginal;
 	/*
 	 * Alojamientoes iniciales de ejemplo.
@@ -127,6 +128,7 @@ public class PanelAlojamientos extends JPanel {
 		splitPane.setLeftComponent(scrollPaneListaAlojs);
 
 		lstAlojamientos = new JList();
+		lstAlojamientos.addListSelectionListener(new LstAlojamientosListSelectionListener());
 		modeloOriginal = new DefaultListModel();
 
 		modeloOriginal.addElement(panelEjemplo1);
@@ -219,21 +221,95 @@ public class PanelAlojamientos extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			DefaultListModel modeloFiltrado = new DefaultListModel();
 			for (int i = 0; i < lstAlojamientos.getModel().getSize(); ++i) {
-				if (((String)cbFiltro.getSelectedItem()).equals("Parcelas")) {
-					if(alojamientosDb.getAlojamientos().get(i) instanceof Parcela) 
+				if (((String) cbFiltro.getSelectedItem()).equals("Parcelas")) {
+					if (alojamientosDb.getAlojamientos().get(i) instanceof Parcela)
 						modeloFiltrado.addElement(modeloOriginal.getElementAt(i));
-				}
-				else if (((String)cbFiltro.getSelectedItem()).equals("Cabañas")) {
-					if(alojamientosDb.getAlojamientos().get(i) instanceof Bungalow)
+				} else if (((String) cbFiltro.getSelectedItem()).equals("Cabañas")) {
+					if (alojamientosDb.getAlojamientos().get(i) instanceof Bungalow)
 						modeloFiltrado.addElement(modeloOriginal.getElementAt(i));
-				}
-				else {
+				} else {
 					lstAlojamientos.setModel(modeloOriginal);
-					break;	//No se toca el modelo porque se selecciono "Parcelas y cabañas"
+					break; // No se toca el modelo porque se selecciono "Parcelas y cabañas"
 				}
 			}
-			if(modeloFiltrado.getSize() != 0) 
+			if (modeloFiltrado.getSize() != 0)
 				lstAlojamientos.setModel(modeloFiltrado);
+		}
+	}
+
+	private class LstAlojamientosListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent e) {
+			if (lstAlojamientos.getSelectedIndex() != -1) {
+				Alojamiento alojamientoSeleccionado = alojamientosDb.getAlojamientos()
+						.get(lstAlojamientos.getSelectedIndex());
+				if (alojamientoSeleccionado instanceof Parcela) {
+					PanelFormularioReservaParcela panelAlojamientoInfoCompleta = new PanelFormularioReservaParcela(
+							lstAlojamientos, alojamientosDb, lstAlojamientos.getSelectedIndex());
+
+					panelAlojamientoInfoCompleta.lblFoto.setIcon(alojamientoSeleccionado.getFoto());
+					panelAlojamientoInfoCompleta.lblNombre.setText(alojamientoSeleccionado.getNombre());
+					panelAlojamientoInfoCompleta.lblPrecio.setText(String.valueOf(alojamientoSeleccionado.getPrecio()));
+					panelAlojamientoInfoCompleta.lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
+
+					panelAlojamientoInfoCompleta.chckbxCorrienteElectrica
+							.setEnabled(((Parcela) alojamientoSeleccionado).isGolf());
+					panelAlojamientoInfoCompleta.chckbxCorrienteElectrica
+							.setEnabled(((Parcela) alojamientoSeleccionado).isCorriente());
+					panelAlojamientoInfoCompleta.chckbxParking
+							.setEnabled(((Parcela) alojamientoSeleccionado).isParking());
+					panelAlojamientoInfoCompleta.chckbxWifi.setEnabled(((Parcela) alojamientoSeleccionado).isWifi());
+					panelAlojamientoInfoCompleta.chckbxTiendaAcampada
+							.setEnabled(((Parcela) alojamientoSeleccionado).isAcampada());
+					panelAlojamientoInfoCompleta.chckbxMascotas
+							.setEnabled(((Parcela) alojamientoSeleccionado).isMascotas());
+
+					panelAlojamientoInfoCompleta.tPDescripcion.setText(alojamientoSeleccionado.getDescripcion());
+
+					pnlFormularioAlojs.add(panelAlojamientoInfoCompleta, alojamientoSeleccionado.getNombre());
+					((CardLayout) pnlFormularioAlojs.getLayout()).show(pnlFormularioAlojs,
+							alojamientoSeleccionado.getNombre());
+
+					ImageIcon image = new ImageIcon(PanelAlojamientoRenderer.class
+							.getResource("./estrellas" + alojamientoSeleccionado.getValoracion() + ".PNG"));
+					Image imagenEscalada1 = image.getImage().getScaledInstance(128, 20, java.awt.Image.SCALE_SMOOTH);
+					image = new ImageIcon(imagenEscalada1);
+					panelAlojamientoInfoCompleta.lblEstrellas.setIcon(image);
+
+					UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
+					UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
+				} else if (alojamientoSeleccionado instanceof Bungalow) {
+					PanelFormularioReservaBungalow panelAlojamientoInfoCompleta = new PanelFormularioReservaBungalow(
+							lstAlojamientos, alojamientosDb, lstAlojamientos.getSelectedIndex());
+
+					panelAlojamientoInfoCompleta.lblFoto.setIcon(alojamientoSeleccionado.getFoto());
+					panelAlojamientoInfoCompleta.lblNombre.setText(alojamientoSeleccionado.getNombre());
+					panelAlojamientoInfoCompleta.lblPrecio.setText(String.valueOf(alojamientoSeleccionado.getPrecio()));
+					panelAlojamientoInfoCompleta.lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
+
+					panelAlojamientoInfoCompleta.chckbxGolf.setEnabled(((Bungalow) alojamientoSeleccionado).isGolf());
+					panelAlojamientoInfoCompleta.chckbxCarbon
+							.setEnabled(((Bungalow) alojamientoSeleccionado).isCarbon());
+					panelAlojamientoInfoCompleta.chckbxGaraje
+							.setEnabled(((Bungalow) alojamientoSeleccionado).isGaraje());
+					panelAlojamientoInfoCompleta.chckbxCama.setEnabled(((Bungalow) alojamientoSeleccionado).isCama());
+					panelAlojamientoInfoCompleta.chckbxLimpieza
+							.setEnabled(((Bungalow) alojamientoSeleccionado).isLimpieza());
+					panelAlojamientoInfoCompleta.chckbxLavavajillas
+							.setEnabled(((Bungalow) alojamientoSeleccionado).isLavavajillas());
+
+					panelAlojamientoInfoCompleta.tPDescripcion.setText(alojamientoSeleccionado.getDescripcion());
+
+					pnlFormularioAlojs.add(panelAlojamientoInfoCompleta, alojamientoSeleccionado.getNombre());
+					((CardLayout) pnlFormularioAlojs.getLayout()).show(pnlFormularioAlojs,
+							alojamientoSeleccionado.getNombre());
+
+					ImageIcon image = new ImageIcon(PanelAlojamientoRenderer.class
+							.getResource("./estrellas" + alojamientoSeleccionado.getValoracion() + ".PNG"));
+					Image imagenEscalada1 = image.getImage().getScaledInstance(128, 20, java.awt.Image.SCALE_SMOOTH);
+					image = new ImageIcon(imagenEscalada1);
+					panelAlojamientoInfoCompleta.lblEstrellas.setIcon(image);
+				}
+			}
 		}
 	}
 }

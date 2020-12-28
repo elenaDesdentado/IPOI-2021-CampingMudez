@@ -216,7 +216,7 @@ public class PanelActividades extends JPanel {
 	private class LstActividadesListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
 			if (actividadesDb.getActividades().get(lstActividades.getModel().getSize() - 1).getFotoActividad() == null)
-				// En caso de dejar incompleta la agregacion de un nuevo monitor, eliminarlo de
+				// En caso de dejar incompleta la agregacion de una nueva actividad, eliminarla de
 				// la lista
 				actividadesDb.getActividades().remove(lstActividades.getModel().getSize() - 1);
 			if (lstActividades.getSelectedIndex() != -1) {
