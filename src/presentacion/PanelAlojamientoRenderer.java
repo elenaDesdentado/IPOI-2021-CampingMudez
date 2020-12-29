@@ -21,7 +21,7 @@ public class PanelAlojamientoRenderer extends JPanel {
 	private JLabel lblDisponibilidad;
 	private JLabel lblTamanio;
 	private JLabel lblArea;
-	private Alojamiento Alojamiento;
+	public Alojamiento alojamiento;
 	private JLabel lblValoracion;
 	private JLabel lblClientes;
 	
@@ -36,7 +36,7 @@ public class PanelAlojamientoRenderer extends JPanel {
 	 */
 	public PanelAlojamientoRenderer(Alojamiento alojamiento) {
 
-		this.Alojamiento = Alojamiento;
+		this.alojamiento = alojamiento;
 		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informaci\u00F3n del Alojamiento", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(64, 64, 64)));
 		setLayout(null);
 
@@ -104,5 +104,9 @@ public class PanelAlojamientoRenderer extends JPanel {
 		lblClientes.setBounds(10, 175, 164, 21);
 		add(lblClientes);
 
+	}
+	
+	public Alojamiento getAlojamiento() {
+		return this.alojamiento;
 	}
 }

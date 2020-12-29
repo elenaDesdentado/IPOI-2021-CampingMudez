@@ -15,7 +15,7 @@ public class Alojamiento {
 	private double precio;
 	private String disponibilidad;
 	private ImageIcon foto;
-	ArrayList<Calendar> fechasReservadas;	//Constructor o no?
+	ArrayList<String> fechasReservadas;	//fechas reservadas con formato "yyyy-MM-dd;yyyy-MM-dd"
 	
 	public Alojamiento(String area, int valoracion, String nombre, String descripcion, double tamanio, double precio,
 			String disponibilidad, ImageIcon foto) {
@@ -27,6 +27,7 @@ public class Alojamiento {
 		this.precio = precio;
 		this.disponibilidad = disponibilidad;
 		this.foto = foto;
+		this.fechasReservadas= new ArrayList<String>();  
 	}
 	
 	public Alojamiento() {
@@ -97,11 +98,11 @@ public class Alojamiento {
 		this.disponibilidad = disponibilidad;
 	}
 
-	public ArrayList<Calendar> getFechasReservadas() {
+	public ArrayList<String> getFechasReservadas() {
 		return fechasReservadas;
 	}
 
-	public void setFechasReservadas(ArrayList<Calendar> fechasReservadas) {
+	public void setFechasReservadas(ArrayList<String> fechasReservadas) {
 		this.fechasReservadas = fechasReservadas;
 	}
 

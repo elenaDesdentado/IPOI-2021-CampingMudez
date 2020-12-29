@@ -5,6 +5,10 @@ import java.awt.GridBagLayout;
 import javax.swing.JProgressBar;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -12,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.JTextArea;
 import com.toedter.calendar.JCalendar;
 
+import dominio.Alojamiento;
 import persistencia.Actividades;
 import persistencia.Alojamientos;
 
@@ -45,10 +50,17 @@ public class PanelFormularioReservaBungalow extends JPanel {
 	private JProgressBar progressBar;
 	public JLabel lblPrecio;
 
+	private Alojamientos alojamientosDb;
+	private int indice;
+	
 	/**
 	 * Create the panel.
 	 */
 	public PanelFormularioReservaBungalow(JList lstAlojamientos, Alojamientos db, int indice) {
+		
+		this.alojamientosDb = db;
+		this.indice = indice;
+		
 		setLayout(new BorderLayout(0, 0));
 		
 		scrollPane = new JScrollPane();
@@ -124,6 +136,7 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		
 		lblEstrellas = new JLabel("");
 		GridBagConstraints gbc_lblEstrellas = new GridBagConstraints();
+		gbc_lblEstrellas.anchor = GridBagConstraints.WEST;
 		gbc_lblEstrellas.gridwidth = 2;
 		gbc_lblEstrellas.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEstrellas.gridx = 5;
@@ -226,5 +239,23 @@ public class PanelFormularioReservaBungalow extends JPanel {
 		gbc_btnSiguiente.gridy = 15;
 		panel.add(btnSiguiente, gbc_btnSiguiente);
 
+		invalidarDias();
+	}
+	
+	public void invalidarDias() {
+		Alojamiento alojamiento = alojamientosDb.getAlojamientos().get(indice);
+		for(String rangoFechas : alojamiento.getFechasReservadas()) {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			FechasInvalidas evaluator = new FechasInvalidas();
+			String [] fechas = rangoFechas.split(";");
+			try {
+				evaluator.setStartDate(dateFormat.parse(fechas[0]));
+				evaluator.setEndDate(dateFormat.parse(fechas[1]));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			calendar.getDayChooser().addDateEvaluator(evaluator);
+		}
+		calendar.setDate(Calendar.getInstance().getTime());
 	}
 }

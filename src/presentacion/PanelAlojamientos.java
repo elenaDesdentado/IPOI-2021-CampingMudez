@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -28,6 +29,7 @@ import javax.swing.event.ListSelectionListener;
 import dominio.Actividad;
 import dominio.Alojamiento;
 import dominio.Bungalow;
+import dominio.Monitor;
 import dominio.Parcela;
 import persistencia.Alojamientos;
 import persistencia.Alojamientos;
@@ -92,25 +94,44 @@ public class PanelAlojamientos extends JPanel {
 		Image imagenEscalada4 = image4.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
 		image4 = new ImageIcon(imagenEscalada4);
 
-		Parcela AlojamientoEjemplo1 = new Parcela("Escorpión", 4, "El Páramo", "Descripción...", 43.5, 32.0, "Libre",
-				"Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón (1 km)", true, false, true, true, true,
-				false, image1);
-		Parcela AlojamientoEjemplo2 = new Parcela("Salmón", 5, "Rio Mudez", "Descripción...", 34.4, 23.0, "Libre",
-				"Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón (1 km)", true, false, true, true, true, true,
-				image2);
-		Bungalow AlojamientoEjemplo3 = new Bungalow("Salmón", 5, "Lagunas Claras", "Descripción...", 23.5, 15.5,
-				"Ocupada", true, 6, true, false, true, true, false, false, true, true, false, image3);
-		Bungalow AlojamientoEjemplo4 = new Bungalow("Ciervo", 3, "Las colinas", "Descripción...", 43.5, 32, "Libre",
-				true, 4, false, false, true, true, true, false, true, true, false, image4);
-		alojamientosDb.addAlojamiento(AlojamientoEjemplo1);
-		alojamientosDb.addAlojamiento(AlojamientoEjemplo2);
-		alojamientosDb.addAlojamiento(AlojamientoEjemplo3);
-		alojamientosDb.addAlojamiento(AlojamientoEjemplo4);
+		Parcela alojamientoEjemplo1 = new Parcela("Escorpión", 4, "El Páramo",
+				"Con un cálido clima que se mantiene constante a lo largo del año, en la parcela El Páramo \npodrá disfrutar de una experiencia lo más cercana a una playa sin estar en ella.\n"
+						+ "Bien equipada y económica, podrá disfrutar de unas vacaciones de ensueño.",
+				43.5, 32.0, "Libre", "Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón (1 km)", true, false,
+				true, true, true, false, image1);
+		Parcela alojamientoEjemplo2 = new Parcela("Salmón", 5, "Rio Mudez",
+				"Una parcela que se encuentra en la misma orilla del famoso río Mudez. \nHaga realidad los recuerdos de su infancia disfrutando de un día de pesca o de baño en el río, \n"
+						+ "mientras tiene a escasos metros una vivienda de 2 pisos, 4 baños y 6 camas para descansar \ndel agotador día de natación.",
+				34.4, 23.0, "Libre", "Poca sombra", "Césped", "Río", "Gastrobar Tapas y más (5 km)", true, false, true,
+				true, true, true, image2);
+		Bungalow alojamientoEjemplo3 = new Bungalow("Salmón", 5, "Lagunas Claras",
+				"Esta cabaña se encuentra en mitad de las reconocidas Lagunas Claras donde podremos \ndisfrutar de reconfortantes baños, sobre todo en verano. "
+						+ "La cabaña se encuentra \nclimatizada interiormente, cuenta con un gran almacén y una chimenea con la poder \nasar para pasar unas vacaciones invernales de lujo.",
+				23.5, 15.5, "Ocupada", true, 6, true, false, true, true, false, false, true, true, false, image3);
+		Bungalow alojamientoEjemplo4 = new Bungalow("Águila", 3, "Las colinas",
+				"En la cabaña Las Colinas podrá vivir una experiencia del típico \"ermitaño\" solitario. \n"
+						+ "La cabaña se encuentra situada a 1000 metros de altura, y se encuentra completamente \nclimatizada para resistir las nevadas. Cuenta además, con chimenea, 2 pisos, 4 baños \ny 4 camas."
+						+ "Cabe destacar la instalación de un cercado para disuadir a los osos \nque por allí merodean.",
+				43.5, 32, "Libre", true, 4, false, false, true, true, true, false, true, true, false, image4);
 
-		panelEjemplo1 = new PanelAlojamientoRenderer(AlojamientoEjemplo1);
-		panelEjemplo2 = new PanelAlojamientoRenderer(AlojamientoEjemplo2);
-		panelEjemplo3 = new PanelAlojamientoRenderer(AlojamientoEjemplo3);
-		panelEjemplo4 = new PanelAlojamientoRenderer(AlojamientoEjemplo4);
+		/*
+		 * Añadiendo algunos dias como fechas ya reservadas
+		 */
+
+		alojamientoEjemplo1.getFechasReservadas().add("2020-12-01;2020-12-04");
+		alojamientoEjemplo1.getFechasReservadas().add("2020-12-23;2020-12-27");
+		alojamientoEjemplo3.getFechasReservadas().add("2021-01-01;2021-01-05");
+		alojamientoEjemplo3.getFechasReservadas().add("2020-12-15;2020-12-27");
+
+		alojamientosDb.addAlojamiento(alojamientoEjemplo1);
+		alojamientosDb.addAlojamiento(alojamientoEjemplo2);
+		alojamientosDb.addAlojamiento(alojamientoEjemplo3);
+		alojamientosDb.addAlojamiento(alojamientoEjemplo4);
+
+		panelEjemplo1 = new PanelAlojamientoRenderer(alojamientoEjemplo1);
+		panelEjemplo2 = new PanelAlojamientoRenderer(alojamientoEjemplo2);
+		panelEjemplo3 = new PanelAlojamientoRenderer(alojamientoEjemplo3);
+		panelEjemplo4 = new PanelAlojamientoRenderer(alojamientoEjemplo4);
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -159,16 +180,17 @@ public class PanelAlojamientos extends JPanel {
 				Double.MIN_VALUE };
 		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
-		
-				btnCancelar = new JButton("Cancelar una reserva");
-				btnCancelar.setForeground(Color.BLACK);
-				btnCancelar.setBackground(colorBotonCritico);
-				btnCancelar.setFocusPainted(false);
-				GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-				gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
-				gbc_btnCancelar.gridx = 1;
-				gbc_btnCancelar.gridy = 1;
-				pnlGestionBusqueda.add(btnCancelar, gbc_btnCancelar);
+
+		btnCancelar = new JButton("Cancelar una reserva");
+		btnCancelar.addActionListener(new BtnCancelarActionListener());
+		btnCancelar.setForeground(Color.BLACK);
+		btnCancelar.setBackground(colorBotonCritico);
+		btnCancelar.setFocusPainted(false);
+		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+		gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCancelar.gridx = 1;
+		gbc_btnCancelar.gridy = 1;
+		pnlGestionBusqueda.add(btnCancelar, gbc_btnCancelar);
 
 		lblBarraBusqueda = new JLabel("Barra de búsqueda:");
 		lblBarraBusqueda.setBackground(colorFondo);
@@ -181,6 +203,7 @@ public class PanelAlojamientos extends JPanel {
 		pnlGestionBusqueda.add(lblBarraBusqueda, gbc_lblBarraBusqueda);
 
 		txtBarraBusqueda = new JTextField();
+		txtBarraBusqueda.addActionListener(new TxtBarraBusquedaActionListener());
 		GridBagConstraints gbc_txtBarraBusqueda = new GridBagConstraints();
 		gbc_txtBarraBusqueda.gridwidth = 2;
 		gbc_txtBarraBusqueda.insets = new Insets(0, 0, 5, 5);
@@ -191,6 +214,7 @@ public class PanelAlojamientos extends JPanel {
 		txtBarraBusqueda.setColumns(10);
 
 		lblLupa = new JLabel("");
+		lblLupa.addMouseListener(new LblLupaMouseListener());
 		lblLupa.setIcon(new ImageIcon(PanelAlojamientos.class.getResource("/presentacion/lupa.png")));
 		lblLupa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GridBagConstraints gbc_lblLupa = new GridBagConstraints();
@@ -209,7 +233,7 @@ public class PanelAlojamientos extends JPanel {
 	private class CbFiltroActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			DefaultListModel modeloFiltrado = new DefaultListModel();
-			for (int i = 0; i < lstAlojamientos.getModel().getSize(); ++i) {
+			for (int i = 0; i < modeloOriginal.getSize(); ++i) {
 				if (((String) cbFiltro.getSelectedItem()).equals("Parcelas")) {
 					if (alojamientosDb.getAlojamientos().get(i) instanceof Parcela)
 						modeloFiltrado.addElement(modeloOriginal.getElementAt(i));
@@ -229,8 +253,9 @@ public class PanelAlojamientos extends JPanel {
 	private class LstAlojamientosListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
 			if (lstAlojamientos.getSelectedIndex() != -1) {
-				Alojamiento alojamientoSeleccionado = alojamientosDb.getAlojamientos()
-						.get(lstAlojamientos.getSelectedIndex());
+				int index = alojamientosDb.getAlojamientos()
+						.indexOf(((PanelAlojamientoRenderer) lstAlojamientos.getSelectedValue()).getAlojamiento());
+				Alojamiento alojamientoSeleccionado = alojamientosDb.getAlojamientos().get(index);
 				if (alojamientoSeleccionado instanceof Parcela) {
 					PanelFormularioReservaParcela panelAlojamientoInfoCompleta = new PanelFormularioReservaParcela(
 							lstAlojamientos, alojamientosDb, lstAlojamientos.getSelectedIndex());
@@ -253,13 +278,14 @@ public class PanelAlojamientos extends JPanel {
 							.setEnabled(((Parcela) alojamientoSeleccionado).isMascotas());
 
 					panelAlojamientoInfoCompleta.tPDescripcion.setText("<html><pre>"
-							+ alojamientoSeleccionado.getDescripcion() + "\n - Tipo de parcela: "
-							+ alojamientoSeleccionado.getArea() + "\n - Superficie de la parcela: "
-							+ String.valueOf(alojamientoSeleccionado.getTamanio()) + "m<sup>2</sup>" + "\n - Sombra: "
-							+ ((Parcela) alojamientoSeleccionado).getSombra() + "\n - Tipo de suelo: "
-							+ ((Parcela) alojamientoSeleccionado).getSuelo() + "\n - Zona de baño: "
-							+ ((Parcela) alojamientoSeleccionado).getBanio() + "\n - Restaurantes cercanos: "
-							+ ((Parcela) alojamientoSeleccionado).getRestaurante() + "</pre></html>");
+							+ alojamientoSeleccionado.getDescripcion() + "</pre><ul><li>Área de la parcela: "
+							+ alojamientoSeleccionado.getArea() + "</li><li>Superficie de la parcela: "
+							+ String.valueOf(alojamientoSeleccionado.getTamanio()) + "m<sup>2</sup>"
+							+ "</li><li>Sombra: " + ((Parcela) alojamientoSeleccionado).getSombra()
+							+ "</li><li>Tipo de suelo: " + ((Parcela) alojamientoSeleccionado).getSuelo()
+							+ "</li><li>Zona de baño: " + ((Parcela) alojamientoSeleccionado).getBanio()
+							+ "</li><li>Restaurantes cercanos: " + ((Parcela) alojamientoSeleccionado).getRestaurante()
+							+ "</li></ul></html>");
 
 					pnlFormularioAlojs.add(panelAlojamientoInfoCompleta, alojamientoSeleccionado.getNombre());
 					((CardLayout) pnlFormularioAlojs.getLayout()).show(pnlFormularioAlojs,
@@ -307,16 +333,19 @@ public class PanelAlojamientos extends JPanel {
 						piscina = "Sí";
 					else
 						piscina = "No";
-					if (((Bungalow) alojamientoSeleccionado).isBarbacoa()) barbacoa = "Sí";
-					else barbacoa = "No";
+					if (((Bungalow) alojamientoSeleccionado).isBarbacoa())
+						barbacoa = "Sí";
+					else
+						barbacoa = "No";
 
-					panelAlojamientoInfoCompleta.tPDescripcion
-							.setText("<html><pre>" + alojamientoSeleccionado.getDescripcion() + "\n - Jardin: " + jardin
-									+ "\n - Superficie: " + alojamientoSeleccionado.getTamanio() + "m<sup>2</sup>"
-									+ "\n - Capacidad máxima de personas: "
-									+ String.valueOf(((Bungalow) alojamientoSeleccionado).getCapacidadMaxima())
-									+ "personas \n - WiFi: " + wifi + "\n - Piscina: " + piscina
-									+ "\n - Barbacoa exterior: " + barbacoa + "</pre></html>");
+					panelAlojamientoInfoCompleta.tPDescripcion.setText("<html><pre>"
+							+ alojamientoSeleccionado.getDescripcion() + "</pre><ul><li>Área de la cabaña: "
+							+ alojamientoSeleccionado.getArea() + "</li><li>Jardín: " + jardin + "</li><li>Superficie: "
+							+ alojamientoSeleccionado.getTamanio() + "m<sup>2</sup>"
+							+ "</li><li>Capacidad máxima de personas: "
+							+ String.valueOf(((Bungalow) alojamientoSeleccionado).getCapacidadMaxima())
+							+ "personas</li><li>WiFi: " + wifi + "</li><li>Piscina: " + piscina
+							+ "</li><li>Barbacoa exterior: " + barbacoa + "</li></ul></html>");
 
 					pnlFormularioAlojs.add(panelAlojamientoInfoCompleta, alojamientoSeleccionado.getNombre());
 					((CardLayout) pnlFormularioAlojs.getLayout()).show(pnlFormularioAlojs,
@@ -329,6 +358,78 @@ public class PanelAlojamientos extends JPanel {
 					panelAlojamientoInfoCompleta.lblEstrellas.setIcon(image);
 				}
 			}
+		}
+	}
+
+	private class BtnCancelarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (lstAlojamientos.getSelectedIndex() != -1) {
+				int index = alojamientosDb.getAlojamientos()
+						.indexOf(((PanelAlojamientoRenderer) lstAlojamientos.getSelectedValue()).getAlojamiento());
+				Alojamiento alojamientoSeleccionado = alojamientosDb.getAlojamientos().get(index);
+				String[] choices = new String[alojamientoSeleccionado.getFechasReservadas().size()];
+				for (int i = 0; i < choices.length; ++i) {
+//					 String [] fechas = alojamientoSeleccionado.getFechasReservadas().get(i).split(";");
+//					 String fechaFormateada = "Entrada: " + fechas[0] + "\t Salida: " + fechas[1];
+					choices[i] = alojamientoSeleccionado.getFechasReservadas().get(i);
+				}
+				String input = (String) JOptionPane.showInputDialog(null, "Elige uan de las fechas reservadas",
+						"Fechas reservadas", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
+				if (input != null) {
+					String[] options = { "Sí", "No" };
+					int seleccion = JOptionPane.showOptionDialog(null,
+							"¿Está seguro de cancelar las fechas reservadas?", "Cancelar reserva",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+					if (seleccion == 0)
+						alojamientoSeleccionado.getFechasReservadas().remove(input);
+				}
+			}
+		}
+	}
+
+	private class TxtBarraBusquedaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String nombreAlojamiento;
+			PanelAlojamientoRenderer panelAlojamiento;
+			int result = -1, i = 0;
+			DefaultListModel modeloAlojamientos = (DefaultListModel) lstAlojamientos.getModel();
+			for (; i < modeloAlojamientos.getSize(); ++i) {
+				panelAlojamiento = (PanelAlojamientoRenderer) modeloAlojamientos.get(i);
+				nombreAlojamiento = panelAlojamiento.getAlojamiento().getNombre();
+				if (nombreAlojamiento.equals(txtBarraBusqueda.getText())) {
+					result = i;
+					break;
+				}
+			}
+			if (result != -1)
+				lstAlojamientos.setSelectedIndex(i);
+			else
+				JOptionPane.showMessageDialog(null, "El monitor que has buscado no existe en la lista",
+						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private class LblLupaMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			String nombreAlojamiento;
+			PanelAlojamientoRenderer panelAlojamiento;
+			int result = -1, i = 0;
+			DefaultListModel modeloAlojamientos = (DefaultListModel) lstAlojamientos.getModel();
+			for (; i < modeloAlojamientos.getSize(); ++i) {
+				panelAlojamiento = (PanelAlojamientoRenderer) modeloAlojamientos.get(i);
+				nombreAlojamiento = panelAlojamiento.getAlojamiento().getNombre();
+				if (nombreAlojamiento.equals(txtBarraBusqueda.getText())) {
+					result = i;
+					break;
+				}
+			}
+			if (result != -1)
+				lstAlojamientos.setSelectedIndex(i);
+			else
+				JOptionPane.showMessageDialog(null,
+						"El alojamiento que has buscado no existe en la lista acutal. Revise el filtro aplicado.",
+						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
