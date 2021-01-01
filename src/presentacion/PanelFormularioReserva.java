@@ -29,9 +29,9 @@ import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
 
 import dominio.Alojamiento;
+import dominio.Parcela;
 
 import javax.swing.JSeparator;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
@@ -409,22 +409,50 @@ public class PanelFormularioReserva extends JPanel {
 
 	private class BtnReservarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (!lblPrecioTotal.getText().contains("€"))
+			if (!lblPrecioTotal.getText().contains("€")) {
 				JOptionPane.showMessageDialog(null,
 						"Por favor, presione primero \"Calcular precio\" para saber el precio de su reserva",
 						"No se pudo realizar la reserva", JOptionPane.ERROR_MESSAGE);
-			if (sonFechasValidas()) {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				String entrada = sdf.format(dcEntrada.getDate());
-				String salida = sdf.format(dcSalida.getDate());
-				alojamiento.getFechasReservadas().add(entrada + ";" + salida);
-				/*
-				 * Quiza estaria guay comprobar que todos los campos estan rellenos
-				 * cuando se le da a reserva, o si falta uno por completar avisarlo con un JOptionPane.
-				 * Tambien ojo, faltaria lo de poner la progressBar al 100
-				 */
-				JOptionPane.showMessageDialog(null, "La reserva se ha realizado con éxito", "Reserva finalizada",
-						JOptionPane.OK_OPTION);
+			} else {
+				boolean condicionFtxt = !ftxtDNI.getText().matches(patron) || ftxtMovil.getText().contains("*")
+						|| ftxtFijo.getText().contains("*");
+				if (txtNombreApellidos.getText() == null || condicionFtxt || txtEmail.getText() == null) {
+					JOptionPane.showMessageDialog(null, "Por favor, rellena todas las entradas de la reserva.",
+							"Entradas vacías", JOptionPane.ERROR_MESSAGE);
+				} else {
+					if (sonFechasValidas()) {
+						progressBar.setValue(progressBar.getValue() + 11);
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						String entrada = sdf.format(dcEntrada.getDate());
+						String salida = sdf.format(dcSalida.getDate());
+						alojamiento.getFechasReservadas().add(entrada + ";" + salida);
+
+						String[] opciones = { "Sí", "No" };
+						int seleccion = JOptionPane.showOptionDialog(null, "¿Está seguro de realizar la reserva?",
+								"¿Realizar reserva?", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+								opciones, opciones[0]);
+						if (seleccion == 0) {
+							JOptionPane.showMessageDialog(null, "La reserva se ha realizado con éxito.",
+									"Reserva realizada", JOptionPane.INFORMATION_MESSAGE);
+							boolean isParcela = false;
+							if (alojamiento instanceof Parcela)
+								isParcela = true;
+							FormularioReservaRealizada reservaRealizada = new FormularioReservaRealizada(
+									nombreAlojamiento, entrada, salida, txtNombreApellidos.getText(), ftxtDNI.getText(),
+									ftxtMovil.getText(), ftxtFijo.getText(), txtEmail.getText(),
+									(int) spnOcupantes.getValue(), servicios, isParcela);
+							reservaRealizada.setLocationRelativeTo(null);
+							reservaRealizada.setVisible(true);
+						}
+
+						/*
+						 * Quiza estaria guay comprobar que todos los campos estan rellenos cuando se le
+						 * da a reserva, o si falta uno por completar avisarlo con un JOptionPane.
+						 * Tambien ojo, faltaria lo de poner la progressBar al 100
+						 */
+
+					}
+				}
 			}
 		}
 	}
@@ -433,14 +461,12 @@ public class PanelFormularioReserva extends JPanel {
 
 		@Override
 		public void insertUpdate(DocumentEvent e) {
-			System.out.println("Mas pinchao");
 			updateProgressBar(e);
 
 		}
 
 		@Override
 		public void removeUpdate(DocumentEvent e) {
-			System.out.println("Mas pinchao en remove");
 			removeUpdateProgressBar(e);
 
 		}
@@ -479,8 +505,6 @@ public class PanelFormularioReserva extends JPanel {
 				}
 				break;
 			case "txtEmail":
-				System.out
-						.println(ftxtDNI.getText().matches(patron) + " y ademas " + !ftxtMovil.getText().contains("*"));
 				boolean condicion = ftxtDNI.getText().matches(patron) && !ftxtMovil.getText().contains("*")
 						&& !ftxtFijo.getText().contains("*");
 				if (txtEmail.getText().length() >= 16 && updateEM && condicion) {
@@ -510,7 +534,6 @@ public class PanelFormularioReserva extends JPanel {
 	private class BtnAtrasActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JPanel padre = (JPanel) getParent();
-			System.out.println(nombreAlojamiento);
 			((CardLayout) padre.getLayout()).show(padre, nombreAlojamiento);
 		}
 	}
@@ -518,39 +541,44 @@ public class PanelFormularioReserva extends JPanel {
 	private class BtnCalcularPrecioActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			double precioServicios = 0;
-			if (sonFechasValidas()) {
-				for (String servicio : servicios) {
-					if (servicio.contains("golf"))
-						precioServicios += 50;
-					else if (servicio.contains("corriente"))
-						precioServicios += 20;
-					else if (servicio.contains("Parking"))
-						precioServicios += 15;
-					else if (servicio.contains("WiFi"))
-						precioServicios += 10;
-					else if (servicio.contains("acampada"))
-						precioServicios += 18;
-					else if (servicio.contains("animales"))
-						precioServicios += 5;
-					else if (servicio.contains("carbón"))
-						precioServicios += 5;
-					else if (servicio.contains("garaje"))
-						precioServicios += 15;
-					else if (servicio.contains("extra"))
-						precioServicios += 10;
-					else if (servicio.contains("limpieza"))
-						precioServicios += 15;
-					else if (servicio.contains("Lavavajillas"))
-						precioServicios += 10;
-				}
+			if (dcEntrada.getDate() == null || dcSalida.getDate() == null) {
+				JOptionPane.showMessageDialog(null, "Introduzca una fecha de entrada y otra de salida.",
+						"Fechas vacías", JOptionPane.ERROR_MESSAGE);
+			} else {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				String entrada = sdf.format(dcEntrada.getDate());
 				String salida = sdf.format(dcSalida.getDate());
-				LocalDate d1 = LocalDate.parse(entrada, DateTimeFormatter.ISO_LOCAL_DATE);
-				LocalDate d2 = LocalDate.parse(salida, DateTimeFormatter.ISO_LOCAL_DATE);
-				Duration dias = Duration.between(d1.atStartOfDay(), d2.atStartOfDay());
-				long diasReservados = dias.toDays();
-				lblPrecioTotal.setText("Precio total: " + (precioServicios + diasReservados * precioNoche) + " €");
+				if (sonFechasValidas()) {
+					for (String servicio : servicios) {
+						if (servicio.contains("golf"))
+							precioServicios += 50;
+						else if (servicio.contains("corriente"))
+							precioServicios += 20;
+						else if (servicio.contains("Parking"))
+							precioServicios += 15;
+						else if (servicio.contains("WiFi"))
+							precioServicios += 10;
+						else if (servicio.contains("acampada"))
+							precioServicios += 18;
+						else if (servicio.contains("animales"))
+							precioServicios += 5;
+						else if (servicio.contains("carbón"))
+							precioServicios += 5;
+						else if (servicio.contains("garaje"))
+							precioServicios += 15;
+						else if (servicio.contains("extra"))
+							precioServicios += 10;
+						else if (servicio.contains("limpieza"))
+							precioServicios += 15;
+						else if (servicio.contains("Lavavajillas"))
+							precioServicios += 10;
+					}
+					LocalDate d1 = LocalDate.parse(entrada, DateTimeFormatter.ISO_LOCAL_DATE);
+					LocalDate d2 = LocalDate.parse(salida, DateTimeFormatter.ISO_LOCAL_DATE);
+					Duration dias = Duration.between(d1.atStartOfDay(), d2.atStartOfDay());
+					long diasReservados = dias.toDays();
+					lblPrecioTotal.setText("Precio total: " + (precioServicios + diasReservados * precioNoche) + " €");
+				}
 			}
 		}
 	}
