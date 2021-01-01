@@ -119,9 +119,13 @@ public class PanelAlojamientos extends JPanel {
 		 */
 
 		alojamientoEjemplo1.getFechasReservadas().add("2020-12-01;2020-12-04");
-		alojamientoEjemplo1.getFechasReservadas().add("2020-12-23;2020-12-27");
+		alojamientoEjemplo1.getFechasReservadas().add("2021-01-03;2020-01-06");
 		alojamientoEjemplo3.getFechasReservadas().add("2021-01-01;2021-01-05");
 		alojamientoEjemplo3.getFechasReservadas().add("2020-12-15;2020-12-27");
+		alojamientoEjemplo2.getFechasReservadas().add("2020-12-01;2020-12-04");
+		alojamientoEjemplo1.getFechasReservadas().add("2021-01-08;2021-01-20");
+		alojamientoEjemplo2.getFechasReservadas().add("2021-01-01;2021-01-05");
+		alojamientoEjemplo4.getFechasReservadas().add("2021-01-15;2021-01-20");
 
 		alojamientosDb.addAlojamiento(alojamientoEjemplo1);
 		alojamientosDb.addAlojamiento(alojamientoEjemplo2);
@@ -258,7 +262,7 @@ public class PanelAlojamientos extends JPanel {
 				Alojamiento alojamientoSeleccionado = alojamientosDb.getAlojamientos().get(index);
 				if (alojamientoSeleccionado instanceof Parcela) {
 					PanelFormularioReservaParcela panelAlojamientoInfoCompleta = new PanelFormularioReservaParcela(
-							lstAlojamientos, alojamientosDb, lstAlojamientos.getSelectedIndex());
+							lstAlojamientos, alojamientosDb);
 
 					panelAlojamientoInfoCompleta.lblFoto.setIcon(alojamientoSeleccionado.getFoto());
 					panelAlojamientoInfoCompleta.lblNombre.setText(alojamientoSeleccionado.getNombre());
@@ -303,7 +307,7 @@ public class PanelAlojamientos extends JPanel {
 					String jardin = "", wifi = "", piscina = "", barbacoa = "";
 
 					PanelFormularioReservaBungalow panelAlojamientoInfoCompleta = new PanelFormularioReservaBungalow(
-							lstAlojamientos, alojamientosDb, lstAlojamientos.getSelectedIndex());
+							lstAlojamientos, alojamientosDb);
 
 					panelAlojamientoInfoCompleta.lblFoto.setIcon(alojamientoSeleccionado.getFoto());
 					panelAlojamientoInfoCompleta.lblNombre.setText(alojamientoSeleccionado.getNombre());
@@ -431,5 +435,9 @@ public class PanelAlojamientos extends JPanel {
 						"El alojamiento que has buscado no existe en la lista acutal. Revise el filtro aplicado.",
 						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	public JList getLstAlojamientos() {
+		return this.lstAlojamientos;
 	}
 }

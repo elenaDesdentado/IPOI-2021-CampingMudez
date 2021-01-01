@@ -59,17 +59,18 @@ public class PanelFormularioReservaBungalow extends JPanel {
 	public JLabel lblPrecio;
 
 	private Alojamientos alojamientosDb;
-	private int indice;
+	
+	private JList lstAlojamientos;
 
 	private ArrayList<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelFormularioReservaBungalow(JList lstAlojamientos, Alojamientos db, int indice) {
-
+	public PanelFormularioReservaBungalow(JList lstAlojamientos, Alojamientos db) {
+		
+		this.lstAlojamientos = lstAlojamientos;
 		this.alojamientosDb = db;
-		this.indice = indice;
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -262,7 +263,9 @@ public class PanelFormularioReservaBungalow extends JPanel {
 	}
 
 	public void invalidarDias() {
-		Alojamiento alojamiento = alojamientosDb.getAlojamientos().get(indice);
+		int index = alojamientosDb.getAlojamientos()
+				.indexOf(((PanelAlojamientoRenderer) lstAlojamientos.getSelectedValue()).getAlojamiento());
+		Alojamiento alojamiento = alojamientosDb.getAlojamientos().get(index);
 		for (String rangoFechas : alojamiento.getFechasReservadas()) {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			FechasInvalidas evaluator = new FechasInvalidas();
@@ -281,13 +284,16 @@ public class PanelFormularioReservaBungalow extends JPanel {
 	private class BtnSiguienteActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			ArrayList<String> servicios = new ArrayList<String>();
-			Alojamiento alojamiento = alojamientosDb.getAlojamientos().get(indice);
+			int index = alojamientosDb.getAlojamientos()
+					.indexOf(((PanelAlojamientoRenderer) lstAlojamientos.getSelectedValue()).getAlojamiento());
+			Alojamiento alojamiento = alojamientosDb.getAlojamientos().get(index);
+			System.out.println(index);
 			for (JCheckBox cbx : checkBoxes) {
 				if (cbx.isSelected())
 					servicios.add(cbx.getText());
 			}
-			PanelFormularioReserva reserva = new PanelFormularioReserva(calendar, alojamiento.getNombre(),
-					((Bungalow) alojamiento).getCapacidadMaxima(), servicios);
+			PanelFormularioReserva reserva = new PanelFormularioReserva(calendar, alojamiento, alojamiento.getNombre(),
+					((Bungalow) alojamiento).getCapacidadMaxima(), servicios, alojamiento.getPrecio(), alojamiento.getFechasReservadas());
 			JPanel padre = (JPanel) getParent();
 			padre.add(reserva, "Nueva reserva");
 			((CardLayout) padre.getLayout()).show(padre, "Nueva reserva");

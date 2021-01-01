@@ -187,7 +187,7 @@ public class PanelFormularioMonitores extends JPanel {
 
 		MaskFormatter formatoDNI;
 		try {
-			formatoDNI = new MaskFormatter("########' U");
+			formatoDNI = new MaskFormatter("########U");
 			formatoDNI.setPlaceholderCharacter('X');
 			ftxtDNI = new JFormattedTextField(formatoDNI);
 		} catch (ParseException e) {
