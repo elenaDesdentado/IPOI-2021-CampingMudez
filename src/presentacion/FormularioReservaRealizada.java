@@ -86,21 +86,22 @@ public class FormularioReservaRealizada extends JFrame {
 	 */
 	public FormularioReservaRealizada(String nombreAlojamiento, String entrada, String salida, String nombreCliente, String DNI, String movil,
 			String fijo, String email, int ocupantes, ArrayList<String> servicios, boolean isParcela) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 125, 113, 69, 0, 50, 126, 0, 30, 30, 0, 0 };
-		gbl_contentPane.rowHeights = new int[] { 0, 0, 20, 0, 0, 0, 0, 0, 0, 40, 0, 0, 0, 20, 0, 0 };
-		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0,
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 20, 0, 0, 60, 0, 0, 0, 40, 0, 0, 0, 20, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
 		btnGuardar = new JButton("");
+		btnGuardar.setToolTipText("Pulse para guardar la información de la reserva en formato PDF");
 		btnGuardar.setIcon(new ImageIcon(FormularioReservaRealizada.class.getResource("/presentacion/guardar.png")));
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
@@ -109,6 +110,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(btnGuardar, gbc_btnGuardar);
 
 		btnImpresora = new JButton("");
+		btnImpresora.setToolTipText("Pulse para imprimir la información de la reserva");
 		btnImpresora
 				.setIcon(new ImageIcon(FormularioReservaRealizada.class.getResource("/presentacion/impresora.png")));
 		GridBagConstraints gbc_btnImpresora = new GridBagConstraints();
@@ -164,7 +166,7 @@ public class FormularioReservaRealizada extends JFrame {
 		gbc_lblDNI.gridy = 4;
 		contentPane.add(lblDNI, gbc_lblDNI);
 
-		lblMovil = new JLabel("Móvil: ");
+		lblMovil = new JLabel("Teléfono móvil: ");
 		GridBagConstraints gbc_lblMovil = new GridBagConstraints();
 		gbc_lblMovil.anchor = GridBagConstraints.EAST;
 		gbc_lblMovil.insets = new Insets(0, 0, 5, 5);
@@ -192,10 +194,9 @@ public class FormularioReservaRealizada extends JFrame {
 		gbc_tPInformacion.gridy = 5;
 		contentPane.add(tPInformacion, gbc_tPInformacion);
 
-		tPInformacion.setText("<html><pre> La reserva se ha realizado con éxito y se "
-				+ "\n encuentra confirmada. Gracias por confiar en nosotros.</html></pre>");
+		tPInformacion.setText("<html><pre> La reserva se ha realizado con éxito y se \r\n encuentra confirmada. Gracias por confiar en nosotros.</html></pre>");
 
-		lblFijo = new JLabel("Fijo: ");
+		lblFijo = new JLabel("Teléfono fijo: ");
 		GridBagConstraints gbc_lblFijo = new GridBagConstraints();
 		gbc_lblFijo.anchor = GridBagConstraints.EAST;
 		gbc_lblFijo.insets = new Insets(0, 0, 5, 5);
@@ -285,6 +286,7 @@ public class FormularioReservaRealizada extends JFrame {
 
 		lblNombreAlojamiento = new JLabel(nombreAlojamiento);
 		GridBagConstraints gbc_lblNombreAlojamiento = new GridBagConstraints();
+		gbc_lblNombreAlojamiento.anchor = GridBagConstraints.WEST;
 		gbc_lblNombreAlojamiento.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNombreAlojamiento.gridx = 7;
 		gbc_lblNombreAlojamiento.gridy = 10;
@@ -318,6 +320,7 @@ public class FormularioReservaRealizada extends JFrame {
 
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 2;
 		gbc_scrollPane.gridheight = 3;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;

@@ -5,7 +5,6 @@ import java.awt.GridBagLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.MaskFormatter;
 
@@ -22,8 +21,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
@@ -47,10 +44,9 @@ import javax.swing.JButton;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import javax.swing.ImageIcon;
 
 public class PanelFormularioReserva extends JPanel {
 	private JProgressBar progressBar;
@@ -182,6 +178,7 @@ public class PanelFormularioReserva extends JPanel {
 		add(calendar, gbc_calendar);
 
 		btnCalcularPrecio = new JButton("Calcular precio");
+		btnCalcularPrecio.setIcon(new ImageIcon(PanelFormularioReserva.class.getResource("/presentacion/euro.png")));
 		btnCalcularPrecio.addActionListener(new BtnCalcularPrecioActionListener());
 		GridBagConstraints gbc_btnCalcularPrecio = new GridBagConstraints();
 		gbc_btnCalcularPrecio.insets = new Insets(0, 0, 5, 5);
@@ -390,7 +387,8 @@ public class PanelFormularioReserva extends JPanel {
 		btnReservar = new JButton("Reservar");
 		btnReservar.addActionListener(new BtnReservarActionListener());
 
-		btnAtras = new JButton("Atrás");
+		btnAtras = new JButton("");
+		btnAtras.setIcon(new ImageIcon(PanelFormularioReserva.class.getResource("/presentacion/flecha-hacia-atras.png")));
 		btnAtras.addActionListener(new BtnAtrasActionListener());
 		GridBagConstraints gbc_btnAtras = new GridBagConstraints();
 		gbc_btnAtras.insets = new Insets(0, 0, 5, 5);
@@ -414,14 +412,15 @@ public class PanelFormularioReserva extends JPanel {
 						"Por favor, presione primero \"Calcular precio\" para saber el precio de su reserva",
 						"No se pudo realizar la reserva", JOptionPane.ERROR_MESSAGE);
 			} else {
-				boolean condicionFtxt = !ftxtDNI.getText().matches(patron) || ftxtMovil.getText().contains("*")
-						|| ftxtFijo.getText().contains("*");
-				if (txtNombreApellidos.getText() == null || condicionFtxt || txtEmail.getText() == null) {
+				boolean condicionCamposRellenados = !ftxtDNI.getText().matches(patron)
+						|| ftxtMovil.getText().contains("*") || ftxtFijo.getText().contains("*")
+						|| txtNombreApellidos.getText().length() < 12 || txtEmail.getText().length() < 16;
+				if (txtNombreApellidos.getText() == null || condicionCamposRellenados || txtEmail.getText() == null) {
 					JOptionPane.showMessageDialog(null, "Por favor, rellena todas las entradas de la reserva.",
 							"Entradas vacías", JOptionPane.ERROR_MESSAGE);
 				} else {
 					if (sonFechasValidas()) {
-						progressBar.setValue(progressBar.getValue() + 11);
+						progressBar.setValue(100);
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 						String entrada = sdf.format(dcEntrada.getDate());
 						String salida = sdf.format(dcSalida.getDate());
@@ -444,13 +443,6 @@ public class PanelFormularioReserva extends JPanel {
 							reservaRealizada.setLocationRelativeTo(null);
 							reservaRealizada.setVisible(true);
 						}
-
-						/*
-						 * Quiza estaria guay comprobar que todos los campos estan rellenos cuando se le
-						 * da a reserva, o si falta uno por completar avisarlo con un JOptionPane.
-						 * Tambien ojo, faltaria lo de poner la progressBar al 100
-						 */
-
 					}
 				}
 			}
@@ -489,7 +481,7 @@ public class PanelFormularioReserva extends JPanel {
 				break;
 			case "txtEmail":
 				if (txtEmail.getText().equals("")) {
-					progressBar.setValue(progressBar.getValue() - 15);
+					progressBar.setValue(progressBar.getValue() - 44);
 					updateEM = true;
 				}
 			}
@@ -587,11 +579,18 @@ public class PanelFormularioReserva extends JPanel {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date fechaEntrada = new Date();
 		Date fechaSalida = new Date();
+		Date diaHoy = new Date();
 		if (dcEntrada.getDate().after(dcSalida.getDate())) {
 			JOptionPane.showMessageDialog(null, "La fecha de entrada debe ser previa a la de salida", "Fechas erroneas",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
-		} else {
+		} else if(dcEntrada.getDate().before(diaHoy) || dcSalida.getDate().before(diaHoy)) {
+			JOptionPane.showMessageDialog(null,
+					"Las fechas seleccionadas no pueden ser previas al dia de hoy",
+					"Fechas antiguas", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		else {
 			for (String rangoFechas : fechasReservadas) {
 				String[] fechas = rangoFechas.split(";");
 				try {
