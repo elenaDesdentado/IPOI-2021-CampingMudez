@@ -94,6 +94,8 @@ public class PanelFormularioReserva extends JPanel {
 	private boolean updateEM = true;
 
 	private double precioNoche;
+	private JTextField txtPrecioTotal;
+	private JLabel lblSimboloEuros;
 
 	/**
 	 * Create the panel.
@@ -111,9 +113,9 @@ public class PanelFormularioReserva extends JPanel {
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Datos de la reserva", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(128, 128, 128)));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 15, 127, 51, 30, 47, 0, 30, 0, 0, 0, 0 };
+		gridBagLayout.columnWidths = new int[] { 15, 127, 82, 51, 47, 0, 52, 0, 56, 0, 20, 0 };
 		gridBagLayout.rowHeights = new int[] { 15, 0, 27, 0, 0, 18, 0, 0, 0, 0, 0, 0, 18, 0, 28, 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -254,7 +256,7 @@ public class PanelFormularioReserva extends JPanel {
 			e.printStackTrace();
 		}
 		GridBagConstraints gbc_ftxtMovil = new GridBagConstraints();
-		gbc_ftxtMovil.gridwidth = 3;
+		gbc_ftxtMovil.gridwidth = 2;
 		gbc_ftxtMovil.insets = new Insets(0, 0, 5, 5);
 		gbc_ftxtMovil.fill = GridBagConstraints.HORIZONTAL;
 		gbc_ftxtMovil.gridx = 2;
@@ -278,7 +280,7 @@ public class PanelFormularioReserva extends JPanel {
 			e.printStackTrace();
 		}
 		GridBagConstraints gbc_ftxtFijo = new GridBagConstraints();
-		gbc_ftxtFijo.gridwidth = 3;
+		gbc_ftxtFijo.gridwidth = 2;
 		gbc_ftxtFijo.insets = new Insets(0, 0, 5, 5);
 		gbc_ftxtFijo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_ftxtFijo.gridx = 2;
@@ -366,6 +368,7 @@ public class PanelFormularioReserva extends JPanel {
 		scrollPane.setViewportView(lstServicios);
 
 		tAComentarios = new JTextArea();
+		tAComentarios.setBackground(Color.LIGHT_GRAY);
 		tAComentarios.setRows(5);
 		tAComentarios.setLineWrap(true);
 		GridBagConstraints gbc_tAComentarios = new GridBagConstraints();
@@ -379,6 +382,7 @@ public class PanelFormularioReserva extends JPanel {
 
 		lblPrecioTotal = new JLabel("Precio total:");
 		GridBagConstraints gbc_lblPrecioTotal = new GridBagConstraints();
+		gbc_lblPrecioTotal.anchor = GridBagConstraints.EAST;
 		gbc_lblPrecioTotal.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecioTotal.gridx = 7;
 		gbc_lblPrecioTotal.gridy = 14;
@@ -390,6 +394,24 @@ public class PanelFormularioReserva extends JPanel {
 		btnAtras = new JButton("");
 		btnAtras.setIcon(new ImageIcon(PanelFormularioReserva.class.getResource("/presentacion/flecha-hacia-atras.png")));
 		btnAtras.addActionListener(new BtnAtrasActionListener());
+		
+		txtPrecioTotal = new JTextField();
+		txtPrecioTotal.setEditable(false);
+		GridBagConstraints gbc_txtPrecioTotal = new GridBagConstraints();
+		gbc_txtPrecioTotal.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtPrecioTotal.insets = new Insets(0, 0, 5, 5);
+		gbc_txtPrecioTotal.gridx = 8;
+		gbc_txtPrecioTotal.gridy = 14;
+		add(txtPrecioTotal, gbc_txtPrecioTotal);
+		txtPrecioTotal.setColumns(10);
+		
+		lblSimboloEuros = new JLabel("€");
+		GridBagConstraints gbc_lblSimboloEuros = new GridBagConstraints();
+		gbc_lblSimboloEuros.anchor = GridBagConstraints.WEST;
+		gbc_lblSimboloEuros.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSimboloEuros.gridx = 9;
+		gbc_lblSimboloEuros.gridy = 14;
+		add(lblSimboloEuros, gbc_lblSimboloEuros);
 		GridBagConstraints gbc_btnAtras = new GridBagConstraints();
 		gbc_btnAtras.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAtras.gridx = 1;
@@ -407,15 +429,15 @@ public class PanelFormularioReserva extends JPanel {
 
 	private class BtnReservarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (!lblPrecioTotal.getText().contains("€")) {
+			if (txtPrecioTotal.getText().length() == 0) {
 				JOptionPane.showMessageDialog(null,
 						"Por favor, presione primero \"Calcular precio\" para saber el precio de su reserva",
 						"No se pudo realizar la reserva", JOptionPane.ERROR_MESSAGE);
 			} else {
 				boolean condicionCamposRellenados = !ftxtDNI.getText().matches(patron)
 						|| ftxtMovil.getText().contains("*") || ftxtFijo.getText().contains("*")
-						|| txtNombreApellidos.getText().length() < 12 || txtEmail.getText().length() < 16;
-				if (txtNombreApellidos.getText() == null || condicionCamposRellenados || txtEmail.getText() == null) {
+						|| txtNombreApellidos.getText().length() < 12 || txtEmail.getText().length() < 16 || !txtEmail.getText().contains("@");
+				if (condicionCamposRellenados) {
 					JOptionPane.showMessageDialog(null, "Por favor, rellena todas las entradas de la reserva.",
 							"Entradas vacías", JOptionPane.ERROR_MESSAGE);
 				} else {
@@ -439,7 +461,7 @@ public class PanelFormularioReserva extends JPanel {
 							FormularioReservaRealizada reservaRealizada = new FormularioReservaRealizada(
 									nombreAlojamiento, entrada, salida, txtNombreApellidos.getText(), ftxtDNI.getText(),
 									ftxtMovil.getText(), ftxtFijo.getText(), txtEmail.getText(),
-									(int) spnOcupantes.getValue(), servicios, isParcela);
+									(int) spnOcupantes.getValue(), servicios, txtPrecioTotal.getText(), isParcela);
 							reservaRealizada.setLocationRelativeTo(null);
 							reservaRealizada.setVisible(true);
 						}
@@ -569,7 +591,7 @@ public class PanelFormularioReserva extends JPanel {
 					LocalDate d2 = LocalDate.parse(salida, DateTimeFormatter.ISO_LOCAL_DATE);
 					Duration dias = Duration.between(d1.atStartOfDay(), d2.atStartOfDay());
 					long diasReservados = dias.toDays();
-					lblPrecioTotal.setText("Precio total: " + (precioServicios + diasReservados * precioNoche) + " €");
+					txtPrecioTotal.setText(String.valueOf(precioServicios + diasReservados * precioNoche));
 				}
 			}
 		}

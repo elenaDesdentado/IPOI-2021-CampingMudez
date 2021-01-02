@@ -377,7 +377,7 @@ public class PanelAlojamientos extends JPanel {
 //					 String fechaFormateada = "Entrada: " + fechas[0] + "\t Salida: " + fechas[1];
 					choices[i] = alojamientoSeleccionado.getFechasReservadas().get(i);
 				}
-				String input = (String) JOptionPane.showInputDialog(null, "Elige uan de las fechas reservadas",
+				String input = (String) JOptionPane.showInputDialog(null, "Elige una de las fechas reservadas",
 						"Fechas reservadas", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
 				if (input != null) {
 					String[] options = { "Sí", "No" };
