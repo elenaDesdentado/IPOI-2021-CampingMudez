@@ -178,7 +178,7 @@ public class VentanaInicio extends JFrame {
 		pnlActividades = new PanelActividades();
 		pnlMonitores = new PanelMonitores();
 		pnlReservas = new PanelAlojamientos();
-		pnlRutas = new JPanel();
+		pnlRutas = new PanelRutas();
 		pnlConfiguracion = new PanelConfiguracion(this, usuarios, usuarioPrincipal);
 		pnlActividades.setBackground(colorFondo);
 		pnlMonitores.setBackground(colorFondo);
