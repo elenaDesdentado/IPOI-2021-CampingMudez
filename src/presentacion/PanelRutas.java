@@ -77,7 +77,7 @@ public class PanelRutas extends JPanel {
 		ImageIcon image3 = new ImageIcon(PanelMonitorRenderer.class.getResource("./ruta3.png"));
 		Image imagenEscalada3 = image3.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
 		image3 = new ImageIcon(imagenEscalada3);
-		ImageIcon image4 = new ImageIcon(PanelMonitorRenderer.class.getResource("./ruta4.png"));
+		ImageIcon image4 = new ImageIcon(PanelMonitorRenderer.class.getResource("./ruta4.jpg"));
 		Image imagenEscalada4 = image4.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
 		image4 = new ImageIcon(imagenEscalada4);
 
@@ -87,19 +87,19 @@ public class PanelRutas extends JPanel {
 			if (i % 2 == 0)
 				monitoresRutas.add(monitoresDb.getMonitores().get(i));
 
-		Ruta ruta1 = new Ruta("Sendero punta del Boquerón", "Lunes", "9:00 - 11:00", "Restaurante El Comilón", "Media",
-				"Este sendero escarposo tiene fama por desgastar muchas calorias con subidas de hasta 9º que se pueden extender hasta 100 metros. Se recomienda venir con cantimplora de agua y sombrero debido a lo cercano que está el Sol.",
+		Ruta ruta1 = new Ruta("Sendero Punta del Boquerón", "Lunes", "9:00 - 11:00", "Restaurante El Comilón", "Media",
+				"Este sendero escarposo tiene fama por desgastar muchas calorias con subidas de hasta 9º que se pueden extender hasta 100 metros. Se recomienda venir con cantimplora con agua y sombrero debido a lo cercano que está el Sol.",
 				monitoresRutas, 15, image1);
 		Ruta ruta2 = new Ruta("Camino de los Angeles", "Viernes", "18:30 - 20:00", "Marca número 5 del Río Mudez",
 				"Baja",
-				"Largo camino destacable por el terreno llano que lo abarca. A medio camino se atraviesa la cueva Mudez, por lo que se recomienda un casco con linterna incorporada y calzado cómodo para evitar resbalones.",
+				"Largo camino destacable por el terreno llano que lo abarca. A medio camino se atraviesa la cueva Múdez, por lo que se recomienda un casco con linterna incorporada y calzado cómodo para evitar resbalones.",
 				monitoresRutas, 10, image2);
 		Ruta ruta3 = new Ruta("Sendero de la Magdalena", "Martes", "10:15 - 11:30", "A los pies del monte Picudo",
 				"Extrema",
 				"Este sendero se caracteriza por su elevada dificultad, solo apto para expertos. Incluye escalada y 5 km de bici, además de atravesar una zona empinada de difícil acceso. Se exige experiencia en escalada para realizar esta ruta.",
 				monitoresRutas, 10, image3);
-		Ruta ruta4 = new Ruta("Camino de la risa", "Míercoles", "11:00 - 14:00", "Marca número 5 del Río Mudez", "Alta",
-				"El camino de la risa, pese a su nombre, no es que sea fácil. Destacamos el tramo a canoa por el río múdez y un largo recorrdio por un camino rocoso. Destaca por la longitud del camino. Se aconseja traer: agua, comida calzado cómodo y gorra.",
+		Ruta ruta4 = new Ruta("Camino de la Risa", "Miércoles", "11:00 - 14:00", "Marca número 5 del Río Mudez", "Alta",
+				"El camino de la risa, pese a su nombre, no es que sea fácil. Destacamos el tramo a canoa por el río Múdez y un largo recorrido por un camino rocoso. Destaca por la longitud del camino. Se aconseja traer: agua, comida, calzado cómodo y gorra.",
 				monitoresRutas, 20, image4);
 
 		rutasDb.addRuta(ruta1);
@@ -114,6 +114,7 @@ public class PanelRutas extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 
 		splitPane = new JSplitPane();
+		// splitPane.setPreferredSize(new Dimension(500, 25));
 		splitPane.setMinimumSize(new Dimension(462, 25));
 		add(splitPane, BorderLayout.CENTER);
 
@@ -127,7 +128,7 @@ public class PanelRutas extends JPanel {
 
 		lstRutas = new JList();
 		lstRutas.addListSelectionListener(new LstActividadesListSelectionListener());
-		lstRutas.setMinimumSize(new Dimension(440, 23));
+		lstRutas.setMinimumSize(new Dimension(1000, 25));
 		scrollPaneListaActs.setViewportView(lstRutas);
 
 		DefaultListModel lstModel = new DefaultListModel();
@@ -141,7 +142,7 @@ public class PanelRutas extends JPanel {
 		lstRutas.setFixedCellHeight(220);
 		lstRutas.setCellRenderer(new ActividadRenderer());
 
-		lstRutas.setMinimumSize(new Dimension(200, 23));
+		lstRutas.setMinimumSize(new Dimension(400, 23));
 		scrollPaneListaActs.setViewportView(lstRutas);
 
 		pnlGestionBusqueda = new JPanel();
@@ -206,40 +207,31 @@ public class PanelRutas extends JPanel {
 
 	private class LstActividadesListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
-			if (actividadesDb.getActividades().get(lstRutas.getModel().getSize() - 1).getFotoActividad() == null)
-				// En caso de dejar incompleta la agregacion de una nueva actividad, eliminarla
-				// de
-				// la lista
-				actividadesDb.getActividades().remove(lstRutas.getModel().getSize() - 1);
+//			if (rutasDb.getRutas().get(lstRutas.getModel().getSize() - 1).getFoto() == null)
+//				// En caso de dejar incompleta la agregacion de una nueva ruta, eliminarla
+//				// de
+//				// la lista
+//				actividadesDb.getActividades().remove(lstRutas.getModel().getSize() - 1);
 			if (lstRutas.getSelectedIndex() != -1) {
-				Actividad actividadSeleccionada = actividadesDb.getActividades().get(lstRutas.getSelectedIndex());
-				PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstRutas,
-						actividadesDb, lstRutas.getSelectedIndex());
-				panelActividadInfoCompleta.lblFoto.setIcon(actividadSeleccionada.getFotoActividad());
-				panelActividadInfoCompleta.txtNombre.setText(actividadSeleccionada.getNombre());
-				panelActividadInfoCompleta.txtMonitor.setText(actividadSeleccionada.getMonitor());
-				panelActividadInfoCompleta.spinCupo.setValue(actividadSeleccionada.getCupo());
-				panelActividadInfoCompleta.cbDestinatarios.setSelectedItem(actividadSeleccionada.getDestinatario());
-				panelActividadInfoCompleta.cbArea.setSelectedItem(actividadSeleccionada.getArea());
-				panelActividadInfoCompleta.tADescripcion.setText(actividadSeleccionada.getDescripcion());
-				panelActividadInfoCompleta.tAMateriales.setText(actividadSeleccionada.getMateriales());
-				panelActividadInfoCompleta.txtPrecio.setText(actividadSeleccionada.getPrecio().toString());
-				panelActividadInfoCompleta.cbHorario.setSelectedItem(actividadSeleccionada.getHorario());
+				Ruta rutaSeleccionada = rutasDb.getRutas().get(lstRutas.getSelectedIndex());
+				PanelFormularioRutas panelRutaInfoCompleta = new PanelFormularioRutas(lstRutas, rutasDb,
+						lstRutas.getSelectedIndex());
+				panelRutaInfoCompleta.lblFoto.setIcon(rutaSeleccionada.getFoto());
+				panelRutaInfoCompleta.txtNombre.setText(rutaSeleccionada.getNombre());
+				panelRutaInfoCompleta.txtDia.setText(rutaSeleccionada.getDia());
+				panelRutaInfoCompleta.txtHorario.setText(rutaSeleccionada.getHorario());
+				panelRutaInfoCompleta.spinCupo.setValue(rutaSeleccionada.getCupo());
+				panelRutaInfoCompleta.txtEncuentro.setText(rutaSeleccionada.getEncuentro());
+				panelRutaInfoCompleta.txtDificultad.setText(rutaSeleccionada.getDificultad());
+				panelRutaInfoCompleta.tPDescripcion.setText(rutaSeleccionada.getDescripcion());
 
-				pnlFormularioActs.add(panelActividadInfoCompleta, actividadSeleccionada.getNombre());
-				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, actividadSeleccionada.getNombre());
+				pnlFormularioActs.add(panelRutaInfoCompleta, rutaSeleccionada.getNombre());
+				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, rutaSeleccionada.getNombre());
 
-				panelActividadInfoCompleta.btnAniadirAvatar.setEnabled(false);
-				panelActividadInfoCompleta.btnAplicarCambios.setEnabled(false);
-				panelActividadInfoCompleta.txtNombre.setEditable(false);
-				panelActividadInfoCompleta.txtMonitor.setEditable(false);
-				panelActividadInfoCompleta.txtPrecio.setEditable(false);
-				panelActividadInfoCompleta.spinCupo.setEnabled(false);
-				panelActividadInfoCompleta.tADescripcion.setEnabled(false);
-				panelActividadInfoCompleta.tAMateriales.setEnabled(false);
-				panelActividadInfoCompleta.cbDestinatarios.setEnabled(false);
-				panelActividadInfoCompleta.cbArea.setEnabled(false);
-				panelActividadInfoCompleta.cbHorario.setEnabled(false);
+				panelRutaInfoCompleta.btnAniadirAvatar.setEnabled(false);
+				panelRutaInfoCompleta.btnAplicarCambios.setEnabled(false);
+				panelRutaInfoCompleta.txtNombre.setEditable(false);
+				panelRutaInfoCompleta.spinCupo.setEnabled(false);
 
 				UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
 				UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
@@ -272,13 +264,13 @@ public class PanelRutas extends JPanel {
 	private class BtnCrearActividadActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			lstRutas.clearSelection();
-			PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstRutas,
-					actividadesDb, lstRutas.getModel().getSize());
-			panelActividadInfoCompleta.btnModificar.setEnabled(false);
-			pnlFormularioActs.add(panelActividadInfoCompleta, "Nueva actividad");
+			PanelFormularioRutas panelRutaInfoCompleta = new PanelFormularioRutas(lstRutas, rutasDb,
+					lstRutas.getModel().getSize());
+			panelRutaInfoCompleta.btnModificar.setEnabled(false);
+			pnlFormularioActs.add(panelRutaInfoCompleta, "Nueva actividad");
 			// Añadir monitor vacio a la lista, si no se completa el formulario, se elimina.
-			actividadesDb.addActividad(new Actividad());
-			((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Nueva actividad");
+			rutasDb.addRuta(new Ruta());
+			((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Nueva ruta");
 		}
 	}
 

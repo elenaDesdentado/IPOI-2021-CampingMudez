@@ -211,14 +211,14 @@ public class VentanaInicio extends JFrame {
 		pnlActividades = new PanelActividades();
 		pnlMonitores = new PanelMonitores(monitoresDb);
 		pnlReservas = new PanelAlojamientos();
-		//pnlRutas = new PanelRutas();
+		pnlRutas = new PanelRutas(monitoresDb);
 		pnlConfiguracion = new PanelConfiguracion(this, usuarios, usuarioPrincipal);
 		pnlActividades.setBackground(colorFondo);
 		pnlMonitores.setBackground(colorFondo);
 		pnlListaFormulario.add(pnlActividades, "Actividades");
 		pnlListaFormulario.add(pnlMonitores, "Monitores");
 		pnlListaFormulario.add(pnlReservas, "Reservas");
-		//pnlListaFormulario.add(pnlRutas, "Rutas");
+		pnlListaFormulario.add(pnlRutas, "Rutas");
 		pnlListaFormulario.add(pnlConfiguracion, "Configuración");
 
 		JLabel lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
