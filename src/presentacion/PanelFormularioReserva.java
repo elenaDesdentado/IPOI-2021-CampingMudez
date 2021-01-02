@@ -443,11 +443,6 @@ public class PanelFormularioReserva extends JPanel {
 				} else {
 					if (sonFechasValidas()) {
 						progressBar.setValue(100);
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-						String entrada = sdf.format(dcEntrada.getDate());
-						String salida = sdf.format(dcSalida.getDate());
-						alojamiento.getFechasReservadas().add(entrada + ";" + salida);
-
 						String[] opciones = { "Sí", "No" };
 						int seleccion = JOptionPane.showOptionDialog(null, "¿Está seguro de realizar la reserva?",
 								"¿Realizar reserva?", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
@@ -455,6 +450,10 @@ public class PanelFormularioReserva extends JPanel {
 						if (seleccion == 0) {
 							JOptionPane.showMessageDialog(null, "La reserva se ha realizado con éxito.",
 									"Reserva realizada", JOptionPane.INFORMATION_MESSAGE);
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+							String entrada = sdf.format(dcEntrada.getDate());
+							String salida = sdf.format(dcSalida.getDate());
+							alojamiento.getFechasReservadas().add(entrada + ";" + salida);
 							boolean isParcela = false;
 							if (alojamiento instanceof Parcela)
 								isParcela = true;
@@ -464,7 +463,8 @@ public class PanelFormularioReserva extends JPanel {
 									(int) spnOcupantes.getValue(), servicios, txtPrecioTotal.getText(), isParcela);
 							reservaRealizada.setLocationRelativeTo(null);
 							reservaRealizada.setVisible(true);
-						}
+						} else
+							progressBar.setValue(89);
 					}
 				}
 			}

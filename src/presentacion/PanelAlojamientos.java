@@ -348,7 +348,7 @@ public class PanelAlojamientos extends JPanel {
 							+ alojamientoSeleccionado.getTamanio() + "m<sup>2</sup>"
 							+ "</li><li>Capacidad máxima de personas: "
 							+ String.valueOf(((Bungalow) alojamientoSeleccionado).getCapacidadMaxima())
-							+ "personas</li><li>WiFi: " + wifi + "</li><li>Piscina: " + piscina
+							+ " personas</li><li>WiFi: " + wifi + "</li><li>Piscina: " + piscina
 							+ "</li><li>Barbacoa exterior: " + barbacoa + "</li></ul></html>");
 
 					pnlFormularioAlojs.add(panelAlojamientoInfoCompleta, alojamientoSeleccionado.getNombre());

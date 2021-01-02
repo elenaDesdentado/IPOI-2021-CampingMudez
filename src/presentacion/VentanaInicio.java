@@ -27,7 +27,9 @@ import javax.swing.JMenuItem;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 
+import dominio.Monitor;
 import dominio.Usuario;
+import persistencia.Monitores;
 import persistencia.Usuarios;
 
 import javax.swing.border.EtchedBorder;
@@ -37,6 +39,7 @@ import javax.swing.JSplitPane;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
@@ -88,6 +91,36 @@ public class VentanaInicio extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaInicio(String usuario, String password, Usuarios usuarios) {
+		
+		/*
+		 * Añade los monitores de ejemplo a la "persistencia"
+		 */
+		
+		Monitores monitoresDb = new Monitores(new ArrayList<Monitor>());
+		ArrayList<String> idiomas1 = new ArrayList<String>();
+		idiomas1.add("Castellano");
+		idiomas1.add("Inglés");
+		idiomas1.add("Francés");
+		ArrayList<String> idiomas2 = new ArrayList<String>();
+		idiomas2.add("Castellano");
+		idiomas2.add("Francés");
+		ArrayList<String> idiomas3 = new ArrayList<String>();
+		idiomas3.add("Castellano");
+		idiomas3.add("Noruego");
+		idiomas3.add("Alemán");
+		Monitor monitorEjemplo1 = new Monitor("Juan", "Marín Prieto", "05718928T", "654738273", null,
+				"juanmapriSi@gmail.com", "Estudios Universitarios", "Disponible", "8:00-15:00", 1000.0, 24, idiomas1,
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo1.png")));
+		Monitor monitorEjemplo2 = new Monitor("Eva", "Grande Milagro", "05283928L", "654839283", "926 46 82 91",
+				"powerJapan90@yahoo.com", "Educación Secundaria Obligatoria", "Baja laboral", "17:30-22:30", 1235.5, 20,
+				idiomas2, new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo2.png")));
+		Monitor monitorEjemplo3 = new Monitor("Martín", "García Ortega", "05673822Q", "625890973", null,
+				"destroyerManhattan@gmail.com", "Estudios post-universitarios", "Vacaciones", "15:00-23:00", 1540.0, 30,
+				idiomas3, new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo3.png")));
+		monitoresDb.addMonitor(monitorEjemplo1);
+		monitoresDb.addMonitor(monitorEjemplo2);
+		monitoresDb.addMonitor(monitorEjemplo3);
+		
 		setTitle("Camping Mudez");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(VentanaInicio.class.getResource("/presentacion/campingMudez.png")));
@@ -176,16 +209,16 @@ public class VentanaInicio extends JFrame {
 
 		// Añadiendo los paneles al panel con cardLayout
 		pnlActividades = new PanelActividades();
-		pnlMonitores = new PanelMonitores();
+		pnlMonitores = new PanelMonitores(monitoresDb);
 		pnlReservas = new PanelAlojamientos();
-		pnlRutas = new PanelRutas();
+		//pnlRutas = new PanelRutas();
 		pnlConfiguracion = new PanelConfiguracion(this, usuarios, usuarioPrincipal);
 		pnlActividades.setBackground(colorFondo);
 		pnlMonitores.setBackground(colorFondo);
 		pnlListaFormulario.add(pnlActividades, "Actividades");
 		pnlListaFormulario.add(pnlMonitores, "Monitores");
 		pnlListaFormulario.add(pnlReservas, "Reservas");
-		pnlListaFormulario.add(pnlRutas, "Rutas");
+		//pnlListaFormulario.add(pnlRutas, "Rutas");
 		pnlListaFormulario.add(pnlConfiguracion, "Configuración");
 
 		JLabel lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");

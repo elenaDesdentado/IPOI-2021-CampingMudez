@@ -412,7 +412,7 @@ public class PanelFormularioMonitores extends JPanel {
 	private class BtnAniadirIdiomaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			String nuevoIdioma = (String) JOptionPane.showInputDialog(null, "Introduzca un "
-					+ "nuevo idioma", "Idioma", indice, null, null, null);
+					+ "nuevo idioma", "Idioma", JOptionPane.QUESTION_MESSAGE, null, null, null);
 			Monitor monitor = monitoresDb.getMonitores().get(indice);
 			if(monitor.getIdiomas() == null) 
 				monitor.setIdiomas(new ArrayList<String>());

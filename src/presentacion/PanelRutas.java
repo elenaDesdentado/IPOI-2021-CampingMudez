@@ -7,6 +7,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,9 +27,10 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import dominio.Actividad;
+import dominio.Ruta;
 import dominio.Monitor;
-import persistencia.Actividades;
+import persistencia.Monitores;
+import persistencia.Rutas;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -38,7 +40,6 @@ public class PanelRutas extends JPanel {
 	private JPanel pnlGestionBusqueda;
 	private JScrollPane scrollPaneListaActs;
 	private JButton btnDiseniarRuta;
-	private JButton btnEliminarActividad;
 	private JLabel lblBarraBusqueda;
 	private JTextField txtBarraBusqueda;
 	private JList lstRutas;
@@ -48,65 +49,67 @@ public class PanelRutas extends JPanel {
 	private Color colorBotonCritico = new Color(190, 68, 36);
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
 
-	private Actividades actividadesDb = new Actividades(new ArrayList<Actividad>());
+	private Rutas rutasDb = new Rutas(new ArrayList<Ruta>());
+	private Monitores monitoresDb;
 	/*
 	 * Actividades iniciales de ejemplo.
 	 */
-	private PanelActividadRenderer panelEjemplo1;
-	private PanelActividadRenderer panelEjemplo2;
-	private PanelActividadRenderer panelEjemplo3;
-	private PanelActividadRenderer panelEjemplo4;
-	private PanelActividadRenderer panelEjemplo5;
+	private PanelRutaRenderer panelEjemplo1;
+	private PanelRutaRenderer panelEjemplo2;
+	private PanelRutaRenderer panelEjemplo3;
+	private PanelRutaRenderer panelEjemplo4;
 	private JLabel lblLupa;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelRutas() {
+	public PanelRutas(Monitores monitoresDb) {
 		/*
 		 * Añade las actividades de ejemplo a la "persistencia"
 		 */
-		Actividad actividad1 = new Actividad("Paintball", "Juan Marín Prieto", 10, "Adultos", "Ciervo",
-				"El paintball es un juego de estrategia en el que compiten normalmente dos equipos. Cada jugador tiene algo "
-						+ "parecido a una pistola de bolas de pintura, y el objetivo puede variar según la modalidad del juego que es"
-						+ "cojas: atrapar la bandera, eliminar al equipo contrario, rescatar al presidente...",
-				"Incluye la equipación", "16:00-18:00", 20.5,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoPaintball.jpg")));
-		Actividad actividad2 = new Actividad("Espeleología subacuática", "Martín García Ortega", 5, "Adultos", "Salmón",
-				"Cuevas bajo el agua. Si descubrir los secretos de las cuevas y galerías nos abre un mundo, imagínate la "
-						+ "sensación cuando esto ocurre debajo del agua. ",
-				"Incluye la equipación", "11:00-12:00", 150.0,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoEspeleologiaAcuatica.jpg")));
-		Actividad actividad3 = new Actividad("Karts Infantil", "Martín García Ortega", 8, "Niños de 12 a 14 años",
-				"Escorpión",
-				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
-						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
-						+ "toda la adrenalina generada sin preocupaciones.",
-				"Incluye el kart y la equipación", "9:00-12:00", 14.5,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartInf.jpg")));
-		Actividad actividad4 = new Actividad("Karts Junior", "Juan Marín Prieto", 10, "Niños de 14 a 17 años", "Ciervo",
-				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
-						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
-						+ "toda la adrenalina generada sin preocupaciones.",
-				"Incluye el kart y la equipación", "10:00-11:30", 18.5,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartJunior.jpg")));
-		Actividad actividad5 = new Actividad("Karts Adultos", "Juan Marín Prieto", 12, "Adultos", "Águila",
-				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
-						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
-						+ "toda la adrenalina generada sin preocupaciones.",
-				"Incluye el kart y la equipación", "19:00-21:00", 22.5,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartAdultos.jpg")));
 
-		actividadesDb.addActividad(actividad1);
-		actividadesDb.addActividad(actividad2);
-		actividadesDb.addActividad(actividad3);
-		actividadesDb.addActividad(actividad4);
-		actividadesDb.addActividad(actividad5);
-		panelEjemplo1 = new PanelActividadRenderer(actividad1);
-		panelEjemplo2 = new PanelActividadRenderer(actividad2);
-		panelEjemplo3 = new PanelActividadRenderer(actividad3);
-		panelEjemplo4 = new PanelActividadRenderer(actividad4);
-		panelEjemplo5 = new PanelActividadRenderer(actividad5);
+		ImageIcon image1 = new ImageIcon(PanelMonitorRenderer.class.getResource("./ruta1.png"));
+		Image imagenEscalada1 = image1.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+		image1 = new ImageIcon(imagenEscalada1);
+		ImageIcon image2 = new ImageIcon(PanelMonitorRenderer.class.getResource("./ruta2.png"));
+		Image imagenEscalada2 = image2.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+		image2 = new ImageIcon(imagenEscalada2);
+		ImageIcon image3 = new ImageIcon(PanelMonitorRenderer.class.getResource("./ruta3.png"));
+		Image imagenEscalada3 = image3.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+		image3 = new ImageIcon(imagenEscalada3);
+		ImageIcon image4 = new ImageIcon(PanelMonitorRenderer.class.getResource("./ruta4.png"));
+		Image imagenEscalada4 = image4.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+		image4 = new ImageIcon(imagenEscalada4);
+
+		ArrayList<Monitor> monitoresRutas = new ArrayList<Monitor>();
+		this.monitoresDb = monitoresDb;
+		for (int i = 0; i < monitoresDb.getMonitores().size(); ++i)
+			if (i % 2 == 0)
+				monitoresRutas.add(monitoresDb.getMonitores().get(i));
+
+		Ruta ruta1 = new Ruta("Sendero punta del Boquerón", "Lunes", "9:00 - 11:00", "Restaurante El Comilón", "Media",
+				"Este sendero escarposo tiene fama por desgastar muchas calorias con subidas de hasta 9º que se pueden extender hasta 100 metros. Se recomienda venir con cantimplora de agua y sombrero debido a lo cercano que está el Sol.",
+				monitoresRutas, 15, image1);
+		Ruta ruta2 = new Ruta("Camino de los Angeles", "Viernes", "18:30 - 20:00", "Marca número 5 del Río Mudez",
+				"Baja",
+				"Largo camino destacable por el terreno llano que lo abarca. A medio camino se atraviesa la cueva Mudez, por lo que se recomienda un casco con linterna incorporada y calzado cómodo para evitar resbalones.",
+				monitoresRutas, 10, image2);
+		Ruta ruta3 = new Ruta("Sendero de la Magdalena", "Martes", "10:15 - 11:30", "A los pies del monte Picudo",
+				"Extrema",
+				"Este sendero se caracteriza por su elevada dificultad, solo apto para expertos. Incluye escalada y 5 km de bici, además de atravesar una zona empinada de difícil acceso. Se exige experiencia en escalada para realizar esta ruta.",
+				monitoresRutas, 10, image3);
+		Ruta ruta4 = new Ruta("Camino de la risa", "Míercoles", "11:00 - 14:00", "Marca número 5 del Río Mudez", "Alta",
+				"El camino de la risa, pese a su nombre, no es que sea fácil. Destacamos el tramo a canoa por el río múdez y un largo recorrdio por un camino rocoso. Destaca por la longitud del camino. Se aconseja traer: agua, comida calzado cómodo y gorra.",
+				monitoresRutas, 20, image4);
+
+		rutasDb.addRuta(ruta1);
+		rutasDb.addRuta(ruta2);
+		rutasDb.addRuta(ruta3);
+		rutasDb.addRuta(ruta4);
+		panelEjemplo1 = new PanelRutaRenderer(ruta1);
+		panelEjemplo2 = new PanelRutaRenderer(ruta2);
+		panelEjemplo3 = new PanelRutaRenderer(ruta3);
+		panelEjemplo4 = new PanelRutaRenderer(ruta4);
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -133,7 +136,6 @@ public class PanelRutas extends JPanel {
 		lstModel.addElement(panelEjemplo2);
 		lstModel.addElement(panelEjemplo3);
 		lstModel.addElement(panelEjemplo4);
-		lstModel.addElement(panelEjemplo5);
 
 		lstRutas.setModel(lstModel);
 		lstRutas.setFixedCellHeight(220);
@@ -146,9 +148,9 @@ public class PanelRutas extends JPanel {
 		pnlGestionBusqueda.setBackground(colorBarraBusqueda);
 		add(pnlGestionBusqueda, BorderLayout.NORTH);
 		GridBagLayout gbl_pnlGestionBusqueda = new GridBagLayout();
-		gbl_pnlGestionBusqueda.columnWidths = new int[] { 56, 83, 171, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnlGestionBusqueda.columnWidths = new int[] { 56, 83, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_pnlGestionBusqueda.rowHeights = new int[] { 19, 33, 0, 0 };
-		gbl_pnlGestionBusqueda.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
+		gbl_pnlGestionBusqueda.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
@@ -164,24 +166,13 @@ public class PanelRutas extends JPanel {
 		gbc_btnDiseniarRuta.gridy = 1;
 		pnlGestionBusqueda.add(btnDiseniarRuta, gbc_btnDiseniarRuta);
 
-		btnEliminarActividad = new JButton("Eliminar Actividad");
-		btnEliminarActividad.addActionListener(new BtnEliminarActividadActionListener());
-		btnEliminarActividad.setForeground(Color.BLACK);
-		btnEliminarActividad.setBackground(colorBotonCritico);
-		btnEliminarActividad.setFocusPainted(false);
-		GridBagConstraints gbc_btnEliminarActividad = new GridBagConstraints();
-		gbc_btnEliminarActividad.insets = new Insets(0, 0, 5, 5);
-		gbc_btnEliminarActividad.gridx = 2;
-		gbc_btnEliminarActividad.gridy = 1;
-		pnlGestionBusqueda.add(btnEliminarActividad, gbc_btnEliminarActividad);
-
 		lblBarraBusqueda = new JLabel("Barra de búsqueda:");
 		lblBarraBusqueda.setBackground(colorFondo);
 		lblBarraBusqueda.setAlignmentX(1.0f);
 		GridBagConstraints gbc_lblBarraBusqueda = new GridBagConstraints();
 		gbc_lblBarraBusqueda.anchor = GridBagConstraints.EAST;
 		gbc_lblBarraBusqueda.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBarraBusqueda.gridx = 4;
+		gbc_lblBarraBusqueda.gridx = 3;
 		gbc_lblBarraBusqueda.gridy = 1;
 		pnlGestionBusqueda.add(lblBarraBusqueda, gbc_lblBarraBusqueda);
 
@@ -191,7 +182,7 @@ public class PanelRutas extends JPanel {
 		gbc_txtBarraBusqueda.gridwidth = 2;
 		gbc_txtBarraBusqueda.insets = new Insets(0, 0, 5, 5);
 		gbc_txtBarraBusqueda.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtBarraBusqueda.gridx = 5;
+		gbc_txtBarraBusqueda.gridx = 4;
 		gbc_txtBarraBusqueda.gridy = 1;
 		pnlGestionBusqueda.add(txtBarraBusqueda, gbc_txtBarraBusqueda);
 		txtBarraBusqueda.setColumns(10);
@@ -202,7 +193,7 @@ public class PanelRutas extends JPanel {
 		lblLupa.setIcon(new ImageIcon(PanelRutas.class.getResource("/presentacion/lupa.png")));
 		GridBagConstraints gbc_lblLupa = new GridBagConstraints();
 		gbc_lblLupa.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLupa.gridx = 8;
+		gbc_lblLupa.gridx = 7;
 		gbc_lblLupa.gridy = 1;
 		pnlGestionBusqueda.add(lblLupa, gbc_lblLupa);
 
@@ -216,13 +207,14 @@ public class PanelRutas extends JPanel {
 	private class LstActividadesListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
 			if (actividadesDb.getActividades().get(lstRutas.getModel().getSize() - 1).getFotoActividad() == null)
-				// En caso de dejar incompleta la agregacion de una nueva actividad, eliminarla de
+				// En caso de dejar incompleta la agregacion de una nueva actividad, eliminarla
+				// de
 				// la lista
 				actividadesDb.getActividades().remove(lstRutas.getModel().getSize() - 1);
 			if (lstRutas.getSelectedIndex() != -1) {
 				Actividad actividadSeleccionada = actividadesDb.getActividades().get(lstRutas.getSelectedIndex());
-				PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstRutas, actividadesDb,
-						lstRutas.getSelectedIndex());
+				PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstRutas,
+						actividadesDb, lstRutas.getSelectedIndex());
 				panelActividadInfoCompleta.lblFoto.setIcon(actividadSeleccionada.getFotoActividad());
 				panelActividadInfoCompleta.txtNombre.setText(actividadSeleccionada.getNombre());
 				panelActividadInfoCompleta.txtMonitor.setText(actividadSeleccionada.getMonitor());
@@ -233,10 +225,10 @@ public class PanelRutas extends JPanel {
 				panelActividadInfoCompleta.tAMateriales.setText(actividadSeleccionada.getMateriales());
 				panelActividadInfoCompleta.txtPrecio.setText(actividadSeleccionada.getPrecio().toString());
 				panelActividadInfoCompleta.cbHorario.setSelectedItem(actividadSeleccionada.getHorario());
-	
+
 				pnlFormularioActs.add(panelActividadInfoCompleta, actividadSeleccionada.getNombre());
 				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, actividadSeleccionada.getNombre());
-	
+
 				panelActividadInfoCompleta.btnAniadirAvatar.setEnabled(false);
 				panelActividadInfoCompleta.btnAplicarCambios.setEnabled(false);
 				panelActividadInfoCompleta.txtNombre.setEditable(false);
@@ -248,7 +240,7 @@ public class PanelRutas extends JPanel {
 				panelActividadInfoCompleta.cbDestinatarios.setEnabled(false);
 				panelActividadInfoCompleta.cbArea.setEnabled(false);
 				panelActividadInfoCompleta.cbHorario.setEnabled(false);
-				
+
 				UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
 				UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
 			}
@@ -257,14 +249,14 @@ public class PanelRutas extends JPanel {
 
 	private class TxtBarraBusquedaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String nombreActividad;
-			Actividad actividad;
+			String nombreRuta;
+			Ruta ruta;
 			int result = -1, i = 0;
 			DefaultListModel modeloMonitores = (DefaultListModel) lstRutas.getModel();
 			for (; i < modeloMonitores.getSize(); ++i) {
-				actividad = actividadesDb.getActividades().get(i);
-				nombreActividad = actividad.getNombre();
-				if (nombreActividad.equals(txtBarraBusqueda.getText())) {
+				ruta = rutasDb.getRutas().get(i);
+				nombreRuta = ruta.getNombre();
+				if (nombreRuta.equals(txtBarraBusqueda.getText())) {
 					result = i;
 					break;
 				}
@@ -276,11 +268,12 @@ public class PanelRutas extends JPanel {
 						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+
 	private class BtnCrearActividadActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			lstRutas.clearSelection();
-			PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstRutas, actividadesDb,
-					lstRutas.getModel().getSize());
+			PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstRutas,
+					actividadesDb, lstRutas.getModel().getSize());
 			panelActividadInfoCompleta.btnModificar.setEnabled(false);
 			pnlFormularioActs.add(panelActividadInfoCompleta, "Nueva actividad");
 			// Añadir monitor vacio a la lista, si no se completa el formulario, se elimina.
@@ -288,36 +281,18 @@ public class PanelRutas extends JPanel {
 			((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Nueva actividad");
 		}
 	}
-	private class BtnEliminarActividadActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			
-			String[] options = {"Sí", "No"};
-			int seleccion = JOptionPane.showOptionDialog(null, "¿Está seguro de eliminar la actividad "
-					+ "seleccionada en la lista?", "Eliminar actividad", JOptionPane.DEFAULT_OPTION, 
-					JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-			if (seleccion == 0) {
-				int indiceActividadElminada = lstRutas.getSelectedIndex();
-				DefaultListModel modelo = (DefaultListModel) lstRutas.getModel();
-				modelo.remove(indiceActividadElminada);
-				actividadesDb.getActividades().remove(indiceActividadElminada);
-				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Formulario vacio");
-			}
-			if (actividadesDb.getActividades().size() == 0)
-				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Formulario vacio");
-		}
-	}
-	
+
 	private class LblLupaMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			String nombreActividad;
-			Actividad actividad;
+			String nombreRuta;
+			Ruta ruta;
 			int result = -1, i = 0;
 			DefaultListModel modeloMonitores = (DefaultListModel) lstRutas.getModel();
 			for (; i < modeloMonitores.getSize(); ++i) {
-				actividad = actividadesDb.getActividades().get(i);
-				nombreActividad = actividad.getNombre();
-				if (nombreActividad.equals(txtBarraBusqueda.getText())) {
+				ruta = rutasDb.getRutas().get(i);
+				nombreRuta = ruta.getNombre();
+				if (nombreRuta.equals(txtBarraBusqueda.getText())) {
 					result = i;
 					break;
 				}

@@ -48,50 +48,23 @@ public class PanelMonitores extends JPanel {
 	private Color colorBotonCritico = new Color(190, 68, 36);
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
 
-	private Monitores monitoresDb = new Monitores(new ArrayList<Monitor>());
+	private Monitores monitoresDb;
 	/*
 	 * Monitores iniciales de ejemplo.
 	 */
-	private PanelMonitorRenderer panelEjemplo1;
-	private PanelMonitorRenderer panelEjemplo2;
-	private PanelMonitorRenderer panelEjemplo3;
+	private ArrayList<PanelMonitorRenderer> panelesEjemplo = new ArrayList<PanelMonitorRenderer>();
 	private JLabel lblLupa;
 
 	/**
 	 * Create the panel.
+	 * @param monitoresDb 
 	 */
-	public PanelMonitores() {
+	public PanelMonitores(Monitores monitoresDb) {
 
-		/*
-		 * Añade los monitores de ejemplo a la "persistencia"
-		 */
-		ArrayList<String> idiomas1 = new ArrayList<String>();
-		idiomas1.add("Castellano");
-		idiomas1.add("Inglés");
-		idiomas1.add("Francés");
-		ArrayList<String> idiomas2 = new ArrayList<String>();
-		idiomas2.add("Castellano");
-		idiomas2.add("Francés");
-		ArrayList<String> idiomas3 = new ArrayList<String>();
-		idiomas3.add("Castellano");
-		idiomas3.add("Noruego");
-		idiomas3.add("Alemán");
-		Monitor monitorEjemplo1 = new Monitor("Juan", "Marín Prieto", "05718928T", "654738273", null,
-				"juanmapriSi@gmail.com", "Estudios Universitarios", "Disponible", "8:00-15:00", 1000.0, 24, idiomas1,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo1.png")));
-		Monitor monitorEjemplo2 = new Monitor("Eva", "Grande Milagro", "05283928L", "654839283", "926 46 82 91",
-				"powerJapan90@yahoo.com", "Educación Secundaria Obligatoria", "Baja laboral", "17:30-22:30", 1235.5, 20,
-				idiomas2, new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo2.png")));
-		Monitor monitorEjemplo3 = new Monitor("Martín", "García Ortega", "05673822Q", "625890973", null,
-				"destroyerManhattan@gmail.com", "Estudios post-universitarios", "Vacaciones", "15:00-23:00", 1540.0, 30,
-				idiomas3, new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo3.png")));
-		monitoresDb.addMonitor(monitorEjemplo1);
-		monitoresDb.addMonitor(monitorEjemplo2);
-		monitoresDb.addMonitor(monitorEjemplo3);
-
-		panelEjemplo1 = new PanelMonitorRenderer(monitorEjemplo1);
-		panelEjemplo2 = new PanelMonitorRenderer(monitorEjemplo2);
-		panelEjemplo3 = new PanelMonitorRenderer(monitorEjemplo3);
+		this.monitoresDb = monitoresDb;
+		
+		for(Monitor monitor : monitoresDb.getMonitores())
+			panelesEjemplo.add(new PanelMonitorRenderer(monitor));
 
 		setLayout(new BorderLayout(0, 0));
 
@@ -111,9 +84,9 @@ public class PanelMonitores extends JPanel {
 		lstMonitores.addListSelectionListener(new LstMonitoresListSelectionListener());
 		DefaultListModel lstModel = new DefaultListModel();
 
-		lstModel.addElement(panelEjemplo1);
-		lstModel.addElement(panelEjemplo2);
-		lstModel.addElement(panelEjemplo3);
+		for(PanelMonitorRenderer panel : panelesEjemplo)
+			lstModel.addElement(panel);
+		
 		lstMonitores.setModel(lstModel);
 		lstMonitores.setFixedCellHeight(220);
 		lstMonitores.setCellRenderer(new MonitorRenderer());
