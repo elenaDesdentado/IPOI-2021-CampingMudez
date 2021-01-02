@@ -161,7 +161,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(6, 0, 0, 0));
 		
-		lblDireccion = new JLabel("Avenida los pajaritos, 4, Cuenca, España");
+		lblDireccion = new JLabel("Avenida Los Pajaritos, 4, Cuenca, España");
 		panel.add(lblDireccion);
 		
 		lblTelefono = new JLabel("969 89 92 25");
@@ -252,6 +252,7 @@ public class FormularioReservaRealizada extends JFrame {
 		txtMovil.setColumns(10);
 		
 		tAInformacion = new JTextArea("La reserva se ha realizado con éxito y se \nencuentra confirmada. Gracias por confiar \nen nosotros.");
+		tAInformacion.setEditable(false);
 		GridBagConstraints gbc_tAInformacion = new GridBagConstraints();
 		gbc_tAInformacion.gridwidth = 2;
 		gbc_tAInformacion.insets = new Insets(0, 0, 5, 5);
