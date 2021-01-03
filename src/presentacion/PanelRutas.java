@@ -158,7 +158,7 @@ public class PanelRutas extends JPanel {
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
 
 		btnDiseniarRuta = new JButton("Diseñar una nueva ruta");
-		btnDiseniarRuta.addActionListener(new BtnCrearActividadActionListener());
+		btnDiseniarRuta.addActionListener(new BtnCrearRutaActionListener());
 		btnDiseniarRuta.setForeground(Color.BLACK);
 		btnDiseniarRuta.setBackground(colorBoton);
 		btnDiseniarRuta.setFocusPainted(false);
@@ -266,13 +266,11 @@ public class PanelRutas extends JPanel {
 		}
 	}
 
-	private class BtnCrearActividadActionListener implements ActionListener {
+	private class BtnCrearRutaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			lstRutas.clearSelection();
-			PanelEditorRutas panelEditor = new PanelEditorRutas();
+			PanelEditorRutas panelEditor = new PanelEditorRutas(monitoresDb, rutasDb, lstRutas);
 			pnlFormularioRutas.add(panelEditor, "Nueva ruta");
-			// Añadir ruta vacia a la lista, si no se completa el formulario, se elimina.
-			rutasDb.addRuta(new Ruta());
 			((CardLayout) pnlFormularioRutas.getLayout()).show(pnlFormularioRutas, "Nueva ruta");
 		}
 	}
