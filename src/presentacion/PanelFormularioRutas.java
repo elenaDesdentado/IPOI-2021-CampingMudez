@@ -51,7 +51,6 @@ public class PanelFormularioRutas extends JPanel {
 	private JLabel lblEncuentro;
 	private JLabel lblDificultad;
 	public JTextField txtNombre;
-	public JTextField txtDia;
 	public JSpinner spinCupo;
 	public JButton btnAplicarCambios;
 
@@ -61,21 +60,25 @@ public class PanelFormularioRutas extends JPanel {
 
 	private int indice;
 	private Rutas rutasDb = new Rutas(new ArrayList<Ruta>());
+	private Monitores monitoresDb;
 	private JList lstRutas;
 	public JTextField txtEncuentro;
-	public JTextField txtDificultad;
 	private JLabel lblHorario;
-	public JTextField txtHorario;
 	private JLabel lblDescripcion;
 	private JScrollPane scrollPaneDescripcion;
 	public JTextPane tPDescripcion;
 	private JLabel lblMonitores;
+	private JButton btnInfo;
+	public JComboBox cbDificultad;
+	public JComboBox cbHorario;
+	public JComboBox cbDia;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelFormularioRutas(JList lstRutas, Rutas rutasDb, int indice) {
-
+	public PanelFormularioRutas(JList lstRutas, Rutas rutasDb, int indice, Monitores monitoresDb) {
+		
+		this.monitoresDb = monitoresDb;
 		this.lstRutas = lstRutas;
 		this.rutasDb = rutasDb;
 		this.indice = indice;
@@ -84,7 +87,7 @@ public class PanelFormularioRutas extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 30, 0, 67, 219, 111, 97, 0, 40, 0 };
 		gridBagLayout.rowHeights = new int[] { 27, 28, 21, 0, 0, 0, 0, 0, 0, 0, 20, 0, 15, 42, 40, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
@@ -143,15 +146,16 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblDia.gridx = 4;
 		gbc_lblDia.gridy = 4;
 		add(lblDia, gbc_lblDia);
-
-		txtDia = new JTextField();
-		GridBagConstraints gbc_txtDia = new GridBagConstraints();
-		gbc_txtDia.insets = new Insets(0, 0, 5, 5);
-		gbc_txtDia.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtDia.gridx = 5;
-		gbc_txtDia.gridy = 4;
-		add(txtDia, gbc_txtDia);
-		txtDia.setColumns(10);
+		
+		cbDia = new JComboBox();
+		cbDia.setModel(new DefaultComboBoxModel(new String[] {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"}));
+		GridBagConstraints gbc_cbDia = new GridBagConstraints();
+		gbc_cbDia.gridwidth = 2;
+		gbc_cbDia.insets = new Insets(0, 0, 5, 5);
+		gbc_cbDia.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbDia.gridx = 5;
+		gbc_cbDia.gridy = 4;
+		add(cbDia, gbc_cbDia);
 		
 		lblHorario = new JLabel("Horario:");
 		GridBagConstraints gbc_lblHorario = new GridBagConstraints();
@@ -161,14 +165,15 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblHorario.gridy = 5;
 		add(lblHorario, gbc_lblHorario);
 		
-		txtHorario = new JTextField();
-		GridBagConstraints gbc_txtHorario = new GridBagConstraints();
-		gbc_txtHorario.insets = new Insets(0, 0, 5, 5);
-		gbc_txtHorario.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtHorario.gridx = 5;
-		gbc_txtHorario.gridy = 5;
-		add(txtHorario, gbc_txtHorario);
-		txtHorario.setColumns(10);
+		cbHorario = new JComboBox();
+		cbHorario.setModel(new DefaultComboBoxModel(new String[] {"8:00 - 10:00", "9:00 - 10:15", "10:15 - 11:30", "11:00 - 14:00", "11:15 - 12:45", "17:30 - 19:30", "18:30 - 20:00"}));
+		GridBagConstraints gbc_cbHorario = new GridBagConstraints();
+		gbc_cbHorario.gridwidth = 2;
+		gbc_cbHorario.insets = new Insets(0, 0, 5, 5);
+		gbc_cbHorario.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbHorario.gridx = 5;
+		gbc_cbHorario.gridy = 5;
+		add(cbHorario, gbc_cbHorario);
 		
 		lblMonitores = new JLabel("Monitor/es:");
 		GridBagConstraints gbc_lblMonitores = new GridBagConstraints();
@@ -177,6 +182,16 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblMonitores.gridx = 4;
 		gbc_lblMonitores.gridy = 6;
 		add(lblMonitores, gbc_lblMonitores);
+		
+		btnInfo = new JButton("Ver monitores");
+		btnInfo.setIcon(new ImageIcon(PanelFormularioRutas.class.getResource("/presentacion/icono-info.png")));
+		btnInfo.addActionListener(new BtnInfoActionListener());
+		GridBagConstraints gbc_btnInfo = new GridBagConstraints();
+		gbc_btnInfo.anchor = GridBagConstraints.WEST;
+		gbc_btnInfo.insets = new Insets(0, 0, 5, 5);
+		gbc_btnInfo.gridx = 5;
+		gbc_btnInfo.gridy = 6;
+		add(btnInfo, gbc_btnInfo);
 
 		lblCupo = new JLabel("Cupo:");
 		GridBagConstraints gbc_lblCupo = new GridBagConstraints();
@@ -220,18 +235,19 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblDificultad.gridx = 4;
 		gbc_lblDificultad.gridy = 9;
 		add(lblDificultad, gbc_lblDificultad);
-		
-		txtDificultad = new JTextField();
-		GridBagConstraints gbc_txtDificultad = new GridBagConstraints();
-		gbc_txtDificultad.insets = new Insets(0, 0, 5, 5);
-		gbc_txtDificultad.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtDificultad.gridx = 5;
-		gbc_txtDificultad.gridy = 9;
-		add(txtDificultad, gbc_txtDificultad);
-		txtDificultad.setColumns(10);
 
 		btnAplicarCambios = new JButton("Aplicar cambios");
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
+		
+		cbDificultad = new JComboBox();
+		cbDificultad.setModel(new DefaultComboBoxModel(new String[] {"Baja", "Media", "Alta", "Extrema"}));
+		GridBagConstraints gbc_cbDificultad = new GridBagConstraints();
+		gbc_cbDificultad.gridwidth = 2;
+		gbc_cbDificultad.insets = new Insets(0, 0, 5, 5);
+		gbc_cbDificultad.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbDificultad.gridx = 5;
+		gbc_cbDificultad.gridy = 9;
+		add(cbDificultad, gbc_cbDificultad);
 		
 		lblDescripcion = new JLabel("Descripción de la ruta y recomendaciones:");
 		GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
@@ -266,17 +282,12 @@ public class PanelFormularioRutas extends JPanel {
 
 	private class BtnModificarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-//			btnAniadirAvatar.setEnabled(true);
-//			btnAplicarCambios.setEnabled(true);
-//			txtNombre.setEditable(true);
-//			txtDia.setEditable(true);
-//			txtPrecio.setEditable(true);
-//			spinCupo.setEnabled(true);
-//			tADescripcion.setEnabled(true);
-//			tAMateriales.setEnabled(true);
-//			cbDestinatarios.setEnabled(true);
-//			cbArea.setEnabled(true);
-//			cbHorario.setEnabled(true);
+			txtNombre.setEnabled(true);
+			cbDia.setEnabled(true);
+			cbHorario.setEnabled(true);
+			spinCupo.setEnabled(true);
+			txtEncuentro.setEnabled(true);
+			cbDificultad.setEnabled(true);
 		}
 	}
 
@@ -289,7 +300,7 @@ public class PanelFormularioRutas extends JPanel {
 				Image imagenOriginal;
 				try {
 					imagenOriginal = ImageIO.read(file);
-					Image imagenEscalada = imagenOriginal.getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+					Image imagenEscalada = imagenOriginal.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
 					ImageIcon iconoLabel = new ImageIcon(imagenEscalada);
 					lblFoto.setIcon(iconoLabel);
 				} catch (IOException ex) {
@@ -301,27 +312,26 @@ public class PanelFormularioRutas extends JPanel {
 
 	private class BtnAplicarCambiosActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-//			Ruta ruta = rutasDb.getRutas().get(indice);
-//			try {
-//				ruta.setNombre(txtNombre.getText());
-//				ruta.setMonitor(txtDia.getText());
-//				ruta.setCupo((Integer) spinCupo.getValue());
-//				ruta.setDestinatario((String) cbDestinatarios.getSelectedItem());
-//				ruta.setArea((String) cbArea.getSelectedItem());
-//				ruta.setDescripcion(tADescripcion.getText());
-//				ruta.setMateriales(tAMateriales.getText());
-//				ruta.setPrecio(Double.valueOf(txtPrecio.getText()));
-//				ruta.setHorario((String) cbHorario.getSelectedItem());
-//				ruta.setFotoActividad((ImageIcon) lblFoto.getIcon());
-//				DefaultListModel modeloActividades = (DefaultListModel) lstRutas.getModel();
-//				if (modeloActividades.getSize() == indice)
-//					modeloActividades.addElement(null); // En caso de nuevo monitor, agregarlo al modelo
-//				modeloActividades.set(indice, new PanelActividadRenderer(actividad));
-//			} catch (Exception ex) {
-//				JOptionPane.showMessageDialog(null,
-//						"Se ha producido un error. Por favor, asegúrese que ha rellenado al información en todos los campos.",
-//						"Error al aplicar cambios", JOptionPane.ERROR_MESSAGE);
-//			}
+			Ruta ruta = rutasDb.getRutas().get(indice);
+			try {
+				ruta.setNombre(txtNombre.getText());
+				ruta.setDia((String) cbDia.getSelectedItem());
+				ruta.setCupo((Integer) spinCupo.getValue());
+				ruta.setDificultad((String) cbDificultad.getSelectedItem());
+				ruta.setDescripcion(tPDescripcion.getText());
+				ruta.setHorario((String) cbHorario.getSelectedItem());
+				ruta.setFoto((ImageIcon) lblFoto.getIcon());
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null,
+						"Se ha producido un error. Por favor, asegúrese que ha rellenado al información en todos los campos.",
+						"Error al aplicar cambios", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+	private class BtnInfoActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			PanelInfoMonitoresRutas infoMons = new PanelInfoMonitoresRutas(monitoresDb);
+			infoMons.setVisible(true);
 		}
 	}
 }

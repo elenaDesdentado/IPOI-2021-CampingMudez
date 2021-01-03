@@ -36,9 +36,9 @@ import java.awt.event.MouseEvent;
 
 public class PanelRutas extends JPanel {
 	private JSplitPane splitPane;
-	private JPanel pnlFormularioActs;
+	private JPanel pnlFormularioRutas;
 	private JPanel pnlGestionBusqueda;
-	private JScrollPane scrollPaneListaActs;
+	private JScrollPane scrollPaneListaRutas;
 	private JButton btnDiseniarRuta;
 	private JLabel lblBarraBusqueda;
 	private JTextField txtBarraBusqueda;
@@ -118,18 +118,18 @@ public class PanelRutas extends JPanel {
 		splitPane.setMinimumSize(new Dimension(462, 25));
 		add(splitPane, BorderLayout.CENTER);
 
-		pnlFormularioActs = new JPanel();
-		splitPane.setRightComponent(pnlFormularioActs);
-		pnlFormularioActs.setLayout(new CardLayout(0, 0));
+		pnlFormularioRutas = new JPanel();
+		splitPane.setRightComponent(pnlFormularioRutas);
+		pnlFormularioRutas.setLayout(new CardLayout(0, 0));
 
-		scrollPaneListaActs = new JScrollPane();
-		scrollPaneListaActs.setMinimumSize(new Dimension(420, 23));
-		splitPane.setLeftComponent(scrollPaneListaActs);
+		scrollPaneListaRutas = new JScrollPane();
+		scrollPaneListaRutas.setMinimumSize(new Dimension(520, 23));
+		splitPane.setLeftComponent(scrollPaneListaRutas);
 
 		lstRutas = new JList();
 		lstRutas.addListSelectionListener(new LstActividadesListSelectionListener());
 		lstRutas.setMinimumSize(new Dimension(1000, 25));
-		scrollPaneListaActs.setViewportView(lstRutas);
+		scrollPaneListaRutas.setViewportView(lstRutas);
 
 		DefaultListModel lstModel = new DefaultListModel();
 
@@ -140,10 +140,11 @@ public class PanelRutas extends JPanel {
 
 		lstRutas.setModel(lstModel);
 		lstRutas.setFixedCellHeight(220);
+		lstRutas.setFixedCellWidth(520);
 		lstRutas.setCellRenderer(new ActividadRenderer());
 
 		lstRutas.setMinimumSize(new Dimension(400, 23));
-		scrollPaneListaActs.setViewportView(lstRutas);
+		scrollPaneListaRutas.setViewportView(lstRutas);
 
 		pnlGestionBusqueda = new JPanel();
 		pnlGestionBusqueda.setBackground(colorBarraBusqueda);
@@ -201,7 +202,7 @@ public class PanelRutas extends JPanel {
 		// PANELES PARA EL CARD LAYOUT
 		JPanel formularioVacio = new PanelFormularioActividadesInicio();
 
-		pnlFormularioActs.add(formularioVacio, "Formulario vacio");
+		pnlFormularioRutas.add(formularioVacio, "Formulario vacio");
 
 	}
 
@@ -215,23 +216,27 @@ public class PanelRutas extends JPanel {
 			if (lstRutas.getSelectedIndex() != -1) {
 				Ruta rutaSeleccionada = rutasDb.getRutas().get(lstRutas.getSelectedIndex());
 				PanelFormularioRutas panelRutaInfoCompleta = new PanelFormularioRutas(lstRutas, rutasDb,
-						lstRutas.getSelectedIndex());
-				panelRutaInfoCompleta.lblFoto.setIcon(rutaSeleccionada.getFoto());
+						lstRutas.getSelectedIndex(), monitoresDb);
+				ImageIcon foto = rutaSeleccionada.getFoto();
+				Image imagenEscalada = foto.getImage().getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
+				ImageIcon fotoForm = new ImageIcon(imagenEscalada);
+				panelRutaInfoCompleta.lblFoto.setIcon(fotoForm);
 				panelRutaInfoCompleta.txtNombre.setText(rutaSeleccionada.getNombre());
-				panelRutaInfoCompleta.txtDia.setText(rutaSeleccionada.getDia());
-				panelRutaInfoCompleta.txtHorario.setText(rutaSeleccionada.getHorario());
+				panelRutaInfoCompleta.cbDia.setSelectedItem(rutaSeleccionada.getDia());
+				panelRutaInfoCompleta.cbHorario.setSelectedItem(rutaSeleccionada.getHorario());
 				panelRutaInfoCompleta.spinCupo.setValue(rutaSeleccionada.getCupo());
 				panelRutaInfoCompleta.txtEncuentro.setText(rutaSeleccionada.getEncuentro());
-				panelRutaInfoCompleta.txtDificultad.setText(rutaSeleccionada.getDificultad());
+				panelRutaInfoCompleta.cbDificultad.setSelectedItem(rutaSeleccionada.getDificultad());
 				panelRutaInfoCompleta.tPDescripcion.setText(rutaSeleccionada.getDescripcion());
 
-				pnlFormularioActs.add(panelRutaInfoCompleta, rutaSeleccionada.getNombre());
-				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, rutaSeleccionada.getNombre());
+				pnlFormularioRutas.add(panelRutaInfoCompleta, rutaSeleccionada.getNombre());
+				((CardLayout) pnlFormularioRutas.getLayout()).show(pnlFormularioRutas, rutaSeleccionada.getNombre());
 
 				panelRutaInfoCompleta.btnAniadirAvatar.setEnabled(false);
 				panelRutaInfoCompleta.btnAplicarCambios.setEnabled(false);
 				panelRutaInfoCompleta.txtNombre.setEditable(false);
 				panelRutaInfoCompleta.spinCupo.setEnabled(false);
+				panelRutaInfoCompleta.cbDificultad.setEnabled(false);
 
 				UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
 				UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
@@ -244,8 +249,8 @@ public class PanelRutas extends JPanel {
 			String nombreRuta;
 			Ruta ruta;
 			int result = -1, i = 0;
-			DefaultListModel modeloMonitores = (DefaultListModel) lstRutas.getModel();
-			for (; i < modeloMonitores.getSize(); ++i) {
+			DefaultListModel modeloRutas = (DefaultListModel) lstRutas.getModel();
+			for (; i < modeloRutas.getSize(); ++i) {
 				ruta = rutasDb.getRutas().get(i);
 				nombreRuta = ruta.getNombre();
 				if (nombreRuta.equals(txtBarraBusqueda.getText())) {
@@ -256,7 +261,7 @@ public class PanelRutas extends JPanel {
 			if (result != -1)
 				lstRutas.setSelectedIndex(i);
 			else
-				JOptionPane.showMessageDialog(null, "La actividad que has buscado no existe en la lista",
+				JOptionPane.showMessageDialog(null, "La ruta que has buscado no existe en la lista",
 						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
 		}
 	}
@@ -264,13 +269,11 @@ public class PanelRutas extends JPanel {
 	private class BtnCrearActividadActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			lstRutas.clearSelection();
-			PanelFormularioRutas panelRutaInfoCompleta = new PanelFormularioRutas(lstRutas, rutasDb,
-					lstRutas.getModel().getSize());
-			panelRutaInfoCompleta.btnModificar.setEnabled(false);
-			pnlFormularioActs.add(panelRutaInfoCompleta, "Nueva actividad");
-			// Añadir monitor vacio a la lista, si no se completa el formulario, se elimina.
+			PanelEditorRutas panelEditor = new PanelEditorRutas();
+			pnlFormularioRutas.add(panelEditor, "Nueva ruta");
+			// Añadir ruta vacia a la lista, si no se completa el formulario, se elimina.
 			rutasDb.addRuta(new Ruta());
-			((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Nueva ruta");
+			((CardLayout) pnlFormularioRutas.getLayout()).show(pnlFormularioRutas, "Nueva ruta");
 		}
 	}
 
@@ -280,8 +283,8 @@ public class PanelRutas extends JPanel {
 			String nombreRuta;
 			Ruta ruta;
 			int result = -1, i = 0;
-			DefaultListModel modeloMonitores = (DefaultListModel) lstRutas.getModel();
-			for (; i < modeloMonitores.getSize(); ++i) {
+			DefaultListModel modeloRutas = (DefaultListModel) lstRutas.getModel();
+			for (; i < modeloRutas.getSize(); ++i) {
 				ruta = rutasDb.getRutas().get(i);
 				nombreRuta = ruta.getNombre();
 				if (nombreRuta.equals(txtBarraBusqueda.getText())) {
@@ -292,7 +295,7 @@ public class PanelRutas extends JPanel {
 			if (result != -1)
 				lstRutas.setSelectedIndex(i);
 			else
-				JOptionPane.showMessageDialog(null, "La actividad que has buscado no existe en la lista",
+				JOptionPane.showMessageDialog(null, "La ruta que has buscado no existe en la lista",
 						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
 		}
 	}
