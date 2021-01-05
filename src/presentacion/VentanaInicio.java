@@ -59,16 +59,17 @@ public class VentanaInicio extends JFrame {
 	private JButton btnGestorMonitores;
 	private JButton btnRutasSenderistas;
 	private JPanel pnlListaFormulario;
-	
+
 	private Color colorFondo = new Color(255, 255, 255);
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
 	private Color colorTbGestion = new Color(74, 103, 49);
-	private Color colorBotonesGestion = new Color (243, 243, 245);
-	
+	private Color colorBotonesGestion = new Color(243, 243, 245);
+	private Color colorBotonSeleccionado = new Color(159, 177, 57);
+
 	public JLabel lblAvatar;
 	private JLabel lblName;
 	private JPanel pnlMenu;
-	
+
 	private Usuarios usuarios;
 	private Usuario usuarioPrincipal;
 
@@ -91,11 +92,11 @@ public class VentanaInicio extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaInicio(String usuario, String password, Usuarios usuarios) {
-		
+
 		/*
 		 * Añade los monitores de ejemplo a la "persistencia"
 		 */
-		
+
 		Monitores monitoresDb = new Monitores(new ArrayList<Monitor>());
 		ArrayList<String> idiomas1 = new ArrayList<String>();
 		idiomas1.add("Castellano");
@@ -120,7 +121,7 @@ public class VentanaInicio extends JFrame {
 		monitoresDb.addMonitor(monitorEjemplo1);
 		monitoresDb.addMonitor(monitorEjemplo2);
 		monitoresDb.addMonitor(monitorEjemplo3);
-		
+
 		setTitle("Camping Mudez");
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(VentanaInicio.class.getResource("/presentacion/campingMudez.png")));
@@ -131,10 +132,10 @@ public class VentanaInicio extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		this.usuarios = usuarios;
 		this.usuarioPrincipal = usuarios.getUsuario();
-		
+
 		JToolBar tbGestion = new JToolBar();
 		tbGestion.setName("tbGestion");
 		tbGestion.setBackground(colorTbGestion);
@@ -149,7 +150,8 @@ public class VentanaInicio extends JFrame {
 		tbGestion.add(verticalGlue_5);
 
 		btnGestorReservas = new JButton("Reservas");
-		btnGestorReservas.setToolTipText("Haz click para gestionar las reservas de los campings y bungalows ofertados por Campings Mudez");
+		btnGestorReservas.setToolTipText(
+				"Haz click para gestionar las reservas de los campings y bungalows ofertados por Campings Mudez");
 		btnGestorReservas.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoReservas.png")));
 		btnGestorReservas.setMargin(new Insets(10, 15, 10, 15));
 		btnGestorReservas.setBackground(colorBotonesGestion);
@@ -163,7 +165,8 @@ public class VentanaInicio extends JFrame {
 
 		btnGestorActividades = new JButton("Actividades");
 		btnGestorActividades.setToolTipText("Haz click para gestionar las actividades ofertadas por Campings Mudez");
-		btnGestorActividades.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoActividades.png")));
+		btnGestorActividades
+				.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoActividades.png")));
 		btnGestorActividades.setMargin(new Insets(10, 9, 10, 9));
 		btnGestorActividades.setBackground(colorBotonesGestion);
 		btnGestorActividades.addActionListener(new BtnSeleccionarGestorActionListener());
@@ -290,7 +293,8 @@ public class VentanaInicio extends JFrame {
 		JButton btnConfiguracion = new JButton("");
 		btnConfiguracion.addActionListener(new BtnConfiguracionActionListener());
 		btnConfiguracion.setToolTipText("Permite configurar la información de tu usuario");
-		btnConfiguracion.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoConfiguracion.png")));
+		btnConfiguracion
+				.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoConfiguracion.png")));
 		btnConfiguracion.setBackground(colorFondo);
 		btnConfiguracion.setFocusPainted(false);
 		tbUsuario.add(btnConfiguracion);
@@ -324,13 +328,44 @@ public class VentanaInicio extends JFrame {
 		final JMenuItem mntmReadMe = new JMenuItem("Acceder a la documentación en línea");
 		mntmReadMe.setBackground(colorFondo);
 		mnAyuda.add(mntmReadMe);
+
+		JMenuItem mntmManualUsuario = new JMenuItem("Accede al manual de usuario en línea");
+		mntmManualUsuario.addActionListener(new MntmManualUsuarioActionListener());
+		mnAyuda.add(mntmManualUsuario);
 	}
+
 	private class BtnSeleccionarGestorActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+			switch (arg0.getActionCommand()) {
+			case "Actividades":
+				btnGestorActividades.setBackground(colorBotonSeleccionado);
+				btnGestorMonitores.setBackground(colorBotonesGestion);
+				btnGestorReservas.setBackground(colorBotonesGestion);
+				btnRutasSenderistas.setBackground(colorBotonesGestion);
+				break;
+			case "Reservas":
+				btnGestorActividades.setBackground(colorBotonesGestion);
+				btnGestorMonitores.setBackground(colorBotonesGestion);
+				btnGestorReservas.setBackground(colorBotonSeleccionado);
+				btnRutasSenderistas.setBackground(colorBotonesGestion);
+				break;
+			case "Rutas":
+				btnGestorActividades.setBackground(colorBotonesGestion);
+				btnGestorMonitores.setBackground(colorBotonesGestion);
+				btnGestorReservas.setBackground(colorBotonesGestion);
+				btnRutasSenderistas.setBackground(colorBotonSeleccionado);
+				break;
+			case "Monitores":
+				btnGestorActividades.setBackground(colorBotonesGestion);
+				btnGestorMonitores.setBackground(colorBotonSeleccionado);
+				btnGestorReservas.setBackground(colorBotonesGestion);
+				btnRutasSenderistas.setBackground(colorBotonesGestion);
+			}
 			((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, arg0.getActionCommand());
 			pnlMenu.repaint();
 		}
 	}
+
 	private class BtnLogOutActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			ventanaLogin ventanaLogin = new ventanaLogin();
@@ -338,9 +373,24 @@ public class VentanaInicio extends JFrame {
 			ventanaLogin.getFrame().setVisible(true);
 		}
 	}
+
 	private class BtnConfiguracionActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Configuración");
 		}
-	}	
+	}
+
+	public void openWebPage(String url) {
+		try {
+			java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+		} catch (java.io.IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private class MntmManualUsuarioActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			openWebPage("https://stackoverflow.com/questions/19771836/adding-and-opening-links-on-a-jbutton");
+		}
+	}
 }

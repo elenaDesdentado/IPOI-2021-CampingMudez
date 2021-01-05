@@ -173,7 +173,7 @@ public class ventanaLogin {
 
 		pnlLogin.add(pnlTFLogin, BorderLayout.CENTER);
 		GridBagLayout gbl_pnlTFLogin = new GridBagLayout();
-		gbl_pnlTFLogin.columnWidths = new int[] { 254, 423, 182, 0 };
+		gbl_pnlTFLogin.columnWidths = new int[] { 254, 423, 254, 0 };
 		gbl_pnlTFLogin.rowHeights = new int[] { 0, 0, 0, 0, 27, 0, 37, 0, 0 };
 		gbl_pnlTFLogin.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gbl_pnlTFLogin.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -229,6 +229,7 @@ public class ventanaLogin {
 		pnlTFLogin.add(lblMensajeError, gbc_lblMensajeError);
 
 		chckbxRecuerdame = new JCheckBox("Recuérdame");
+		chckbxRecuerdame.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_chckbxRecuerdame = new GridBagConstraints();
 		gbc_chckbxRecuerdame.insets = new Insets(0, 0, 5, 5);
 		gbc_chckbxRecuerdame.gridx = 1;

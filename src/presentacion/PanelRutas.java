@@ -46,7 +46,6 @@ public class PanelRutas extends JPanel {
 
 	private Color colorFondo = new Color(255, 255, 255);
 	private Color colorBoton = new Color(159, 177, 57);
-	private Color colorBotonCritico = new Color(190, 68, 36);
 	private Color colorBarraBusqueda = new Color(231, 227, 218);
 
 	private Rutas rutasDb = new Rutas(new ArrayList<Ruta>());
@@ -237,6 +236,10 @@ public class PanelRutas extends JPanel {
 				panelRutaInfoCompleta.txtNombre.setEditable(false);
 				panelRutaInfoCompleta.spinCupo.setEnabled(false);
 				panelRutaInfoCompleta.cbDificultad.setEnabled(false);
+				panelRutaInfoCompleta.tPDescripcion.setEnabled(false);
+				panelRutaInfoCompleta.txtEncuentro.setEnabled(false);
+				panelRutaInfoCompleta.cbDia.setEnabled(false);
+				panelRutaInfoCompleta.cbHorario.setEnabled(false);
 
 				UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
 				UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);

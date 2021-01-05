@@ -99,7 +99,7 @@ public class PanelAlojamientos extends JPanel {
 						+ "Bien equipada y económica, podrá disfrutar de unas vacaciones de ensueño.",
 				43.5, 32.0, "Libre", "Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón (1 km)", true, false,
 				true, true, true, false, image1);
-		Parcela alojamientoEjemplo2 = new Parcela("Salmón", 5, "Rio Mudez",
+		Parcela alojamientoEjemplo2 = new Parcela("Salmón", 5, "Río Mudez",
 				"Una parcela que se encuentra en la misma orilla del famoso río Mudez. \nHaga realidad los recuerdos de su infancia disfrutando de un día de pesca o de baño en el río, \n"
 						+ "mientras tiene a escasos metros una vivienda de 2 pisos, 4 baños y 6 camas para descansar \ndel agotador día de natación.",
 				34.4, 23.0, "Libre", "Poca sombra", "Césped", "Río", "Gastrobar Tapas y más (5 km)", true, false, true,

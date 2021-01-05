@@ -283,11 +283,16 @@ public class PanelFormularioRutas extends JPanel {
 	private class BtnModificarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			txtNombre.setEnabled(true);
+			txtNombre.setEditable(true);
 			cbDia.setEnabled(true);
 			cbHorario.setEnabled(true);
 			spinCupo.setEnabled(true);
 			txtEncuentro.setEnabled(true);
 			cbDificultad.setEnabled(true);
+			cbDia.setEnabled(true);
+			tPDescripcion.setEnabled(true);
+			btnAplicarCambios.setEnabled(true);
+			
 		}
 	}
 
@@ -318,9 +323,14 @@ public class PanelFormularioRutas extends JPanel {
 				ruta.setDia((String) cbDia.getSelectedItem());
 				ruta.setCupo((Integer) spinCupo.getValue());
 				ruta.setDificultad((String) cbDificultad.getSelectedItem());
+				ruta.setEncuentro(txtEncuentro.getText());
 				ruta.setDescripcion(tPDescripcion.getText());
 				ruta.setHorario((String) cbHorario.getSelectedItem());
-				ruta.setFoto((ImageIcon) lblFoto.getIcon());
+				Image imagenEscalada1 = ((ImageIcon) lblFoto.getIcon()).getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+				ImageIcon foto = new ImageIcon(imagenEscalada1);
+				ruta.setFoto(foto);
+				DefaultListModel modeloRutas = (DefaultListModel) lstRutas.getModel();
+				modeloRutas.set(indice, new PanelRutaRenderer(ruta));
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null,
 						"Se ha producido un error. Por favor, asegúrese que ha rellenado al información en todos los campos.",
@@ -331,6 +341,7 @@ public class PanelFormularioRutas extends JPanel {
 	private class BtnInfoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			PanelInfoMonitoresRutas infoMons = new PanelInfoMonitoresRutas(monitoresDb);
+			infoMons.setLocationRelativeTo(null);
 			infoMons.setVisible(true);
 		}
 	}

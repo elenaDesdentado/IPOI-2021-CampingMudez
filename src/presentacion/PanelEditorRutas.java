@@ -52,6 +52,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JTextArea;
 import javax.swing.JSeparator;
 import java.awt.Dimension;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
 
 public class PanelEditorRutas extends JPanel {
 	private JLabel lblNombre;
@@ -66,7 +68,6 @@ public class PanelEditorRutas extends JPanel {
 	private JSpinner spinCupo;
 	private JTextField txtEncuentro;
 	private JComboBox cbDificultad;
-	private JLabel lblDibujo;
 	private JPanel pnlDiseño;
 	private JToolBar toolBar;
 	private JButton btnCargarMapa;
@@ -127,9 +128,10 @@ public class PanelEditorRutas extends JPanel {
 	private Monitores monitores;
 	private Rutas rutas;
 	private JList lstRutas;
-	
+
 	private JButton btnCursor;
 	private JSeparator separator;
+	private JLabel lblLeyenda;
 
 	/**
 	 * Create the panel.
@@ -141,9 +143,9 @@ public class PanelEditorRutas extends JPanel {
 		this.lstRutas = lstRutas;
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 15, 0, 133, 0, 69, 85, 0, 68, 0, 0, 0, 0 };
+		gridBagLayout.columnWidths = new int[] { 15, 0, 133, 0, 69, 85, 0, 68, 0, 0, 33, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 15, 0, 0, 0, 0, 0, 0, 38, 50, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
 				Double.MIN_VALUE };
@@ -167,26 +169,26 @@ public class PanelEditorRutas extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 
-		lblDibujo = new JLabel("Diseño de la ruta");
-		lblDibujo.setFont(new Font("Tahoma", Font.BOLD, 12));
-		GridBagConstraints gbc_lblDibujo = new GridBagConstraints();
-		gbc_lblDibujo.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblDibujo.gridwidth = 3;
-		gbc_lblDibujo.anchor = GridBagConstraints.SOUTH;
-		gbc_lblDibujo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDibujo.gridx = 5;
-		gbc_lblDibujo.gridy = 1;
-		add(lblDibujo, gbc_lblDibujo);
-		
-				btnNewButton = new JButton("Guardar ruta");
-				btnNewButton.addActionListener(new BtnNewButtonActionListener());
-				btnNewButton.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/guardar.png")));
-				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-				gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-				gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-				gbc_btnNewButton.gridx = 9;
-				gbc_btnNewButton.gridy = 1;
-				add(btnNewButton, gbc_btnNewButton);
+		btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new BtnNewButtonActionListener());
+		btnNewButton.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/guardar.png")));
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 5;
+		gbc_btnNewButton.gridy = 1;
+		add(btnNewButton, gbc_btnNewButton);
+
+		lblLeyenda = new JLabel("");
+		lblLeyenda.addMouseListener(new LblLeyendaMouseListener());
+		lblLeyenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblLeyenda.setToolTipText("Haz click para ver la leyenda del diseño de la ruta");
+		lblLeyenda.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-info.png")));
+		GridBagConstraints gbc_lblLeyenda = new GridBagConstraints();
+		gbc_lblLeyenda.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLeyenda.gridx = 10;
+		gbc_lblLeyenda.gridy = 1;
+		add(lblLeyenda, gbc_lblLeyenda);
 
 		lblDia = new JLabel("Dia que se realiza:");
 		GridBagConstraints gbc_lblDia = new GridBagConstraints();
@@ -207,6 +209,9 @@ public class PanelEditorRutas extends JPanel {
 		add(cbDia, gbc_cbDia);
 
 		pnlDiseño = new JPanel();
+		pnlDiseño.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Dise\u00F1o de la ruta", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_pnlDiseño = new GridBagConstraints();
 		gbc_pnlDiseño.gridheight = 9;
 		gbc_pnlDiseño.gridwidth = 5;
@@ -228,19 +233,19 @@ public class PanelEditorRutas extends JPanel {
 
 		btnInicio = new JButton("");
 		btnInicio.addActionListener(new BtnInicioActionListener());
-		
+
 		btnCursor = new JButton("");
 		btnCursor.setToolTipText("Pulsa para \"recuperar\" el cursor normal");
 		btnCursor.addActionListener(new BtnCursorActionListener());
-		
-				btnPapelera = new JButton("");
-				btnPapelera.setToolTipText("Pulsa para limpiar lo que este dibujado sobre la imagen");
-				btnPapelera.addActionListener(new BtnPapeleraActionListener());
-				btnPapelera.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-papelera.png")));
-				toolBar.add(btnPapelera);
+
+		btnPapelera = new JButton("");
+		btnPapelera.setToolTipText("Pulsa para limpiar lo que este dibujado sobre la imagen");
+		btnPapelera.addActionListener(new BtnPapeleraActionListener());
+		btnPapelera.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-papelera.png")));
+		toolBar.add(btnPapelera);
 		btnCursor.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-cursor.png")));
 		toolBar.add(btnCursor);
-		
+
 		separator = new JSeparator();
 		separator.setMinimumSize(new Dimension(10, 0));
 		separator.setPreferredSize(new Dimension(10, 2));
@@ -250,7 +255,7 @@ public class PanelEditorRutas extends JPanel {
 
 		btnMeta = new JButton("");
 		btnMeta.addActionListener(new BtnMetaActionListener());
-		btnMeta.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-meta.png")));
+		btnMeta.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-final.png")));
 		toolBar.add(btnMeta);
 
 		btnMirador = new JButton("");
@@ -356,14 +361,14 @@ public class PanelEditorRutas extends JPanel {
 		miAreaDibujo.addMouseListener(new MiAreaDibujoMouseListener());
 		miAreaDibujo.setIcon(null);
 		spDibujo.setViewportView(miAreaDibujo);
-		
-				lblDescripcion = new JLabel("Descripción:");
-				GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
-				gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
-				gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
-				gbc_lblDescripcion.gridx = 1;
-				gbc_lblDescripcion.gridy = 7;
-				add(lblDescripcion, gbc_lblDescripcion);
+
+		lblDescripcion = new JLabel("Descripción:");
+		GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
+		gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
+		gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDescripcion.gridx = 1;
+		gbc_lblDescripcion.gridy = 7;
+		add(lblDescripcion, gbc_lblDescripcion);
 
 		scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -381,14 +386,14 @@ public class PanelEditorRutas extends JPanel {
 		// Creación de imágenes y cursores
 		toolkit = Toolkit.getDefaultToolkit();
 		imagInicio = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-inicio.png"));
-		imagMeta = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-meta.png"));
+		imagMeta = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-final.png"));
 		imagMirador = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-mirador.png"));
 		imagFuente = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-fuente-agua.png"));
 		imagRupestre = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-rupestre.png"));
 		imagMerendero = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-merendero.png"));
 		imagLinea = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-linea.png"));
 		imagCursorInicio = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-inicio.png"));
-		imagCursorMeta = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-meta.png"));
+		imagCursorMeta = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-final.png"));
 		imagCursorFuente = toolkit
 				.getImage(getClass().getClassLoader().getResource("presentacion/icono-fuente-agua.png"));
 		imagCursorMirador = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-mirador.png"));
@@ -465,7 +470,6 @@ public class PanelEditorRutas extends JPanel {
 	private class BtnLineaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			modo = LINEA;
-			setCursor(cursorLinea);
 		}
 	}
 
@@ -529,7 +533,6 @@ public class PanelEditorRutas extends JPanel {
 
 	private class BtnNewButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("ME HAS PINCHASOOOOOO");
 			Image image = null;
 			if (txtNombre.getText().length() < 10 || txtEncuentro.getText().length() < 10
 					|| tADescripcion.getText().length() < 20)
@@ -563,16 +566,26 @@ public class PanelEditorRutas extends JPanel {
 				nuevaRuta.setFoto(foto);
 				rutas.addRuta(nuevaRuta);
 				PanelRutaRenderer nuevoPanel = new PanelRutaRenderer(nuevaRuta);
-				((DefaultListModel)lstRutas.getModel()).addElement(nuevoPanel);
+				((DefaultListModel) lstRutas.getModel()).addElement(nuevoPanel);
 				JOptionPane.showConfirmDialog(null, "La ruta se guardo correctamente", "Ruta guardada",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
 			}
 		}
 	}
+
 	private class BtnCursorActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			setCursor(Cursor.getDefaultCursor());
+		}
+	}
+
+	private class LblLeyendaMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			JOptionPane.showConfirmDialog(null,
+					"De izquierda a derecha, el significado de los botones es el siguiente:\nCargar la imagen de un mapa\nLimpiar la imagen\nRecuperar el cursor\nComienzo de la ruta\nMeta\nMirador\nFuente\nPintura rupestre\nMerendero\nTrazar una linea",
+					"Leyenda de los botones", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }
