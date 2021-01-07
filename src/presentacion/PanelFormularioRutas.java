@@ -87,7 +87,7 @@ public class PanelFormularioRutas extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 30, 0, 67, 219, 111, 97, 0, 40, 0 };
 		gridBagLayout.rowHeights = new int[] { 27, 28, 21, 0, 0, 0, 0, 0, 0, 0, 20, 0, 15, 42, 40, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
@@ -150,7 +150,6 @@ public class PanelFormularioRutas extends JPanel {
 		cbDia = new JComboBox();
 		cbDia.setModel(new DefaultComboBoxModel(new String[] {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"}));
 		GridBagConstraints gbc_cbDia = new GridBagConstraints();
-		gbc_cbDia.gridwidth = 2;
 		gbc_cbDia.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDia.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbDia.gridx = 5;
@@ -168,7 +167,6 @@ public class PanelFormularioRutas extends JPanel {
 		cbHorario = new JComboBox();
 		cbHorario.setModel(new DefaultComboBoxModel(new String[] {"8:00 - 10:00", "9:00 - 10:15", "10:15 - 11:30", "11:00 - 14:00", "11:15 - 12:45", "17:30 - 19:30", "18:30 - 20:00"}));
 		GridBagConstraints gbc_cbHorario = new GridBagConstraints();
-		gbc_cbHorario.gridwidth = 2;
 		gbc_cbHorario.insets = new Insets(0, 0, 5, 5);
 		gbc_cbHorario.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbHorario.gridx = 5;
@@ -242,7 +240,6 @@ public class PanelFormularioRutas extends JPanel {
 		cbDificultad = new JComboBox();
 		cbDificultad.setModel(new DefaultComboBoxModel(new String[] {"Baja", "Media", "Alta", "Extrema"}));
 		GridBagConstraints gbc_cbDificultad = new GridBagConstraints();
-		gbc_cbDificultad.gridwidth = 2;
 		gbc_cbDificultad.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDificultad.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbDificultad.gridx = 5;
