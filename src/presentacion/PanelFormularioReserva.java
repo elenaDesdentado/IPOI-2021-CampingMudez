@@ -368,6 +368,7 @@ public class PanelFormularioReserva extends JPanel {
 		scrollPane.setViewportView(lstServicios);
 
 		tAComentarios = new JTextArea();
+		tAComentarios.setWrapStyleWord(true);
 		tAComentarios.setBackground(Color.LIGHT_GRAY);
 		tAComentarios.setRows(5);
 		tAComentarios.setLineWrap(true);

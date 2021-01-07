@@ -259,6 +259,7 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblDescripcion, gbc_lblDescripcion);
 
 		tADescripcion = new JTextArea();
+		tADescripcion.setWrapStyleWord(true);
 		tADescripcion.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		tADescripcion.setLineWrap(true);
 		GridBagConstraints gbc_tADescripcion = new GridBagConstraints();

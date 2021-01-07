@@ -381,6 +381,8 @@ public class PanelEditorRutas extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 
 		tADescripcion = new JTextArea();
+		tADescripcion.setLineWrap(true);
+		tADescripcion.setWrapStyleWord(true);
 		scrollPane.setViewportView(tADescripcion);
 
 		// Creación de imágenes y cursores
