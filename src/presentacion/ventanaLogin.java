@@ -413,6 +413,10 @@ public class ventanaLogin {
 			MessagesPanelMonitorRenderer.setIdioma("inglés");
 			MessagesPanelRutaRenderer.setIdioma("inglés");
 			MessagesPanelConfiguracion.setIdioma("inglés");
+			MessagesPanelActividadRenderer.setIdioma("inglés");
+			MessagesPanelAlojamientoRenderer.setIdioma("inglés");
+			MessagesPanelEditorRutas.setIdioma("inglés");
+			MessagesFormularioReservaRealizada.setIdioma("inglés");
 		}
 	}
 	private class BtnEspaniolActionListener implements ActionListener {
@@ -433,6 +437,10 @@ public class ventanaLogin {
 			MessagesPanelMonitorRenderer.setIdioma("");
 			MessagesPanelRutaRenderer.setIdioma("");
 			MessagesPanelConfiguracion.setIdioma("");
+			MessagesPanelActividadRenderer.setIdioma("");
+			MessagesPanelAlojamientoRenderer.setIdioma("");
+			MessagesPanelEditorRutas.setIdioma("");
+			MessagesFormularioReservaRealizada.setIdioma("");
 		}
 	}
 }

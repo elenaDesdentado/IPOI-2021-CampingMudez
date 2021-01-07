@@ -27,7 +27,7 @@ public class PanelActividadRenderer extends JPanel {
 	 */
 	public PanelActividadRenderer(Actividad actividad) {
 		this.actividad = actividad;
-		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informaci\u00F3n de la actividad", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(64, 64, 64)));
+		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), MessagesPanelActividadRenderer.getString("PanelActividadRenderer.this.borderTitle"), TitledBorder.LEADING, TitledBorder.TOP, null, new Color(64, 64, 64))); //$NON-NLS-1$
 		setLayout(null);
 
 		lblFoto = new JLabel("");
@@ -37,7 +37,7 @@ public class PanelActividadRenderer extends JPanel {
 
 		lblNombre = new JLabel(actividad.getNombre());
 		lblNombre.setFont(new Font("Verdana", Font.BOLD, 14));
-		lblNombre.setToolTipText("Nombre del actividad");
+		lblNombre.setToolTipText(MessagesPanelActividadRenderer.getString("PanelActividadRenderer.lblNombre.toolTipText")); //$NON-NLS-1$
 		lblNombre.setBounds(177, 29, 263, 29);
 		add(lblNombre);
 

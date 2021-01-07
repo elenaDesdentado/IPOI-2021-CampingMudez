@@ -37,7 +37,7 @@ public class PanelAlojamientoRenderer extends JPanel {
 	public PanelAlojamientoRenderer(Alojamiento alojamiento) {
 
 		this.alojamiento = alojamiento;
-		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informaci\u00F3n del Alojamiento", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(64, 64, 64)));
+		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), MessagesPanelAlojamientoRenderer.getString("PanelAlojamientoRenderer.this.borderTitle"), TitledBorder.LEADING, TitledBorder.TOP, null, new Color(64, 64, 64))); //$NON-NLS-1$
 		setLayout(null);
 
 		lblFoto = new JLabel("");
@@ -47,7 +47,7 @@ public class PanelAlojamientoRenderer extends JPanel {
 
 		lblNombre = new JLabel(alojamiento.getNombre());
 		lblNombre.setFont(new Font("Verdana", Font.BOLD, 14));
-		lblNombre.setToolTipText("Nombre del Alojamiento");
+		lblNombre.setToolTipText(MessagesPanelAlojamientoRenderer.getString("PanelAlojamientoRenderer.lblNombre.toolTipText")); //$NON-NLS-1$
 		lblNombre.setBounds(177, 21, 263, 29);
 		add(lblNombre);
 
@@ -99,7 +99,7 @@ public class PanelAlojamientoRenderer extends JPanel {
 		lblValoracion.setBounds(177, 174, 208, 21);
 		add(lblValoracion);
 
-		lblClientes = new JLabel("Valoración de los clientes:");
+		lblClientes = new JLabel(MessagesPanelAlojamientoRenderer.getString("PanelAlojamientoRenderer.lblClientes.text")); //$NON-NLS-1$
 		lblClientes.setFont(new Font("Verdana", Font.PLAIN, 12));
 		lblClientes.setBounds(10, 175, 164, 21);
 		add(lblClientes);

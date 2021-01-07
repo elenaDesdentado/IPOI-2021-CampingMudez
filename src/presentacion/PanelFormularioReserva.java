@@ -83,7 +83,7 @@ public class PanelFormularioReserva extends JPanel {
 	private String nombreAlojamiento;
 	private JLabel lblDNI;
 	private JFormattedTextField ftxtDNI;
-	private String patron = "[0-9]{7,8}[A-Z a-z]";
+	private String patron = "[0-9]{7,8}[A-Z a-z]"; //$NON-NLS-1$
 
 	/*
 	 * Variables para determinar si actualizar la barra de progreso
@@ -140,7 +140,7 @@ public class PanelFormularioReserva extends JPanel {
 		gbc_lblFechaEntrada.gridy = 2;
 		add(lblFechaEntrada, gbc_lblFechaEntrada);
 
-		dcEntrada = new JDateChooser("yyyy-MM-dd", "####-##-##", '_');
+		dcEntrada = new JDateChooser("yyyy-MM-dd", "####-##-##", '_'); //$NON-NLS-1$ //$NON-NLS-2$
 		DcPropertyChangeListener listener = new DcPropertyChangeListener(updateDCE);
 		dcEntrada.addPropertyChangeListener(listener);
 		GridBagConstraints gbc_dcEntrada = new GridBagConstraints();
@@ -159,7 +159,7 @@ public class PanelFormularioReserva extends JPanel {
 		gbc_lblFechaSalida.gridy = 3;
 		add(lblFechaSalida, gbc_lblFechaSalida);
 
-		dcSalida = new JDateChooser("yyyy-MM-dd", "####-##-##", '_');
+		dcSalida = new JDateChooser("yyyy-MM-dd", "####-##-##", '_'); //$NON-NLS-1$ //$NON-NLS-2$
 		DcPropertyChangeListener list = new DcPropertyChangeListener(updateDCS);
 		dcSalida.addPropertyChangeListener(list);
 		GridBagConstraints gbc_dcSalida = new GridBagConstraints();
@@ -180,7 +180,7 @@ public class PanelFormularioReserva extends JPanel {
 		add(calendar, gbc_calendar);
 
 		btnCalcularPrecio = new JButton(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.btnCalcularPrecio.text")); //$NON-NLS-1$
-		btnCalcularPrecio.setIcon(new ImageIcon(PanelFormularioReserva.class.getResource("/presentacion/euro.png")));
+		btnCalcularPrecio.setIcon(new ImageIcon(PanelFormularioReserva.class.getResource("/presentacion/euro.png"))); //$NON-NLS-1$
 		btnCalcularPrecio.addActionListener(new BtnCalcularPrecioActionListener());
 		GridBagConstraints gbc_btnCalcularPrecio = new GridBagConstraints();
 		gbc_btnCalcularPrecio.insets = new Insets(0, 0, 5, 5);
@@ -198,7 +198,7 @@ public class PanelFormularioReserva extends JPanel {
 
 		txtNombreApellidos = new JTextField();
 		txtNombreApellidos.getDocument().addDocumentListener(new miDocumentListener());
-		txtNombreApellidos.getDocument().putProperty("name", "txtNombreApellidos");
+		txtNombreApellidos.getDocument().putProperty("name", "txtNombreApellidos"); //$NON-NLS-1$ //$NON-NLS-2$
 		GridBagConstraints gbc_txtNombreApellidos = new GridBagConstraints();
 		gbc_txtNombreApellidos.gridwidth = 4;
 		gbc_txtNombreApellidos.insets = new Insets(0, 0, 5, 5);
@@ -208,7 +208,7 @@ public class PanelFormularioReserva extends JPanel {
 		add(txtNombreApellidos, gbc_txtNombreApellidos);
 		txtNombreApellidos.setColumns(10);
 
-		lblAlojamiento = new JLabel("<html>Alojamiento: <b>" + nombreAlojamiento + "</b></html>");
+		lblAlojamiento = new JLabel(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.LabelAlojamiento") + nombreAlojamiento + "</b></html>"); //$NON-NLS-1$ //$NON-NLS-2$
 		GridBagConstraints gbc_lblAlojamiento = new GridBagConstraints();
 		gbc_lblAlojamiento.anchor = GridBagConstraints.WEST;
 		gbc_lblAlojamiento.insets = new Insets(0, 0, 5, 5);
@@ -216,7 +216,7 @@ public class PanelFormularioReserva extends JPanel {
 		gbc_lblAlojamiento.gridy = 6;
 		add(lblAlojamiento, gbc_lblAlojamiento);
 
-		lblDNI = new JLabel("DNI/NIF:");
+		lblDNI = new JLabel("DNI/NIF:"); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDNI = new GridBagConstraints();
 		gbc_lblDNI.anchor = GridBagConstraints.EAST;
 		gbc_lblDNI.insets = new Insets(0, 0, 5, 5);
@@ -226,7 +226,7 @@ public class PanelFormularioReserva extends JPanel {
 
 		MaskFormatter formatoDNI;
 		try {
-			formatoDNI = new MaskFormatter("########U");
+			formatoDNI = new MaskFormatter("########U"); //$NON-NLS-1$
 			formatoDNI.setPlaceholderCharacter('X');
 			ftxtDNI = new JFormattedTextField(formatoDNI);
 		} catch (ParseException e) {
@@ -249,7 +249,7 @@ public class PanelFormularioReserva extends JPanel {
 
 		MaskFormatter formatoMovil;
 		try {
-			formatoMovil = new MaskFormatter("###' ##' ##' ##");
+			formatoMovil = new MaskFormatter("###' ##' ##' ##"); //$NON-NLS-1$
 			formatoMovil.setPlaceholderCharacter('*');
 			ftxtMovil = new JFormattedTextField(formatoMovil);
 		} catch (ParseException e) {
@@ -273,7 +273,7 @@ public class PanelFormularioReserva extends JPanel {
 
 		MaskFormatter formatoFijo;
 		try {
-			formatoFijo = new MaskFormatter("###' ##' ##' ##");
+			formatoFijo = new MaskFormatter("###' ##' ##' ##"); //$NON-NLS-1$
 			formatoFijo.setPlaceholderCharacter('*');
 			ftxtFijo = new JFormattedTextField(formatoFijo);
 		} catch (ParseException e) {
@@ -297,7 +297,7 @@ public class PanelFormularioReserva extends JPanel {
 
 		txtEmail = new JTextField();
 		txtEmail.getDocument().addDocumentListener(new miDocumentListener());
-		txtEmail.getDocument().putProperty("name", "txtEmail");
+		txtEmail.getDocument().putProperty("name", "txtEmail"); //$NON-NLS-1$ //$NON-NLS-2$
 		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
 		gbc_txtEmail.gridwidth = 4;
 		gbc_txtEmail.insets = new Insets(0, 0, 5, 5);
@@ -392,8 +392,8 @@ public class PanelFormularioReserva extends JPanel {
 		btnReservar = new JButton(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.btnReservar.text")); //$NON-NLS-1$
 		btnReservar.addActionListener(new BtnReservarActionListener());
 
-		btnAtras = new JButton("");
-		btnAtras.setIcon(new ImageIcon(PanelFormularioReserva.class.getResource("/presentacion/flecha-hacia-atras.png")));
+		btnAtras = new JButton(""); //$NON-NLS-1$
+		btnAtras.setIcon(new ImageIcon(PanelFormularioReserva.class.getResource("/presentacion/flecha-hacia-atras.png"))); //$NON-NLS-1$
 		btnAtras.addActionListener(new BtnAtrasActionListener());
 		
 		txtPrecioTotal = new JTextField();
@@ -406,7 +406,7 @@ public class PanelFormularioReserva extends JPanel {
 		add(txtPrecioTotal, gbc_txtPrecioTotal);
 		txtPrecioTotal.setColumns(10);
 		
-		lblSimboloEuros = new JLabel("€");
+		lblSimboloEuros = new JLabel("€"); //$NON-NLS-1$
 		GridBagConstraints gbc_lblSimboloEuros = new GridBagConstraints();
 		gbc_lblSimboloEuros.anchor = GridBagConstraints.WEST;
 		gbc_lblSimboloEuros.insets = new Insets(0, 0, 5, 5);
@@ -432,29 +432,29 @@ public class PanelFormularioReserva extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (txtPrecioTotal.getText().length() == 0) {
 				JOptionPane.showMessageDialog(null,
-						"Por favor, presione primero \"Calcular precio\" para saber el precio de su reserva",
-						"No se pudo realizar la reserva", JOptionPane.ERROR_MESSAGE);
+						MessagesPanelFormularioReserva.getString("PanelFormularioReserva.PrimeroCalcular"), //$NON-NLS-1$
+						MessagesPanelFormularioReserva.getString("PanelFormularioReserva.NoSePudoReservar"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 			} else {
 				boolean condicionCamposRellenados = !ftxtDNI.getText().matches(patron)
-						|| ftxtMovil.getText().contains("*") || ftxtFijo.getText().contains("*")
-						|| txtNombreApellidos.getText().length() < 12 || txtEmail.getText().length() < 16 || !txtEmail.getText().contains("@");
+						|| ftxtMovil.getText().contains("*") || ftxtFijo.getText().contains("*") //$NON-NLS-1$ //$NON-NLS-2$
+						|| txtNombreApellidos.getText().length() < 12 || txtEmail.getText().length() < 16 || !txtEmail.getText().contains("@"); //$NON-NLS-1$
 				if (condicionCamposRellenados) {
-					JOptionPane.showMessageDialog(null, "Por favor, rellena todas las entradas de la reserva.",
-							"Entradas vacías", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, MessagesPanelFormularioReserva.getString("PanelFormularioReserva.RellenaTodasEntradas"), //$NON-NLS-1$
+							MessagesPanelFormularioReserva.getString("PanelFormularioReserva.EntradasVacias"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 				} else {
 					if (sonFechasValidas()) {
 						progressBar.setValue(100);
-						String[] opciones = { "Sí", "No" };
-						int seleccion = JOptionPane.showOptionDialog(null, "¿Está seguro de realizar la reserva?",
-								"¿Realizar reserva?", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+						String[] opciones = { MessagesPanelFormularioReserva.getString("PanelFormularioReserva.OpcionSi"), MessagesPanelFormularioReserva.getString("PanelFormularioReserva.OpcionNo") }; //$NON-NLS-1$ //$NON-NLS-2$
+						int seleccion = JOptionPane.showOptionDialog(null, MessagesPanelFormularioReserva.getString("PanelFormularioReserva.ConfirmarReserva"), //$NON-NLS-1$
+								MessagesPanelFormularioReserva.getString("PanelFormularioReserva.PreguntaRealizarReserva"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, //$NON-NLS-1$
 								opciones, opciones[0]);
 						if (seleccion == 0) {
-							JOptionPane.showMessageDialog(null, "La reserva se ha realizado con éxito.",
-									"Reserva realizada", JOptionPane.INFORMATION_MESSAGE);
-							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+							JOptionPane.showMessageDialog(null, MessagesPanelFormularioReserva.getString("PanelFormularioReserva.ExitoReserva"), //$NON-NLS-1$
+									MessagesPanelFormularioReserva.getString("PanelFormularioReserva.TituloExitoReserva"), JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
+							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); //$NON-NLS-1$
 							String entrada = sdf.format(dcEntrada.getDate());
 							String salida = sdf.format(dcSalida.getDate());
-							alojamiento.getFechasReservadas().add(entrada + ";" + salida);
+							alojamiento.getFechasReservadas().add(entrada + ";" + salida); //$NON-NLS-1$
 							boolean isParcela = false;
 							if (alojamiento instanceof Parcela)
 								isParcela = true;
@@ -495,15 +495,15 @@ public class PanelFormularioReserva extends JPanel {
 		public void removeUpdateProgressBar(DocumentEvent e) {
 
 			Document doc = (Document) e.getDocument();
-			switch ((String) doc.getProperty("name")) {
-			case "txtNombreApellidos":
-				if (txtNombreApellidos.getText().equals("")) {
+			switch ((String) doc.getProperty("name")) { //$NON-NLS-1$
+			case "txtNombreApellidos": //$NON-NLS-1$
+				if (txtNombreApellidos.getText().equals("")) { //$NON-NLS-1$
 					progressBar.setValue(progressBar.getValue() - 15);
 					updateNA = true;
 				}
 				break;
-			case "txtEmail":
-				if (txtEmail.getText().equals("")) {
+			case "txtEmail": //$NON-NLS-1$
+				if (txtEmail.getText().equals("")) { //$NON-NLS-1$
 					progressBar.setValue(progressBar.getValue() - 44);
 					updateEM = true;
 				}
@@ -512,16 +512,16 @@ public class PanelFormularioReserva extends JPanel {
 
 		public void updateProgressBar(DocumentEvent e) {
 			Document doc = (Document) e.getDocument();
-			switch ((String) doc.getProperty("name")) {
-			case "txtNombreApellidos":
+			switch ((String) doc.getProperty("name")) { //$NON-NLS-1$
+			case "txtNombreApellidos": //$NON-NLS-1$
 				if (txtNombreApellidos.getText().length() >= 12 && updateNA) {
 					progressBar.setValue(progressBar.getValue() + 15);
 					updateNA = false;
 				}
 				break;
-			case "txtEmail":
-				boolean condicion = ftxtDNI.getText().matches(patron) && !ftxtMovil.getText().contains("*")
-						&& !ftxtFijo.getText().contains("*");
+			case "txtEmail": //$NON-NLS-1$
+				boolean condicion = ftxtDNI.getText().matches(patron) && !ftxtMovil.getText().contains("*") //$NON-NLS-1$
+						&& !ftxtFijo.getText().contains("*"); //$NON-NLS-1$
 				if (txtEmail.getText().length() >= 16 && updateEM && condicion) {
 					progressBar.setValue(progressBar.getValue() + 44);
 					updateEM = false;
@@ -539,7 +539,7 @@ public class PanelFormularioReserva extends JPanel {
 		}
 
 		public void propertyChange(PropertyChangeEvent evt) {
-			if ("date".equals(evt.getPropertyName()) && updater) {
+			if ("date".equals(evt.getPropertyName()) && updater) { //$NON-NLS-1$
 				progressBar.setValue(progressBar.getValue() + 15);
 				this.updater = false;
 			}
@@ -557,35 +557,35 @@ public class PanelFormularioReserva extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			double precioServicios = 0;
 			if (dcEntrada.getDate() == null || dcSalida.getDate() == null) {
-				JOptionPane.showMessageDialog(null, "Introduzca una fecha de entrada y otra de salida.",
-						"Fechas vacías", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, MessagesPanelFormularioReserva.getString("PanelFormularioReserva.IntroduceDosFechas"), //$NON-NLS-1$
+						MessagesPanelFormularioReserva.getString("PanelFormularioReserva.TitulointroduceDosFechas"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 			} else {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); //$NON-NLS-1$
 				String entrada = sdf.format(dcEntrada.getDate());
 				String salida = sdf.format(dcSalida.getDate());
 				if (sonFechasValidas()) {
 					for (String servicio : servicios) {
-						if (servicio.contains("golf"))
+						if (servicio.contains("golf")) //$NON-NLS-1$
 							precioServicios += 50;
-						else if (servicio.contains("corriente"))
+						else if (servicio.contains("corriente")) //$NON-NLS-1$
 							precioServicios += 20;
-						else if (servicio.contains("Parking"))
+						else if (servicio.contains("Parking")) //$NON-NLS-1$
 							precioServicios += 15;
-						else if (servicio.contains("WiFi"))
+						else if (servicio.contains("WiFi")) //$NON-NLS-1$
 							precioServicios += 10;
-						else if (servicio.contains("acampada"))
+						else if (servicio.contains("acampada")) //$NON-NLS-1$
 							precioServicios += 18;
-						else if (servicio.contains("animales"))
+						else if (servicio.contains("animales")) //$NON-NLS-1$
 							precioServicios += 5;
-						else if (servicio.contains("carbón"))
+						else if (servicio.contains("carbón")) //$NON-NLS-1$
 							precioServicios += 5;
-						else if (servicio.contains("garaje"))
+						else if (servicio.contains("garaje")) //$NON-NLS-1$
 							precioServicios += 15;
-						else if (servicio.contains("extra"))
+						else if (servicio.contains("extra")) //$NON-NLS-1$
 							precioServicios += 10;
-						else if (servicio.contains("limpieza"))
+						else if (servicio.contains("limpieza")) //$NON-NLS-1$
 							precioServicios += 15;
-						else if (servicio.contains("Lavavajillas"))
+						else if (servicio.contains("Lavavajillas")) //$NON-NLS-1$
 							precioServicios += 10;
 					}
 					LocalDate d1 = LocalDate.parse(entrada, DateTimeFormatter.ISO_LOCAL_DATE);
@@ -599,23 +599,23 @@ public class PanelFormularioReserva extends JPanel {
 	}
 
 	public boolean sonFechasValidas() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); //$NON-NLS-1$
 		Date fechaEntrada = new Date();
 		Date fechaSalida = new Date();
 		Date diaHoy = new Date();
 		if (dcEntrada.getDate().after(dcSalida.getDate())) {
-			JOptionPane.showMessageDialog(null, "La fecha de entrada debe ser previa a la de salida", "Fechas erroneas",
+			JOptionPane.showMessageDialog(null, MessagesPanelFormularioReserva.getString("PanelFormularioReserva.EntradaPreviaSalida"), MessagesPanelFormularioReserva.getString("PanelFormularioReserva.TituloEntradaPreviaSalida"), //$NON-NLS-1$ //$NON-NLS-2$
 					JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else if(dcEntrada.getDate().before(diaHoy) || dcSalida.getDate().before(diaHoy)) {
 			JOptionPane.showMessageDialog(null,
-					"Las fechas seleccionadas no pueden ser previas al dia de hoy",
-					"Fechas antiguas", JOptionPane.ERROR_MESSAGE);
+					MessagesPanelFormularioReserva.getString("PanelFormularioReserva.PreviasHoy"), //$NON-NLS-1$
+					MessagesPanelFormularioReserva.getString("PanelFormularioReserva.TituloPreviasHoy"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 			return false;
 		}
 		else {
 			for (String rangoFechas : fechasReservadas) {
-				String[] fechas = rangoFechas.split(";");
+				String[] fechas = rangoFechas.split(";"); //$NON-NLS-1$
 				try {
 					fechaEntrada = sdf.parse(fechas[0]);
 					fechaSalida = sdf.parse(fechas[1]);
@@ -625,15 +625,15 @@ public class PanelFormularioReserva extends JPanel {
 				if (fechaEntrada.equals(dcEntrada.getDate()) || !(fechaEntrada.compareTo(dcEntrada.getDate())
 						* fechaSalida.compareTo(dcEntrada.getDate()) > 0)) {
 					JOptionPane.showMessageDialog(null,
-							"La fecha de entrada seleccionada ya ha sido reservada previamente",
-							"Fecha de entrada ya reservada", JOptionPane.ERROR_MESSAGE);
+							MessagesPanelFormularioReserva.getString("PanelFormularioReserva.FechaEntradaReservada"), //$NON-NLS-1$
+							MessagesPanelFormularioReserva.getString("PanelFormularioReserva.TituloEntradaYaReservada"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 					return false;
 				}
 				if (fechaSalida.equals(dcSalida.getDate()) || !(fechaEntrada.compareTo(dcSalida.getDate())
 						* fechaSalida.compareTo(dcSalida.getDate()) > 0)) {
 					JOptionPane.showMessageDialog(null,
-							"La fecha de salida seleccionada ya ha sido reservada previamente",
-							"Fecha de salida ya reservada", JOptionPane.ERROR_MESSAGE);
+							MessagesPanelFormularioReserva.getString("PanelFormularioReserva.SalidaYaReservada"), //$NON-NLS-1$
+							MessagesPanelFormularioReserva.getString("PanelFormularioReserva.TiutuloSalidaYaReservada"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 					return false;
 				}
 			}

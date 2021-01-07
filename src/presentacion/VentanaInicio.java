@@ -361,35 +361,6 @@ public class VentanaInicio extends JFrame {
 				btnRutasSenderistas.setBackground(colorBotonesGestion);
 				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Monitores");
 			}
-			/*switch (arg0.getActionCommand()) {
-			case "Actividades":
-				btnGestorActividades.setBackground(colorBotonSeleccionado);
-				btnGestorMonitores.setBackground(colorBotonesGestion);
-				btnGestorReservas.setBackground(colorBotonesGestion);
-				btnRutasSenderistas.setBackground(colorBotonesGestion);
-				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Actividades");
-				break;
-			case "Reservas":
-				btnGestorActividades.setBackground(colorBotonesGestion);
-				btnGestorMonitores.setBackground(colorBotonesGestion);
-				btnGestorReservas.setBackground(colorBotonSeleccionado);
-				btnRutasSenderistas.setBackground(colorBotonesGestion);
-				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Reservas");
-				break;
-			case "Rutas":
-				btnGestorActividades.setBackground(colorBotonesGestion);
-				btnGestorMonitores.setBackground(colorBotonesGestion);
-				btnGestorReservas.setBackground(colorBotonesGestion);
-				btnRutasSenderistas.setBackground(colorBotonSeleccionado);
-				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Rutas");
-				break;
-			case "Monitores":
-				btnGestorActividades.setBackground(colorBotonesGestion);
-				btnGestorMonitores.setBackground(colorBotonSeleccionado);
-				btnGestorReservas.setBackground(colorBotonesGestion);
-				btnRutasSenderistas.setBackground(colorBotonesGestion);
-				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Monitores");
-			}*/
 			pnlMenu.repaint();
 		}
 	}

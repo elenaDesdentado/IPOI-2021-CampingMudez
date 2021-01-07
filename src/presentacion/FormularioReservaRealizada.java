@@ -123,7 +123,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 
 		btnGuardar = new JButton("");
-		btnGuardar.setToolTipText("Pulse para guardar la información de la reserva en formato PDF");
+		btnGuardar.setToolTipText(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.btnGuardar.toolTipText")); //$NON-NLS-1$
 		btnGuardar.setIcon(new ImageIcon(FormularioReservaRealizada.class.getResource("/presentacion/guardar.png")));
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
@@ -132,7 +132,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(btnGuardar, gbc_btnGuardar);
 		
 				btnImpresora = new JButton("");
-				btnImpresora.setToolTipText("Pulse para imprimir la información de la reserva");
+				btnImpresora.setToolTipText(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.btnImpresora.toolTipText")); //$NON-NLS-1$
 				btnImpresora
 						.setIcon(new ImageIcon(FormularioReservaRealizada.class.getResource("/presentacion/impresora.png")));
 				GridBagConstraints gbc_btnImpresora = new GridBagConstraints();
@@ -161,7 +161,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(panel, gbc_panel);
 		panel.setLayout(new GridLayout(6, 0, 0, 0));
 		
-		lblDireccion = new JLabel("Avenida Los Pajaritos, 4, Cuenca, España");
+		lblDireccion = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblDireccion.text")); //$NON-NLS-1$
 		panel.add(lblDireccion);
 		
 		lblTelefono = new JLabel("969 89 92 25");
@@ -194,7 +194,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(txtSeparador, gbc_txtSeparador);
 		txtSeparador.setColumns(10);
 
-		lblIconoCliente = new JLabel("Cliente");
+		lblIconoCliente = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblIconoCliente.text")); //$NON-NLS-1$
 		lblIconoCliente
 				.setIcon(new ImageIcon(FormularioReservaRealizada.class.getResource("/presentacion/cliente.png")));
 		GridBagConstraints gbc_lblIconoCliente = new GridBagConstraints();
@@ -204,7 +204,7 @@ public class FormularioReservaRealizada extends JFrame {
 		gbc_lblIconoCliente.gridy = 4;
 		contentPane.add(lblIconoCliente, gbc_lblIconoCliente);
 
-		lblIconoInformacion = new JLabel("Información");
+		lblIconoInformacion = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblIconoInformacion.text")); //$NON-NLS-1$
 		lblIconoInformacion
 				.setIcon(new ImageIcon(FormularioReservaRealizada.class.getResource("/presentacion/informacion.png")));
 		GridBagConstraints gbc_lblIconoInformacion = new GridBagConstraints();
@@ -231,7 +231,7 @@ public class FormularioReservaRealizada extends JFrame {
 		gbc_lblDNI.gridy = 6;
 		contentPane.add(lblDNI, gbc_lblDNI);
 
-		lblMovil = new JLabel("Teléfono móvil: ");
+		lblMovil = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblMovil.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblMovil = new GridBagConstraints();
 		gbc_lblMovil.anchor = GridBagConstraints.EAST;
 		gbc_lblMovil.insets = new Insets(0, 0, 5, 5);
@@ -251,7 +251,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(txtMovil, gbc_txtMovil);
 		txtMovil.setColumns(10);
 		
-		tAInformacion = new JTextArea("La reserva se ha realizado con éxito y se \nencuentra confirmada. Gracias por confiar \nen nosotros.");
+		tAInformacion = new JTextArea(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.tAInformacion.text")); //$NON-NLS-1$
 		tAInformacion.setEditable(false);
 		GridBagConstraints gbc_tAInformacion = new GridBagConstraints();
 		gbc_tAInformacion.gridwidth = 2;
@@ -261,7 +261,7 @@ public class FormularioReservaRealizada extends JFrame {
 		gbc_tAInformacion.gridy = 7;
 		contentPane.add(tAInformacion, gbc_tAInformacion);
 
-		lblFijo = new JLabel("Teléfono fijo: ");
+		lblFijo = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblFijo.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblFijo = new GridBagConstraints();
 		gbc_lblFijo.anchor = GridBagConstraints.EAST;
 		gbc_lblFijo.insets = new Insets(0, 0, 5, 5);
@@ -281,7 +281,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(txtFijo, gbc_txtFijo);
 		txtFijo.setColumns(10);
 
-		lblEmail = new JLabel("Correo electrónico: ");
+		lblEmail = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblEmail.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
@@ -301,7 +301,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(txtEmail, gbc_txtEmail);
 		txtEmail.setColumns(10);
 
-		lblOcupantes = new JLabel("Número de ocupantes:");
+		lblOcupantes = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblOcupantes.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblOcupantes = new GridBagConstraints();
 		gbc_lblOcupantes.anchor = GridBagConstraints.EAST;
 		gbc_lblOcupantes.insets = new Insets(0, 0, 5, 5);
@@ -320,7 +320,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(txtOcupantes, gbc_txtOcupantes);
 		txtOcupantes.setColumns(10);
 
-		lblIconoAlojamiento = new JLabel("Alojamiento");
+		lblIconoAlojamiento = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblIconoAlojamiento.text")); //$NON-NLS-1$
 		lblIconoAlojamiento.setIcon(
 				new ImageIcon(FormularioReservaRealizada.class.getResource("/presentacion/iconoAlojamiento.png")));
 		GridBagConstraints gbc_lblIconoAlojamiento = new GridBagConstraints();
@@ -330,7 +330,7 @@ public class FormularioReservaRealizada extends JFrame {
 		gbc_lblIconoAlojamiento.gridy = 12;
 		contentPane.add(lblIconoAlojamiento, gbc_lblIconoAlojamiento);
 		
-		rdbtnParcela = new JRadioButton("Parcela");
+		rdbtnParcela = new JRadioButton(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.rdbtnParcela.text")); //$NON-NLS-1$
 		rdbtnParcela.setEnabled(false);
 		GridBagConstraints gbc_rdbtnParcela = new GridBagConstraints();
 		gbc_rdbtnParcela.anchor = GridBagConstraints.EAST;
@@ -339,7 +339,7 @@ public class FormularioReservaRealizada extends JFrame {
 		gbc_rdbtnParcela.gridy = 12;
 		contentPane.add(rdbtnParcela, gbc_rdbtnParcela);
 
-		rdbtnBungalow = new JRadioButton("Bungalow");
+		rdbtnBungalow = new JRadioButton(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.rdbtnBungalow.text")); //$NON-NLS-1$
 		buttonGroup.add(rdbtnBungalow);
 		rdbtnBungalow.setEnabled(false);
 		GridBagConstraints gbc_rdbtnBungalow = new GridBagConstraints();
@@ -360,7 +360,7 @@ public class FormularioReservaRealizada extends JFrame {
 		gbc_lblNombreAlojamiento.gridy = 12;
 		contentPane.add(lblNombreAlojamiento, gbc_lblNombreAlojamiento);
 
-		lblEntrada = new JLabel("Fecha de entrada:");
+		lblEntrada = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblEntrada.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEntrada = new GridBagConstraints();
 		gbc_lblEntrada.anchor = GridBagConstraints.EAST;
 		gbc_lblEntrada.insets = new Insets(0, 0, 5, 5);
@@ -379,7 +379,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(txtEntrada, gbc_txtEntrada);
 		txtEntrada.setColumns(10);
 		
-		lblServicios = new JLabel("Servicios contratados:");
+		lblServicios = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblServicios.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblServicios = new GridBagConstraints();
 		gbc_lblServicios.anchor = GridBagConstraints.EAST;
 		gbc_lblServicios.insets = new Insets(0, 0, 5, 5);
@@ -407,7 +407,7 @@ public class FormularioReservaRealizada extends JFrame {
 		tAServicios.setText(serviciosContratados);
 		scrollPane.setViewportView(tAServicios);
 
-		lblSalida = new JLabel("Fecha de salida:");
+		lblSalida = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblSalida.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblSalida = new GridBagConstraints();
 		gbc_lblSalida.anchor = GridBagConstraints.EAST;
 		gbc_lblSalida.insets = new Insets(0, 0, 5, 5);
@@ -426,7 +426,7 @@ public class FormularioReservaRealizada extends JFrame {
 		contentPane.add(txtSalida, gbc_txtSalida);
 		txtSalida.setColumns(10);
 		
-		lblPrecio = new JLabel("Precio: ");
+		lblPrecio = new JLabel(MessagesFormularioReservaRealizada.getString("FormularioReservaRealizada.lblPrecio.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblPrecio = new GridBagConstraints();
 		gbc_lblPrecio.anchor = GridBagConstraints.EAST;
 		gbc_lblPrecio.insets = new Insets(0, 0, 5, 5);

@@ -151,7 +151,7 @@ public class PanelEditorRutas extends JPanel {
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		lblNombre = new JLabel("Nombre de la ruta:");
+		lblNombre = new JLabel(MessagesPanelEditorRutas.getString("PanelEditorRutas.lblNombre.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.anchor = GridBagConstraints.EAST;
 		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
@@ -182,7 +182,7 @@ public class PanelEditorRutas extends JPanel {
 		lblLeyenda = new JLabel("");
 		lblLeyenda.addMouseListener(new LblLeyendaMouseListener());
 		lblLeyenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblLeyenda.setToolTipText("Haz click para ver la leyenda del diseño de la ruta");
+		lblLeyenda.setToolTipText(MessagesPanelEditorRutas.getString("PanelEditorRutas.lblLeyenda.toolTipText")); //$NON-NLS-1$
 		lblLeyenda.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-info.png")));
 		GridBagConstraints gbc_lblLeyenda = new GridBagConstraints();
 		gbc_lblLeyenda.insets = new Insets(0, 0, 5, 5);
@@ -190,7 +190,7 @@ public class PanelEditorRutas extends JPanel {
 		gbc_lblLeyenda.gridy = 1;
 		add(lblLeyenda, gbc_lblLeyenda);
 
-		lblDia = new JLabel("Dia que se realiza:");
+		lblDia = new JLabel(MessagesPanelEditorRutas.getString("PanelEditorRutas.lblDia.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDia = new GridBagConstraints();
 		gbc_lblDia.anchor = GridBagConstraints.EAST;
 		gbc_lblDia.insets = new Insets(0, 0, 5, 5);
@@ -211,7 +211,7 @@ public class PanelEditorRutas extends JPanel {
 		pnlDiseño = new JPanel();
 		pnlDiseño.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Dise\u00F1o de la ruta", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				MessagesPanelEditorRutas.getString("PanelEditorRutas.pnlDiseño.borderTitle"), TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0))); //$NON-NLS-1$
 		GridBagConstraints gbc_pnlDiseño = new GridBagConstraints();
 		gbc_pnlDiseño.gridheight = 9;
 		gbc_pnlDiseño.gridwidth = 5;
@@ -226,7 +226,7 @@ public class PanelEditorRutas extends JPanel {
 		pnlDiseño.add(toolBar, BorderLayout.NORTH);
 
 		btnCargarMapa = new JButton("");
-		btnCargarMapa.setToolTipText("Pulsa para cargar la imagen de un mapa sobre el que dibujar");
+		btnCargarMapa.setToolTipText(MessagesPanelEditorRutas.getString("PanelEditorRutas.btnCargarMapa.toolTipText")); //$NON-NLS-1$
 		btnCargarMapa.addActionListener(new BtnCargarMapaActionListener());
 		btnCargarMapa.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-mapa.png")));
 		toolBar.add(btnCargarMapa);
@@ -235,11 +235,11 @@ public class PanelEditorRutas extends JPanel {
 		btnInicio.addActionListener(new BtnInicioActionListener());
 
 		btnCursor = new JButton("");
-		btnCursor.setToolTipText("Pulsa para \"recuperar\" el cursor normal");
+		btnCursor.setToolTipText(MessagesPanelEditorRutas.getString("PanelEditorRutas.btnCursor.toolTipText")); //$NON-NLS-1$
 		btnCursor.addActionListener(new BtnCursorActionListener());
 
 		btnPapelera = new JButton("");
-		btnPapelera.setToolTipText("Pulsa para limpiar lo que este dibujado sobre la imagen");
+		btnPapelera.setToolTipText(MessagesPanelEditorRutas.getString("PanelEditorRutas.btnPapelera.toolTipText")); //$NON-NLS-1$
 		btnPapelera.addActionListener(new BtnPapeleraActionListener());
 		btnPapelera.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-papelera.png")));
 		toolBar.add(btnPapelera);
@@ -286,7 +286,7 @@ public class PanelEditorRutas extends JPanel {
 		spDibujo = new JScrollPane();
 		pnlDiseño.add(spDibujo, BorderLayout.CENTER);
 
-		lblHorario = new JLabel("Horario:");
+		lblHorario = new JLabel(MessagesPanelEditorRutas.getString("PanelEditorRutas.lblHorario.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblHorario = new GridBagConstraints();
 		gbc_lblHorario.anchor = GridBagConstraints.EAST;
 		gbc_lblHorario.insets = new Insets(0, 0, 5, 5);
@@ -304,7 +304,7 @@ public class PanelEditorRutas extends JPanel {
 		gbc_cbHorario.gridy = 3;
 		add(cbHorario, gbc_cbHorario);
 
-		lblCupo = new JLabel("Cupo:");
+		lblCupo = new JLabel(MessagesPanelEditorRutas.getString("PanelEditorRutas.lblCupo.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblCupo = new GridBagConstraints();
 		gbc_lblCupo.anchor = GridBagConstraints.EAST;
 		gbc_lblCupo.insets = new Insets(0, 0, 5, 5);
@@ -321,7 +321,7 @@ public class PanelEditorRutas extends JPanel {
 		gbc_spinCupo.gridy = 4;
 		add(spinCupo, gbc_spinCupo);
 
-		lblEncuentro = new JLabel("Punto de encuentro:");
+		lblEncuentro = new JLabel(MessagesPanelEditorRutas.getString("PanelEditorRutas.lblEncuentro.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEncuentro = new GridBagConstraints();
 		gbc_lblEncuentro.anchor = GridBagConstraints.EAST;
 		gbc_lblEncuentro.insets = new Insets(0, 0, 5, 5);
@@ -339,7 +339,7 @@ public class PanelEditorRutas extends JPanel {
 		add(txtEncuentro, gbc_txtEncuentro);
 		txtEncuentro.setColumns(10);
 
-		lblDificultad = new JLabel("Dificultad:");
+		lblDificultad = new JLabel(MessagesPanelEditorRutas.getString("PanelEditorRutas.lblDificultad.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDificultad = new GridBagConstraints();
 		gbc_lblDificultad.anchor = GridBagConstraints.EAST;
 		gbc_lblDificultad.insets = new Insets(0, 0, 5, 5);
@@ -362,7 +362,7 @@ public class PanelEditorRutas extends JPanel {
 		miAreaDibujo.setIcon(null);
 		spDibujo.setViewportView(miAreaDibujo);
 
-		lblDescripcion = new JLabel("Descripción:");
+		lblDescripcion = new JLabel(MessagesPanelEditorRutas.getString("PanelEditorRutas.lblDescripcion.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
 		gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
 		gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
