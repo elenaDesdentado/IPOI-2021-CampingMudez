@@ -472,6 +472,7 @@ public class PanelEditorRutas extends JPanel {
 	private class BtnLineaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			modo = LINEA;
+			setCursor(Cursor.getDefaultCursor());
 		}
 	}
 
