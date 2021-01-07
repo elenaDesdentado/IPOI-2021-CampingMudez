@@ -156,7 +156,7 @@ public class PanelRutas extends JPanel {
 		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
 
-		btnDiseniarRuta = new JButton("Diseñar una nueva ruta");
+		btnDiseniarRuta = new JButton(MessagesPanelRutas.getString("PanelRutas.btnDiseniarRuta.text")); //$NON-NLS-1$
 		btnDiseniarRuta.addActionListener(new BtnCrearRutaActionListener());
 		btnDiseniarRuta.setForeground(Color.BLACK);
 		btnDiseniarRuta.setBackground(colorBoton);
@@ -167,7 +167,7 @@ public class PanelRutas extends JPanel {
 		gbc_btnDiseniarRuta.gridy = 1;
 		pnlGestionBusqueda.add(btnDiseniarRuta, gbc_btnDiseniarRuta);
 
-		lblBarraBusqueda = new JLabel("Barra de búsqueda:");
+		lblBarraBusqueda = new JLabel(MessagesPanelRutas.getString("PanelRutas.lblBarraBusqueda.text")); //$NON-NLS-1$
 		lblBarraBusqueda.setBackground(colorFondo);
 		lblBarraBusqueda.setAlignmentX(1.0f);
 		GridBagConstraints gbc_lblBarraBusqueda = new GridBagConstraints();

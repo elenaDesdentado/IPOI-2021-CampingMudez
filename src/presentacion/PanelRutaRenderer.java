@@ -46,7 +46,7 @@ public class PanelRutaRenderer extends JPanel {
 		this.ruta = ruta;
 		setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Informaci\u00F3n de la ruta", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(64, 64, 64)));
+				MessagesPanelRutaRenderer.getString("PanelRutaRenderer.this.borderTitle"), TitledBorder.LEADING, TitledBorder.TOP, null, new Color(64, 64, 64))); //$NON-NLS-1$
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 131, 15, 359, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 30, 0, 0, 0, 0, 0, 0 };
@@ -66,7 +66,7 @@ public class PanelRutaRenderer extends JPanel {
 
 		lblNombre = new JLabel(ruta.getNombre());
 		lblNombre.setFont(new Font("Verdana", Font.BOLD, 14));
-		lblNombre.setToolTipText("Nombre del ruta");
+		lblNombre.setToolTipText(MessagesPanelRutaRenderer.getString("PanelRutaRenderer.lblNombre.toolTipText")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNombre.anchor = GridBagConstraints.NORTH;

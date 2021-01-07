@@ -35,7 +35,7 @@ public class PanelFormularioActividadesInicio extends JPanel {
 		lblEspacioVacio.setIcon(new ImageIcon(PanelFormularioActividadesInicio.class.getResource("/presentacion/emptyState.png")));
 		add(lblEspacioVacio);
 		
-		lblMensajeEspacioVacio = new JLabel("Oops, ¡no encontramos nada aquí! \nPor favor elige un elemento de la lista.");
+		lblMensajeEspacioVacio = new JLabel(MessagesPanelFormularioActividadesInicio.getString("PanelFormularioActividadesInicio.lblMensajeEspacioVacio.text")); //$NON-NLS-1$
 		lblMensajeEspacioVacio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensajeEspacioVacio.setForeground(Color.BLACK);
 		add(lblMensajeEspacioVacio);

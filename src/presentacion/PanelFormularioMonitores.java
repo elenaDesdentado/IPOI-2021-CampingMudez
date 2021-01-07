@@ -105,7 +105,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblAvatar.gridy = 1;
 		add(lblAvatar, gbc_lblAvatar);
 
-		btnModificar = new JButton("Modificar");
+		btnModificar = new JButton(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnModificar.text")); //$NON-NLS-1$
 		btnModificar.addActionListener(new BtnModificarActionListener());
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
 		gbc_btnModificar.insets = new Insets(0, 0, 5, 5);
@@ -113,7 +113,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_btnModificar.gridy = 1;
 		add(btnModificar, gbc_btnModificar);
 
-		lblNombre = new JLabel("Nombre:");
+		lblNombre = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblNombre.text")); //$NON-NLS-1$
 		lblNombre.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.anchor = GridBagConstraints.SOUTHEAST;
@@ -132,7 +132,7 @@ public class PanelFormularioMonitores extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 
-		btnAniadirAvatar = new JButton("Añadir foto...");
+		btnAniadirAvatar = new JButton(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnAniadirAvatar.text")); //$NON-NLS-1$
 		btnAniadirAvatar.addActionListener(new BtnAniadirAvatarActionListener());
 		GridBagConstraints gbc_btnAniadirAvatar = new GridBagConstraints();
 		gbc_btnAniadirAvatar.gridwidth = 4;
@@ -141,7 +141,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_btnAniadirAvatar.gridy = 3;
 		add(btnAniadirAvatar, gbc_btnAniadirAvatar);
 
-		lblApellidos = new JLabel("Apellidos:");
+		lblApellidos = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblApellidos.text")); //$NON-NLS-1$
 		lblApellidos.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblApellidos = new GridBagConstraints();
 		gbc_lblApellidos.anchor = GridBagConstraints.EAST;
@@ -160,7 +160,7 @@ public class PanelFormularioMonitores extends JPanel {
 		add(txtApellidos, gbc_txtApellidos);
 		txtApellidos.setColumns(10);
 		
-		lblEdad = new JLabel("Edad:");
+		lblEdad = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblEdad.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEdad = new GridBagConstraints();
 		gbc_lblEdad.anchor = GridBagConstraints.EAST;
 		gbc_lblEdad.insets = new Insets(0, 0, 5, 5);
@@ -217,7 +217,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblSimboloEuros.gridy = 7;
 		add(lblSimboloEuros, gbc_lblSimboloEuros);
 
-		lblMovil = new JLabel("Teléfono móvil:");
+		lblMovil = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblMovil.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblMovil = new GridBagConstraints();
 		gbc_lblMovil.anchor = GridBagConstraints.EAST;
 		gbc_lblMovil.insets = new Insets(0, 0, 5, 5);
@@ -241,7 +241,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_ftxtMovil.gridy = 6;
 		add(ftxtMovil, gbc_ftxtMovil);
 
-		lblSueldo = new JLabel("Sueldo:");
+		lblSueldo = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblSueldo.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblSueldo = new GridBagConstraints();
 		gbc_lblSueldo.anchor = GridBagConstraints.EAST;
 		gbc_lblSueldo.insets = new Insets(0, 0, 5, 5);
@@ -249,7 +249,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblSueldo.gridy = 7;
 		add(lblSueldo, gbc_lblSueldo);
 
-		lblFijo = new JLabel("Teléfono fijo:");
+		lblFijo = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblFijo.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblFijo = new GridBagConstraints();
 		gbc_lblFijo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFijo.anchor = GridBagConstraints.EAST;
@@ -273,7 +273,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_ftxtFijo.gridy = 7;
 		add(ftxtFijo, gbc_ftxtFijo);
 
-		lblHorario = new JLabel("Horario:");
+		lblHorario = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblHorario.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblHorario = new GridBagConstraints();
 		gbc_lblHorario.anchor = GridBagConstraints.EAST;
 		gbc_lblHorario.insets = new Insets(0, 0, 5, 5);
@@ -292,7 +292,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_cbHorario.gridy = 8;
 		add(cbHorario, gbc_cbHorario);
 
-		lblCorreo = new JLabel("Correo electrónico:");
+		lblCorreo = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblCorreo.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblCorreo = new GridBagConstraints();
 		gbc_lblCorreo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCorreo.anchor = GridBagConstraints.EAST;
@@ -310,7 +310,7 @@ public class PanelFormularioMonitores extends JPanel {
 		add(txtCorreo, gbc_txtCorreo);
 		txtCorreo.setColumns(10);
 
-		lblDisponibilidad = new JLabel("Disponibilidad:");
+		lblDisponibilidad = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblDisponibilidad.text")); //$NON-NLS-1$
 		lblDisponibilidad.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_lblDisponibilidad = new GridBagConstraints();
 		gbc_lblDisponibilidad.anchor = GridBagConstraints.EAST;
@@ -330,7 +330,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_cbDisponibilidad.gridy = 9;
 		add(cbDisponibilidad, gbc_cbDisponibilidad);
 
-		lblEstudios = new JLabel("Nivel de estudios:");
+		lblEstudios = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblEstudios.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEstudios = new GridBagConstraints();
 		gbc_lblEstudios.anchor = GridBagConstraints.EAST;
 		gbc_lblEstudios.insets = new Insets(0, 0, 5, 5);
@@ -349,7 +349,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_cbEstudios.gridy = 9;
 		add(cbEstudios, gbc_cbEstudios);
 
-		lblIdiomas = new JLabel("Idiomas:");
+		lblIdiomas = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblIdiomas.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblIdiomas = new GridBagConstraints();
 		gbc_lblIdiomas.anchor = GridBagConstraints.EAST;
 		gbc_lblIdiomas.insets = new Insets(0, 0, 5, 5);
@@ -370,7 +370,7 @@ public class PanelFormularioMonitores extends JPanel {
 		lstIdiomas = new JList(model);
 		spIdiomas.setViewportView(lstIdiomas);
 
-		btnAniadirIdioma = new JButton("Añadir...");
+		btnAniadirIdioma = new JButton(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnAniadirIdioma.text")); //$NON-NLS-1$
 		btnAniadirIdioma.addActionListener(new BtnAniadirIdiomaActionListener());
 		GridBagConstraints gbc_btnAniadirIdioma = new GridBagConstraints();
 		gbc_btnAniadirIdioma.insets = new Insets(0, 0, 5, 5);
@@ -378,7 +378,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_btnAniadirIdioma.gridy = 10;
 		add(btnAniadirIdioma, gbc_btnAniadirIdioma);
 
-		btnAplicarCambios = new JButton("Aplicar cambios");
+		btnAplicarCambios = new JButton(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnAplicarCambios.text")); //$NON-NLS-1$
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
 		btnAplicarCambios.setForeground(Color.BLACK);
 		btnAplicarCambios.setBackground(colorBoton);

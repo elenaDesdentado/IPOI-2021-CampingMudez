@@ -153,7 +153,7 @@ public class PanelActividades extends JPanel {
 		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
 
-		btnCrearActividad = new JButton("Crear Actividad");
+		btnCrearActividad = new JButton(MessagesPanelActividades.getString("PanelActividades.btnCrearActividad.text")); //$NON-NLS-1$
 		btnCrearActividad.addActionListener(new BtnCrearActividadActionListener());
 		btnCrearActividad.setForeground(Color.BLACK);
 		btnCrearActividad.setBackground(colorBoton);
@@ -164,7 +164,7 @@ public class PanelActividades extends JPanel {
 		gbc_btnCrearActividad.gridy = 1;
 		pnlGestionBusqueda.add(btnCrearActividad, gbc_btnCrearActividad);
 
-		btnEliminarActividad = new JButton("Eliminar Actividad");
+		btnEliminarActividad = new JButton(MessagesPanelActividades.getString("PanelActividades.btnEliminarActividad.text")); //$NON-NLS-1$
 		btnEliminarActividad.addActionListener(new BtnEliminarActividadActionListener());
 		btnEliminarActividad.setForeground(Color.BLACK);
 		btnEliminarActividad.setBackground(colorBotonCritico);
@@ -175,7 +175,7 @@ public class PanelActividades extends JPanel {
 		gbc_btnEliminarActividad.gridy = 1;
 		pnlGestionBusqueda.add(btnEliminarActividad, gbc_btnEliminarActividad);
 
-		lblBarraBusqueda = new JLabel("Barra de búsqueda:");
+		lblBarraBusqueda = new JLabel(MessagesPanelActividades.getString("PanelActividades.lblBarraBusqueda.text")); //$NON-NLS-1$
 		lblBarraBusqueda.setBackground(colorFondo);
 		lblBarraBusqueda.setAlignmentX(1.0f);
 		GridBagConstraints gbc_lblBarraBusqueda = new GridBagConstraints();

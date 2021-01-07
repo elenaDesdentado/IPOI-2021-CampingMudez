@@ -169,7 +169,7 @@ public class PanelAlojamientos extends JPanel {
 		cbFiltro = new JComboBox();
 		cbFiltro.addActionListener(new CbFiltroActionListener());
 		cbFiltro.setFont(new Font("Tahoma", Font.BOLD, 11));
-		cbFiltro.setToolTipText("Permite filtrar por tipo de alojamiento y listar los que convenga");
+		cbFiltro.setToolTipText(MessagesPanelAlojamientos.getString("PanelAlojamientos.cbFiltro.toolTipText")); //$NON-NLS-1$
 		cbFiltro.setModel(new DefaultComboBoxModel(new String[] { "Parcelas", "Cabañas", "Parcelas y cabañas" }));
 		cbFiltro.setSelectedIndex(2);
 		scrollPaneListaAlojs.setColumnHeaderView(cbFiltro);
@@ -185,7 +185,7 @@ public class PanelAlojamientos extends JPanel {
 		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
 
-		btnCancelar = new JButton("Cancelar una reserva");
+		btnCancelar = new JButton(MessagesPanelAlojamientos.getString("PanelAlojamientos.btnCancelar.text")); //$NON-NLS-1$
 		btnCancelar.addActionListener(new BtnCancelarActionListener());
 		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.setBackground(colorBotonCritico);
@@ -196,7 +196,7 @@ public class PanelAlojamientos extends JPanel {
 		gbc_btnCancelar.gridy = 1;
 		pnlGestionBusqueda.add(btnCancelar, gbc_btnCancelar);
 
-		lblBarraBusqueda = new JLabel("Barra de búsqueda:");
+		lblBarraBusqueda = new JLabel(MessagesPanelAlojamientos.getString("PanelAlojamientos.lblBarraBusqueda.text")); //$NON-NLS-1$
 		lblBarraBusqueda.setBackground(colorFondo);
 		lblBarraBusqueda.setAlignmentX(1.0f);
 		GridBagConstraints gbc_lblBarraBusqueda = new GridBagConstraints();

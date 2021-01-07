@@ -105,7 +105,7 @@ public class PanelMonitores extends JPanel {
 		gbl_pnlGestionBusqueda.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		pnlGestionBusqueda.setLayout(gbl_pnlGestionBusqueda);
 
-		btnAniadirMonitor = new JButton("Añadir nuevo monitor");
+		btnAniadirMonitor = new JButton(MessagesPanelMonitores.getString("PanelMonitores.btnAniadirMonitor.text")); //$NON-NLS-1$
 		btnAniadirMonitor.addActionListener(new BtnAniadirMonitorActionListener());
 		btnAniadirMonitor.setForeground(Color.BLACK);
 		btnAniadirMonitor.setBackground(colorBoton);
@@ -116,7 +116,7 @@ public class PanelMonitores extends JPanel {
 		gbc_btnAniadirMonitor.gridy = 1;
 		pnlGestionBusqueda.add(btnAniadirMonitor, gbc_btnAniadirMonitor);
 
-		btnEliminarMonitor = new JButton("Dar de baja al monitor");
+		btnEliminarMonitor = new JButton(MessagesPanelMonitores.getString("PanelMonitores.btnEliminarMonitor.text")); //$NON-NLS-1$
 		btnEliminarMonitor.addActionListener(new BtnEliminarMonitorActionListener());
 		btnEliminarMonitor.setForeground(Color.BLACK);
 		btnEliminarMonitor.setBackground(colorBotonCritico);
@@ -127,7 +127,7 @@ public class PanelMonitores extends JPanel {
 		gbc_btnEliminarMonitor.gridy = 1;
 		pnlGestionBusqueda.add(btnEliminarMonitor, gbc_btnEliminarMonitor);
 
-		lblBarraBusqueda = new JLabel("Barra de búsqueda:");
+		lblBarraBusqueda = new JLabel(MessagesPanelMonitores.getString("PanelMonitores.lblBarraBusqueda.text")); //$NON-NLS-1$
 		lblBarraBusqueda.setBackground(colorFondo);
 		lblBarraBusqueda.setAlignmentX(1.0f);
 		GridBagConstraints gbc_lblBarraBusqueda = new GridBagConstraints();

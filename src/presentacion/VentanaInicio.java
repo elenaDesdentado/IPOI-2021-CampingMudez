@@ -141,7 +141,7 @@ public class VentanaInicio extends JFrame {
 		tbGestion.setBackground(colorTbGestion);
 		tbGestion.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				"Gesti\u00F3n", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				MessagesVentanaInicio.getString("VentanaInicio.tbGestion.borderTitle"), TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))); //$NON-NLS-1$
 		tbGestion.setOrientation(SwingConstants.VERTICAL);
 		tbGestion.setFloatable(false);
 		contentPane.add(tbGestion, BorderLayout.WEST);
@@ -149,9 +149,9 @@ public class VentanaInicio extends JFrame {
 		final Component verticalGlue_5 = Box.createVerticalGlue();
 		tbGestion.add(verticalGlue_5);
 
-		btnGestorReservas = new JButton("Reservas");
+		btnGestorReservas = new JButton(MessagesVentanaInicio.getString("VentanaInicio.btnGestorReservas.text")); //$NON-NLS-1$
 		btnGestorReservas.setToolTipText(
-				"Haz click para gestionar las reservas de los campings y bungalows ofertados por Campings Mudez");
+				MessagesVentanaInicio.getString("VentanaInicio.btnGestorReservas.toolTipText")); //$NON-NLS-1$
 		btnGestorReservas.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoReservas.png")));
 		btnGestorReservas.setMargin(new Insets(10, 15, 10, 15));
 		btnGestorReservas.setBackground(colorBotonesGestion);
@@ -163,8 +163,8 @@ public class VentanaInicio extends JFrame {
 		final Component verticalGlue_2 = Box.createVerticalGlue();
 		tbGestion.add(verticalGlue_2);
 
-		btnGestorActividades = new JButton("Actividades");
-		btnGestorActividades.setToolTipText("Haz click para gestionar las actividades ofertadas por Campings Mudez");
+		btnGestorActividades = new JButton(MessagesVentanaInicio.getString("VentanaInicio.btnGestorActividades.text")); //$NON-NLS-1$
+		btnGestorActividades.setToolTipText(MessagesVentanaInicio.getString("VentanaInicio.btnGestorActividades.toolTipText")); //$NON-NLS-1$
 		btnGestorActividades
 				.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoActividades.png")));
 		btnGestorActividades.setMargin(new Insets(10, 9, 10, 9));
@@ -177,8 +177,8 @@ public class VentanaInicio extends JFrame {
 		final Component verticalGlue_3 = Box.createVerticalGlue();
 		tbGestion.add(verticalGlue_3);
 
-		btnGestorMonitores = new JButton("Monitores");
-		btnGestorMonitores.setToolTipText("Haz click para gestionar los monitores que trabajan en Campings Mudez");
+		btnGestorMonitores = new JButton(MessagesVentanaInicio.getString("VentanaInicio.btnGestorMonitores.text")); //$NON-NLS-1$
+		btnGestorMonitores.setToolTipText(MessagesVentanaInicio.getString("VentanaInicio.btnGestorMonitores.toolTipText")); //$NON-NLS-1$
 		btnGestorMonitores.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoMonitores.png")));
 		btnGestorMonitores.setMargin(new Insets(10, 14, 10, 14));
 		btnGestorMonitores.setBackground(colorBotonesGestion);
@@ -190,8 +190,8 @@ public class VentanaInicio extends JFrame {
 		final Component verticalGlue_4 = Box.createVerticalGlue();
 		tbGestion.add(verticalGlue_4);
 
-		btnRutasSenderistas = new JButton("Rutas");
-		btnRutasSenderistas.setToolTipText("Haz click para gestionar las rutas ofertadas por Campings Mudez");
+		btnRutasSenderistas = new JButton(MessagesVentanaInicio.getString("VentanaInicio.btnRutasSenderistas.text")); //$NON-NLS-1$
+		btnRutasSenderistas.setToolTipText(MessagesVentanaInicio.getString("VentanaInicio.btnRutasSenderistas.toolTipText")); //$NON-NLS-1$
 		btnRutasSenderistas.setMargin(new Insets(14, 30, 10, 30));
 		btnRutasSenderistas.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoRutas.png")));
 		btnRutasSenderistas.setBackground(colorBotonesGestion);
@@ -224,7 +224,7 @@ public class VentanaInicio extends JFrame {
 		pnlListaFormulario.add(pnlRutas, "Rutas");
 		pnlListaFormulario.add(pnlConfiguracion, "Configuración");
 
-		JLabel lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
+		JLabel lblInfoLegal = new JLabel(MessagesVentanaInicio.getString("VentanaInicio.lblInfoLegal.text")); //$NON-NLS-1$
 		lblInfoLegal.setName("lblInfoLegal");
 		lblInfoLegal.setBackground(colorBarraBusqueda);
 		lblInfoLegal.setHorizontalAlignment(SwingConstants.CENTER);
@@ -246,7 +246,7 @@ public class VentanaInicio extends JFrame {
 		tbUsuario.setMaximumSize(new Dimension(13, 25));
 		tbUsuario.setName("tbUsuario");
 		tbUsuario.setBackground(colorFondo);
-		tbUsuario.setBorder(new TitledBorder(null, "Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		tbUsuario.setBorder(new TitledBorder(null, MessagesVentanaInicio.getString("VentanaInicio.tbUsuario.borderTitle"), TitledBorder.LEADING, TitledBorder.TOP, null, null)); //$NON-NLS-1$
 		tbUsuario.setFloatable(false);
 		tbUsuario.setMargin(new Insets(0, 0, 0, 50));
 		GridBagConstraints gbc_tbUsuario = new GridBagConstraints();
@@ -283,7 +283,7 @@ public class VentanaInicio extends JFrame {
 		String ultimaConexion = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")).toString();
 		JLabel lblUltimaConexion = new JLabel(ultimaConexion);
 		lblUltimaConexion.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		lblUltimaConexion.setToolTipText("Fecha y hora de la últiam vez que entraste a la aplicación");
+		lblUltimaConexion.setToolTipText(MessagesVentanaInicio.getString("VentanaInicio.lblUltimaConexion.toolTipText")); //$NON-NLS-1$
 		lblUltimaConexion.setBackground(colorFondo);
 		tbUsuario.add(lblUltimaConexion);
 
@@ -292,7 +292,7 @@ public class VentanaInicio extends JFrame {
 
 		JButton btnConfiguracion = new JButton("");
 		btnConfiguracion.addActionListener(new BtnConfiguracionActionListener());
-		btnConfiguracion.setToolTipText("Permite configurar la información de tu usuario");
+		btnConfiguracion.setToolTipText(MessagesVentanaInicio.getString("VentanaInicio.btnConfiguracion.toolTipText")); //$NON-NLS-1$
 		btnConfiguracion
 				.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoConfiguracion.png")));
 		btnConfiguracion.setBackground(colorFondo);
@@ -304,7 +304,7 @@ public class VentanaInicio extends JFrame {
 
 		final JButton btnLogOut = new JButton("");
 		btnLogOut.addActionListener(new BtnLogOutActionListener());
-		btnLogOut.setToolTipText("Al hacer click, saldrás de la aplicación a la ventana de login");
+		btnLogOut.setToolTipText(MessagesVentanaInicio.getString("VentanaInicio.btnLogOut.toolTipText")); //$NON-NLS-1$
 		btnLogOut.setBackground(colorFondo);
 		btnLogOut.setFocusPainted(false);
 		btnLogOut.setIcon(new ImageIcon(VentanaInicio.class.getResource("/presentacion/iconoLogout.png")));
@@ -325,43 +325,71 @@ public class VentanaInicio extends JFrame {
 		mnAyuda.setMnemonic('A');
 		mnbAyuda.add(mnAyuda);
 
-		final JMenuItem mntmReadMe = new JMenuItem("Acceder a la documentación en línea");
+		final JMenuItem mntmReadMe = new JMenuItem(MessagesVentanaInicio.getString("VentanaInicio.mntmReadMe.text")); //$NON-NLS-1$
 		mntmReadMe.setBackground(colorFondo);
 		mnAyuda.add(mntmReadMe);
 
-		JMenuItem mntmManualUsuario = new JMenuItem("Accede al manual de usuario en línea");
+		JMenuItem mntmManualUsuario = new JMenuItem(MessagesVentanaInicio.getString("VentanaInicio.mntmManualUsuario.text")); //$NON-NLS-1$
 		mntmManualUsuario.addActionListener(new MntmManualUsuarioActionListener());
 		mnAyuda.add(mntmManualUsuario);
 	}
 
 	private class BtnSeleccionarGestorActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			switch (arg0.getActionCommand()) {
+			if (arg0.getActionCommand().equals("Actividades") || arg0.getActionCommand().equals("Activities")) {
+				btnGestorActividades.setBackground(colorBotonSeleccionado);
+				btnGestorMonitores.setBackground(colorBotonesGestion);
+				btnGestorReservas.setBackground(colorBotonesGestion);
+				btnRutasSenderistas.setBackground(colorBotonesGestion);
+				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Actividades");
+			} else if (arg0.getActionCommand().equals("Reservas") || arg0.getActionCommand().equals("Reservations")) {
+				btnGestorActividades.setBackground(colorBotonesGestion);
+				btnGestorMonitores.setBackground(colorBotonesGestion);
+				btnGestorReservas.setBackground(colorBotonSeleccionado);
+				btnRutasSenderistas.setBackground(colorBotonesGestion);
+				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Reservas");
+			} else if (arg0.getActionCommand().equals("Rutas") || arg0.getActionCommand().equals("Routes")) {
+				btnGestorActividades.setBackground(colorBotonesGestion);
+				btnGestorMonitores.setBackground(colorBotonesGestion);
+				btnGestorReservas.setBackground(colorBotonesGestion);
+				btnRutasSenderistas.setBackground(colorBotonSeleccionado);
+				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Rutas");
+			} else if (arg0.getActionCommand().equals("Monitores") || arg0.getActionCommand().equals("Monitors")) {
+				btnGestorActividades.setBackground(colorBotonesGestion);
+				btnGestorMonitores.setBackground(colorBotonSeleccionado);
+				btnGestorReservas.setBackground(colorBotonesGestion);
+				btnRutasSenderistas.setBackground(colorBotonesGestion);
+				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Monitores");
+			}
+			/*switch (arg0.getActionCommand()) {
 			case "Actividades":
 				btnGestorActividades.setBackground(colorBotonSeleccionado);
 				btnGestorMonitores.setBackground(colorBotonesGestion);
 				btnGestorReservas.setBackground(colorBotonesGestion);
 				btnRutasSenderistas.setBackground(colorBotonesGestion);
+				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Actividades");
 				break;
 			case "Reservas":
 				btnGestorActividades.setBackground(colorBotonesGestion);
 				btnGestorMonitores.setBackground(colorBotonesGestion);
 				btnGestorReservas.setBackground(colorBotonSeleccionado);
 				btnRutasSenderistas.setBackground(colorBotonesGestion);
+				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Reservas");
 				break;
 			case "Rutas":
 				btnGestorActividades.setBackground(colorBotonesGestion);
 				btnGestorMonitores.setBackground(colorBotonesGestion);
 				btnGestorReservas.setBackground(colorBotonesGestion);
 				btnRutasSenderistas.setBackground(colorBotonSeleccionado);
+				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Rutas");
 				break;
 			case "Monitores":
 				btnGestorActividades.setBackground(colorBotonesGestion);
 				btnGestorMonitores.setBackground(colorBotonSeleccionado);
 				btnGestorReservas.setBackground(colorBotonesGestion);
 				btnRutasSenderistas.setBackground(colorBotonesGestion);
-			}
-			((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, arg0.getActionCommand());
+				((CardLayout) pnlListaFormulario.getLayout()).show(pnlListaFormulario, "Monitores");
+			}*/
 			pnlMenu.repaint();
 		}
 	}

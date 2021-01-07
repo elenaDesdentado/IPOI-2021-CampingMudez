@@ -114,7 +114,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		gbc_lblFoto.gridy = 4;
 		panel.add(lblFoto, gbc_lblFoto);
 
-		lblParcela = new JLabel("Parcela: ");
+		lblParcela = new JLabel(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.lblParcela.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblParcela = new GridBagConstraints();
 		gbc_lblParcela.anchor = GridBagConstraints.EAST;
 		gbc_lblParcela.insets = new Insets(0, 0, 5, 5);
@@ -141,7 +141,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		gbc_calendar.gridy = 4;
 		panel.add(calendar, gbc_calendar);
 
-		lblValoracionCliente = new JLabel("Valoración media de los clientes:");
+		lblValoracionCliente = new JLabel(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.lblValoracionCliente.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblValoracionCliente = new GridBagConstraints();
 		gbc_lblValoracionCliente.anchor = GridBagConstraints.EAST;
 		gbc_lblValoracionCliente.insets = new Insets(0, 0, 5, 5);
@@ -158,7 +158,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		gbc_lblEstrellas.gridy = 6;
 		panel.add(lblEstrellas, gbc_lblEstrellas);
 
-		lblServiciosOfertados = new JLabel("Servicios ofertados:");
+		lblServiciosOfertados = new JLabel(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.lblServiciosOfertados.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblServiciosOfertados = new GridBagConstraints();
 		gbc_lblServiciosOfertados.anchor = GridBagConstraints.WEST;
 		gbc_lblServiciosOfertados.gridwidth = 4;
@@ -167,7 +167,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		gbc_lblServiciosOfertados.gridy = 8;
 		panel.add(lblServiciosOfertados, gbc_lblServiciosOfertados);
 
-		chckbxGolf = new JCheckBox("Acceso pista de golf (50€)");
+		chckbxGolf = new JCheckBox(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.chckbxGolf.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_chckbxGolf = new GridBagConstraints();
 		gbc_chckbxGolf.anchor = GridBagConstraints.WEST;
 		gbc_chckbxGolf.gridwidth = 4;
@@ -177,7 +177,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		panel.add(chckbxGolf, gbc_chckbxGolf);
 		checkBoxes.add(chckbxGolf);
 
-		chckbxCorrienteElectrica = new JCheckBox("Acceso corriente eléctrica (20€)");
+		chckbxCorrienteElectrica = new JCheckBox(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.chckbxCorrienteElectrica.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_chckbxCorrienteElectrica = new GridBagConstraints();
 		gbc_chckbxCorrienteElectrica.anchor = GridBagConstraints.WEST;
 		gbc_chckbxCorrienteElectrica.gridwidth = 4;
@@ -187,7 +187,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		panel.add(chckbxCorrienteElectrica, gbc_chckbxCorrienteElectrica);
 		checkBoxes.add(chckbxCorrienteElectrica);
 
-		chckbxParking = new JCheckBox("Parking para autocaravana (15€)");
+		chckbxParking = new JCheckBox(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.chckbxParking.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_chckbxParking = new GridBagConstraints();
 		gbc_chckbxParking.anchor = GridBagConstraints.WEST;
 		gbc_chckbxParking.gridwidth = 4;
@@ -197,7 +197,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		panel.add(chckbxParking, gbc_chckbxParking);
 		checkBoxes.add(chckbxParking);
 
-		chckbxWifi = new JCheckBox("Zona WiFi (10€)");
+		chckbxWifi = new JCheckBox(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.chckbxWifi.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_chckbxWifi = new GridBagConstraints();
 		gbc_chckbxWifi.anchor = GridBagConstraints.WEST;
 		gbc_chckbxWifi.gridwidth = 4;
@@ -207,7 +207,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		panel.add(chckbxWifi, gbc_chckbxWifi);
 		checkBoxes.add(chckbxWifi);
 
-		lblPrecioNoche = new JLabel("Precio por noche:");
+		lblPrecioNoche = new JLabel(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.lblPrecioNoche.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblPrecioNoche = new GridBagConstraints();
 		gbc_lblPrecioNoche.anchor = GridBagConstraints.EAST;
 		gbc_lblPrecioNoche.insets = new Insets(0, 0, 5, 5);
@@ -231,7 +231,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		gbc_lblEuros.gridy = 12;
 		panel.add(lblEuros, gbc_lblEuros);
 
-		chckbxTiendaAcampada = new JCheckBox("Tienda de acampada (18€)");
+		chckbxTiendaAcampada = new JCheckBox(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.chckbxTiendaAcampada.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_chckbxTiendaAcampada = new GridBagConstraints();
 		gbc_chckbxTiendaAcampada.anchor = GridBagConstraints.WEST;
 		gbc_chckbxTiendaAcampada.gridwidth = 4;
@@ -241,7 +241,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		panel.add(chckbxTiendaAcampada, gbc_chckbxTiendaAcampada);
 		checkBoxes.add(chckbxTiendaAcampada);
 
-		chckbxMascotas = new JCheckBox("Admisión animales de compañía (5€)");
+		chckbxMascotas = new JCheckBox(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.chckbxMascotas.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_chckbxMascotas = new GridBagConstraints();
 		gbc_chckbxMascotas.anchor = GridBagConstraints.WEST;
 		gbc_chckbxMascotas.gridwidth = 4;
@@ -251,7 +251,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		panel.add(chckbxMascotas, gbc_chckbxMascotas);
 		checkBoxes.add(chckbxMascotas);
 
-		btnSiguiente = new JButton("Siguiente");
+		btnSiguiente = new JButton(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.btnSiguiente.text")); //$NON-NLS-1$
 		btnSiguiente.addActionListener(new BtnSiguienteActionListener());
 		GridBagConstraints gbc_btnSiguiente = new GridBagConstraints();
 		gbc_btnSiguiente.anchor = GridBagConstraints.EAST;

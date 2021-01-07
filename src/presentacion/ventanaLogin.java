@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.text.MaskFormatter;
 
 import dominio.Usuario;
@@ -49,13 +50,13 @@ public class ventanaLogin {
 	private JPanel pnlIdioma;
 	private JPanel pnlLogin;
 	private JLabel lblLogoCamping;
-	private JLabel lblInfoLegal;
+	public JLabel lblInfoLegal;
 	private JPanel pnlTFLogin;
 	private JTextField txtNombreUsuario;
 	private JPasswordField pwfContrasenia;
-	private JCheckBox chckbxRecuerdame;
+	public JCheckBox chckbxRecuerdame;
 	private JButton btnLogin;
-	private JLabel lblOlvido;
+	public JLabel lblOlvido;
 	private TextPrompt nombreUsuario;
 	private TextPrompt contrasenia;
 	
@@ -133,6 +134,7 @@ public class ventanaLogin {
 		pnlIdioma.setLayout(gbl_pnlIdioma);
 		
 		btnEspaniol = new JButton("");
+		btnEspaniol.addActionListener(new BtnEspaniolActionListener());
 		btnEspaniol.setFocusable(false);
 		btnEspaniol.setIcon(new ImageIcon(ventanaLogin.class.getResource("/presentacion/espaniol.png")));
 		btnEspaniol.setBackground(colorFondo);
@@ -143,6 +145,7 @@ public class ventanaLogin {
 		pnlIdioma.add(btnEspaniol, gbc_btnEspaniol);
 		
 		btnIngles = new JButton("");
+		btnIngles.addActionListener(new BtnInglesActionListener());
 		btnIngles.setFocusable(false);
 		btnIngles.setIcon(new ImageIcon(ventanaLogin.class.getResource("/presentacion/ingles.png")));
 		btnIngles.setBackground(colorFondo);
@@ -228,7 +231,7 @@ public class ventanaLogin {
 		gbc_lblMensajeError.gridy = 2;
 		pnlTFLogin.add(lblMensajeError, gbc_lblMensajeError);
 
-		chckbxRecuerdame = new JCheckBox("Recuérdame");
+		chckbxRecuerdame = new JCheckBox(MessagesVentanaLogin.getString("ventanaLogin.chckbxRecuerdame.text")); //$NON-NLS-1$
 		chckbxRecuerdame.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_chckbxRecuerdame = new GridBagConstraints();
 		gbc_chckbxRecuerdame.insets = new Insets(0, 0, 5, 5);
@@ -249,7 +252,7 @@ public class ventanaLogin {
 		gbc_btnLogin.gridy = 5;
 		pnlTFLogin.add(btnLogin, gbc_btnLogin);
 
-		lblOlvido = new JLabel("<html><u>Olvidé mi contraseña o usuario</u></html>");
+		lblOlvido = new JLabel(MessagesVentanaLogin.getString("ventanaLogin.lblOlvido.text")); //$NON-NLS-1$
 		lblOlvido.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOlvido.addMouseListener(new LblOlvidoMouseListener());
 		lblOlvido.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -261,7 +264,7 @@ public class ventanaLogin {
 		gbc_lblOlvido.gridy = 7;
 		pnlTFLogin.add(lblOlvido, gbc_lblOlvido);
 
-		lblInfoLegal = new JLabel("Done by: elena.desdentado@alu.uclm.es and ruben.grande@alu.uclm.es");
+		lblInfoLegal = new JLabel(MessagesVentanaLogin.getString("ventanaLogin.lblInfoLegal.text")); //$NON-NLS-1$
 		lblInfoLegal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInfoLegal.setForeground(Color.BLACK);
 		lblInfoLegal.setBackground(Color.WHITE);
@@ -272,7 +275,6 @@ public class ventanaLogin {
 		// Text Prompt para indicar lo que hay que escribir en los text field
 		nombreUsuario = new TextPrompt("Nombre de usuario", txtNombreUsuario);
 		contrasenia = new TextPrompt("Contraseña", pwfContrasenia);
-		
 		
 	}
 	
@@ -389,7 +391,46 @@ public class ventanaLogin {
 	private class LblOlvidoMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			JOptionPane.showMessageDialog(frmCampingMudez, "Pedira cambiar la contraseña o el usuario", "Reestablecer credenciales", JOptionPane.INFORMATION_MESSAGE);;
+			JOptionPane.showMessageDialog(frmCampingMudez, "Pedirá cambiar la contraseña o el usuario", "Reestablecer credenciales", JOptionPane.INFORMATION_MESSAGE);;
+		}
+	}
+	private class BtnInglesActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			MessagesVentanaLogin.setIdioma("inglés");
+			frmCampingMudez.revalidate();
+			MessagesVentanaInicio.setIdioma("inglés");
+			MessagesPanelRutas.setIdioma("inglés");
+			MessagesPanelMonitores.setIdioma("inglés");
+			MessagesPanelActividades.setIdioma("inglés");
+			MessagesPanelAlojamientos.setIdioma("inglés");
+			MessagesPanelFormularioActividadesInicio.setIdioma("inglés");
+			MessagesPanelFormularioActividades.setIdioma("inglés");
+			MessagesPanelFormularioMonitores.setIdioma("inglés");
+			MessagesPanelFormularioReserva.setIdioma("inglés");
+			MessagesPanelFormularioReservaBungalow.setIdioma("inglés");
+			MessagesPanelFormularioReservaParcela.setIdioma("inglés");
+			MessagesPanelFormularioRutas.setIdioma("inglés");
+			MessagesPanelMonitorRenderer.setIdioma("inglés");
+			MessagesPanelRutaRenderer.setIdioma("inglés");
+		}
+	}
+	private class BtnEspaniolActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			MessagesVentanaLogin.setIdioma("");
+			MessagesVentanaInicio.setIdioma("");
+			MessagesPanelRutas.setIdioma("");
+			MessagesPanelMonitores.setIdioma("");
+			MessagesPanelActividades.setIdioma("");
+			MessagesPanelAlojamientos.setIdioma("");
+			MessagesPanelFormularioActividadesInicio.setIdioma("");
+			MessagesPanelFormularioActividades.setIdioma("");
+			MessagesPanelFormularioMonitores.setIdioma("");
+			MessagesPanelFormularioReserva.setIdioma("");
+			MessagesPanelFormularioReservaBungalow.setIdioma("");
+			MessagesPanelFormularioReservaParcela.setIdioma("");
+			MessagesPanelFormularioRutas.setIdioma("");
+			MessagesPanelMonitorRenderer.setIdioma("");
+			MessagesPanelRutaRenderer.setIdioma("");
 		}
 	}
 }

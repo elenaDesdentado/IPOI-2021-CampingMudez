@@ -92,7 +92,7 @@ public class PanelFormularioRutas extends JPanel {
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		btnModificar = new JButton("Modificar");
+		btnModificar = new JButton(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnModificar.text")); //$NON-NLS-1$
 		btnModificar.addActionListener(new BtnModificarActionListener());
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
 		gbc_btnModificar.insets = new Insets(0, 0, 5, 5);
@@ -109,7 +109,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblFoto.gridy = 1;
 		add(lblFoto, gbc_lblFoto);
 
-		lblNombre = new JLabel("Nombre:");
+		lblNombre = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblNombre.text")); //$NON-NLS-1$
 		lblNombre.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.anchor = GridBagConstraints.SOUTHEAST;
@@ -129,7 +129,7 @@ public class PanelFormularioRutas extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 
-		btnAniadirAvatar = new JButton("Añadir foto...");
+		btnAniadirAvatar = new JButton(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnAniadirAvatar.text")); //$NON-NLS-1$
 		btnAniadirAvatar.addActionListener(new BtnAniadirAvatarActionListener());
 		GridBagConstraints gbc_btnAniadirAvatar = new GridBagConstraints();
 		gbc_btnAniadirAvatar.gridwidth = 2;
@@ -138,7 +138,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_btnAniadirAvatar.gridy = 4;
 		add(btnAniadirAvatar, gbc_btnAniadirAvatar);
 
-		lblDia = new JLabel("Día que se realiza:");
+		lblDia = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblDia.text")); //$NON-NLS-1$
 		lblDia.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblDia = new GridBagConstraints();
 		gbc_lblDia.anchor = GridBagConstraints.EAST;
@@ -156,7 +156,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_cbDia.gridy = 4;
 		add(cbDia, gbc_cbDia);
 		
-		lblHorario = new JLabel("Horario:");
+		lblHorario = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblHorario.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblHorario = new GridBagConstraints();
 		gbc_lblHorario.anchor = GridBagConstraints.EAST;
 		gbc_lblHorario.insets = new Insets(0, 0, 5, 5);
@@ -173,7 +173,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_cbHorario.gridy = 5;
 		add(cbHorario, gbc_cbHorario);
 		
-		lblMonitores = new JLabel("Monitor/es:");
+		lblMonitores = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblMonitores.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblMonitores = new GridBagConstraints();
 		gbc_lblMonitores.anchor = GridBagConstraints.EAST;
 		gbc_lblMonitores.insets = new Insets(0, 0, 5, 5);
@@ -181,7 +181,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblMonitores.gridy = 6;
 		add(lblMonitores, gbc_lblMonitores);
 		
-		btnInfo = new JButton("Ver monitores");
+		btnInfo = new JButton(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnInfo.text")); //$NON-NLS-1$
 		btnInfo.setIcon(new ImageIcon(PanelFormularioRutas.class.getResource("/presentacion/icono-info.png")));
 		btnInfo.addActionListener(new BtnInfoActionListener());
 		GridBagConstraints gbc_btnInfo = new GridBagConstraints();
@@ -191,7 +191,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_btnInfo.gridy = 6;
 		add(btnInfo, gbc_btnInfo);
 
-		lblCupo = new JLabel("Cupo:");
+		lblCupo = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblCupo.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblCupo = new GridBagConstraints();
 		gbc_lblCupo.anchor = GridBagConstraints.EAST;
 		gbc_lblCupo.insets = new Insets(0, 0, 5, 5);
@@ -208,7 +208,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_spinCupo.gridy = 7;
 		add(spinCupo, gbc_spinCupo);
 
-		lblEncuentro = new JLabel("Punto de encuentro:");
+		lblEncuentro = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblEncuentro.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEncuentro = new GridBagConstraints();
 		gbc_lblEncuentro.anchor = GridBagConstraints.EAST;
 		gbc_lblEncuentro.insets = new Insets(0, 0, 5, 5);
@@ -226,7 +226,7 @@ public class PanelFormularioRutas extends JPanel {
 		add(txtEncuentro, gbc_txtEncuentro);
 		txtEncuentro.setColumns(10);
 
-		lblDificultad = new JLabel("Dificultad:");
+		lblDificultad = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblDificultad.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDificultad = new GridBagConstraints();
 		gbc_lblDificultad.anchor = GridBagConstraints.EAST;
 		gbc_lblDificultad.insets = new Insets(0, 0, 5, 5);
@@ -234,7 +234,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblDificultad.gridy = 9;
 		add(lblDificultad, gbc_lblDificultad);
 
-		btnAplicarCambios = new JButton("Aplicar cambios");
+		btnAplicarCambios = new JButton(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnAplicarCambios.text")); //$NON-NLS-1$
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
 		
 		cbDificultad = new JComboBox();
@@ -246,7 +246,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_cbDificultad.gridy = 9;
 		add(cbDificultad, gbc_cbDificultad);
 		
-		lblDescripcion = new JLabel("Descripción de la ruta y recomendaciones:");
+		lblDescripcion = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblDescripcion.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
 		gbc_lblDescripcion.anchor = GridBagConstraints.WEST;
 		gbc_lblDescripcion.gridwidth = 4;

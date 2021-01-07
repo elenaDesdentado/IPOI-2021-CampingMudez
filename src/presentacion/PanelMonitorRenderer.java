@@ -30,7 +30,7 @@ public class PanelMonitorRenderer extends JPanel {
 		setMinimumSize(new Dimension(10, 2));
 		setMaximumSize(new Dimension(32767, 5));
 		this.monitor = monitor;
-		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Informacion del monitor", TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY));
+		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), MessagesPanelMonitorRenderer.getString("PanelMonitorRenderer.this.borderTitle"), TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY)); //$NON-NLS-1$
 		setLayout(null);
 
 		lblAvatar = new JLabel("");
@@ -40,7 +40,7 @@ public class PanelMonitorRenderer extends JPanel {
 
 		lblNombre = new JLabel(monitor.getNombre() + ' ' + monitor.getApellidos());
 		lblNombre.setFont(new Font("Verdana", Font.BOLD, 13));
-		lblNombre.setToolTipText("Nombre del monitor");
+		lblNombre.setToolTipText(MessagesPanelMonitorRenderer.getString("PanelMonitorRenderer.lblNombre.toolTipText")); //$NON-NLS-1$
 		lblNombre.setBounds(177, 29, 275, 29);
 		add(lblNombre);
 
