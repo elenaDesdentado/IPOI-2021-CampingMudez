@@ -80,7 +80,7 @@ public class PanelConfiguracion extends JPanel {
 		gbc_lblAvatar.gridy = 1;
 		add(lblAvatar, gbc_lblAvatar);
 
-		btnCambiarAvatar = new JButton("Cambiar avatar...");
+		btnCambiarAvatar = new JButton(MessagesPanelConfiguracion.getString("PanelConfiguracion.btnCambiarAvatar.text")); //$NON-NLS-1$
 		btnCambiarAvatar.addActionListener(new BtnCambiarAvatarActionListener());
 		GridBagConstraints gbc_btnCambiarAvatar = new GridBagConstraints();
 		gbc_btnCambiarAvatar.gridwidth = 3;
@@ -89,7 +89,7 @@ public class PanelConfiguracion extends JPanel {
 		gbc_btnCambiarAvatar.gridy = 4;
 		add(btnCambiarAvatar, gbc_btnCambiarAvatar);
 
-		lblNuevoNombre = new JLabel("Nuevo nombre de usuario:");
+		lblNuevoNombre = new JLabel(MessagesPanelConfiguracion.getString("PanelConfiguracion.lblNuevoNombre.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNuevoNombre = new GridBagConstraints();
 		gbc_lblNuevoNombre.anchor = GridBagConstraints.EAST;
 		gbc_lblNuevoNombre.gridwidth = 3;
@@ -117,7 +117,7 @@ public class PanelConfiguracion extends JPanel {
 		gbc_lblWrongNombreUsuario.gridy = 6;
 		add(lblWrongNombreUsuario, gbc_lblWrongNombreUsuario);
 
-		lblCambiarContrasenia = new JLabel("Nueva contraseña:");
+		lblCambiarContrasenia = new JLabel(MessagesPanelConfiguracion.getString("PanelConfiguracion.lblCambiarContrasenia.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblCambiarContrasenia = new GridBagConstraints();
 		gbc_lblCambiarContrasenia.anchor = GridBagConstraints.EAST;
 		gbc_lblCambiarContrasenia.gridwidth = 3;
@@ -145,7 +145,7 @@ public class PanelConfiguracion extends JPanel {
 		gbc_lblWrongPassword.gridy = 7;
 		add(lblWrongPassword, gbc_lblWrongPassword);
 
-		lblConfirmarContrasenia = new JLabel("Confirmar nueva contraseña:");
+		lblConfirmarContrasenia = new JLabel(MessagesPanelConfiguracion.getString("PanelConfiguracion.lblConfirmarContrasenia.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblConfirmarContrasenia = new GridBagConstraints();
 		gbc_lblConfirmarContrasenia.anchor = GridBagConstraints.EAST;
 		gbc_lblConfirmarContrasenia.insets = new Insets(0, 0, 5, 5);
@@ -172,7 +172,7 @@ public class PanelConfiguracion extends JPanel {
 		gbc_lblWrongPasswordConfirmation.gridy = 9;
 		add(lblWrongPasswordConfirmation, gbc_lblWrongPasswordConfirmation);
 
-		btnAplicarCambios = new JButton("Aplicar cambios");
+		btnAplicarCambios = new JButton(MessagesPanelConfiguracion.getString("PanelConfiguracion.btnAplicarCambios.text")); //$NON-NLS-1$
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
 
 		lblMensajeError = new JLabel("");

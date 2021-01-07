@@ -412,6 +412,7 @@ public class ventanaLogin {
 			MessagesPanelFormularioRutas.setIdioma("inglés");
 			MessagesPanelMonitorRenderer.setIdioma("inglés");
 			MessagesPanelRutaRenderer.setIdioma("inglés");
+			MessagesPanelConfiguracion.setIdioma("inglés");
 		}
 	}
 	private class BtnEspaniolActionListener implements ActionListener {
@@ -431,6 +432,7 @@ public class ventanaLogin {
 			MessagesPanelFormularioRutas.setIdioma("");
 			MessagesPanelMonitorRenderer.setIdioma("");
 			MessagesPanelRutaRenderer.setIdioma("");
+			MessagesPanelConfiguracion.setIdioma("");
 		}
 	}
 }
