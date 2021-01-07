@@ -287,7 +287,6 @@ public class PanelFormularioReservaBungalow extends JPanel {
 			int index = alojamientosDb.getAlojamientos()
 					.indexOf(((PanelAlojamientoRenderer) lstAlojamientos.getSelectedValue()).getAlojamiento());
 			Alojamiento alojamiento = alojamientosDb.getAlojamientos().get(index);
-			System.out.println(index);
 			for (JCheckBox cbx : checkBoxes) {
 				if (cbx.isSelected())
 					servicios.add(cbx.getText());
