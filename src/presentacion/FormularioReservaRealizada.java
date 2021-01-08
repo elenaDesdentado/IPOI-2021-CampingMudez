@@ -293,7 +293,7 @@ public class FormularioReservaRealizada extends JFrame {
 		txtEmail.setEditable(false);
 		txtEmail.setText(email);
 		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
-		gbc_txtEmail.gridwidth = 3;
+		gbc_txtEmail.gridwidth = 4;
 		gbc_txtEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_txtEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtEmail.gridx = 2;
