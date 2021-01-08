@@ -389,7 +389,7 @@ public class VentanaInicio extends JFrame {
 
 	private class MntmManualUsuarioActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			openWebPage("https://stackoverflow.com/questions/19771836/adding-and-opening-links-on-a-jbutton");
+			openWebPage("https://www.youtube.com/playlist?list=PLm5gPPPhlUenezECNoXFjdU6I4TXCYo41");
 		}
 	}
 }
