@@ -100,7 +100,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_btnModificar.gridy = 1;
 		add(btnModificar, gbc_btnModificar);
 
-		lblFoto = new JLabel("");
+		lblFoto = new JLabel(""); //$NON-NLS-1$
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 		gbc_lblFoto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFoto.gridheight = 3;
@@ -148,7 +148,7 @@ public class PanelFormularioRutas extends JPanel {
 		add(lblDia, gbc_lblDia);
 		
 		cbDia = new JComboBox();
-		cbDia.setModel(new DefaultComboBoxModel(new String[] {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"}));
+		cbDia.setModel(new DefaultComboBoxModel(new String[] {MessagesPanelFormularioRutas.getString("PanelFormularioRutas.1"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.2"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.3"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.4"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.5"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.6"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.7")})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		GridBagConstraints gbc_cbDia = new GridBagConstraints();
 		gbc_cbDia.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDia.fill = GridBagConstraints.HORIZONTAL;
@@ -165,7 +165,7 @@ public class PanelFormularioRutas extends JPanel {
 		add(lblHorario, gbc_lblHorario);
 		
 		cbHorario = new JComboBox();
-		cbHorario.setModel(new DefaultComboBoxModel(new String[] {"8:00 - 10:00", "9:00 - 10:15", "10:15 - 11:30", "11:00 - 14:00", "11:15 - 12:45", "17:30 - 19:30", "18:30 - 20:00"}));
+		cbHorario.setModel(new DefaultComboBoxModel(new String[] {"8:00 - 10:00", "9:00 - 10:15", "10:15 - 11:30", "11:00 - 14:00", "11:15 - 12:45", "17:30 - 19:30", "18:30 - 20:00"})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		GridBagConstraints gbc_cbHorario = new GridBagConstraints();
 		gbc_cbHorario.insets = new Insets(0, 0, 5, 5);
 		gbc_cbHorario.fill = GridBagConstraints.HORIZONTAL;
@@ -182,7 +182,7 @@ public class PanelFormularioRutas extends JPanel {
 		add(lblMonitores, gbc_lblMonitores);
 		
 		btnInfo = new JButton(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnInfo.text")); //$NON-NLS-1$
-		btnInfo.setIcon(new ImageIcon(PanelFormularioRutas.class.getResource("/presentacion/icono-info.png")));
+		btnInfo.setIcon(new ImageIcon(PanelFormularioRutas.class.getResource("/presentacion/icono-info.png"))); //$NON-NLS-1$
 		btnInfo.addActionListener(new BtnInfoActionListener());
 		GridBagConstraints gbc_btnInfo = new GridBagConstraints();
 		gbc_btnInfo.anchor = GridBagConstraints.WEST;
@@ -238,7 +238,7 @@ public class PanelFormularioRutas extends JPanel {
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
 		
 		cbDificultad = new JComboBox();
-		cbDificultad.setModel(new DefaultComboBoxModel(new String[] {"Baja", "Media", "Alta", "Extrema"}));
+		cbDificultad.setModel(new DefaultComboBoxModel(new String[] {MessagesPanelFormularioRutas.getString("PanelFormularioRutas.16"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.17"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.18"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.19")})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		GridBagConstraints gbc_cbDificultad = new GridBagConstraints();
 		gbc_cbDificultad.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDificultad.fill = GridBagConstraints.HORIZONTAL;
@@ -330,8 +330,8 @@ public class PanelFormularioRutas extends JPanel {
 				modeloRutas.set(indice, new PanelRutaRenderer(ruta));
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null,
-						"Se ha producido un error. Por favor, asegúrese que ha rellenado al información en todos los campos.",
-						"Error al aplicar cambios", JOptionPane.ERROR_MESSAGE);
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.20"), //$NON-NLS-1$
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.21"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 			}
 		}
 	}

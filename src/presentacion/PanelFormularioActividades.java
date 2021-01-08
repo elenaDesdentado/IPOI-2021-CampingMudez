@@ -97,7 +97,7 @@ public class PanelFormularioActividades extends JPanel {
 		gbc_btnModificar.gridy = 1;
 		add(btnModificar, gbc_btnModificar);
 
-		lblFoto = new JLabel("");
+		lblFoto = new JLabel(""); //$NON-NLS-1$
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 		gbc_lblFoto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFoto.gridheight = 2;
@@ -135,7 +135,7 @@ public class PanelFormularioActividades extends JPanel {
 		gbc_btnAniadirAvatar.gridy = 4;
 		add(btnAniadirAvatar, gbc_btnAniadirAvatar);
 
-		lblMonitor = new JLabel("Monitor:");
+		lblMonitor = new JLabel("Monitor:"); //$NON-NLS-1$
 		lblMonitor.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblMonitor = new GridBagConstraints();
 		gbc_lblMonitor.anchor = GridBagConstraints.EAST;
@@ -188,7 +188,7 @@ public class PanelFormularioActividades extends JPanel {
 		add(txtPrecio, gbc_txtPrecio);
 		txtPrecio.setColumns(10);
 
-		lblSimboloEuro = new JLabel("€");
+		lblSimboloEuro = new JLabel("€"); //$NON-NLS-1$
 		GridBagConstraints gbc_lblSimboloEuro = new GridBagConstraints();
 		gbc_lblSimboloEuro.anchor = GridBagConstraints.WEST;
 		gbc_lblSimboloEuro.insets = new Insets(0, 0, 5, 5);
@@ -205,8 +205,8 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblDestinatarios, gbc_lblDestinatarios);
 
 		cbDestinatarios = new JComboBox();
-		cbDestinatarios.setModel(new DefaultComboBoxModel(new String[] { "Niños de menos de 12 años",
-				"Niños de 12 a 14 años", "Niños de 14 a 17 años", "Adultos", "Adultos de más de 65 años" }));
+		cbDestinatarios.setModel(new DefaultComboBoxModel(new String[] { MessagesPanelFormularioActividades.getString("PanelFormularioActividades.3"), //$NON-NLS-1$
+				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.4"), MessagesPanelFormularioActividades.getString("PanelFormularioActividades.5"), MessagesPanelFormularioActividades.getString("PanelFormularioActividades.6"), MessagesPanelFormularioActividades.getString("PanelFormularioActividades.7") })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		GridBagConstraints gbc_cbDestinatarios = new GridBagConstraints();
 		gbc_cbDestinatarios.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDestinatarios.fill = GridBagConstraints.HORIZONTAL;
@@ -223,8 +223,8 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblHorario, gbc_lblHorario);
 
 		cbHorario = new JComboBox();
-		cbHorario.setModel(new DefaultComboBoxModel(new String[] { "9:00-12:00", "10:00-11:30", "11:00-12:00",
-				"15:30-17:00", "16:00-18:00", "19:00-21:00" }));
+		cbHorario.setModel(new DefaultComboBoxModel(new String[] { "9:00-12:00", "10:00-11:30", "11:00-12:00", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				"15:30-17:00", "16:00-18:00", "19:00-21:00" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		GridBagConstraints gbc_cbHorario = new GridBagConstraints();
 		gbc_cbHorario.gridwidth = 2;
 		gbc_cbHorario.insets = new Insets(0, 0, 5, 5);
@@ -242,7 +242,7 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblArea, gbc_lblArea);
 
 		cbArea = new JComboBox();
-		cbArea.setModel(new DefaultComboBoxModel(new String[] { "Escorpión", "Ciervo", "Salmón", "Águila" }));
+		cbArea.setModel(new DefaultComboBoxModel(new String[] { "Escorpión", "Ciervo", "Salmón", "Águila" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		GridBagConstraints gbc_cbArea = new GridBagConstraints();
 		gbc_cbArea.insets = new Insets(0, 0, 5, 5);
 		gbc_cbArea.fill = GridBagConstraints.HORIZONTAL;
@@ -357,8 +357,8 @@ public class PanelFormularioActividades extends JPanel {
 				modeloActividades.set(indice, new PanelActividadRenderer(actividad));
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null,
-						"Se ha producido un error. Por favor, asegúrese que ha rellenado al información en todos los campos.",
-						"Error al aplicar cambios", JOptionPane.ERROR_MESSAGE);
+						MessagesPanelFormularioActividades.getString("PanelFormularioActividades.18"), //$NON-NLS-1$
+						MessagesPanelFormularioActividades.getString("PanelFormularioActividades.19"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 			}
 		}
 	}

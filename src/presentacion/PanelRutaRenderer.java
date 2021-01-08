@@ -54,7 +54,7 @@ public class PanelRutaRenderer extends JPanel {
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		lblFoto = new JLabel("");
+		lblFoto = new JLabel(""); //$NON-NLS-1$
 		lblFoto.setIcon(ruta.getFoto());
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 		gbc_lblFoto.gridheight = 6;
@@ -65,7 +65,7 @@ public class PanelRutaRenderer extends JPanel {
 		add(lblFoto, gbc_lblFoto);
 
 		lblNombre = new JLabel(ruta.getNombre());
-		lblNombre.setFont(new Font("Verdana", Font.BOLD, 14));
+		lblNombre.setFont(new Font("Verdana", Font.BOLD, 14)); //$NON-NLS-1$
 		lblNombre.setToolTipText(MessagesPanelRutaRenderer.getString("PanelRutaRenderer.lblNombre.toolTipText")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
@@ -75,8 +75,8 @@ public class PanelRutaRenderer extends JPanel {
 		gbc_lblNombre.gridy = 0;
 		add(lblNombre, gbc_lblNombre);
 
-		lblDia = new JLabel("Día: " + ruta.getDia());
-		lblDia.setFont(new Font("Verdana", Font.PLAIN, 12));
+		lblDia = new JLabel(MessagesPanelRutaRenderer.getString("PanelRutaRenderer.2") + ruta.getDia()); //$NON-NLS-1$
+		lblDia.setFont(new Font(MessagesPanelRutaRenderer.getString("PanelRutaRenderer.3"), Font.PLAIN, 12)); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDia = new GridBagConstraints();
 		gbc_lblDia.anchor = GridBagConstraints.WEST;
 		gbc_lblDia.insets = new Insets(0, 0, 5, 5);
@@ -84,8 +84,8 @@ public class PanelRutaRenderer extends JPanel {
 		gbc_lblDia.gridy = 1;
 		add(lblDia, gbc_lblDia);
 		
-		lblHorario = new JLabel("Horario: " + ruta.getHorario());
-		lblHorario.setFont(new Font("Verdana", Font.PLAIN, 12));
+		lblHorario = new JLabel(MessagesPanelRutaRenderer.getString("PanelRutaRenderer.4") + ruta.getHorario()); //$NON-NLS-1$
+		lblHorario.setFont(new Font("Verdana", Font.PLAIN, 12)); //$NON-NLS-1$
 		GridBagConstraints gbc_lblHorario = new GridBagConstraints();
 		gbc_lblHorario.anchor = GridBagConstraints.WEST;
 		gbc_lblHorario.insets = new Insets(0, 0, 5, 5);
@@ -93,11 +93,11 @@ public class PanelRutaRenderer extends JPanel {
 		gbc_lblHorario.gridy = 2;
 		add(lblHorario, gbc_lblHorario);
 		
-		lblMonitores = new JLabel("");
-		lblMonitores.setFont(new Font("Verdana", Font.PLAIN, 12));
-		String monitores = "Monitor/es: ";
+		lblMonitores = new JLabel(""); //$NON-NLS-1$
+		lblMonitores.setFont(new Font("Verdana", Font.PLAIN, 12)); //$NON-NLS-1$
+		String monitores = MessagesPanelRutaRenderer.getString("PanelRutaRenderer.8"); //$NON-NLS-1$
 		for (Monitor monitor : ruta.getMonitores()) {
-			monitores += (monitor.getNombre() + " " + monitor.getApellidos() + " - ");
+			monitores += (monitor.getNombre() + " " + monitor.getApellidos() + " - "); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		lblMonitores.setText(monitores);
 		GridBagConstraints gbc_lblMonitores = new GridBagConstraints();
@@ -107,8 +107,8 @@ public class PanelRutaRenderer extends JPanel {
 		gbc_lblMonitores.gridy = 3;
 		add(lblMonitores, gbc_lblMonitores);
 		
-		lblEncuentro = new JLabel("Punto de encuentro: " + ruta.getEncuentro());
-		lblEncuentro.setFont(new Font("Verdana", Font.PLAIN, 12));
+		lblEncuentro = new JLabel(MessagesPanelRutaRenderer.getString("PanelRutaRenderer.11") + ruta.getEncuentro()); //$NON-NLS-1$
+		lblEncuentro.setFont(new Font("Verdana", Font.PLAIN, 12)); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEncuentro = new GridBagConstraints();
 		gbc_lblEncuentro.anchor = GridBagConstraints.WEST;
 		gbc_lblEncuentro.insets = new Insets(0, 0, 5, 5);
@@ -116,8 +116,8 @@ public class PanelRutaRenderer extends JPanel {
 		gbc_lblEncuentro.gridy = 4;
 		add(lblEncuentro, gbc_lblEncuentro);
 		
-		lblDificultad = new JLabel("Dificultad de la ruta: " + ruta.getDificultad());
-		lblDificultad.setFont(new Font("Verdana", Font.PLAIN, 12));
+		lblDificultad = new JLabel(MessagesPanelRutaRenderer.getString("PanelRutaRenderer.13") + ruta.getDificultad()); //$NON-NLS-1$
+		lblDificultad.setFont(new Font("Verdana", Font.PLAIN, 12)); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDificultad = new GridBagConstraints();
 		gbc_lblDificultad.insets = new Insets(0, 0, 0, 5);
 		gbc_lblDificultad.anchor = GridBagConstraints.WEST;

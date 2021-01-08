@@ -96,7 +96,7 @@ public class PanelFormularioMonitores extends JPanel {
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		lblAvatar = new JLabel("");
+		lblAvatar = new JLabel(""); //$NON-NLS-1$
 		GridBagConstraints gbc_lblAvatar = new GridBagConstraints();
 		gbc_lblAvatar.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAvatar.gridheight = 2;
@@ -177,7 +177,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_spnEdad.gridy = 4;
 		add(spnEdad, gbc_spnEdad);
 
-		lblDNI = new JLabel("DNI/NIF:");
+		lblDNI = new JLabel("DNI/NIF:"); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDNI = new GridBagConstraints();
 		gbc_lblDNI.anchor = GridBagConstraints.EAST;
 		gbc_lblDNI.insets = new Insets(0, 0, 5, 5);
@@ -187,7 +187,7 @@ public class PanelFormularioMonitores extends JPanel {
 
 		MaskFormatter formatoDNI;
 		try {
-			formatoDNI = new MaskFormatter("########U");
+			formatoDNI = new MaskFormatter("########U"); //$NON-NLS-1$
 			formatoDNI.setPlaceholderCharacter('X');
 			ftxtDNI = new JFormattedTextField(formatoDNI);
 		} catch (ParseException e) {
@@ -210,7 +210,7 @@ public class PanelFormularioMonitores extends JPanel {
 		add(txtSueldo, gbc_txtSueldo);
 		txtSueldo.setColumns(10);
 
-		lblSimboloEuros = new JLabel("€");
+		lblSimboloEuros = new JLabel("€"); //$NON-NLS-1$
 		GridBagConstraints gbc_lblSimboloEuros = new GridBagConstraints();
 		gbc_lblSimboloEuros.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSimboloEuros.gridx = 5;
@@ -227,7 +227,7 @@ public class PanelFormularioMonitores extends JPanel {
 
 		MaskFormatter formatoMovil;
 		try {
-			formatoMovil = new MaskFormatter("###' ##' ##' ##");
+			formatoMovil = new MaskFormatter("###' ##' ##' ##"); //$NON-NLS-1$
 			formatoMovil.setPlaceholderCharacter('*');
 			ftxtMovil = new JFormattedTextField(formatoMovil);
 		} catch (ParseException e) {
@@ -259,7 +259,7 @@ public class PanelFormularioMonitores extends JPanel {
 
 		MaskFormatter formatoFijo;
 		try {
-			formatoFijo = new MaskFormatter("###' ##' ##' ##");
+			formatoFijo = new MaskFormatter("###' ##' ##' ##"); //$NON-NLS-1$
 			formatoFijo.setPlaceholderCharacter('*');
 			ftxtFijo = new JFormattedTextField(formatoFijo);
 		} catch (ParseException e) {
@@ -282,8 +282,8 @@ public class PanelFormularioMonitores extends JPanel {
 		add(lblHorario, gbc_lblHorario);
 
 		cbHorario = new JComboBox();
-		cbHorario.setModel(new DefaultComboBoxModel(new String[] { "7:00-14:00", "8:00-15:00", "9:30-14:30",
-				"10:00-15:00", "15:00-22:00", "15:30-23:00" }));
+		cbHorario.setModel(new DefaultComboBoxModel(new String[] { "7:00-14:00", "8:00-15:00", "9:30-14:30", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				"10:00-15:00", "15:00-22:00", "15:30-23:00" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		GridBagConstraints gbc_cbHorario = new GridBagConstraints();
 		gbc_cbHorario.gridwidth = 4;
 		gbc_cbHorario.insets = new Insets(0, 0, 5, 5);
@@ -321,7 +321,7 @@ public class PanelFormularioMonitores extends JPanel {
 
 		cbDisponibilidad = new JComboBox();
 		cbDisponibilidad
-				.setModel(new DefaultComboBoxModel(new String[] { "Disponible", "Baja laboral", "Vacaciones" }));
+				.setModel(new DefaultComboBoxModel(new String[] { MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptDisponible"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptBaja"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptVacaciones") })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		GridBagConstraints gbc_cbDisponibilidad = new GridBagConstraints();
 		gbc_cbDisponibilidad.gridwidth = 4;
 		gbc_cbDisponibilidad.insets = new Insets(0, 0, 5, 5);
@@ -339,8 +339,8 @@ public class PanelFormularioMonitores extends JPanel {
 		add(lblEstudios, gbc_lblEstudios);
 
 		cbEstudios = new JComboBox();
-		cbEstudios.setModel(new DefaultComboBoxModel(new String[] { "Ninguno", "Educación Secundaria Obligatoria",
-				"Bachillerato", "Formación Profesional", "Estudios Universitarios", "Estudios post-universitarios" }));
+		cbEstudios.setModel(new DefaultComboBoxModel(new String[] { MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptNinguno"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptESO"), //$NON-NLS-1$ //$NON-NLS-2$
+				MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptBachillerato"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptFP"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptUni"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptPostUni") })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		GridBagConstraints gbc_cbEstudios = new GridBagConstraints();
 		gbc_cbEstudios.gridwidth = 3;
 		gbc_cbEstudios.insets = new Insets(0, 0, 5, 5);
@@ -411,8 +411,8 @@ public class PanelFormularioMonitores extends JPanel {
 
 	private class BtnAniadirIdiomaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String nuevoIdioma = (String) JOptionPane.showInputDialog(null, "Introduzca un "
-					+ "nuevo idioma", "Idioma", JOptionPane.QUESTION_MESSAGE, null, null, null);
+			String nuevoIdioma = (String) JOptionPane.showInputDialog(null, MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.IntroduzcaUn") //$NON-NLS-1$
+					+ MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.NuevoIdioma"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.TituloIntroduzcaIdioma"), JOptionPane.QUESTION_MESSAGE, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$
 			Monitor monitor = monitoresDb.getMonitores().get(indice);
 			if(monitor.getIdiomas() == null) 
 				monitor.setIdiomas(new ArrayList<String>());
@@ -449,8 +449,8 @@ public class PanelFormularioMonitores extends JPanel {
 				modeloMonitores.set(indice, new PanelMonitorRenderer(monitor));
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null,
-						"Se ha producido un error. Por favor, asegúrese que ha rellenado al información en todos los campos.",
-						"Error al aplicar cambios", JOptionPane.ERROR_MESSAGE);
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.Error"), //$NON-NLS-1$
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.TituloError"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 			}
 		}
 	}

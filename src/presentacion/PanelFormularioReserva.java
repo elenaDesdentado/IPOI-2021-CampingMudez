@@ -565,27 +565,27 @@ public class PanelFormularioReserva extends JPanel {
 				String salida = sdf.format(dcSalida.getDate());
 				if (sonFechasValidas()) {
 					for (String servicio : servicios) {
-						if (servicio.contains("golf")) //$NON-NLS-1$
+						if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.golf"))) //$NON-NLS-1$
 							precioServicios += 50;
-						else if (servicio.contains("corriente")) //$NON-NLS-1$
+						else if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.corriente"))) //$NON-NLS-1$
 							precioServicios += 20;
-						else if (servicio.contains("Parking")) //$NON-NLS-1$
+						else if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.parking"))) //$NON-NLS-1$
 							precioServicios += 15;
-						else if (servicio.contains("WiFi")) //$NON-NLS-1$
+						else if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.WiFi"))) //$NON-NLS-1$
 							precioServicios += 10;
-						else if (servicio.contains("acampada")) //$NON-NLS-1$
+						else if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.acampada"))) //$NON-NLS-1$
 							precioServicios += 18;
-						else if (servicio.contains("animales")) //$NON-NLS-1$
+						else if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.animales"))) //$NON-NLS-1$
 							precioServicios += 5;
-						else if (servicio.contains("carbón")) //$NON-NLS-1$
+						else if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.carbon"))) //$NON-NLS-1$
 							precioServicios += 5;
-						else if (servicio.contains("garaje")) //$NON-NLS-1$
+						else if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.garaje"))) //$NON-NLS-1$
 							precioServicios += 15;
-						else if (servicio.contains("extra")) //$NON-NLS-1$
+						else if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.extra"))) //$NON-NLS-1$
 							precioServicios += 10;
-						else if (servicio.contains("limpieza")) //$NON-NLS-1$
+						else if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.limpieza"))) //$NON-NLS-1$
 							precioServicios += 15;
-						else if (servicio.contains("Lavavajillas")) //$NON-NLS-1$
+						else if (servicio.contains(MessagesPanelFormularioReserva.getString("PanelFormularioReserva.lavavajillas"))) //$NON-NLS-1$
 							precioServicios += 10;
 					}
 					LocalDate d1 = LocalDate.parse(entrada, DateTimeFormatter.ISO_LOCAL_DATE);
