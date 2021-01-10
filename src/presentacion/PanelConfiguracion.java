@@ -222,9 +222,6 @@ public class PanelConfiguracion extends JPanel {
 							"Cambios cuenta de usuario", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 							options, options[0]);
 					if (seleccion == 0) {
-						System.out.print(pwfPassword.getPassword());
-						System.out.print(pwfPasswordConfirmada.getPassword());
-						
 						if (Arrays.equals(pwfPassword.getPassword(), pwfPasswordConfirmada.getPassword())) {
 							int indexUsuario = usuarios.getUsuarios().indexOf(usuarioPrincipal);
 							Image imagenEscalada = ((ImageIcon) lblAvatar.getIcon()).getImage().getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH);
@@ -237,14 +234,11 @@ public class PanelConfiguracion extends JPanel {
 							Component[] components = framePadre.getContentPane().getComponents();
 							for(int i=0; i<components.length; i++) {
 								if (components[i] instanceof JPanel && components[i].getName().equals("pnlMenu")) {
-									System.out.println(components[i].getName());
 									Component[] comMenu = ((Container) components[i]).getComponents();
 									for(int j=0; j<comMenu.length; j++) {
 										if (comMenu[j] instanceof JToolBar && comMenu[j].getName().equals("tbUsuario")) {
-											System.out.println(comMenu[j].getName());
 											Component[] comTB = ((Container) comMenu[j]).getComponents();
 											for (int k=0; k<comTB.length; k++) {
-												System.out.print(comTB[k].toString());
 												if (comTB[k] instanceof JLabel && comTB[k].getName().equals("lblAvatar")) {
 													((JLabel) comTB[k]).setIcon(usuarioPrincipal.getAvatar());	
 												} 

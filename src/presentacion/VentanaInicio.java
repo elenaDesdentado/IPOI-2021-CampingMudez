@@ -329,10 +329,6 @@ public class VentanaInicio extends JFrame {
 		mnAyuda.setMnemonic('A');
 		mnbAyuda.add(mnAyuda);
 
-		final JMenuItem mntmReadMe = new JMenuItem(MessagesVentanaInicio.getString("VentanaInicio.mntmReadMe.text")); //$NON-NLS-1$
-		mntmReadMe.setBackground(colorFondo);
-		mnAyuda.add(mntmReadMe);
-
 		JMenuItem mntmManualUsuario = new JMenuItem(MessagesVentanaInicio.getString("VentanaInicio.mntmManualUsuario.text")); //$NON-NLS-1$
 		mntmManualUsuario.addActionListener(new MntmManualUsuarioActionListener());
 		mnAyuda.add(mntmManualUsuario);
