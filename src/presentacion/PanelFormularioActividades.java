@@ -83,9 +83,9 @@ public class PanelFormularioActividades extends JPanel {
 		setBackground(colorFondo);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 47, 0, 67, 0, 76, 0, 0, 0, 40, 0 };
-		gridBagLayout.rowHeights = new int[] { 27, 28, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 27, 28, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 10, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
@@ -295,7 +295,7 @@ public class PanelFormularioActividades extends JPanel {
 		btnAplicarCambios.setForeground(Color.BLACK);
 		btnAplicarCambios.setBackground(colorBoton);
 		GridBagConstraints gbc_btnAplicarCambios = new GridBagConstraints();
-		gbc_btnAplicarCambios.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAplicarCambios.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAplicarCambios.gridx = 7;
 		gbc_btnAplicarCambios.gridy = 13;
 		add(btnAplicarCambios, gbc_btnAplicarCambios);
