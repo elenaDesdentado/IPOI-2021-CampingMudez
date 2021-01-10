@@ -54,6 +54,8 @@ import javax.swing.JSeparator;
 import java.awt.Dimension;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PanelEditorRutas extends JPanel {
 	private JLabel lblNombre;
@@ -120,7 +122,7 @@ public class PanelEditorRutas extends JPanel {
 	private Cursor cursorLinea;
 	private JButton btnLinea;
 	private JButton btnPapelera;
-	private JButton btnNewButton;
+	private JButton btnGuardar;
 	private JLabel lblDescripcion;
 	private JScrollPane scrollPane;
 	private JTextArea tADescripcion;
@@ -169,15 +171,16 @@ public class PanelEditorRutas extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 
-		btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new BtnNewButtonActionListener());
-		btnNewButton.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/guardar.png")));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 5;
-		gbc_btnNewButton.gridy = 1;
-		add(btnNewButton, gbc_btnNewButton);
+		btnGuardar = new JButton("");
+		btnGuardar.addKeyListener(new BtnGuardarKeyListener());
+		btnGuardar.addActionListener(new BtnGuardarActionListener());
+		btnGuardar.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/guardar.png")));
+		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
+		gbc_btnGuardar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnGuardar.gridx = 5;
+		gbc_btnGuardar.gridy = 1;
+		add(btnGuardar, gbc_btnGuardar);
 
 		lblLeyenda = new JLabel("");
 		lblLeyenda.addMouseListener(new LblLeyendaMouseListener());
@@ -211,7 +214,8 @@ public class PanelEditorRutas extends JPanel {
 		pnlDiseño = new JPanel();
 		pnlDiseño.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-				MessagesPanelEditorRutas.getString("PanelEditorRutas.pnlDiseño.borderTitle"), TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0))); //$NON-NLS-1$
+				MessagesPanelEditorRutas.getString("PanelEditorRutas.pnlDiseño.borderTitle"), TitledBorder.CENTER, //$NON-NLS-1$
+				TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_pnlDiseño = new GridBagConstraints();
 		gbc_pnlDiseño.gridheight = 9;
 		gbc_pnlDiseño.gridwidth = 5;
@@ -381,6 +385,7 @@ public class PanelEditorRutas extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 
 		tADescripcion = new JTextArea();
+		tADescripcion.addKeyListener(new TADescripcionKeyListener());
 		tADescripcion.setLineWrap(true);
 		tADescripcion.setWrapStyleWord(true);
 		scrollPane.setViewportView(tADescripcion);
@@ -534,7 +539,7 @@ public class PanelEditorRutas extends JPanel {
 		}
 	}
 
-	private class BtnNewButtonActionListener implements ActionListener {
+	private class BtnGuardarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Image image = null;
 			if (txtNombre.getText().length() < 10 || txtEncuentro.getText().length() < 10
@@ -577,6 +582,53 @@ public class PanelEditorRutas extends JPanel {
 		}
 	}
 
+	private class BtnGuardarKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				Image image = null;
+				if (txtNombre.getText().length() < 10 || txtEncuentro.getText().length() < 10
+						|| tADescripcion.getText().length() < 20)
+					JOptionPane.showMessageDialog(null,
+							"Asegúrese de haber completado correctamente toda la información", "Error al guardar ruta",
+							JOptionPane.ERROR_MESSAGE);
+				else {
+					Ruta nuevaRuta = new Ruta();
+					nuevaRuta.setNombre(txtNombre.getText());
+					nuevaRuta.setDia((String) cbDia.getSelectedItem());
+					nuevaRuta.setDificultad((String) cbDificultad.getSelectedItem());
+					nuevaRuta.setHorario((String) cbHorario.getSelectedItem());
+					nuevaRuta.setCupo((int) spinCupo.getValue());
+					nuevaRuta.setEncuentro(txtEncuentro.getText());
+					nuevaRuta.setDescripcion(tADescripcion.getText());
+					nuevaRuta.setMonitores(monitores.getMonitores());
+					// Guardar la ruta pintada como imagen
+					BufferedImage img = new BufferedImage(miAreaDibujo.getWidth(), miAreaDibujo.getHeight(),
+							BufferedImage.TYPE_INT_ARGB);
+					Graphics2D g2d = img.createGraphics();
+					miAreaDibujo.printAll(g2d);
+					g2d.dispose();
+					File imagen = new File("./src/presentacion/NuevoMapa" + rutas.getRutas().size() + ".png");
+					try {
+						ImageIO.write(img, "png", imagen);
+						image = ImageIO.read(imagen);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					Image imagenEscalada = image.getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+					ImageIcon foto = new ImageIcon(imagenEscalada);
+					nuevaRuta.setFoto(foto);
+					rutas.addRuta(nuevaRuta);
+					PanelRutaRenderer nuevoPanel = new PanelRutaRenderer(nuevaRuta);
+					((DefaultListModel) lstRutas.getModel()).addElement(nuevoPanel);
+					JOptionPane.showConfirmDialog(null, "La ruta se guardo correctamente", "Ruta guardada",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+				}
+			}
+		}
+	}
+
 	private class BtnCursorActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			setCursor(Cursor.getDefaultCursor());
@@ -587,8 +639,18 @@ public class PanelEditorRutas extends JPanel {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			JOptionPane.showConfirmDialog(null,
-					"De izquierda a derecha, el significado de los botones es el siguiente:\nCargar la imagen de un mapa\nLimpiar la imagen\nRecuperar el cursor\nComienzo de la ruta\nMeta\nMirador\nFuente\nPintura rupestre\nMerendero\nTrazar una linea",
+					"De izquierda a derecha, el significado de los botones es el siguiente:\nCargar la imagen de un mapa\nLimpiar la imagen\nRecuperar el cursor\n\nComienzo de la ruta\nMeta\nMirador\nFuente\nPintura rupestre\nMerendero\nTrazar una linea",
 					"Leyenda de los botones", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+
+	private class TADescripcionKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_TAB) {
+				tADescripcion.transferFocus();
+				btnGuardar.requestFocus();
+			}
 		}
 	}
 }

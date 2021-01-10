@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PanelFormularioMonitores extends JPanel {
 
@@ -105,7 +107,9 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblAvatar.gridy = 1;
 		add(lblAvatar, gbc_lblAvatar);
 
-		btnModificar = new JButton(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnModificar.text")); //$NON-NLS-1$
+		btnModificar = new JButton(
+				MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnModificar.text")); //$NON-NLS-1$
+		btnModificar.addKeyListener(new BtnModificarKeyListener());
 		btnModificar.addActionListener(new BtnModificarActionListener());
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
 		gbc_btnModificar.insets = new Insets(0, 0, 5, 5);
@@ -132,7 +136,9 @@ public class PanelFormularioMonitores extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 
-		btnAniadirAvatar = new JButton(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnAniadirAvatar.text")); //$NON-NLS-1$
+		btnAniadirAvatar = new JButton(
+				MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnAniadirAvatar.text")); //$NON-NLS-1$
+		btnAniadirAvatar.addKeyListener(new BtnAniadirAvatarKeyListener());
 		btnAniadirAvatar.addActionListener(new BtnAniadirAvatarActionListener());
 		GridBagConstraints gbc_btnAniadirAvatar = new GridBagConstraints();
 		gbc_btnAniadirAvatar.gridwidth = 4;
@@ -141,7 +147,8 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_btnAniadirAvatar.gridy = 3;
 		add(btnAniadirAvatar, gbc_btnAniadirAvatar);
 
-		lblApellidos = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblApellidos.text")); //$NON-NLS-1$
+		lblApellidos = new JLabel(
+				MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblApellidos.text")); //$NON-NLS-1$
 		lblApellidos.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblApellidos = new GridBagConstraints();
 		gbc_lblApellidos.anchor = GridBagConstraints.EAST;
@@ -159,7 +166,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_txtApellidos.gridy = 3;
 		add(txtApellidos, gbc_txtApellidos);
 		txtApellidos.setColumns(10);
-		
+
 		lblEdad = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblEdad.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEdad = new GridBagConstraints();
 		gbc_lblEdad.anchor = GridBagConstraints.EAST;
@@ -167,7 +174,7 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_lblEdad.gridx = 7;
 		gbc_lblEdad.gridy = 4;
 		add(lblEdad, gbc_lblEdad);
-		
+
 		spnEdad = new JSpinner();
 		spnEdad.setModel(new SpinnerNumberModel(16, 16, 67, 1));
 		GridBagConstraints gbc_spnEdad = new GridBagConstraints();
@@ -310,7 +317,8 @@ public class PanelFormularioMonitores extends JPanel {
 		add(txtCorreo, gbc_txtCorreo);
 		txtCorreo.setColumns(10);
 
-		lblDisponibilidad = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblDisponibilidad.text")); //$NON-NLS-1$
+		lblDisponibilidad = new JLabel(
+				MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblDisponibilidad.text")); //$NON-NLS-1$
 		lblDisponibilidad.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_lblDisponibilidad = new GridBagConstraints();
 		gbc_lblDisponibilidad.anchor = GridBagConstraints.EAST;
@@ -320,8 +328,10 @@ public class PanelFormularioMonitores extends JPanel {
 		add(lblDisponibilidad, gbc_lblDisponibilidad);
 
 		cbDisponibilidad = new JComboBox();
-		cbDisponibilidad
-				.setModel(new DefaultComboBoxModel(new String[] { MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptDisponible"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptBaja"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptVacaciones") })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		cbDisponibilidad.setModel(new DefaultComboBoxModel(
+				new String[] { MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptDisponible"), //$NON-NLS-1$
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptBaja"), //$NON-NLS-1$
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptVacaciones") })); //$NON-NLS-1$
 		GridBagConstraints gbc_cbDisponibilidad = new GridBagConstraints();
 		gbc_cbDisponibilidad.gridwidth = 4;
 		gbc_cbDisponibilidad.insets = new Insets(0, 0, 5, 5);
@@ -330,7 +340,8 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_cbDisponibilidad.gridy = 9;
 		add(cbDisponibilidad, gbc_cbDisponibilidad);
 
-		lblEstudios = new JLabel(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblEstudios.text")); //$NON-NLS-1$
+		lblEstudios = new JLabel(
+				MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.lblEstudios.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEstudios = new GridBagConstraints();
 		gbc_lblEstudios.anchor = GridBagConstraints.EAST;
 		gbc_lblEstudios.insets = new Insets(0, 0, 5, 5);
@@ -339,8 +350,13 @@ public class PanelFormularioMonitores extends JPanel {
 		add(lblEstudios, gbc_lblEstudios);
 
 		cbEstudios = new JComboBox();
-		cbEstudios.setModel(new DefaultComboBoxModel(new String[] { MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptNinguno"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptESO"), //$NON-NLS-1$ //$NON-NLS-2$
-				MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptBachillerato"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptFP"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptUni"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptPostUni") })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		cbEstudios.setModel(new DefaultComboBoxModel(
+				new String[] { MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptNinguno"), //$NON-NLS-1$
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptESO"), //$NON-NLS-1$
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptBachillerato"), //$NON-NLS-1$
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptFP"), //$NON-NLS-1$
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptUni"), //$NON-NLS-1$
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.OptPostUni") })); //$NON-NLS-1$
 		GridBagConstraints gbc_cbEstudios = new GridBagConstraints();
 		gbc_cbEstudios.gridwidth = 3;
 		gbc_cbEstudios.insets = new Insets(0, 0, 5, 5);
@@ -370,7 +386,9 @@ public class PanelFormularioMonitores extends JPanel {
 		lstIdiomas = new JList(model);
 		spIdiomas.setViewportView(lstIdiomas);
 
-		btnAniadirIdioma = new JButton(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnAniadirIdioma.text")); //$NON-NLS-1$
+		btnAniadirIdioma = new JButton(
+				MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnAniadirIdioma.text")); //$NON-NLS-1$
+		btnAniadirIdioma.addKeyListener(new BtnAniadirIdiomaKeyListener());
 		btnAniadirIdioma.addActionListener(new BtnAniadirIdiomaActionListener());
 		GridBagConstraints gbc_btnAniadirIdioma = new GridBagConstraints();
 		gbc_btnAniadirIdioma.insets = new Insets(0, 0, 5, 5);
@@ -378,7 +396,9 @@ public class PanelFormularioMonitores extends JPanel {
 		gbc_btnAniadirIdioma.gridy = 10;
 		add(btnAniadirIdioma, gbc_btnAniadirIdioma);
 
-		btnAplicarCambios = new JButton(MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnAplicarCambios.text")); //$NON-NLS-1$
+		btnAplicarCambios = new JButton(
+				MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.btnAplicarCambios.text")); //$NON-NLS-1$
+		btnAplicarCambios.addKeyListener(new BtnAplicarCambiosKeyListener());
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
 		btnAplicarCambios.setForeground(Color.BLACK);
 		btnAplicarCambios.setBackground(colorBoton);
@@ -409,16 +429,63 @@ public class PanelFormularioMonitores extends JPanel {
 		}
 	}
 
+	private class BtnModificarKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				btnAniadirAvatar.setEnabled(true);
+				btnAplicarCambios.setEnabled(true);
+				btnAniadirIdioma.setEnabled(true);
+				lstIdiomas.setEnabled(true);
+				txtNombre.setEnabled(true);
+				txtApellidos.setEnabled(true);
+				spnEdad.setEnabled(true);
+				ftxtDNI.setEnabled(true);
+				ftxtMovil.setEnabled(true);
+				ftxtFijo.setEnabled(true);
+				txtCorreo.setEnabled(true);
+				cbEstudios.setEnabled(true);
+				txtSueldo.setEnabled(true);
+				cbHorario.setEnabled(true);
+				cbDisponibilidad.setEnabled(true);
+			}
+		}
+	}
+
 	private class BtnAniadirIdiomaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String nuevoIdioma = (String) JOptionPane.showInputDialog(null, MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.IntroduzcaUn") //$NON-NLS-1$
-					+ MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.NuevoIdioma"), MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.TituloIntroduzcaIdioma"), JOptionPane.QUESTION_MESSAGE, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$
+			String nuevoIdioma = (String) JOptionPane.showInputDialog(null,
+					MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.IntroduzcaUn") //$NON-NLS-1$
+							+ MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.NuevoIdioma"), //$NON-NLS-1$
+					MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.TituloIntroduzcaIdioma"), //$NON-NLS-1$
+					JOptionPane.QUESTION_MESSAGE, null, null, null);
 			Monitor monitor = monitoresDb.getMonitores().get(indice);
-			if(monitor.getIdiomas() == null) 
+			if (monitor.getIdiomas() == null)
 				monitor.setIdiomas(new ArrayList<String>());
 			monitor.getIdiomas().add(nuevoIdioma);
 			DefaultListModel modeloLista = (DefaultListModel) lstIdiomas.getModel();
 			modeloLista.addElement(nuevoIdioma);
+		}
+	}
+
+	private class BtnAniadirIdiomaKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				String nuevoIdioma = (String) JOptionPane.showInputDialog(null,
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.IntroduzcaUn") //$NON-NLS-1$
+								+ MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.NuevoIdioma"), //$NON-NLS-1$
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.TituloIntroduzcaIdioma"), //$NON-NLS-1$
+						JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if (!nuevoIdioma.isEmpty()) {
+					Monitor monitor = monitoresDb.getMonitores().get(indice);
+					if (monitor.getIdiomas() == null)
+						monitor.setIdiomas(new ArrayList<String>());
+					monitor.getIdiomas().add(nuevoIdioma);
+					DefaultListModel modeloLista = (DefaultListModel) lstIdiomas.getModel();
+					modeloLista.addElement(nuevoIdioma);
+				}
+			}
 		}
 	}
 
@@ -432,7 +499,11 @@ public class PanelFormularioMonitores extends JPanel {
 				monitor.setDni(ftxtDNI.getText());
 				monitor.setMovil(ftxtMovil.getText());
 				monitor.setFijo(ftxtFijo.getText());
-				monitor.setCorreo(txtCorreo.getText());
+				if (txtCorreo.getText().contains("@") && txtCorreo.getText().contains(".")) //$NON-NLS-1$ //$NON-NLS-2$
+					monitor.setCorreo(txtCorreo.getText());
+				else
+					JOptionPane.showMessageDialog(null, MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.CorreoInvalido1"), //$NON-NLS-1$
+							MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.CorreoInvalidoTitulo1"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 				monitor.setSueldo(Double.valueOf(txtSueldo.getText()));
 				monitor.setEstudios((String) cbEstudios.getSelectedItem());
 				monitor.setHorario((String) cbHorario.getSelectedItem());
@@ -444,13 +515,55 @@ public class PanelFormularioMonitores extends JPanel {
 					nuevosIdiomas.add(modelo.get(i).toString());
 				monitor.setIdiomas(nuevosIdiomas);
 				DefaultListModel modeloMonitores = (DefaultListModel) lstMonitores.getModel();
-				if(modeloMonitores.getSize() == indice)
-					modeloMonitores.addElement(null);	//En caso de nuevo monitor, agregarlo al modelo
+				if (modeloMonitores.getSize() == indice)
+					modeloMonitores.addElement(null); // En caso de nuevo monitor, agregarlo al modelo
 				modeloMonitores.set(indice, new PanelMonitorRenderer(monitor));
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null,
 						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.Error"), //$NON-NLS-1$
-						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.TituloError"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
+						MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.TituloError"), //$NON-NLS-1$
+						JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
+	private class BtnAplicarCambiosKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				Monitor monitor = monitoresDb.getMonitores().get(indice);
+				try {
+					monitor.setNombre(txtNombre.getText());
+					monitor.setApellidos(txtApellidos.getText());
+					monitor.setEdad((Integer) spnEdad.getValue());
+					monitor.setDni(ftxtDNI.getText());
+					monitor.setMovil(ftxtMovil.getText());
+					monitor.setFijo(ftxtFijo.getText());
+					if (txtCorreo.getText().contains("@") && txtCorreo.getText().contains(".")) //$NON-NLS-1$ //$NON-NLS-2$
+						monitor.setCorreo(txtCorreo.getText());
+					else
+						JOptionPane.showMessageDialog(null, MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.CorreoInvalido2"), //$NON-NLS-1$
+								MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.CorreoInvalidoTitulo2"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
+					monitor.setSueldo(Double.valueOf(txtSueldo.getText()));
+					monitor.setEstudios((String) cbEstudios.getSelectedItem());
+					monitor.setHorario((String) cbHorario.getSelectedItem());
+					monitor.setDisponibilidad((String) cbDisponibilidad.getSelectedItem());
+					monitor.setAvatar((ImageIcon) lblAvatar.getIcon());
+					DefaultListModel modelo = (DefaultListModel) lstIdiomas.getModel();
+					ArrayList<String> nuevosIdiomas = new ArrayList<String>();
+					for (int i = 0; i < modelo.getSize(); ++i)
+						nuevosIdiomas.add(modelo.get(i).toString());
+					monitor.setIdiomas(nuevosIdiomas);
+					DefaultListModel modeloMonitores = (DefaultListModel) lstMonitores.getModel();
+					if (modeloMonitores.getSize() == indice)
+						modeloMonitores.addElement(null); // En caso de nuevo monitor, agregarlo al modelo
+					modeloMonitores.set(indice, new PanelMonitorRenderer(monitor));
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null,
+							MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.Error"), //$NON-NLS-1$
+							MessagesPanelFormularioMonitores.getString("PanelFormularioMonitores.TituloError"), //$NON-NLS-1$
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 	}
@@ -469,6 +582,28 @@ public class PanelFormularioMonitores extends JPanel {
 					lblAvatar.setIcon(iconoLabel);
 				} catch (IOException ex) {
 					ex.printStackTrace();
+				}
+			}
+		}
+	}
+
+	private class BtnAniadirAvatarKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				JFileChooser fcAbrir = new JFileChooser();
+				int valorDevuelto = fcAbrir.showOpenDialog(null);
+				if (valorDevuelto == JFileChooser.APPROVE_OPTION) {
+					File file = fcAbrir.getSelectedFile();
+					Image imagenOriginal;
+					try {
+						imagenOriginal = ImageIO.read(file);
+						Image imagenEscalada = imagenOriginal.getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+						ImageIcon iconoLabel = new ImageIcon(imagenEscalada);
+						lblAvatar.setIcon(iconoLabel);
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
 				}
 			}
 		}

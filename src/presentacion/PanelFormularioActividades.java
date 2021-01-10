@@ -38,6 +38,10 @@ import dominio.Actividad;
 import dominio.Monitor;
 import persistencia.Actividades;
 import persistencia.Monitores;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class PanelFormularioActividades extends JPanel {
 	public JLabel lblFoto;
@@ -85,11 +89,13 @@ public class PanelFormularioActividades extends JPanel {
 		gridBagLayout.columnWidths = new int[] { 47, 0, 67, 0, 76, 0, 0, 0, 40, 0 };
 		gridBagLayout.rowHeights = new int[] { 27, 28, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 10, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		btnModificar = new JButton(MessagesPanelFormularioActividades.getString("PanelFormularioActividades.btnModificar.text")); //$NON-NLS-1$
+		btnModificar = new JButton(
+				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.btnModificar.text")); //$NON-NLS-1$
+		btnModificar.addKeyListener(new BtnModificarKeyListener());
 		btnModificar.addActionListener(new BtnModificarActionListener());
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
 		gbc_btnModificar.insets = new Insets(0, 0, 5, 5);
@@ -106,7 +112,8 @@ public class PanelFormularioActividades extends JPanel {
 		gbc_lblFoto.gridy = 2;
 		add(lblFoto, gbc_lblFoto);
 
-		lblNombre = new JLabel(MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblNombre.text")); //$NON-NLS-1$
+		lblNombre = new JLabel(
+				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblNombre.text")); //$NON-NLS-1$
 		lblNombre.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.anchor = GridBagConstraints.SOUTHEAST;
@@ -126,7 +133,9 @@ public class PanelFormularioActividades extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 
-		btnAniadirAvatar = new JButton(MessagesPanelFormularioActividades.getString("PanelFormularioActividades.btnAniadirAvatar.text")); //$NON-NLS-1$
+		btnAniadirAvatar = new JButton(
+				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.btnAniadirAvatar.text")); //$NON-NLS-1$
+		btnAniadirAvatar.addKeyListener(new BtnAniadirAvatarKeyListener());
 		btnAniadirAvatar.addActionListener(new BtnAniadirAvatarActionListener());
 		GridBagConstraints gbc_btnAniadirAvatar = new GridBagConstraints();
 		gbc_btnAniadirAvatar.gridwidth = 3;
@@ -171,7 +180,8 @@ public class PanelFormularioActividades extends JPanel {
 		gbc_spinCupo.gridy = 5;
 		add(spinCupo, gbc_spinCupo);
 
-		lblPrecio = new JLabel(MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblPrecio.text")); //$NON-NLS-1$
+		lblPrecio = new JLabel(
+				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblPrecio.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblPrecio = new GridBagConstraints();
 		gbc_lblPrecio.anchor = GridBagConstraints.EAST;
 		gbc_lblPrecio.insets = new Insets(0, 0, 5, 5);
@@ -196,7 +206,8 @@ public class PanelFormularioActividades extends JPanel {
 		gbc_lblSimboloEuro.gridy = 6;
 		add(lblSimboloEuro, gbc_lblSimboloEuro);
 
-		lblDestinatarios = new JLabel(MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblDestinatarios.text")); //$NON-NLS-1$
+		lblDestinatarios = new JLabel(
+				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblDestinatarios.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDestinatarios = new GridBagConstraints();
 		gbc_lblDestinatarios.anchor = GridBagConstraints.EAST;
 		gbc_lblDestinatarios.insets = new Insets(0, 0, 5, 5);
@@ -205,8 +216,12 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblDestinatarios, gbc_lblDestinatarios);
 
 		cbDestinatarios = new JComboBox();
-		cbDestinatarios.setModel(new DefaultComboBoxModel(new String[] { MessagesPanelFormularioActividades.getString("PanelFormularioActividades.3"), //$NON-NLS-1$
-				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.4"), MessagesPanelFormularioActividades.getString("PanelFormularioActividades.5"), MessagesPanelFormularioActividades.getString("PanelFormularioActividades.6"), MessagesPanelFormularioActividades.getString("PanelFormularioActividades.7") })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		cbDestinatarios.setModel(new DefaultComboBoxModel(
+				new String[] { MessagesPanelFormularioActividades.getString("PanelFormularioActividades.3"), //$NON-NLS-1$
+						MessagesPanelFormularioActividades.getString("PanelFormularioActividades.4"), //$NON-NLS-1$
+						MessagesPanelFormularioActividades.getString("PanelFormularioActividades.5"), //$NON-NLS-1$
+						MessagesPanelFormularioActividades.getString("PanelFormularioActividades.6"), //$NON-NLS-1$
+						MessagesPanelFormularioActividades.getString("PanelFormularioActividades.7") })); //$NON-NLS-1$
 		GridBagConstraints gbc_cbDestinatarios = new GridBagConstraints();
 		gbc_cbDestinatarios.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDestinatarios.fill = GridBagConstraints.HORIZONTAL;
@@ -214,7 +229,8 @@ public class PanelFormularioActividades extends JPanel {
 		gbc_cbDestinatarios.gridy = 6;
 		add(cbDestinatarios, gbc_cbDestinatarios);
 
-		lblHorario = new JLabel(MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblHorario.text")); //$NON-NLS-1$
+		lblHorario = new JLabel(
+				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblHorario.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblHorario = new GridBagConstraints();
 		gbc_lblHorario.anchor = GridBagConstraints.EAST;
 		gbc_lblHorario.insets = new Insets(0, 0, 5, 5);
@@ -250,7 +266,8 @@ public class PanelFormularioActividades extends JPanel {
 		gbc_cbArea.gridy = 7;
 		add(cbArea, gbc_cbArea);
 
-		lblDescripcion = new JLabel(MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblDescripcion.text")); //$NON-NLS-1$
+		lblDescripcion = new JLabel(
+				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblDescripcion.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
 		gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
@@ -259,6 +276,7 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblDescripcion, gbc_lblDescripcion);
 
 		tADescripcion = new JTextArea();
+		tADescripcion.addKeyListener(new TADescripcionKeyListener());
 		tADescripcion.setWrapStyleWord(true);
 		tADescripcion.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		tADescripcion.setLineWrap(true);
@@ -271,7 +289,8 @@ public class PanelFormularioActividades extends JPanel {
 		gbc_tADescripcion.gridy = 8;
 		add(tADescripcion, gbc_tADescripcion);
 
-		lblMateriales = new JLabel(MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblMateriales.text")); //$NON-NLS-1$
+		lblMateriales = new JLabel(
+				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.lblMateriales.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblMateriales = new GridBagConstraints();
 		gbc_lblMateriales.anchor = GridBagConstraints.EAST;
 		gbc_lblMateriales.insets = new Insets(0, 0, 5, 5);
@@ -280,6 +299,7 @@ public class PanelFormularioActividades extends JPanel {
 		add(lblMateriales, gbc_lblMateriales);
 
 		tAMateriales = new JTextArea();
+		tAMateriales.addKeyListener(new TAMaterialesKeyListener());
 		tAMateriales.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		tAMateriales.setLineWrap(true);
 		GridBagConstraints gbc_tAMateriales = new GridBagConstraints();
@@ -290,7 +310,9 @@ public class PanelFormularioActividades extends JPanel {
 		gbc_tAMateriales.gridy = 10;
 		add(tAMateriales, gbc_tAMateriales);
 
-		btnAplicarCambios = new JButton(MessagesPanelFormularioActividades.getString("PanelFormularioActividades.btnAplicarCambios.text")); //$NON-NLS-1$
+		btnAplicarCambios = new JButton(
+				MessagesPanelFormularioActividades.getString("PanelFormularioActividades.btnAplicarCambios.text")); //$NON-NLS-1$
+		btnAplicarCambios.addKeyListener(new BtnAplicarCambiosKeyListener());
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
 		btnAplicarCambios.setForeground(Color.BLACK);
 		btnAplicarCambios.setBackground(colorBoton);
@@ -318,6 +340,25 @@ public class PanelFormularioActividades extends JPanel {
 		}
 	}
 
+	private class BtnModificarKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				btnAniadirAvatar.setEnabled(true);
+				btnAplicarCambios.setEnabled(true);
+				txtNombre.setEditable(true);
+				txtMonitor.setEditable(true);
+				txtPrecio.setEditable(true);
+				spinCupo.setEnabled(true);
+				tADescripcion.setEnabled(true);
+				tAMateriales.setEnabled(true);
+				cbDestinatarios.setEnabled(true);
+				cbArea.setEnabled(true);
+				cbHorario.setEnabled(true);
+			}
+		}
+	}
+
 	private class BtnAniadirAvatarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser fcAbrir = new JFileChooser();
@@ -332,6 +373,28 @@ public class PanelFormularioActividades extends JPanel {
 					lblFoto.setIcon(iconoLabel);
 				} catch (IOException ex) {
 					ex.printStackTrace();
+				}
+			}
+		}
+	}
+
+	private class BtnAniadirAvatarKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				JFileChooser fcAbrir = new JFileChooser();
+				int valorDevuelto = fcAbrir.showOpenDialog(null);
+				if (valorDevuelto == JFileChooser.APPROVE_OPTION) {
+					File file = fcAbrir.getSelectedFile();
+					Image imagenOriginal;
+					try {
+						imagenOriginal = ImageIO.read(file);
+						Image imagenEscalada = imagenOriginal.getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+						ImageIcon iconoLabel = new ImageIcon(imagenEscalada);
+						lblFoto.setIcon(iconoLabel);
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
 				}
 			}
 		}
@@ -358,8 +421,54 @@ public class PanelFormularioActividades extends JPanel {
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null,
 						MessagesPanelFormularioActividades.getString("PanelFormularioActividades.18"), //$NON-NLS-1$
-						MessagesPanelFormularioActividades.getString("PanelFormularioActividades.19"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
+						MessagesPanelFormularioActividades.getString("PanelFormularioActividades.19"), //$NON-NLS-1$
+						JOptionPane.ERROR_MESSAGE);
 			}
+		}
+	}
+
+	private class BtnAplicarCambiosKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				Actividad actividad = actividadesDb.getActividades().get(indice);
+				try {
+					actividad.setNombre(txtNombre.getText());
+					actividad.setMonitor(txtMonitor.getText());
+					actividad.setCupo((Integer) spinCupo.getValue());
+					actividad.setDestinatario((String) cbDestinatarios.getSelectedItem());
+					actividad.setArea((String) cbArea.getSelectedItem());
+					actividad.setDescripcion(tADescripcion.getText());
+					actividad.setMateriales(tAMateriales.getText());
+					actividad.setPrecio(Double.valueOf(txtPrecio.getText()));
+					actividad.setHorario((String) cbHorario.getSelectedItem());
+					actividad.setFotoActividad((ImageIcon) lblFoto.getIcon());
+					DefaultListModel modeloActividades = (DefaultListModel) lstActividades.getModel();
+					if (modeloActividades.getSize() == indice)
+						modeloActividades.addElement(null); // En caso de nuevo monitor, agregarlo al modelo
+					modeloActividades.set(indice, new PanelActividadRenderer(actividad));
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null,
+							MessagesPanelFormularioActividades.getString("PanelFormularioActividades.18"), //$NON-NLS-1$
+							MessagesPanelFormularioActividades.getString("PanelFormularioActividades.19"), //$NON-NLS-1$
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+	}
+
+	private class TADescripcionKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_TAB)
+				tADescripcion.transferFocus();
+		}
+	}
+	private class TAMaterialesKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_TAB)
+				tAMateriales.transferFocus();
 		}
 	}
 }

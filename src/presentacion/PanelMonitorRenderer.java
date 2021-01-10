@@ -30,7 +30,10 @@ public class PanelMonitorRenderer extends JPanel {
 		setMinimumSize(new Dimension(10, 2));
 		setMaximumSize(new Dimension(32767, 5));
 		this.monitor = monitor;
-		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), MessagesPanelMonitorRenderer.getString("PanelMonitorRenderer.this.borderTitle"), TitledBorder.LEADING, TitledBorder.TOP, null, Color.DARK_GRAY)); //$NON-NLS-1$
+		setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				MessagesPanelMonitorRenderer.getString("PanelMonitorRenderer.this.borderTitle"), TitledBorder.LEADING, //$NON-NLS-1$
+				TitledBorder.TOP, null, Color.DARK_GRAY));
 		setLayout(null);
 
 		lblAvatar = new JLabel("");
@@ -60,17 +63,12 @@ public class PanelMonitorRenderer extends JPanel {
 		add(lblTelefono);
 
 		lblDisponibilidad = new JLabel(monitor.getDisponibilidad());
-		switch (lblDisponibilidad.getText()) {
-		case "Disponible":
+		if (lblDisponibilidad.getText().equals("Disponible") || lblDisponibilidad.getText().equals("Available"))
 			lblDisponibilidad.setForeground(Color.green);
-			break;
-		case "Baja laboral":
+		else if (lblDisponibilidad.getText().equals("Baja laboral") || lblDisponibilidad.getText().equals("Sick leave"))
 			lblDisponibilidad.setForeground(Color.red);
-			break;
-		case "Vacaciones":
+		else if (lblDisponibilidad.getText().equals("Vacaciones") || lblDisponibilidad.getText().equals("Holidays"))
 			lblDisponibilidad.setForeground(Color.orange);
-			break;
-		}
 		lblDisponibilidad.setFont(new Font("Verdana", Font.PLAIN, 12));
 		lblDisponibilidad.setBounds(177, 153, 145, 21);
 		add(lblDisponibilidad);
@@ -132,6 +130,5 @@ public class PanelMonitorRenderer extends JPanel {
 	public void setMonitor(Monitor monitor) {
 		this.monitor = monitor;
 	}
-	
-	
+
 }

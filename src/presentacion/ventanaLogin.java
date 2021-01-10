@@ -363,8 +363,12 @@ public class ventanaLogin {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			if (e.getKeyCode()==KeyEvent.VK_ENTER){
+				Usuario nuevoUsuario = new Usuario(new ImageIcon(VentanaInicio.class.getResource("/presentacion/avatarUsuario.png")), USER, PASSWORD);
+				usuarios.addUsuario(nuevoUsuario);
+				
+				lblWrongUsuario.setIcon(null); lblWrongPassword.setIcon(null);
 				// CHECKEO DE CREDENCIALES
-				if(txtNombreUsuario.getText() == USER && String.valueOf(pwfContrasenia.getPassword()) == PASSWORD) {
+				if(txtNombreUsuario.getText().equals(USER) && String.valueOf(pwfContrasenia.getPassword()).equals(PASSWORD)) {
 					if(chckbxRecuerdame.isSelected()) save();
 					else delete();
 					VentanaInicio inicio = new VentanaInicio(USER, PASSWORD, usuarios);
@@ -372,18 +376,19 @@ public class ventanaLogin {
 					inicio.setVisible(true);
 					// Hacer que la frame ocupe toda la pantalla
 					inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				}
-				else {
+				} else if(!(txtNombreUsuario.getText().equals(USER)) && !(String.valueOf(pwfContrasenia.getPassword()).equals(PASSWORD))) {
 					lblWrongUsuario.setIcon(wrong);
 					lblWrongPassword.setIcon(wrong);
-					if (!txtNombreUsuario.getText().equals(USER)) {
-						lblMensajeError.setText("Nombre de usuario incorrecto. Intente de nuevo.");
-						lblMensajeError.setForeground(Color.RED);
-					}
-					else {
-						lblMensajeError.setText("Contraseña incorrecta. Intente de nuevo.");
-						lblMensajeError.setForeground(Color.RED);
-					}
+					lblMensajeError.setText("Nombre de usuario y contraseña incorrectos. Intente de nuevo.");
+					lblMensajeError.setForeground(Color.RED);
+				} else if (!txtNombreUsuario.getText().equals(USER)){
+					lblWrongUsuario.setIcon(wrong);
+					lblMensajeError.setText("Nombre de usuario incorrecto. Intente de nuevo.");
+					lblMensajeError.setForeground(Color.RED);
+				} else if (!String.valueOf(pwfContrasenia.getPassword()).equals(PASSWORD)) {
+					lblWrongPassword.setIcon(wrong);
+					lblMensajeError.setText("Contraseña incorrecta. Intente de nuevo.");
+					lblMensajeError.setForeground(Color.RED);
 				}
 		    }
 		}

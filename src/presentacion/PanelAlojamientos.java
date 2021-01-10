@@ -217,9 +217,9 @@ public class PanelAlojamientos extends JPanel {
 		pnlGestionBusqueda.add(txtBarraBusqueda, gbc_txtBarraBusqueda);
 		txtBarraBusqueda.setColumns(10);
 
-		lblLupa = new JLabel("");
+		lblLupa = new JLabel(""); //$NON-NLS-1$
 		lblLupa.addMouseListener(new LblLupaMouseListener());
-		lblLupa.setIcon(new ImageIcon(PanelAlojamientos.class.getResource("/presentacion/lupa.png")));
+		lblLupa.setIcon(new ImageIcon(PanelAlojamientos.class.getResource("/presentacion/lupa.png"))); //$NON-NLS-1$
 		lblLupa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GridBagConstraints gbc_lblLupa = new GridBagConstraints();
 		gbc_lblLupa.insets = new Insets(0, 0, 5, 5);
@@ -230,7 +230,7 @@ public class PanelAlojamientos extends JPanel {
 		// PANELES PARA EL CARD LAYOUT
 		JPanel formularioVacio = new PanelFormularioActividadesInicio();
 
-		pnlFormularioAlojs.add(formularioVacio, "Formulario vacio");
+		pnlFormularioAlojs.add(formularioVacio, "Formulario vacio"); //$NON-NLS-1$
 
 	}
 
@@ -238,10 +238,10 @@ public class PanelAlojamientos extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			DefaultListModel modeloFiltrado = new DefaultListModel();
 			for (int i = 0; i < modeloOriginal.getSize(); ++i) {
-				if (((String) cbFiltro.getSelectedItem()).equals("Parcelas")) {
+				if (((String) cbFiltro.getSelectedItem()).equals("Parcelas")) { //$NON-NLS-1$
 					if (alojamientosDb.getAlojamientos().get(i) instanceof Parcela)
 						modeloFiltrado.addElement(modeloOriginal.getElementAt(i));
-				} else if (((String) cbFiltro.getSelectedItem()).equals("Cabañas")) {
+				} else if (((String) cbFiltro.getSelectedItem()).equals("Cabañas")) { //$NON-NLS-1$
 					if (alojamientosDb.getAlojamientos().get(i) instanceof Bungalow)
 						modeloFiltrado.addElement(modeloOriginal.getElementAt(i));
 				} else {
@@ -267,7 +267,7 @@ public class PanelAlojamientos extends JPanel {
 					panelAlojamientoInfoCompleta.lblFoto.setIcon(alojamientoSeleccionado.getFoto());
 					panelAlojamientoInfoCompleta.lblNombre.setText(alojamientoSeleccionado.getNombre());
 					panelAlojamientoInfoCompleta.lblPrecio.setText(String.valueOf(alojamientoSeleccionado.getPrecio()));
-					panelAlojamientoInfoCompleta.lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
+					panelAlojamientoInfoCompleta.lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14)); //$NON-NLS-1$
 
 					panelAlojamientoInfoCompleta.chckbxCorrienteElectrica
 							.setEnabled(((Parcela) alojamientoSeleccionado).isGolf());
@@ -281,30 +281,30 @@ public class PanelAlojamientos extends JPanel {
 					panelAlojamientoInfoCompleta.chckbxMascotas
 							.setEnabled(((Parcela) alojamientoSeleccionado).isMascotas());
 
-					panelAlojamientoInfoCompleta.tPDescripcion.setText("<html><pre>"
-							+ alojamientoSeleccionado.getDescripcion() + "</pre><ul><li>Área de la parcela: "
-							+ alojamientoSeleccionado.getArea() + "</li><li>Superficie de la parcela: "
-							+ String.valueOf(alojamientoSeleccionado.getTamanio()) + "m<sup>2</sup>"
-							+ "</li><li>Sombra: " + ((Parcela) alojamientoSeleccionado).getSombra()
-							+ "</li><li>Tipo de suelo: " + ((Parcela) alojamientoSeleccionado).getSuelo()
-							+ "</li><li>Zona de baño: " + ((Parcela) alojamientoSeleccionado).getBanio()
-							+ "</li><li>Restaurantes cercanos: " + ((Parcela) alojamientoSeleccionado).getRestaurante()
-							+ "</li></ul></html>");
+					panelAlojamientoInfoCompleta.tPDescripcion.setText("<html><pre>" //$NON-NLS-1$
+							+ alojamientoSeleccionado.getDescripcion() + "</pre><ul><li>Área de la parcela: " //$NON-NLS-1$
+							+ alojamientoSeleccionado.getArea() + "</li><li>Superficie de la parcela: " //$NON-NLS-1$
+							+ String.valueOf(alojamientoSeleccionado.getTamanio()) + "m<sup>2</sup>" //$NON-NLS-1$
+							+ "</li><li>Sombra: " + ((Parcela) alojamientoSeleccionado).getSombra() //$NON-NLS-1$
+							+ "</li><li>Tipo de suelo: " + ((Parcela) alojamientoSeleccionado).getSuelo() //$NON-NLS-1$
+							+ "</li><li>Zona de baño: " + ((Parcela) alojamientoSeleccionado).getBanio() //$NON-NLS-1$
+							+ "</li><li>Restaurantes cercanos: " + ((Parcela) alojamientoSeleccionado).getRestaurante() //$NON-NLS-1$
+							+ "</li></ul></html>"); //$NON-NLS-1$
 
 					pnlFormularioAlojs.add(panelAlojamientoInfoCompleta, alojamientoSeleccionado.getNombre());
 					((CardLayout) pnlFormularioAlojs.getLayout()).show(pnlFormularioAlojs,
 							alojamientoSeleccionado.getNombre());
 
 					ImageIcon image = new ImageIcon(PanelAlojamientoRenderer.class
-							.getResource("./estrellas" + alojamientoSeleccionado.getValoracion() + ".PNG"));
+							.getResource("./estrellas" + alojamientoSeleccionado.getValoracion() + ".PNG")); //$NON-NLS-1$ //$NON-NLS-2$
 					Image imagenEscalada1 = image.getImage().getScaledInstance(128, 20, java.awt.Image.SCALE_SMOOTH);
 					image = new ImageIcon(imagenEscalada1);
 					panelAlojamientoInfoCompleta.lblEstrellas.setIcon(image);
 
-					UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
-					UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
+					UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY); //$NON-NLS-1$
+					UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY); //$NON-NLS-1$
 				} else if (alojamientoSeleccionado instanceof Bungalow) {
-					String jardin = "", wifi = "", piscina = "", barbacoa = "";
+					String jardin = "", wifi = "", piscina = "", barbacoa = ""; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 
 					PanelFormularioReservaBungalow panelAlojamientoInfoCompleta = new PanelFormularioReservaBungalow(
 							lstAlojamientos, alojamientosDb);
@@ -312,7 +312,7 @@ public class PanelAlojamientos extends JPanel {
 					panelAlojamientoInfoCompleta.lblFoto.setIcon(alojamientoSeleccionado.getFoto());
 					panelAlojamientoInfoCompleta.lblNombre.setText(alojamientoSeleccionado.getNombre());
 					panelAlojamientoInfoCompleta.lblPrecio.setText(String.valueOf(alojamientoSeleccionado.getPrecio()));
-					panelAlojamientoInfoCompleta.lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
+					panelAlojamientoInfoCompleta.lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14)); //$NON-NLS-1$
 
 					panelAlojamientoInfoCompleta.chckbxGolf.setEnabled(((Bungalow) alojamientoSeleccionado).isGolf());
 					panelAlojamientoInfoCompleta.chckbxCarbon
@@ -326,37 +326,37 @@ public class PanelAlojamientos extends JPanel {
 							.setEnabled(((Bungalow) alojamientoSeleccionado).isLavavajillas());
 
 					if (((Bungalow) alojamientoSeleccionado).isJardin())
-						jardin = "Sí";
+						jardin = "Sí"; //$NON-NLS-1$
 					else
-						jardin = "No";
+						jardin = "No"; //$NON-NLS-1$
 					if (((Bungalow) alojamientoSeleccionado).isWifi())
-						wifi = "Sí";
+						wifi = "Sí"; //$NON-NLS-1$
 					else
-						wifi = "No";
+						wifi = "No"; //$NON-NLS-1$
 					if (((Bungalow) alojamientoSeleccionado).isPiscina())
-						piscina = "Sí";
+						piscina = "Sí"; //$NON-NLS-1$
 					else
-						piscina = "No";
+						piscina = "No"; //$NON-NLS-1$
 					if (((Bungalow) alojamientoSeleccionado).isBarbacoa())
-						barbacoa = "Sí";
+						barbacoa = "Sí"; //$NON-NLS-1$
 					else
-						barbacoa = "No";
+						barbacoa = "No"; //$NON-NLS-1$
 
-					panelAlojamientoInfoCompleta.tPDescripcion.setText("<html><pre>"
-							+ alojamientoSeleccionado.getDescripcion() + "</pre><ul><li>Área de la cabaña: "
-							+ alojamientoSeleccionado.getArea() + "</li><li>Jardín: " + jardin + "</li><li>Superficie: "
-							+ alojamientoSeleccionado.getTamanio() + "m<sup>2</sup>"
-							+ "</li><li>Capacidad máxima de personas: "
+					panelAlojamientoInfoCompleta.tPDescripcion.setText("<html><pre>" //$NON-NLS-1$
+							+ alojamientoSeleccionado.getDescripcion() + "</pre><ul><li>Área de la cabaña: " //$NON-NLS-1$
+							+ alojamientoSeleccionado.getArea() + "</li><li>Jardín: " + jardin + "</li><li>Superficie: " //$NON-NLS-1$ //$NON-NLS-2$
+							+ alojamientoSeleccionado.getTamanio() + "m<sup>2</sup>" //$NON-NLS-1$
+							+ "</li><li>Capacidad máxima de personas: " //$NON-NLS-1$
 							+ String.valueOf(((Bungalow) alojamientoSeleccionado).getCapacidadMaxima())
-							+ " personas</li><li>WiFi: " + wifi + "</li><li>Piscina: " + piscina
-							+ "</li><li>Barbacoa exterior: " + barbacoa + "</li></ul></html>");
+							+ " personas</li><li>WiFi: " + wifi + "</li><li>Piscina: " + piscina //$NON-NLS-1$ //$NON-NLS-2$
+							+ "</li><li>Barbacoa exterior: " + barbacoa + "</li></ul></html>"); //$NON-NLS-1$ //$NON-NLS-2$
 
 					pnlFormularioAlojs.add(panelAlojamientoInfoCompleta, alojamientoSeleccionado.getNombre());
 					((CardLayout) pnlFormularioAlojs.getLayout()).show(pnlFormularioAlojs,
 							alojamientoSeleccionado.getNombre());
 
 					ImageIcon image = new ImageIcon(PanelAlojamientoRenderer.class
-							.getResource("./estrellas" + alojamientoSeleccionado.getValoracion() + ".PNG"));
+							.getResource("./estrellas" + alojamientoSeleccionado.getValoracion() + ".PNG")); //$NON-NLS-1$ //$NON-NLS-2$
 					Image imagenEscalada1 = image.getImage().getScaledInstance(128, 20, java.awt.Image.SCALE_SMOOTH);
 					image = new ImageIcon(imagenEscalada1);
 					panelAlojamientoInfoCompleta.lblEstrellas.setIcon(image);
@@ -377,12 +377,16 @@ public class PanelAlojamientos extends JPanel {
 //					 String fechaFormateada = "Entrada: " + fechas[0] + "\t Salida: " + fechas[1];
 					choices[i] = alojamientoSeleccionado.getFechasReservadas().get(i);
 				}
-				String input = (String) JOptionPane.showInputDialog(null, "Elige una de las fechas reservadas",
-						"Fechas reservadas", JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
+				String input = (String) JOptionPane.showInputDialog(null,
+						MessagesPanelAlojamientos.getString("PanelAlojamientos.EliminarReserva"), //$NON-NLS-1$
+						MessagesPanelAlojamientos.getString("PanelAlojamientos.EliminarReservaTitulo"), //$NON-NLS-1$
+						JOptionPane.QUESTION_MESSAGE, null, choices, choices[0]);
 				if (input != null) {
-					String[] options = { "Sí", "No" };
+					String[] options = { MessagesPanelAlojamientos.getString("PanelAlojamientos.EliminarReservaSi"), //$NON-NLS-1$
+							MessagesPanelAlojamientos.getString("PanelAlojamientos.EliminarReservaNo") }; //$NON-NLS-1$
 					int seleccion = JOptionPane.showOptionDialog(null,
-							"¿Está seguro de cancelar las fechas reservadas?", "Cancelar reserva",
+							MessagesPanelAlojamientos.getString("PanelAlojamientos.EliminarReservaConfirmacion"), //$NON-NLS-1$
+							MessagesPanelAlojamientos.getString("PanelAlojamientos.EliminarReservaConfirmacionTitulo"), //$NON-NLS-1$
 							JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 					if (seleccion == 0)
 						alojamientoSeleccionado.getFechasReservadas().remove(input);
@@ -408,8 +412,10 @@ public class PanelAlojamientos extends JPanel {
 			if (result != -1)
 				lstAlojamientos.setSelectedIndex(i);
 			else
-				JOptionPane.showMessageDialog(null, "El monitor que has buscado no existe en la lista",
-						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null,
+						MessagesPanelAlojamientos.getString("PanelAlojamientos.MonitorNoExiste"), //$NON-NLS-1$
+						MessagesPanelAlojamientos.getString("PanelAlojamientos.ErrorBusqueda"), //$NON-NLS-1$
+						JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -432,11 +438,12 @@ public class PanelAlojamientos extends JPanel {
 				lstAlojamientos.setSelectedIndex(i);
 			else
 				JOptionPane.showMessageDialog(null,
-						"El alojamiento que has buscado no existe en la lista acutal. Revise el filtro aplicado.",
-						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
+						MessagesPanelAlojamientos.getString("PanelAlojamientos.AlojamientoNoExiste"), //$NON-NLS-1$
+						MessagesPanelAlojamientos.getString("PanelAlojamientos.ErrorBusqueda2"), //$NON-NLS-1$
+						JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public JList getLstAlojamientos() {
 		return this.lstAlojamientos;
 	}

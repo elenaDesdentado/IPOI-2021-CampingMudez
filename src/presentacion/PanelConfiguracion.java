@@ -32,6 +32,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PanelConfiguracion extends JPanel {
 	private JLabel lblAvatar;
@@ -52,7 +54,7 @@ public class PanelConfiguracion extends JPanel {
 
 	private File file = new File("./src/persistencia/credenciales-usuario.txt");
 	private JLabel lblMensajeError;
-	
+
 	private JFrame framePadre;
 	private Usuarios usuarios;
 
@@ -80,7 +82,9 @@ public class PanelConfiguracion extends JPanel {
 		gbc_lblAvatar.gridy = 1;
 		add(lblAvatar, gbc_lblAvatar);
 
-		btnCambiarAvatar = new JButton(MessagesPanelConfiguracion.getString("PanelConfiguracion.btnCambiarAvatar.text")); //$NON-NLS-1$
+		btnCambiarAvatar = new JButton(
+				MessagesPanelConfiguracion.getString("PanelConfiguracion.btnCambiarAvatar.text")); //$NON-NLS-1$
+		btnCambiarAvatar.addKeyListener(new BtnCambiarAvatarKeyListener());
 		btnCambiarAvatar.addActionListener(new BtnCambiarAvatarActionListener());
 		GridBagConstraints gbc_btnCambiarAvatar = new GridBagConstraints();
 		gbc_btnCambiarAvatar.gridwidth = 3;
@@ -117,7 +121,8 @@ public class PanelConfiguracion extends JPanel {
 		gbc_lblWrongNombreUsuario.gridy = 6;
 		add(lblWrongNombreUsuario, gbc_lblWrongNombreUsuario);
 
-		lblCambiarContrasenia = new JLabel(MessagesPanelConfiguracion.getString("PanelConfiguracion.lblCambiarContrasenia.text")); //$NON-NLS-1$
+		lblCambiarContrasenia = new JLabel(
+				MessagesPanelConfiguracion.getString("PanelConfiguracion.lblCambiarContrasenia.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblCambiarContrasenia = new GridBagConstraints();
 		gbc_lblCambiarContrasenia.anchor = GridBagConstraints.EAST;
 		gbc_lblCambiarContrasenia.gridwidth = 3;
@@ -145,7 +150,8 @@ public class PanelConfiguracion extends JPanel {
 		gbc_lblWrongPassword.gridy = 7;
 		add(lblWrongPassword, gbc_lblWrongPassword);
 
-		lblConfirmarContrasenia = new JLabel(MessagesPanelConfiguracion.getString("PanelConfiguracion.lblConfirmarContrasenia.text")); //$NON-NLS-1$
+		lblConfirmarContrasenia = new JLabel(
+				MessagesPanelConfiguracion.getString("PanelConfiguracion.lblConfirmarContrasenia.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblConfirmarContrasenia = new GridBagConstraints();
 		gbc_lblConfirmarContrasenia.anchor = GridBagConstraints.EAST;
 		gbc_lblConfirmarContrasenia.insets = new Insets(0, 0, 5, 5);
@@ -172,7 +178,9 @@ public class PanelConfiguracion extends JPanel {
 		gbc_lblWrongPasswordConfirmation.gridy = 9;
 		add(lblWrongPasswordConfirmation, gbc_lblWrongPasswordConfirmation);
 
-		btnAplicarCambios = new JButton(MessagesPanelConfiguracion.getString("PanelConfiguracion.btnAplicarCambios.text")); //$NON-NLS-1$
+		btnAplicarCambios = new JButton(
+				MessagesPanelConfiguracion.getString("PanelConfiguracion.btnAplicarCambios.text")); //$NON-NLS-1$
+		btnAplicarCambios.addKeyListener(new BtnAplicarCambiosKeyListener());
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
 
 		lblMensajeError = new JLabel("");
@@ -213,6 +221,28 @@ public class PanelConfiguracion extends JPanel {
 		}
 	}
 
+	private class BtnCambiarAvatarKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				JFileChooser fcAbrir = new JFileChooser();
+				int valorDevuelto = fcAbrir.showOpenDialog(null);
+				if (valorDevuelto == JFileChooser.APPROVE_OPTION) {
+					File file = fcAbrir.getSelectedFile();
+					Image imagenOriginal;
+					try {
+						imagenOriginal = ImageIO.read(file);
+						Image imagenEscalada = imagenOriginal.getScaledInstance(214, 214, java.awt.Image.SCALE_SMOOTH);
+						ImageIcon iconoLabel = new ImageIcon(imagenEscalada);
+						lblAvatar.setIcon(iconoLabel);
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+
 	private class BtnAplicarCambiosActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if (!(pwfPassword.getPassword().length == 0)) {
@@ -224,25 +254,29 @@ public class PanelConfiguracion extends JPanel {
 					if (seleccion == 0) {
 						if (Arrays.equals(pwfPassword.getPassword(), pwfPasswordConfirmada.getPassword())) {
 							int indexUsuario = usuarios.getUsuarios().indexOf(usuarioPrincipal);
-							Image imagenEscalada = ((ImageIcon) lblAvatar.getIcon()).getImage().getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH);
+							Image imagenEscalada = ((ImageIcon) lblAvatar.getIcon()).getImage().getScaledInstance(64,
+									64, java.awt.Image.SCALE_SMOOTH);
 							ImageIcon iconoLabel = new ImageIcon(imagenEscalada);
 							usuarioPrincipal.setAvatar(iconoLabel);
 							usuarioPrincipal.setNombreUsuario(txtNombreUsuario.getText());
 							usuarioPrincipal.setPassword(pwfPassword.getPassword().toString());
 							usuarios.getUsuarios().set(indexUsuario, usuarioPrincipal);
-							
+
 							Component[] components = framePadre.getContentPane().getComponents();
-							for(int i=0; i<components.length; i++) {
+							for (int i = 0; i < components.length; i++) {
 								if (components[i] instanceof JPanel && components[i].getName().equals("pnlMenu")) {
 									Component[] comMenu = ((Container) components[i]).getComponents();
-									for(int j=0; j<comMenu.length; j++) {
-										if (comMenu[j] instanceof JToolBar && comMenu[j].getName().equals("tbUsuario")) {
+									for (int j = 0; j < comMenu.length; j++) {
+										if (comMenu[j] instanceof JToolBar
+												&& comMenu[j].getName().equals("tbUsuario")) {
 											Component[] comTB = ((Container) comMenu[j]).getComponents();
-											for (int k=0; k<comTB.length; k++) {
-												if (comTB[k] instanceof JLabel && comTB[k].getName().equals("lblAvatar")) {
-													((JLabel) comTB[k]).setIcon(usuarioPrincipal.getAvatar());	
-												} 
-												if (comTB[k] instanceof JLabel && comTB[k].getName().equals("lblName")) {
+											for (int k = 0; k < comTB.length; k++) {
+												if (comTB[k] instanceof JLabel
+														&& comTB[k].getName().equals("lblAvatar")) {
+													((JLabel) comTB[k]).setIcon(usuarioPrincipal.getAvatar());
+												}
+												if (comTB[k] instanceof JLabel
+														&& comTB[k].getName().equals("lblName")) {
 													((JLabel) comTB[k]).setText(usuarioPrincipal.getNombreUsuario());
 													break;
 												}
@@ -277,8 +311,84 @@ public class PanelConfiguracion extends JPanel {
 							"La contraseña o el nombre de usuario no pueden estar vacíos. Inténtelo de nuevo.");
 				}
 			} else {
-				lblMensajeError
-						.setText("La contraseña no puede estar vacía. Inténtelo de nuevo.");
+				lblMensajeError.setText("La contraseña no puede estar vacía. Inténtelo de nuevo.");
+			}
+		}
+	}
+
+	private class BtnAplicarCambiosKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				if (!(pwfPassword.getPassword().length == 0)) {
+					if (!(txtNombreUsuario.getText().equals(""))) {
+						String[] options = { "Sí", "No" };
+						int seleccion = JOptionPane.showOptionDialog(null, "¿Está seguro de realizar" + " los cambios?",
+								"Cambios cuenta de usuario", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+								null, options, options[0]);
+						if (seleccion == 0) {
+							if (Arrays.equals(pwfPassword.getPassword(), pwfPasswordConfirmada.getPassword())) {
+								int indexUsuario = usuarios.getUsuarios().indexOf(usuarioPrincipal);
+								Image imagenEscalada = ((ImageIcon) lblAvatar.getIcon()).getImage()
+										.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH);
+								ImageIcon iconoLabel = new ImageIcon(imagenEscalada);
+								usuarioPrincipal.setAvatar(iconoLabel);
+								usuarioPrincipal.setNombreUsuario(txtNombreUsuario.getText());
+								usuarioPrincipal.setPassword(pwfPassword.getPassword().toString());
+								usuarios.getUsuarios().set(indexUsuario, usuarioPrincipal);
+
+								Component[] components = framePadre.getContentPane().getComponents();
+								for (int i = 0; i < components.length; i++) {
+									if (components[i] instanceof JPanel && components[i].getName().equals("pnlMenu")) {
+										Component[] comMenu = ((Container) components[i]).getComponents();
+										for (int j = 0; j < comMenu.length; j++) {
+											if (comMenu[j] instanceof JToolBar
+													&& comMenu[j].getName().equals("tbUsuario")) {
+												Component[] comTB = ((Container) comMenu[j]).getComponents();
+												for (int k = 0; k < comTB.length; k++) {
+													if (comTB[k] instanceof JLabel
+															&& comTB[k].getName().equals("lblAvatar")) {
+														((JLabel) comTB[k]).setIcon(usuarioPrincipal.getAvatar());
+													}
+													if (comTB[k] instanceof JLabel
+															&& comTB[k].getName().equals("lblName")) {
+														((JLabel) comTB[k])
+																.setText(usuarioPrincipal.getNombreUsuario());
+														break;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+
+							try {
+								if (!file.exists())
+									file.createNewFile(); // if the file !exist create a new one
+
+								BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsolutePath()));
+								bw.write(txtNombreUsuario.getText()); // write the name
+								bw.newLine(); // leave a new Line
+								bw.write(pwfPassword.getPassword()); // write the password
+								bw.close(); // close the BufferdWriter
+
+							} catch (IOException error) {
+								error.printStackTrace();
+							}
+						} else if (seleccion == 1) {
+							pwfPassword.setText("");
+							pwfPasswordConfirmada.setText("");
+							txtNombreUsuario.setText(usuarioPrincipal.getNombreUsuario());
+							lblAvatar.setIcon(usuarioPrincipal.getAvatar());
+						}
+					} else {
+						lblMensajeError.setText(
+								"La contraseña o el nombre de usuario no pueden estar vacíos. Inténtelo de nuevo.");
+					}
+				} else {
+					lblMensajeError.setText("La contraseña no puede estar vacía. Inténtelo de nuevo.");
+				}
 			}
 		}
 	}

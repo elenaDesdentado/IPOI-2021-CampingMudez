@@ -35,6 +35,10 @@ import java.awt.Font;
 import javax.swing.JEditorPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class PanelFormularioReservaParcela extends JPanel {
 	public JScrollPane scrollPane;
@@ -123,6 +127,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		panel.add(lblParcela, gbc_lblParcela);
 
 		tPDescripcion = new JEditorPane();
+		tPDescripcion.addKeyListener(new TPDescripcionKeyListener());
 		tPDescripcion.setContentType("text/html");
 		GridBagConstraints gbc_tPDescripcion = new GridBagConstraints();
 		gbc_tPDescripcion.gridwidth = 3;
@@ -133,6 +138,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		panel.add(tPDescripcion, gbc_tPDescripcion);
 
 		calendar = new JCalendar();
+		calendar.getDayChooser().getDayPanel().addKeyListener(new CalendarDayChooserDayPanelKeyListener());
 		calendar.getDayChooser().getDayPanel().setMinimumSize(new Dimension(189, 50));
 		GridBagConstraints gbc_calendar = new GridBagConstraints();
 		gbc_calendar.insets = new Insets(0, 0, 5, 5);
@@ -252,6 +258,7 @@ public class PanelFormularioReservaParcela extends JPanel {
 		checkBoxes.add(chckbxMascotas);
 
 		btnSiguiente = new JButton(MessagesPanelFormularioReservaParcela.getString("PanelFormularioReservaParcela.btnSiguiente.text")); //$NON-NLS-1$
+		btnSiguiente.addKeyListener(new BtnSiguienteKeyListener());
 		btnSiguiente.addActionListener(new BtnSiguienteActionListener());
 		GridBagConstraints gbc_btnSiguiente = new GridBagConstraints();
 		gbc_btnSiguiente.anchor = GridBagConstraints.EAST;
@@ -301,6 +308,42 @@ public class PanelFormularioReservaParcela extends JPanel {
 			JPanel padre = (JPanel) getParent();
 			padre.add(reserva, "Nueva reserva");
 			((CardLayout) padre.getLayout()).show(padre, "Nueva reserva");
+		}
+	}
+
+	private class BtnSiguienteKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				ArrayList<String> servicios = new ArrayList<String>();
+				int index = alojamientosDb.getAlojamientos()
+						.indexOf(((PanelAlojamientoRenderer) lstAlojamientos.getSelectedValue()).getAlojamiento());
+				Alojamiento alojamiento = alojamientosDb.getAlojamientos().get(index);
+				for (JCheckBox cbx : checkBoxes) {
+					if (cbx.isSelected())
+						servicios.add(cbx.getText());
+				}
+				PanelFormularioReserva reserva = new PanelFormularioReserva(calendar, alojamiento, alojamiento.getNombre(), -1,
+						servicios, alojamiento.getPrecio(), alojamiento.getFechasReservadas());
+				JPanel padre = (JPanel) getParent();
+				padre.add(reserva, "Nueva reserva");
+				((CardLayout) padre.getLayout()).show(padre, "Nueva reserva");
+			}
+		}
+	}
+	
+	private class TPDescripcionKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_TAB)
+				tPDescripcion.transferFocus();
+		}
+	}
+	private class CalendarDayChooserDayPanelKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_TAB)
+				calendar.getDayChooser().getDayPanel().transferFocus();
 		}
 	}
 }

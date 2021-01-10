@@ -41,6 +41,8 @@ import persistencia.Monitores;
 
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PanelFormularioRutas extends JPanel {
 	public JLabel lblFoto;
@@ -77,7 +79,7 @@ public class PanelFormularioRutas extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelFormularioRutas(JList lstRutas, Rutas rutasDb, int indice, Monitores monitoresDb) {
-		
+
 		this.monitoresDb = monitoresDb;
 		this.lstRutas = lstRutas;
 		this.rutasDb = rutasDb;
@@ -88,11 +90,12 @@ public class PanelFormularioRutas extends JPanel {
 		gridBagLayout.columnWidths = new int[] { 30, 0, 67, 219, 111, 97, 0, 40, 0 };
 		gridBagLayout.rowHeights = new int[] { 27, 28, 21, 0, 0, 0, 0, 0, 0, 0, 20, 0, 15, 42, 40, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		btnModificar = new JButton(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnModificar.text")); //$NON-NLS-1$
+		btnModificar.addKeyListener(new BtnModificarKeyListener());
 		btnModificar.addActionListener(new BtnModificarActionListener());
 		GridBagConstraints gbc_btnModificar = new GridBagConstraints();
 		gbc_btnModificar.insets = new Insets(0, 0, 5, 5);
@@ -129,7 +132,9 @@ public class PanelFormularioRutas extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 
-		btnAniadirAvatar = new JButton(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnAniadirAvatar.text")); //$NON-NLS-1$
+		btnAniadirAvatar = new JButton(
+				MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnAniadirAvatar.text")); //$NON-NLS-1$
+		btnAniadirAvatar.addKeyListener(new BtnAniadirAvatarKeyListener());
 		btnAniadirAvatar.addActionListener(new BtnAniadirAvatarActionListener());
 		GridBagConstraints gbc_btnAniadirAvatar = new GridBagConstraints();
 		gbc_btnAniadirAvatar.gridwidth = 2;
@@ -146,16 +151,23 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblDia.gridx = 4;
 		gbc_lblDia.gridy = 4;
 		add(lblDia, gbc_lblDia);
-		
+
 		cbDia = new JComboBox();
-		cbDia.setModel(new DefaultComboBoxModel(new String[] {MessagesPanelFormularioRutas.getString("PanelFormularioRutas.1"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.2"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.3"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.4"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.5"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.6"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.7")})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+		cbDia.setModel(new DefaultComboBoxModel(
+				new String[] { MessagesPanelFormularioRutas.getString("PanelFormularioRutas.1"), //$NON-NLS-1$
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.2"), //$NON-NLS-1$
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.3"), //$NON-NLS-1$
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.4"), //$NON-NLS-1$
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.5"), //$NON-NLS-1$
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.6"), //$NON-NLS-1$
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.7") })); //$NON-NLS-1$
 		GridBagConstraints gbc_cbDia = new GridBagConstraints();
 		gbc_cbDia.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDia.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbDia.gridx = 5;
 		gbc_cbDia.gridy = 4;
 		add(cbDia, gbc_cbDia);
-		
+
 		lblHorario = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblHorario.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblHorario = new GridBagConstraints();
 		gbc_lblHorario.anchor = GridBagConstraints.EAST;
@@ -163,16 +175,17 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblHorario.gridx = 4;
 		gbc_lblHorario.gridy = 5;
 		add(lblHorario, gbc_lblHorario);
-		
+
 		cbHorario = new JComboBox();
-		cbHorario.setModel(new DefaultComboBoxModel(new String[] {"8:00 - 10:00", "9:00 - 10:15", "10:15 - 11:30", "11:00 - 14:00", "11:15 - 12:45", "17:30 - 19:30", "18:30 - 20:00"})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+		cbHorario.setModel(new DefaultComboBoxModel(new String[] { "8:00 - 10:00", "9:00 - 10:15", "10:15 - 11:30", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				"11:00 - 14:00", "11:15 - 12:45", "17:30 - 19:30", "18:30 - 20:00" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		GridBagConstraints gbc_cbHorario = new GridBagConstraints();
 		gbc_cbHorario.insets = new Insets(0, 0, 5, 5);
 		gbc_cbHorario.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbHorario.gridx = 5;
 		gbc_cbHorario.gridy = 5;
 		add(cbHorario, gbc_cbHorario);
-		
+
 		lblMonitores = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblMonitores.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblMonitores = new GridBagConstraints();
 		gbc_lblMonitores.anchor = GridBagConstraints.EAST;
@@ -180,8 +193,9 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblMonitores.gridx = 4;
 		gbc_lblMonitores.gridy = 6;
 		add(lblMonitores, gbc_lblMonitores);
-		
+
 		btnInfo = new JButton(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnInfo.text")); //$NON-NLS-1$
+		btnInfo.addKeyListener(new BtnInfoKeyListener());
 		btnInfo.setIcon(new ImageIcon(PanelFormularioRutas.class.getResource("/presentacion/icono-info.png"))); //$NON-NLS-1$
 		btnInfo.addActionListener(new BtnInfoActionListener());
 		GridBagConstraints gbc_btnInfo = new GridBagConstraints();
@@ -215,7 +229,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblEncuentro.gridx = 4;
 		gbc_lblEncuentro.gridy = 8;
 		add(lblEncuentro, gbc_lblEncuentro);
-		
+
 		txtEncuentro = new JTextField();
 		GridBagConstraints gbc_txtEncuentro = new GridBagConstraints();
 		gbc_txtEncuentro.gridwidth = 2;
@@ -234,18 +248,24 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblDificultad.gridy = 9;
 		add(lblDificultad, gbc_lblDificultad);
 
-		btnAplicarCambios = new JButton(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnAplicarCambios.text")); //$NON-NLS-1$
+		btnAplicarCambios = new JButton(
+				MessagesPanelFormularioRutas.getString("PanelFormularioRutas.btnAplicarCambios.text")); //$NON-NLS-1$
+		btnAplicarCambios.addKeyListener(new BtnAplicarCambiosKeyListener());
 		btnAplicarCambios.addActionListener(new BtnAplicarCambiosActionListener());
-		
+
 		cbDificultad = new JComboBox();
-		cbDificultad.setModel(new DefaultComboBoxModel(new String[] {MessagesPanelFormularioRutas.getString("PanelFormularioRutas.16"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.17"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.18"), MessagesPanelFormularioRutas.getString("PanelFormularioRutas.19")})); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		cbDificultad.setModel(new DefaultComboBoxModel(
+				new String[] { MessagesPanelFormularioRutas.getString("PanelFormularioRutas.16"), //$NON-NLS-1$
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.17"), //$NON-NLS-1$
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.18"), //$NON-NLS-1$
+						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.19") })); //$NON-NLS-1$
 		GridBagConstraints gbc_cbDificultad = new GridBagConstraints();
 		gbc_cbDificultad.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDificultad.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbDificultad.gridx = 5;
 		gbc_cbDificultad.gridy = 9;
 		add(cbDificultad, gbc_cbDificultad);
-		
+
 		lblDescripcion = new JLabel(MessagesPanelFormularioRutas.getString("PanelFormularioRutas.lblDescripcion.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
 		gbc_lblDescripcion.anchor = GridBagConstraints.WEST;
@@ -254,7 +274,7 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_lblDescripcion.gridx = 1;
 		gbc_lblDescripcion.gridy = 11;
 		add(lblDescripcion, gbc_lblDescripcion);
-		
+
 		scrollPaneDescripcion = new JScrollPane();
 		GridBagConstraints gbc_scrollPaneDescripcion = new GridBagConstraints();
 		gbc_scrollPaneDescripcion.gridheight = 2;
@@ -264,8 +284,9 @@ public class PanelFormularioRutas extends JPanel {
 		gbc_scrollPaneDescripcion.gridx = 1;
 		gbc_scrollPaneDescripcion.gridy = 12;
 		add(scrollPaneDescripcion, gbc_scrollPaneDescripcion);
-		
+
 		tPDescripcion = new JTextPane();
+		tPDescripcion.addKeyListener(new TPDescripcionKeyListener());
 		scrollPaneDescripcion.setViewportView(tPDescripcion);
 		btnAplicarCambios.setForeground(Color.BLACK);
 		btnAplicarCambios.setBackground(colorBoton);
@@ -289,7 +310,25 @@ public class PanelFormularioRutas extends JPanel {
 			cbDia.setEnabled(true);
 			tPDescripcion.setEnabled(true);
 			btnAplicarCambios.setEnabled(true);
-			
+
+		}
+	}
+
+	private class BtnModificarKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				txtNombre.setEnabled(true);
+				txtNombre.setEditable(true);
+				cbDia.setEnabled(true);
+				cbHorario.setEnabled(true);
+				spinCupo.setEnabled(true);
+				txtEncuentro.setEnabled(true);
+				cbDificultad.setEnabled(true);
+				cbDia.setEnabled(true);
+				tPDescripcion.setEnabled(true);
+				btnAplicarCambios.setEnabled(true);
+			}
 		}
 	}
 
@@ -312,6 +351,28 @@ public class PanelFormularioRutas extends JPanel {
 		}
 	}
 
+	private class BtnAniadirAvatarKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				JFileChooser fcAbrir = new JFileChooser();
+				int valorDevuelto = fcAbrir.showOpenDialog(null);
+				if (valorDevuelto == JFileChooser.APPROVE_OPTION) {
+					File file = fcAbrir.getSelectedFile();
+					Image imagenOriginal;
+					try {
+						imagenOriginal = ImageIO.read(file);
+						Image imagenEscalada = imagenOriginal.getScaledInstance(160, 160, java.awt.Image.SCALE_SMOOTH);
+						ImageIcon iconoLabel = new ImageIcon(imagenEscalada);
+						lblFoto.setIcon(iconoLabel);
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+
 	private class BtnAplicarCambiosActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Ruta ruta = rutasDb.getRutas().get(indice);
@@ -323,23 +384,70 @@ public class PanelFormularioRutas extends JPanel {
 				ruta.setEncuentro(txtEncuentro.getText());
 				ruta.setDescripcion(tPDescripcion.getText());
 				ruta.setHorario((String) cbHorario.getSelectedItem());
-				Image imagenEscalada1 = ((ImageIcon) lblFoto.getIcon()).getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
+				Image imagenEscalada1 = ((ImageIcon) lblFoto.getIcon()).getImage().getScaledInstance(128, 128,
+						java.awt.Image.SCALE_SMOOTH);
 				ImageIcon foto = new ImageIcon(imagenEscalada1);
 				ruta.setFoto(foto);
 				DefaultListModel modeloRutas = (DefaultListModel) lstRutas.getModel();
 				modeloRutas.set(indice, new PanelRutaRenderer(ruta));
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null,
-						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.20"), //$NON-NLS-1$
+				JOptionPane.showMessageDialog(null, MessagesPanelFormularioRutas.getString("PanelFormularioRutas.20"), //$NON-NLS-1$
 						MessagesPanelFormularioRutas.getString("PanelFormularioRutas.21"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 			}
 		}
 	}
+
+	private class BtnAplicarCambiosKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				Ruta ruta = rutasDb.getRutas().get(indice);
+				try {
+					ruta.setNombre(txtNombre.getText());
+					ruta.setDia((String) cbDia.getSelectedItem());
+					ruta.setCupo((Integer) spinCupo.getValue());
+					ruta.setDificultad((String) cbDificultad.getSelectedItem());
+					ruta.setEncuentro(txtEncuentro.getText());
+					ruta.setDescripcion(tPDescripcion.getText());
+					ruta.setHorario((String) cbHorario.getSelectedItem());
+					Image imagenEscalada1 = ((ImageIcon) lblFoto.getIcon()).getImage().getScaledInstance(128, 128,
+							java.awt.Image.SCALE_SMOOTH);
+					ImageIcon foto = new ImageIcon(imagenEscalada1);
+					ruta.setFoto(foto);
+					DefaultListModel modeloRutas = (DefaultListModel) lstRutas.getModel();
+					modeloRutas.set(indice, new PanelRutaRenderer(ruta));
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null,
+							MessagesPanelFormularioRutas.getString("PanelFormularioRutas.20"), //$NON-NLS-1$
+							MessagesPanelFormularioRutas.getString("PanelFormularioRutas.21"), //$NON-NLS-1$
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+	}
+
 	private class BtnInfoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			PanelInfoMonitoresRutas infoMons = new PanelInfoMonitoresRutas(monitoresDb);
 			infoMons.setLocationRelativeTo(null);
 			infoMons.setVisible(true);
+		}
+	}
+	private class BtnInfoKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				PanelInfoMonitoresRutas infoMons = new PanelInfoMonitoresRutas(monitoresDb);
+				infoMons.setLocationRelativeTo(null);
+				infoMons.setVisible(true);
+			}
+		}
+	}
+	private class TPDescripcionKeyListener extends KeyAdapter {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_TAB)
+				tPDescripcion.transferFocus();
 		}
 	}
 }
