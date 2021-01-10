@@ -171,10 +171,10 @@ public class PanelEditorRutas extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 
-		btnGuardar = new JButton("");
+		btnGuardar = new JButton(""); //$NON-NLS-1$
 		btnGuardar.addKeyListener(new BtnGuardarKeyListener());
 		btnGuardar.addActionListener(new BtnGuardarActionListener());
-		btnGuardar.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/guardar.png")));
+		btnGuardar.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/guardar.png"))); //$NON-NLS-1$
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
@@ -182,11 +182,11 @@ public class PanelEditorRutas extends JPanel {
 		gbc_btnGuardar.gridy = 1;
 		add(btnGuardar, gbc_btnGuardar);
 
-		lblLeyenda = new JLabel("");
+		lblLeyenda = new JLabel(""); //$NON-NLS-1$
 		lblLeyenda.addMouseListener(new LblLeyendaMouseListener());
 		lblLeyenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblLeyenda.setToolTipText(MessagesPanelEditorRutas.getString("PanelEditorRutas.lblLeyenda.toolTipText")); //$NON-NLS-1$
-		lblLeyenda.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-info.png")));
+		lblLeyenda.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-info.png"))); //$NON-NLS-1$
 		GridBagConstraints gbc_lblLeyenda = new GridBagConstraints();
 		gbc_lblLeyenda.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLeyenda.gridx = 10;
@@ -203,7 +203,7 @@ public class PanelEditorRutas extends JPanel {
 
 		cbDia = new JComboBox();
 		cbDia.setModel(new DefaultComboBoxModel(
-				new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" }));
+				new String[] { MessagesPanelEditorRutas.getString("PanelEditorRutas.4"), MessagesPanelEditorRutas.getString("PanelEditorRutas.5"), MessagesPanelEditorRutas.getString("PanelEditorRutas.6"), MessagesPanelEditorRutas.getString("PanelEditorRutas.7"), MessagesPanelEditorRutas.getString("PanelEditorRutas.8"), MessagesPanelEditorRutas.getString("PanelEditorRutas.9"), MessagesPanelEditorRutas.getString("PanelEditorRutas.10") })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		GridBagConstraints gbc_cbDia = new GridBagConstraints();
 		gbc_cbDia.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDia.fill = GridBagConstraints.HORIZONTAL;
@@ -229,62 +229,62 @@ public class PanelEditorRutas extends JPanel {
 		toolBar = new JToolBar();
 		pnlDiseño.add(toolBar, BorderLayout.NORTH);
 
-		btnCargarMapa = new JButton("");
+		btnCargarMapa = new JButton(""); //$NON-NLS-1$
 		btnCargarMapa.setToolTipText(MessagesPanelEditorRutas.getString("PanelEditorRutas.btnCargarMapa.toolTipText")); //$NON-NLS-1$
 		btnCargarMapa.addActionListener(new BtnCargarMapaActionListener());
-		btnCargarMapa.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-mapa.png")));
+		btnCargarMapa.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-mapa.png"))); //$NON-NLS-1$
 		toolBar.add(btnCargarMapa);
 
-		btnInicio = new JButton("");
+		btnInicio = new JButton(""); //$NON-NLS-1$
 		btnInicio.addActionListener(new BtnInicioActionListener());
 
-		btnCursor = new JButton("");
+		btnCursor = new JButton(""); //$NON-NLS-1$
 		btnCursor.setToolTipText(MessagesPanelEditorRutas.getString("PanelEditorRutas.btnCursor.toolTipText")); //$NON-NLS-1$
 		btnCursor.addActionListener(new BtnCursorActionListener());
 
-		btnPapelera = new JButton("");
+		btnPapelera = new JButton(""); //$NON-NLS-1$
 		btnPapelera.setToolTipText(MessagesPanelEditorRutas.getString("PanelEditorRutas.btnPapelera.toolTipText")); //$NON-NLS-1$
 		btnPapelera.addActionListener(new BtnPapeleraActionListener());
-		btnPapelera.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-papelera.png")));
+		btnPapelera.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-papelera.png"))); //$NON-NLS-1$
 		toolBar.add(btnPapelera);
-		btnCursor.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-cursor.png")));
+		btnCursor.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-cursor.png"))); //$NON-NLS-1$
 		toolBar.add(btnCursor);
 
 		separator = new JSeparator();
 		separator.setMinimumSize(new Dimension(10, 0));
 		separator.setPreferredSize(new Dimension(10, 2));
 		toolBar.add(separator);
-		btnInicio.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-inicio.png")));
+		btnInicio.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-inicio.png"))); //$NON-NLS-1$
 		toolBar.add(btnInicio);
 
-		btnMeta = new JButton("");
+		btnMeta = new JButton(""); //$NON-NLS-1$
 		btnMeta.addActionListener(new BtnMetaActionListener());
-		btnMeta.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-final.png")));
+		btnMeta.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-final.png"))); //$NON-NLS-1$
 		toolBar.add(btnMeta);
 
-		btnMirador = new JButton("");
+		btnMirador = new JButton(""); //$NON-NLS-1$
 		btnMirador.addActionListener(new BtnMiradorActionListener());
-		btnMirador.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-mirador.png")));
+		btnMirador.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-mirador.png"))); //$NON-NLS-1$
 		toolBar.add(btnMirador);
 
-		btnFuente = new JButton("");
+		btnFuente = new JButton(""); //$NON-NLS-1$
 		btnFuente.addActionListener(new BtnFuenteActionListener());
-		btnFuente.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-fuente-agua.png")));
+		btnFuente.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-fuente-agua.png"))); //$NON-NLS-1$
 		toolBar.add(btnFuente);
 
-		btnRupestre = new JButton("");
+		btnRupestre = new JButton(""); //$NON-NLS-1$
 		btnRupestre.addActionListener(new BtnRupestreActionListener());
-		btnRupestre.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-rupestre.png")));
+		btnRupestre.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-rupestre.png"))); //$NON-NLS-1$
 		toolBar.add(btnRupestre);
 
-		btnMerendero = new JButton("");
+		btnMerendero = new JButton(""); //$NON-NLS-1$
 		btnMerendero.addActionListener(new BtnMerenderoActionListener());
-		btnMerendero.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-merendero.png")));
+		btnMerendero.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-merendero.png"))); //$NON-NLS-1$
 		toolBar.add(btnMerendero);
 
-		btnLinea = new JButton("");
+		btnLinea = new JButton(""); //$NON-NLS-1$
 		btnLinea.addActionListener(new BtnLineaActionListener());
-		btnLinea.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-linea.png")));
+		btnLinea.setIcon(new ImageIcon(PanelEditorRutas.class.getResource("/presentacion/icono-linea.png"))); //$NON-NLS-1$
 		toolBar.add(btnLinea);
 
 		spDibujo = new JScrollPane();
@@ -299,8 +299,8 @@ public class PanelEditorRutas extends JPanel {
 		add(lblHorario, gbc_lblHorario);
 
 		cbHorario = new JComboBox();
-		cbHorario.setModel(new DefaultComboBoxModel(new String[] { "8:00 - 10:00", "9:00 - 10:15", "10:15 - 11:30",
-				"11:00 - 14:00", "11:15 - 12:45", "17:30 - 19:30", "18:30 - 20:00" }));
+		cbHorario.setModel(new DefaultComboBoxModel(new String[] { "8:00 - 10:00", "9:00 - 10:15", "10:15 - 11:30", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				"11:00 - 14:00", "11:15 - 12:45", "17:30 - 19:30", "18:30 - 20:00" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		GridBagConstraints gbc_cbHorario = new GridBagConstraints();
 		gbc_cbHorario.insets = new Insets(0, 0, 5, 5);
 		gbc_cbHorario.fill = GridBagConstraints.HORIZONTAL;
@@ -352,7 +352,7 @@ public class PanelEditorRutas extends JPanel {
 		add(lblDificultad, gbc_lblDificultad);
 
 		cbDificultad = new JComboBox();
-		cbDificultad.setModel(new DefaultComboBoxModel(new String[] { "Baja", "Media", "Alta", "Extrema" }));
+		cbDificultad.setModel(new DefaultComboBoxModel(new String[] { MessagesPanelEditorRutas.getString("PanelEditorRutas.38"), MessagesPanelEditorRutas.getString("PanelEditorRutas.39"), MessagesPanelEditorRutas.getString("PanelEditorRutas.40"), MessagesPanelEditorRutas.getString("PanelEditorRutas.41") })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		GridBagConstraints gbc_cbDificultad = new GridBagConstraints();
 		gbc_cbDificultad.insets = new Insets(0, 0, 5, 5);
 		gbc_cbDificultad.fill = GridBagConstraints.HORIZONTAL;
@@ -392,31 +392,31 @@ public class PanelEditorRutas extends JPanel {
 
 		// Creación de imágenes y cursores
 		toolkit = Toolkit.getDefaultToolkit();
-		imagInicio = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-inicio.png"));
-		imagMeta = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-final.png"));
-		imagMirador = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-mirador.png"));
-		imagFuente = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-fuente-agua.png"));
-		imagRupestre = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-rupestre.png"));
-		imagMerendero = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-merendero.png"));
-		imagLinea = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-linea.png"));
-		imagCursorInicio = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-inicio.png"));
-		imagCursorMeta = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-final.png"));
+		imagInicio = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-inicio.png")); //$NON-NLS-1$
+		imagMeta = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-final.png")); //$NON-NLS-1$
+		imagMirador = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-mirador.png")); //$NON-NLS-1$
+		imagFuente = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-fuente-agua.png")); //$NON-NLS-1$
+		imagRupestre = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-rupestre.png")); //$NON-NLS-1$
+		imagMerendero = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-merendero.png")); //$NON-NLS-1$
+		imagLinea = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-linea.png")); //$NON-NLS-1$
+		imagCursorInicio = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-inicio.png")); //$NON-NLS-1$
+		imagCursorMeta = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-final.png")); //$NON-NLS-1$
 		imagCursorFuente = toolkit
-				.getImage(getClass().getClassLoader().getResource("presentacion/icono-fuente-agua.png"));
-		imagCursorMirador = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-mirador.png"));
+				.getImage(getClass().getClassLoader().getResource("presentacion/icono-fuente-agua.png")); //$NON-NLS-1$
+		imagCursorMirador = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-mirador.png")); //$NON-NLS-1$
 		imagCursorRupestre = toolkit
-				.getImage(getClass().getClassLoader().getResource("presentacion/icono-rupestre.png"));
+				.getImage(getClass().getClassLoader().getResource("presentacion/icono-rupestre.png")); //$NON-NLS-1$
 		imagCursorMerendero = toolkit
-				.getImage(getClass().getClassLoader().getResource("presentacion/icono-merendero.png"));
-		imagCursorInicio = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-linea.png"));
+				.getImage(getClass().getClassLoader().getResource("presentacion/icono-merendero.png")); //$NON-NLS-1$
+		imagCursorInicio = toolkit.getImage(getClass().getClassLoader().getResource("presentacion/icono-linea.png")); //$NON-NLS-1$
 		// Creación de los cursores
-		cursorInicio = toolkit.createCustomCursor(imagInicio, new Point(0, 0), "CURSOR_INICIO");
-		cursorMeta = toolkit.createCustomCursor(imagMeta, new Point(0, 0), "CURSOR_META");
-		cursorMirador = toolkit.createCustomCursor(imagMirador, new Point(0, 0), "CURSOR_MIRADOR");
-		cursorFuente = toolkit.createCustomCursor(imagCursorFuente, new Point(0, 0), "CURSOR_FUENTE");
-		cursorRupestre = toolkit.createCustomCursor(imagRupestre, new Point(0, 0), "CURSOR_RUPESTRE");
-		cursorMerendero = toolkit.createCustomCursor(imagMerendero, new Point(0, 0), "CURSOR_MERENDERO");
-		cursorLinea = toolkit.createCustomCursor(imagLinea, new Point(0, 0), "CURSOR_LINEA");
+		cursorInicio = toolkit.createCustomCursor(imagInicio, new Point(0, 0), "CURSOR_INICIO"); //$NON-NLS-1$
+		cursorMeta = toolkit.createCustomCursor(imagMeta, new Point(0, 0), "CURSOR_META"); //$NON-NLS-1$
+		cursorMirador = toolkit.createCustomCursor(imagMirador, new Point(0, 0), "CURSOR_MIRADOR"); //$NON-NLS-1$
+		cursorFuente = toolkit.createCustomCursor(imagCursorFuente, new Point(0, 0), "CURSOR_FUENTE"); //$NON-NLS-1$
+		cursorRupestre = toolkit.createCustomCursor(imagRupestre, new Point(0, 0), "CURSOR_RUPESTRE"); //$NON-NLS-1$
+		cursorMerendero = toolkit.createCustomCursor(imagMerendero, new Point(0, 0), "CURSOR_MERENDERO"); //$NON-NLS-1$
+		cursorLinea = toolkit.createCustomCursor(imagLinea, new Point(0, 0), "CURSOR_LINEA"); //$NON-NLS-1$
 	}
 
 	private class BtnCargarMapaActionListener implements ActionListener {
@@ -544,8 +544,8 @@ public class PanelEditorRutas extends JPanel {
 			Image image = null;
 			if (txtNombre.getText().length() < 10 || txtEncuentro.getText().length() < 10
 					|| tADescripcion.getText().length() < 20)
-				JOptionPane.showMessageDialog(null, "Asegúrese de haber completado correctamente toda la información",
-						"Error al guardar ruta", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, MessagesPanelEditorRutas.getString("PanelEditorRutas.63"), //$NON-NLS-1$
+						MessagesPanelEditorRutas.getString("PanelEditorRutas.64"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 			else {
 				Ruta nuevaRuta = new Ruta();
 				nuevaRuta.setNombre(txtNombre.getText());
@@ -562,9 +562,9 @@ public class PanelEditorRutas extends JPanel {
 				Graphics2D g2d = img.createGraphics();
 				miAreaDibujo.printAll(g2d);
 				g2d.dispose();
-				File imagen = new File("./src/presentacion/NuevoMapa" + rutas.getRutas().size() + ".png");
+				File imagen = new File("./src/presentacion/NuevoMapa" + rutas.getRutas().size() + ".png"); //$NON-NLS-1$ //$NON-NLS-2$
 				try {
-					ImageIO.write(img, "png", imagen);
+					ImageIO.write(img, "png", imagen); //$NON-NLS-1$
 					image = ImageIO.read(imagen);
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -575,7 +575,7 @@ public class PanelEditorRutas extends JPanel {
 				rutas.addRuta(nuevaRuta);
 				PanelRutaRenderer nuevoPanel = new PanelRutaRenderer(nuevaRuta);
 				((DefaultListModel) lstRutas.getModel()).addElement(nuevoPanel);
-				JOptionPane.showConfirmDialog(null, "La ruta se guardo correctamente", "Ruta guardada",
+				JOptionPane.showConfirmDialog(null, MessagesPanelEditorRutas.getString("PanelEditorRutas.68"), MessagesPanelEditorRutas.getString("PanelEditorRutas.69"), //$NON-NLS-1$ //$NON-NLS-2$
 						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
 			}
@@ -590,7 +590,7 @@ public class PanelEditorRutas extends JPanel {
 				if (txtNombre.getText().length() < 10 || txtEncuentro.getText().length() < 10
 						|| tADescripcion.getText().length() < 20)
 					JOptionPane.showMessageDialog(null,
-							"Asegúrese de haber completado correctamente toda la información", "Error al guardar ruta",
+							MessagesPanelEditorRutas.getString("PanelEditorRutas.70"), MessagesPanelEditorRutas.getString("PanelEditorRutas.71"), //$NON-NLS-1$ //$NON-NLS-2$
 							JOptionPane.ERROR_MESSAGE);
 				else {
 					Ruta nuevaRuta = new Ruta();
@@ -608,9 +608,9 @@ public class PanelEditorRutas extends JPanel {
 					Graphics2D g2d = img.createGraphics();
 					miAreaDibujo.printAll(g2d);
 					g2d.dispose();
-					File imagen = new File("./src/presentacion/NuevoMapa" + rutas.getRutas().size() + ".png");
+					File imagen = new File("./src/presentacion/NuevoMapa" + rutas.getRutas().size() + ".png"); //$NON-NLS-1$ //$NON-NLS-2$
 					try {
-						ImageIO.write(img, "png", imagen);
+						ImageIO.write(img, "png", imagen); //$NON-NLS-1$
 						image = ImageIO.read(imagen);
 					} catch (IOException e1) {
 						e1.printStackTrace();
@@ -621,7 +621,7 @@ public class PanelEditorRutas extends JPanel {
 					rutas.addRuta(nuevaRuta);
 					PanelRutaRenderer nuevoPanel = new PanelRutaRenderer(nuevaRuta);
 					((DefaultListModel) lstRutas.getModel()).addElement(nuevoPanel);
-					JOptionPane.showConfirmDialog(null, "La ruta se guardo correctamente", "Ruta guardada",
+					JOptionPane.showConfirmDialog(null, MessagesPanelEditorRutas.getString("PanelEditorRutas.75"), MessagesPanelEditorRutas.getString("PanelEditorRutas.76"), //$NON-NLS-1$ //$NON-NLS-2$
 							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
 				}
@@ -639,8 +639,8 @@ public class PanelEditorRutas extends JPanel {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			JOptionPane.showConfirmDialog(null,
-					"De izquierda a derecha, el significado de los botones es el siguiente:\nCargar la imagen de un mapa\nLimpiar la imagen\nRecuperar el cursor\n\nComienzo de la ruta\nMeta\nMirador\nFuente\nPintura rupestre\nMerendero\nTrazar una linea",
-					"Leyenda de los botones", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+					"De izquierda a derecha, el significado de los botones es el siguiente:\nCargar la imagen de un mapa\nLimpiar la imagen\nRecuperar el cursor\n\nComienzo de la ruta\nMeta\nMirador\nFuente\nPintura rupestre\nMerendero\nTrazar una linea", //$NON-NLS-1$
+					"Leyenda de los botones", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE); //$NON-NLS-1$
 		}
 	}
 

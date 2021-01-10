@@ -57,13 +57,14 @@ public class PanelMonitores extends JPanel {
 
 	/**
 	 * Create the panel.
-	 * @param monitoresDb 
+	 * 
+	 * @param monitoresDb
 	 */
 	public PanelMonitores(Monitores monitoresDb) {
 
 		this.monitoresDb = monitoresDb;
-		
-		for(Monitor monitor : monitoresDb.getMonitores())
+
+		for (Monitor monitor : monitoresDb.getMonitores())
 			panelesEjemplo.add(new PanelMonitorRenderer(monitor));
 
 		setLayout(new BorderLayout(0, 0));
@@ -84,9 +85,9 @@ public class PanelMonitores extends JPanel {
 		lstMonitores.addListSelectionListener(new LstMonitoresListSelectionListener());
 		DefaultListModel lstModel = new DefaultListModel();
 
-		for(PanelMonitorRenderer panel : panelesEjemplo)
+		for (PanelMonitorRenderer panel : panelesEjemplo)
 			lstModel.addElement(panel);
-		
+
 		lstMonitores.setModel(lstModel);
 		lstMonitores.setFixedCellHeight(220);
 		lstMonitores.setCellRenderer(new MonitorRenderer());
@@ -148,9 +149,9 @@ public class PanelMonitores extends JPanel {
 		pnlGestionBusqueda.add(txtBarraBusqueda, gbc_txtBarraBusqueda);
 		txtBarraBusqueda.setColumns(10);
 
-		lblLupa = new JLabel("");
+		lblLupa = new JLabel(""); //$NON-NLS-1$
 		lblLupa.addMouseListener(new LblLupaMouseListener());
-		lblLupa.setIcon(new ImageIcon(PanelMonitores.class.getResource("/presentacion/lupa.png")));
+		lblLupa.setIcon(new ImageIcon(PanelMonitores.class.getResource("/presentacion/lupa.png"))); //$NON-NLS-1$
 		lblLupa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		GridBagConstraints gbc_lblLupa = new GridBagConstraints();
 		gbc_lblLupa.insets = new Insets(0, 0, 5, 5);
@@ -161,7 +162,7 @@ public class PanelMonitores extends JPanel {
 		// PANELES PARA EL CARD LAYOUT
 		JPanel formularioVacio = new PanelFormularioActividadesInicio();
 
-		pnlFormularioMons.add(formularioVacio, "Formulario vacio");
+		pnlFormularioMons.add(formularioVacio, "Formulario vacio"); //$NON-NLS-1$
 
 	}
 
@@ -210,8 +211,8 @@ public class PanelMonitores extends JPanel {
 				panelMonitorInfoCompleta.cbEstudios.setEnabled(false);
 				panelMonitorInfoCompleta.cbDisponibilidad.setEnabled(false);
 
-				UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
-				UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
+				UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY); //$NON-NLS-1$
+				UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY); //$NON-NLS-1$
 			}
 		}
 	}
@@ -224,7 +225,7 @@ public class PanelMonitores extends JPanel {
 			DefaultListModel modeloMonitores = (DefaultListModel) lstMonitores.getModel();
 			for (; i < modeloMonitores.getSize(); ++i) {
 				monitor = monitoresDb.getMonitores().get(i);
-				nombreMonitor = monitor.getNombre() + " " + monitor.getApellidos();
+				nombreMonitor = monitor.getNombre() + " " + monitor.getApellidos(); //$NON-NLS-1$
 				if (nombreMonitor.equals(txtBarraBusqueda.getText())) {
 					result = i;
 					break;
@@ -233,8 +234,8 @@ public class PanelMonitores extends JPanel {
 			if (result != -1)
 				lstMonitores.setSelectedIndex(i);
 			else
-				JOptionPane.showMessageDialog(null, "El monitor que has buscado no existe en la lista",
-						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, MessagesPanelMonitores.getString("PanelMonitores.MonitorNoExiste"), //$NON-NLS-1$
+						MessagesPanelMonitores.getString("PanelMonitores.TituloMonitorNoExiste"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 		}
 	}
 
@@ -244,28 +245,35 @@ public class PanelMonitores extends JPanel {
 			PanelFormularioMonitores panelMonitorInfoCompleta = new PanelFormularioMonitores(lstMonitores, monitoresDb,
 					lstMonitores.getModel().getSize());
 			panelMonitorInfoCompleta.btnModificar.setEnabled(false);
-			pnlFormularioMons.add(panelMonitorInfoCompleta, "Nuevo monitor");
+			pnlFormularioMons.add(panelMonitorInfoCompleta, MessagesPanelMonitores.getString("PanelMonitores.8")); //$NON-NLS-1$
 			// Añadir monitor vacio a la lista, si no se completa el formulario, se elimina.
 			monitoresDb.addMonitor(new Monitor());
-			((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, "Nuevo monitor");
+			((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, MessagesPanelMonitores.getString("PanelMonitores.9")); //$NON-NLS-1$
 		}
 	}
 
 	private class BtnEliminarMonitorActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String[] options = {"Sí", "No"};
-			int seleccion = JOptionPane.showOptionDialog(null, "¿Está seguro de eliminar el monitor "
-					+ "seleccionado en la lista?", "Eliminar monitor", JOptionPane.DEFAULT_OPTION, 
-					JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-			if (seleccion == 0) {
-				int indiceMonitorElminado = lstMonitores.getSelectedIndex();
-				DefaultListModel modelo = (DefaultListModel) lstMonitores.getModel();
-				modelo.remove(indiceMonitorElminado);
-				monitoresDb.getMonitores().remove(indiceMonitorElminado);
-				((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, "Formulario vacio");
+			String[] options = { MessagesPanelMonitores.getString("PanelMonitores.optSi"), MessagesPanelMonitores.getString("PanelMonitores.optNo") }; //$NON-NLS-1$ //$NON-NLS-2$
+			if (lstMonitores.getSelectedIndex() == -1)
+				JOptionPane.showMessageDialog(null,
+						MessagesPanelMonitores.getString("PanelMonitores.SeleccionaActividad"), //$NON-NLS-1$
+						MessagesPanelMonitores.getString("PanelMonitores.TituloSeleccionaActividad"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
+			else {
+				int seleccion = JOptionPane.showOptionDialog(null,
+						MessagesPanelMonitores.getString("PanelMonitores.SeguroEliminar") + MessagesPanelMonitores.getString("PanelMonitores.SeleccionadoEliminar"), MessagesPanelMonitores.getString("PanelMonitores.TituloSeguroEliminar"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				if (seleccion == 0) {
+					int indiceMonitorElminado = lstMonitores.getSelectedIndex();
+					DefaultListModel modelo = (DefaultListModel) lstMonitores.getModel();
+					modelo.remove(indiceMonitorElminado);
+					monitoresDb.getMonitores().remove(indiceMonitorElminado);
+					((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, "Formulario vacio"); //$NON-NLS-1$
+				}
+				if (monitoresDb.getMonitores().size() == 0)
+					((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, "Formulario vacio"); //$NON-NLS-1$
 			}
-			if (monitoresDb.getMonitores().size() == 0)
-				((CardLayout) pnlFormularioMons.getLayout()).show(pnlFormularioMons, "Formulario vacio");
+
 		}
 	}
 
@@ -279,7 +287,7 @@ public class PanelMonitores extends JPanel {
 			DefaultListModel modeloMonitores = (DefaultListModel) lstMonitores.getModel();
 			for (; i < modeloMonitores.getSize(); ++i) {
 				monitor = monitoresDb.getMonitores().get(i);
-				nombreMonitor = monitor.getNombre() + " " + monitor.getApellidos();
+				nombreMonitor = monitor.getNombre() + " " + monitor.getApellidos(); //$NON-NLS-1$
 				if (nombreMonitor.equals(txtBarraBusqueda.getText())) {
 					result = i;
 					break;
@@ -288,8 +296,8 @@ public class PanelMonitores extends JPanel {
 			if (result != -1)
 				lstMonitores.setSelectedIndex(i);
 			else
-				JOptionPane.showMessageDialog(null, "El monitor que has buscado no existe en la lista",
-						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, MessagesPanelMonitores.getString("PanelMonitores.MonitorNoExiste"), //$NON-NLS-1$
+						MessagesPanelMonitores.getString("PanelMonitores.TituloMonitorNoExiste"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 		}
 	}
 }

@@ -66,36 +66,36 @@ public class PanelActividades extends JPanel {
 		/*
 		 * Añade las actividades de ejemplo a la "persistencia"
 		 */
-		Actividad actividad1 = new Actividad("Paintball", "Juan Marín Prieto", 10, "Adultos", "Ciervo",
-				"El paintball es un juego de estrategia en el que compiten normalmente dos equipos. Cada jugador tiene algo "
-						+ "parecido a una pistola de bolas de pintura, y el objetivo puede variar según la modalidad del juego que es"
-						+ "cojas: atrapar la bandera, eliminar al equipo contrario, rescatar al presidente...",
-				"Incluye la equipación", "16:00-18:00", 20.5,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoPaintball.jpg")));
-		Actividad actividad2 = new Actividad("Espeleología subacuática", "Martín García Ortega", 5, "Adultos", "Salmón",
-				"Cuevas bajo el agua. Si descubrir los secretos de las cuevas y galerías nos abre un mundo, imagínate la "
-						+ "sensación cuando esto ocurre debajo del agua. ",
-				"Incluye la equipación", "11:00-12:00", 150.0,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoEspeleologiaAcuatica.jpg")));
-		Actividad actividad3 = new Actividad("Karts Infantil", "Martín García Ortega", 8, "Niños de 12 a 14 años",
-				"Escorpión",
-				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
-						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
-						+ "toda la adrenalina generada sin preocupaciones.",
-				"Incluye el kart y la equipación", "9:00-12:00", 14.5,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartInf.jpg")));
-		Actividad actividad4 = new Actividad("Karts Junior", "Juan Marín Prieto", 10, "Niños de 14 a 17 años", "Ciervo",
-				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
-						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
-						+ "toda la adrenalina generada sin preocupaciones.",
-				"Incluye el kart y la equipación", "10:00-11:30", 18.5,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartJunior.jpg")));
-		Actividad actividad5 = new Actividad("Karts Adultos", "Juan Marín Prieto", 12, "Adultos", "Águila",
-				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las "
-						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de "
-						+ "toda la adrenalina generada sin preocupaciones.",
-				"Incluye el kart y la equipación", "19:00-21:00", 22.5,
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartAdultos.jpg")));
+		Actividad actividad1 = new Actividad("Paintball", "Juan Marín Prieto", 10, "Adultos", "Ciervo", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				"El paintball es un juego de estrategia en el que compiten normalmente dos equipos. Cada jugador tiene algo " //$NON-NLS-1$
+						+ "parecido a una pistola de bolas de pintura, y el objetivo puede variar según la modalidad del juego que es" //$NON-NLS-1$
+						+ "cojas: atrapar la bandera, eliminar al equipo contrario, rescatar al presidente...", //$NON-NLS-1$
+				"Incluye la equipación", "16:00-18:00", 20.5, //$NON-NLS-1$ //$NON-NLS-2$
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoPaintball.jpg"))); //$NON-NLS-1$
+		Actividad actividad2 = new Actividad("Espeleología subacuática", "Martín García Ortega", 5, "Adultos", "Salmón", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				"Cuevas bajo el agua. Si descubrir los secretos de las cuevas y galerías nos abre un mundo, imagínate la " //$NON-NLS-1$
+						+ "sensación cuando esto ocurre debajo del agua. ", //$NON-NLS-1$
+				"Incluye la equipación", "11:00-12:00", 150.0, //$NON-NLS-1$ //$NON-NLS-2$
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoEspeleologiaAcuatica.jpg"))); //$NON-NLS-1$
+		Actividad actividad3 = new Actividad("Karts Infantil", "Martín García Ortega", 8, "Niños de 12 a 14 años", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				"Escorpión", //$NON-NLS-1$
+				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las " //$NON-NLS-1$
+						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de " //$NON-NLS-1$
+						+ "toda la adrenalina generada sin preocupaciones.", //$NON-NLS-1$
+				"Incluye el kart y la equipación", "9:00-12:00", 14.5, //$NON-NLS-1$ //$NON-NLS-2$
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartInf.jpg"))); //$NON-NLS-1$
+		Actividad actividad4 = new Actividad("Karts Junior", "Juan Marín Prieto", 10, "Niños de 14 a 17 años", "Ciervo", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las " //$NON-NLS-1$
+						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de " //$NON-NLS-1$
+						+ "toda la adrenalina generada sin preocupaciones.", //$NON-NLS-1$
+				"Incluye el kart y la equipación", "10:00-11:30", 18.5, //$NON-NLS-1$ //$NON-NLS-2$
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartJunior.jpg"))); //$NON-NLS-1$
+		Actividad actividad5 = new Actividad("Karts Adultos", "Juan Marín Prieto", 12, "Adultos", "Águila", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				"Las instalaciones constan de una pista de 10m de ancho y 1100m de cuerda.Esta pista cuenta con todas las " //$NON-NLS-1$
+						+ "normas de seguridad de la real federacion de automovilismo y de la CIK/FIA por que podremos disfrutar de " //$NON-NLS-1$
+						+ "toda la adrenalina generada sin preocupaciones.", //$NON-NLS-1$
+				"Incluye el kart y la equipación", "19:00-21:00", 22.5, //$NON-NLS-1$ //$NON-NLS-2$
+				new ImageIcon(PanelMonitorRenderer.class.getResource("./fotoKartAdultos.jpg"))); //$NON-NLS-1$
 
 		actividadesDb.addActividad(actividad1);
 		actividadesDb.addActividad(actividad2);
@@ -164,7 +164,8 @@ public class PanelActividades extends JPanel {
 		gbc_btnCrearActividad.gridy = 1;
 		pnlGestionBusqueda.add(btnCrearActividad, gbc_btnCrearActividad);
 
-		btnEliminarActividad = new JButton(MessagesPanelActividades.getString("PanelActividades.btnEliminarActividad.text")); //$NON-NLS-1$
+		btnEliminarActividad = new JButton(
+				MessagesPanelActividades.getString("PanelActividades.btnEliminarActividad.text")); //$NON-NLS-1$
 		btnEliminarActividad.addActionListener(new BtnEliminarActividadActionListener());
 		btnEliminarActividad.setForeground(Color.BLACK);
 		btnEliminarActividad.setBackground(colorBotonCritico);
@@ -196,10 +197,10 @@ public class PanelActividades extends JPanel {
 		pnlGestionBusqueda.add(txtBarraBusqueda, gbc_txtBarraBusqueda);
 		txtBarraBusqueda.setColumns(10);
 
-		lblLupa = new JLabel("");
+		lblLupa = new JLabel(""); //$NON-NLS-1$
 		lblLupa.addMouseListener(new LblLupaMouseListener());
 		lblLupa.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblLupa.setIcon(new ImageIcon(PanelActividades.class.getResource("/presentacion/lupa.png")));
+		lblLupa.setIcon(new ImageIcon(PanelActividades.class.getResource("/presentacion/lupa.png"))); //$NON-NLS-1$
 		GridBagConstraints gbc_lblLupa = new GridBagConstraints();
 		gbc_lblLupa.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLupa.gridx = 8;
@@ -209,20 +210,21 @@ public class PanelActividades extends JPanel {
 		// PANELES PARA EL CARD LAYOUT
 		JPanel formularioVacio = new PanelFormularioActividadesInicio();
 
-		pnlFormularioActs.add(formularioVacio, "Formulario vacio");
+		pnlFormularioActs.add(formularioVacio, "Formulario vacio"); //$NON-NLS-1$
 
 	}
 
 	private class LstActividadesListSelectionListener implements ListSelectionListener {
 		public void valueChanged(ListSelectionEvent e) {
 			if (actividadesDb.getActividades().get(lstActividades.getModel().getSize() - 1).getFotoActividad() == null)
-				// En caso de dejar incompleta la agregacion de una nueva actividad, eliminarla de
+				// En caso de dejar incompleta la agregacion de una nueva actividad, eliminarla
+				// de
 				// la lista
 				actividadesDb.getActividades().remove(lstActividades.getModel().getSize() - 1);
 			if (lstActividades.getSelectedIndex() != -1) {
 				Actividad actividadSeleccionada = actividadesDb.getActividades().get(lstActividades.getSelectedIndex());
-				PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstActividades, actividadesDb,
-						lstActividades.getSelectedIndex());
+				PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstActividades,
+						actividadesDb, lstActividades.getSelectedIndex());
 				panelActividadInfoCompleta.lblFoto.setIcon(actividadSeleccionada.getFotoActividad());
 				panelActividadInfoCompleta.txtNombre.setText(actividadSeleccionada.getNombre());
 				panelActividadInfoCompleta.txtMonitor.setText(actividadSeleccionada.getMonitor());
@@ -233,10 +235,10 @@ public class PanelActividades extends JPanel {
 				panelActividadInfoCompleta.tAMateriales.setText(actividadSeleccionada.getMateriales());
 				panelActividadInfoCompleta.txtPrecio.setText(actividadSeleccionada.getPrecio().toString());
 				panelActividadInfoCompleta.cbHorario.setSelectedItem(actividadSeleccionada.getHorario());
-	
+
 				pnlFormularioActs.add(panelActividadInfoCompleta, actividadSeleccionada.getNombre());
 				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, actividadSeleccionada.getNombre());
-	
+
 				panelActividadInfoCompleta.btnAniadirAvatar.setEnabled(false);
 				panelActividadInfoCompleta.btnAplicarCambios.setEnabled(false);
 				panelActividadInfoCompleta.txtNombre.setEditable(false);
@@ -248,9 +250,9 @@ public class PanelActividades extends JPanel {
 				panelActividadInfoCompleta.cbDestinatarios.setEnabled(false);
 				panelActividadInfoCompleta.cbArea.setEnabled(false);
 				panelActividadInfoCompleta.cbHorario.setEnabled(false);
-				
-				UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY);
-				UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY);
+
+				UIManager.getDefaults().put("Button.disabledText", Color.DARK_GRAY); //$NON-NLS-1$
+				UIManager.getDefaults().put("ComboBox.disabledText", Color.DARK_GRAY); //$NON-NLS-1$
 			}
 		}
 	}
@@ -272,41 +274,49 @@ public class PanelActividades extends JPanel {
 			if (result != -1)
 				lstActividades.setSelectedIndex(i);
 			else
-				JOptionPane.showMessageDialog(null, "La actividad que has buscado no existe en la lista",
-						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "La actividad que has buscado no existe en la lista", //$NON-NLS-1$
+						MessagesPanelActividades.getString("PanelActividades.TituloBusqueda"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 		}
 	}
+
 	private class BtnCrearActividadActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			lstActividades.clearSelection();
-			PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstActividades, actividadesDb,
-					lstActividades.getModel().getSize());
+			PanelFormularioActividades panelActividadInfoCompleta = new PanelFormularioActividades(lstActividades,
+					actividadesDb, lstActividades.getModel().getSize());
 			panelActividadInfoCompleta.btnModificar.setEnabled(false);
-			pnlFormularioActs.add(panelActividadInfoCompleta, "Nueva actividad");
+			pnlFormularioActs.add(panelActividadInfoCompleta, "Nueva actividad"); //$NON-NLS-1$
 			// Añadir monitor vacio a la lista, si no se completa el formulario, se elimina.
 			actividadesDb.addActividad(new Actividad());
-			((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Nueva actividad");
+			((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Nueva actividad"); //$NON-NLS-1$
 		}
 	}
+
 	private class BtnEliminarActividadActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
-			String[] options = {"Sí", "No"};
-			int seleccion = JOptionPane.showOptionDialog(null, "¿Está seguro de eliminar la actividad "
-					+ "seleccionada en la lista?", "Eliminar actividad", JOptionPane.DEFAULT_OPTION, 
-					JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-			if (seleccion == 0) {
-				int indiceActividadElminada = lstActividades.getSelectedIndex();
-				DefaultListModel modelo = (DefaultListModel) lstActividades.getModel();
-				modelo.remove(indiceActividadElminada);
-				actividadesDb.getActividades().remove(indiceActividadElminada);
-				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Formulario vacio");
+
+			String[] options = { MessagesPanelActividades.getString("PanelActividades.optSi"), MessagesPanelActividades.getString("PanelActividades.optNo") }; //$NON-NLS-1$ //$NON-NLS-2$
+			if (lstActividades.getSelectedIndex() == -1)
+				JOptionPane.showMessageDialog(null,
+						MessagesPanelActividades.getString("PanelActividades.EliminarAct"), //$NON-NLS-1$
+						MessagesPanelActividades.getString("PanelActividades.TituloEliminarAct"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
+			else {
+				int seleccion = JOptionPane.showOptionDialog(null,
+						MessagesPanelActividades.getString("PanelActividades.Seguroeliminiar") + MessagesPanelActividades.getString("PanelActividades.seleccionadoEliminar"), MessagesPanelActividades.getString("PanelActividades.TituloSeguroEliminar"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+				if (seleccion == 0) {
+					int indiceActividadElminada = lstActividades.getSelectedIndex();
+					DefaultListModel modelo = (DefaultListModel) lstActividades.getModel();
+					modelo.remove(indiceActividadElminada);
+					actividadesDb.getActividades().remove(indiceActividadElminada);
+					((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Formulario vacio"); //$NON-NLS-1$
+				}
+				if (actividadesDb.getActividades().size() == 0)
+					((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Formulario vacio"); //$NON-NLS-1$
 			}
-			if (actividadesDb.getActividades().size() == 0)
-				((CardLayout) pnlFormularioActs.getLayout()).show(pnlFormularioActs, "Formulario vacio");
 		}
 	}
-	
+
 	private class LblLupaMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -325,8 +335,8 @@ public class PanelActividades extends JPanel {
 			if (result != -1)
 				lstActividades.setSelectedIndex(i);
 			else
-				JOptionPane.showMessageDialog(null, "La actividad que has buscado no existe en la lista",
-						"Busqueda erronea", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, MessagesPanelActividades.getString("PanelActividades.1"), //$NON-NLS-1$
+						MessagesPanelActividades.getString("PanelActividades.0"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 		}
 	}
 }

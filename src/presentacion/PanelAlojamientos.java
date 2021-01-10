@@ -81,51 +81,51 @@ public class PanelAlojamientos extends JPanel {
 		 * 
 		 * Añade los Alojamientos de ejemplo a la "persistencia" y escala las imagenes
 		 */
-		ImageIcon image1 = new ImageIcon(PanelMonitorRenderer.class.getResource("./parcela1.jpeg"));
+		ImageIcon image1 = new ImageIcon(PanelMonitorRenderer.class.getResource("./parcela1.jpeg")); //$NON-NLS-1$
 		Image imagenEscalada1 = image1.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
 		image1 = new ImageIcon(imagenEscalada1);
-		ImageIcon image2 = new ImageIcon(PanelMonitorRenderer.class.getResource("./parcela3.jpeg"));
+		ImageIcon image2 = new ImageIcon(PanelMonitorRenderer.class.getResource("./parcela3.jpeg")); //$NON-NLS-1$
 		Image imagenEscalada2 = image2.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
 		image2 = new ImageIcon(imagenEscalada2);
-		ImageIcon image3 = new ImageIcon(PanelMonitorRenderer.class.getResource("./bungalow1.jpeg"));
+		ImageIcon image3 = new ImageIcon(PanelMonitorRenderer.class.getResource("./bungalow1.jpeg")); //$NON-NLS-1$
 		Image imagenEscalada3 = image3.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
 		image3 = new ImageIcon(imagenEscalada3);
-		ImageIcon image4 = new ImageIcon(PanelMonitorRenderer.class.getResource("./bungalow3.jpg"));
+		ImageIcon image4 = new ImageIcon(PanelMonitorRenderer.class.getResource("./bungalow3.jpg")); //$NON-NLS-1$
 		Image imagenEscalada4 = image4.getImage().getScaledInstance(128, 128, java.awt.Image.SCALE_SMOOTH);
 		image4 = new ImageIcon(imagenEscalada4);
 
-		Parcela alojamientoEjemplo1 = new Parcela("Escorpión", 4, "El Páramo",
-				"Con un cálido clima que se mantiene constante a lo largo del año, en la parcela El Páramo \npodrá disfrutar de una experiencia lo más cercana a una playa sin estar en ella.\n"
-						+ "Bien equipada y económica, podrá disfrutar de unas vacaciones de ensueño.",
-				43.5, 32.0, "Libre", "Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón (1 km)", true, false,
+		Parcela alojamientoEjemplo1 = new Parcela("Escorpión", 4, "El Páramo", //$NON-NLS-1$ //$NON-NLS-2$
+				"Con un cálido clima que se mantiene constante a lo largo del año, en la parcela El Páramo \npodrá disfrutar de una experiencia lo más cercana a una playa sin estar en ella.\n" //$NON-NLS-1$
+						+ "Bien equipada y económica, podrá disfrutar de unas vacaciones de ensueño.", //$NON-NLS-1$
+				43.5, 32.0, "Libre", "Mucha sombra", "Arena", "Piscina", "Restaurante El Glotón (1 km)", true, false, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 				true, true, true, false, image1);
-		Parcela alojamientoEjemplo2 = new Parcela("Salmón", 5, "Río Mudez",
-				"Una parcela que se encuentra en la misma orilla del famoso río Mudez. \nHaga realidad los recuerdos de su infancia disfrutando de un día de pesca o de baño en el río, \n"
-						+ "mientras tiene a escasos metros una vivienda de 2 pisos, 4 baños y 6 camas para descansar \ndel agotador día de natación.",
-				34.4, 23.0, "Libre", "Poca sombra", "Césped", "Río", "Gastrobar Tapas y más (5 km)", true, false, true,
+		Parcela alojamientoEjemplo2 = new Parcela("Salmón", 5, "Río Mudez", //$NON-NLS-1$ //$NON-NLS-2$
+				"Una parcela que se encuentra en la misma orilla del famoso río Mudez. \nHaga realidad los recuerdos de su infancia disfrutando de un día de pesca o de baño en el río, \n" //$NON-NLS-1$
+						+ "mientras tiene a escasos metros una vivienda de 2 pisos, 4 baños y 6 camas para descansar \ndel agotador día de natación.", //$NON-NLS-1$
+				34.4, 23.0, "Libre", "Poca sombra", "Césped", "Río", "Gastrobar Tapas y más (5 km)", true, false, true, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 				true, true, true, image2);
-		Bungalow alojamientoEjemplo3 = new Bungalow("Salmón", 5, "Lagunas Claras",
-				"Esta cabaña se encuentra en mitad de las reconocidas Lagunas Claras donde podremos \ndisfrutar de reconfortantes baños, sobre todo en verano. "
-						+ "La cabaña se encuentra \nclimatizada interiormente, cuenta con un gran almacén y una chimenea con la poder \nasar para pasar unas vacaciones invernales de lujo.",
-				23.5, 15.5, "Ocupada", true, 6, true, false, true, true, false, false, true, true, false, image3);
-		Bungalow alojamientoEjemplo4 = new Bungalow("Águila", 3, "Las colinas",
-				"En la cabaña Las Colinas podrá vivir una experiencia del típico \"ermitaño\" solitario. \n"
-						+ "La cabaña se encuentra situada a 1000 metros de altura, y se encuentra completamente \nclimatizada para resistir las nevadas. Cuenta además, con chimenea, 2 pisos, 4 baños \ny 4 camas."
-						+ "Cabe destacar la instalación de un cercado para disuadir a los osos \nque por allí merodean.",
-				43.5, 32, "Libre", true, 4, false, false, true, true, true, false, true, true, false, image4);
+		Bungalow alojamientoEjemplo3 = new Bungalow("Salmón", 5, "Lagunas Claras", //$NON-NLS-1$ //$NON-NLS-2$
+				"Esta cabaña se encuentra en mitad de las reconocidas Lagunas Claras donde podremos \ndisfrutar de reconfortantes baños, sobre todo en verano. " //$NON-NLS-1$
+						+ "La cabaña se encuentra \nclimatizada interiormente, cuenta con un gran almacén y una chimenea con la poder \nasar para pasar unas vacaciones invernales de lujo.", //$NON-NLS-1$
+				23.5, 15.5, "Ocupada", true, 6, true, false, true, true, false, false, true, true, false, image3); //$NON-NLS-1$
+		Bungalow alojamientoEjemplo4 = new Bungalow("Águila", 3, "Las colinas", //$NON-NLS-1$ //$NON-NLS-2$
+				"En la cabaña Las Colinas podrá vivir una experiencia del típico \"ermitaño\" solitario. \n" //$NON-NLS-1$
+						+ "La cabaña se encuentra situada a 1000 metros de altura, y se encuentra completamente \nclimatizada para resistir las nevadas. Cuenta además, con chimenea, 2 pisos, 4 baños \ny 4 camas." //$NON-NLS-1$
+						+ "Cabe destacar la instalación de un cercado para disuadir a los osos \nque por allí merodean.", //$NON-NLS-1$
+				43.5, 32, "Libre", true, 4, false, false, true, true, true, false, true, true, false, image4); //$NON-NLS-1$
 
 		/*
 		 * Añadiendo algunos dias como fechas ya reservadas
 		 */
 
-		alojamientoEjemplo1.getFechasReservadas().add("2020-12-01;2020-12-04");
-		alojamientoEjemplo1.getFechasReservadas().add("2021-01-03;2020-01-06");
-		alojamientoEjemplo3.getFechasReservadas().add("2021-01-01;2021-01-05");
-		alojamientoEjemplo3.getFechasReservadas().add("2020-12-15;2020-12-27");
-		alojamientoEjemplo2.getFechasReservadas().add("2020-12-01;2020-12-04");
-		alojamientoEjemplo1.getFechasReservadas().add("2021-01-08;2021-01-20");
-		alojamientoEjemplo2.getFechasReservadas().add("2021-01-01;2021-01-05");
-		alojamientoEjemplo4.getFechasReservadas().add("2021-01-15;2021-01-20");
+		alojamientoEjemplo1.getFechasReservadas().add("2020-12-01;2020-12-04"); //$NON-NLS-1$
+		alojamientoEjemplo1.getFechasReservadas().add("2021-01-03;2020-01-06"); //$NON-NLS-1$
+		alojamientoEjemplo3.getFechasReservadas().add("2021-01-01;2021-01-05"); //$NON-NLS-1$
+		alojamientoEjemplo3.getFechasReservadas().add("2020-12-15;2020-12-27"); //$NON-NLS-1$
+		alojamientoEjemplo2.getFechasReservadas().add("2020-12-01;2020-12-04"); //$NON-NLS-1$
+		alojamientoEjemplo1.getFechasReservadas().add("2021-01-08;2021-01-20"); //$NON-NLS-1$
+		alojamientoEjemplo2.getFechasReservadas().add("2021-01-01;2021-01-05"); //$NON-NLS-1$
+		alojamientoEjemplo4.getFechasReservadas().add("2021-01-15;2021-01-20"); //$NON-NLS-1$
 
 		alojamientosDb.addAlojamiento(alojamientoEjemplo1);
 		alojamientosDb.addAlojamiento(alojamientoEjemplo2);
@@ -168,9 +168,9 @@ public class PanelAlojamientos extends JPanel {
 
 		cbFiltro = new JComboBox();
 		cbFiltro.addActionListener(new CbFiltroActionListener());
-		cbFiltro.setFont(new Font("Tahoma", Font.BOLD, 11));
+		cbFiltro.setFont(new Font("Tahoma", Font.BOLD, 11)); //$NON-NLS-1$
 		cbFiltro.setToolTipText(MessagesPanelAlojamientos.getString("PanelAlojamientos.cbFiltro.toolTipText")); //$NON-NLS-1$
-		cbFiltro.setModel(new DefaultComboBoxModel(new String[] { "Parcelas", "Cabañas", "Parcelas y cabañas" }));
+		cbFiltro.setModel(new DefaultComboBoxModel(new String[] { MessagesPanelAlojamientos.getString("PanelAlojamientos.OptParcelas"), MessagesPanelAlojamientos.getString("PanelAlojamientos.OptCabañas"), MessagesPanelAlojamientos.getString("PanelAlojamientos.OptAmbas") })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		cbFiltro.setSelectedIndex(2);
 		scrollPaneListaAlojs.setColumnHeaderView(cbFiltro);
 
@@ -238,10 +238,10 @@ public class PanelAlojamientos extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			DefaultListModel modeloFiltrado = new DefaultListModel();
 			for (int i = 0; i < modeloOriginal.getSize(); ++i) {
-				if (((String) cbFiltro.getSelectedItem()).equals("Parcelas")) { //$NON-NLS-1$
+				if (((String) cbFiltro.getSelectedItem()).equals(MessagesPanelAlojamientos.getString("PanelAlojamientos.filtroParcelas"))) { //$NON-NLS-1$
 					if (alojamientosDb.getAlojamientos().get(i) instanceof Parcela)
 						modeloFiltrado.addElement(modeloOriginal.getElementAt(i));
-				} else if (((String) cbFiltro.getSelectedItem()).equals("Cabañas")) { //$NON-NLS-1$
+				} else if (((String) cbFiltro.getSelectedItem()).equals(MessagesPanelAlojamientos.getString("PanelAlojamientos.filtroCabañas"))) { //$NON-NLS-1$
 					if (alojamientosDb.getAlojamientos().get(i) instanceof Bungalow)
 						modeloFiltrado.addElement(modeloOriginal.getElementAt(i));
 				} else {
@@ -391,7 +391,10 @@ public class PanelAlojamientos extends JPanel {
 					if (seleccion == 0)
 						alojamientoSeleccionado.getFechasReservadas().remove(input);
 				}
-			}
+			} else
+				JOptionPane.showMessageDialog(null,
+						MessagesPanelAlojamientos.getString("PanelAlojamientos.DialogSeleccione"), //$NON-NLS-1$
+						MessagesPanelAlojamientos.getString("PanelAlojamientos.TituloSeleccione"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
 		}
 	}
 
