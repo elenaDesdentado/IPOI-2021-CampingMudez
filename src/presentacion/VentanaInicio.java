@@ -115,13 +115,13 @@ public class VentanaInicio extends JFrame {
 		idiomas3.add("Alemán"); //$NON-NLS-1$
 		Monitor monitorEjemplo1 = new Monitor("Juan", "Marín Prieto", "05718928T", "654 73 82 73", null, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				"juanmapriSi@gmail.com", "Estudios Universitarios", "Disponible", MessagesVentanaInicio.getString("VentanaInicio.15"), 1000.0, 24, idiomas1, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo1.png"))); //$NON-NLS-1$
+				new ImageIcon(VentanaInicio.class.getResource("./avatarMonitorEjemplo1.png"))); //$NON-NLS-1$
 		Monitor monitorEjemplo2 = new Monitor("Eva", "Grande Milagro", "05283928L", "654 83 92 83", "926 46 82 91", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 				"powerJapan90@yahoo.com", "Educación Secundaria Obligatoria", "Baja laboral", "17:30-22:30", 1235.5, 20, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				idiomas2, new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo2.png"))); //$NON-NLS-1$
+				idiomas2, new ImageIcon(VentanaInicio.class.getResource("./avatarMonitorEjemplo2.png"))); //$NON-NLS-1$
 		Monitor monitorEjemplo3 = new Monitor("Martín", "García Ortega", "05673822Q", "625 89 09 73", null, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				"destroyerManhattan@gmail.com", "Estudios post-universitarios", "Vacaciones", "15:00-23:00", 1540.0, 30, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				idiomas3, new ImageIcon(PanelMonitorRenderer.class.getResource("./avatarMonitorEjemplo3.png"))); //$NON-NLS-1$
+				idiomas3, new ImageIcon(VentanaInicio.class.getResource("./avatarMonitorEjemplo3.png"))); //$NON-NLS-1$
 		monitoresDb.addMonitor(monitorEjemplo1);
 		monitoresDb.addMonitor(monitorEjemplo2);
 		monitoresDb.addMonitor(monitorEjemplo3);
