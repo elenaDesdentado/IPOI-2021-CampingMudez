@@ -310,7 +310,7 @@ public class PanelFormularioRutas extends JPanel {
 			cbDia.setEnabled(true);
 			tPDescripcion.setEnabled(true);
 			btnAplicarCambios.setEnabled(true);
-
+			btnAniadirAvatar.setEnabled(true);
 		}
 	}
 
