@@ -15,16 +15,12 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.text.MaskFormatter;
-
 import dominio.Usuario;
 import persistencia.Usuarios;
 
@@ -39,7 +35,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -294,6 +289,7 @@ public class ventanaLogin {
 	        	  Scanner scan = new Scanner(credencialesIniciales);
 		          USER = scan.nextLine();
 		          PASSWORD = scan.nextLine();
+		          scan.close();
 	          }
 
 	        } catch (FileNotFoundException e) {         
